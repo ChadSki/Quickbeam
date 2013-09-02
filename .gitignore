@@ -1,7 +1,6 @@
 #################
 ## Eclipse
 #################
-
 *.pydevproject
 .project
 .metadata
@@ -80,6 +79,9 @@ ipch/
 # ReSharper is a .NET coding add-in
 _ReSharper*
 
+# VMWare debugging tools
+*.idc
+
 # Installshield output folder
 [Ee]xpress
 
@@ -130,7 +132,6 @@ Desktop.ini
 #############
 ## Python
 #############
-
 *.py[co]
 
 # Packages
