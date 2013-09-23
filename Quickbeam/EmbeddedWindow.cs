@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Threading;
 
 namespace Quickbeam
 {
@@ -49,25 +50,29 @@ namespace Quickbeam
             psi.WindowStyle = ProcessWindowStyle.Hidden;
             _process = Process.Start(psi);
 
-            // Wait for the child window to invisibly load, then relocate into our window
+            // Wait for the child window to invisibly load
             _process.WaitForInputIdle();
             Thread.Sleep(2000);
             IntPtr hWnd = FindWindow(null, windowTitle);
-            ShowWindow(hWnd, SW_SHOW);
-            EnableWindow(hWnd, true);
-            SetParent(_process.MainWindowHandle, wndHelp.Handle);
 
-            // remove control box
-            int style = GetWindowLong(_process.MainWindowHandle, GWL_STYLE);
-            style = style & ~WS_CAPTION & ~WS_THICKFRAME;
-            SetWindowLong(_process.MainWindowHandle, GWL_STYLE, style);
+            if (hWnd != null && !_process.HasExited)
+            {
+                // reveal and relocate into our window
+                ShowWindow(hWnd, SW_SHOW);
+                EnableWindow(hWnd, true);
+                SetParent(_process.MainWindowHandle, wndHelp.Handle);
 
-            Resize(800, 600);
+                // remove control box
+                int style = GetWindowLong(_process.MainWindowHandle, GWL_STYLE);
+                style = style & ~WS_CAPTION & ~WS_THICKFRAME;
+                SetWindowLong(_process.MainWindowHandle, GWL_STYLE, style);
+            }
+            else Dispose();
         }
 
-        public void Resize(int width, int height, int x = 6, int y = 42)
+        public void Resize(int width, int height, int xcoor, int ycoor)
         {
-            SetWindowPos(_process.MainWindowHandle, IntPtr.Zero, x, y, width, height, SWP_NOZORDER | SWP_NOACTIVATE);
+            SetWindowPos(_process.MainWindowHandle, IntPtr.Zero, xcoor, ycoor, width, height, SWP_NOZORDER | SWP_NOACTIVATE);
         }
 
         public void Dispose()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Quickbeam
 {
@@ -12,12 +13,19 @@ namespace Quickbeam
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        private EmbeddedWindow _haloWindow;
+        private EmbeddedWindow haloWindow;
+        private EmbeddedWindow st2Window;
         private bool restoreIfMove;
+
+        public static Color blue = Color.FromRgb(0x00, 0x71, 0xcc);
+        public static Color purple = Color.FromRgb(0x68, 0x21, 0x7a);
 
         public MainWindow()
         {
             InitializeComponent();
+            statusColorBrush.Color = purple;
+            widthSlider.Value = 800;
+            heightSlider.Value = 600;
 
             // For whatever reason, the default behavior of a Metro window does
             // not allow you to 'unsnap' from a maximized state by dragging the
@@ -27,18 +35,12 @@ namespace Quickbeam
             {
                 if (e.ClickCount == 2)
                 {
-                    if ((ResizeMode == ResizeMode.CanResize) ||
-                        (ResizeMode == ResizeMode.CanResizeWithGrip))
-                    {
-                        SwitchState();
-                    }
+                    SwitchState();
                 }
                 else
                 {
                     if (WindowState == WindowState.Maximized)
-                    {
                         restoreIfMove = true;
-                    }
                 }
             };
 
@@ -55,6 +57,12 @@ namespace Quickbeam
                     var mouseX = e.GetPosition(this).X;
                     var width = RestoreBounds.Width;
                     var x = mouseX - width / 2;
+
+                    // Stay within the work area when we unsnap from maximized
+                    if (x < 0)
+                        x = 0;
+                    if (x > SystemParameters.WorkArea.Width - width)
+                        x = SystemParameters.WorkArea.Width - width;
 
                     WindowState = WindowState.Normal;
                     Left = x;
@@ -74,21 +82,35 @@ namespace Quickbeam
                 WindowState = WindowState.Normal;
         }
 
-        private void btnHost_Click(object sender, RoutedEventArgs e)
+        private void btnHost_Click(object s, RoutedEventArgs e)
         {
-            _haloWindow = new EmbeddedWindow(this,
+            var width = Convert.ToInt32(widthSlider.Value);
+            var height = Convert.ToInt32(heightSlider.Value);
+            var st2Width = Convert.ToInt32(st2Container.ActualWidth);
+
+            haloWindow = new EmbeddedWindow(this,
                 @"D:\Program Files (x86)\Microsoft Games\Halo\halo.exe",
                 @"D:\Program Files (x86)\Microsoft Games\Halo\",
-                @"-console -window -vidmode 800,600,60",
+                string.Format(@"-console -window -vidmode {0},{1},60", width, height),
                 "Halo");
+            haloWindow.Resize(width, height, 7, 44);
+
+            st2Window = new EmbeddedWindow(this,
+                @"D:\Users\Chad\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\bin\Debug\Sublime Text 2.0.2 x64\sublime_text.exe",
+                //@"C:\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\bin\Debug\Sublime Text 2.0.2 x64\sublime_text.exe",
+                @"D:\Users\Chad\Dropbox\Workbench\CodeProjects\Halo\halolib.py\",
+                //@"C:\Dropbox\Workbench\CodeProjects\Halo\halolib.py",
+                null,
+                "untitled - Sublime Text 2 (UNREGISTERED)");
+            st2Window.Resize(st2Width, height, 7 + width + 6, 44);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
-            if (_haloWindow != null)
+            if (haloWindow != null)
             {
-                _haloWindow.Dispose();
+                haloWindow.Dispose();
             }
         }
     }
