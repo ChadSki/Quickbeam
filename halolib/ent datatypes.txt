@@ -1,0 +1,24 @@
+bitmask16 -- int16
+bitmask32 -- int32
+bitmask8 -- int8
+colorARGB -- array of four single-precision floats. Total size: 0x10
+colorbyte -- array of four Int8 floats. Total size: 4
+colorRGB -- array of three single-precision floats. Total size: 0xC
+dependency -- Class name[4], name offset[4], padding[4], ID[4]. Total: 0x10
+double -- Double-precision float. 0x8
+float -- Single-precision float. 4
+enum16 -- int16
+enum32 --int32
+enum8 -- int8
+index -- int16
+int16 -- int16
+short -- int16
+int32 -- int32
+long -- int32
+int8 -- int8
+char -- int8
+loneID -- int32
+struct -- Count[4], offset[4], padding[4]. Total: 0xC
+string128 -- char[128]
+string32 --char[32]
+string4 -- char[4]

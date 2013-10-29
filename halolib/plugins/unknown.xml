@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="unknown" struct_size="0x504">
+    <rawdata name="stuff" offset="0x0" length="16" />
+</plugin>

@@ -24,6 +24,7 @@ namespace Quickbeam
         {
             InitializeComponent();
             statusColorBrush.Color = purple;
+            borderFrame.BorderBrush = new SolidColorBrush(purple);
             widthSlider.Value = 800;
             heightSlider.Value = 600;
 
@@ -84,25 +85,17 @@ namespace Quickbeam
 
         private void btnHost_Click(object s, RoutedEventArgs e)
         {
-            var width = Convert.ToInt32(widthSlider.Value);
-            var height = Convert.ToInt32(heightSlider.Value);
-            var st2Width = Convert.ToInt32(st2Container.ActualWidth);
+            int haloWidth = Convert.ToInt32(widthSlider.Value);
+            int haloHeight = Convert.ToInt32(heightSlider.Value);
+            int xOffset = 7;
+            int yOffset = 44;
 
             haloWindow = new EmbeddedWindow(this,
                 @"D:\Program Files (x86)\Microsoft Games\Halo\halo.exe",
                 @"D:\Program Files (x86)\Microsoft Games\Halo\",
-                string.Format(@"-console -window -vidmode {0},{1},60", width, height),
+                string.Format(@"-console -window -vidmode {0},{1},60", haloWidth, haloHeight),
                 "Halo");
-            haloWindow.Resize(width, height, 7, 44);
-
-            st2Window = new EmbeddedWindow(this,
-                @"D:\Users\Chad\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\bin\Debug\Sublime Text 2.0.2 x64\sublime_text.exe",
-                //@"C:\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\bin\Debug\Sublime Text 2.0.2 x64\sublime_text.exe",
-                @"D:\Users\Chad\Dropbox\Workbench\CodeProjects\Halo\halolib.py\",
-                //@"C:\Dropbox\Workbench\CodeProjects\Halo\halolib.py",
-                null,
-                "untitled - Sublime Text 2 (UNREGISTERED)");
-            st2Window.Resize(st2Width, height, 7 + width + 6, 44);
+            haloWindow.Resize(haloWidth, haloHeight, xOffset, yOffset);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
