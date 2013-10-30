@@ -30,3 +30,6 @@
 #pragma warning(disable : 4211)
 #include <Python.h>
 #pragma warning(pop)
+
+#include <cstdio>
+#include <iostream>

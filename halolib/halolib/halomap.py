@@ -26,21 +26,57 @@ Defines the HaloMap class, as well as functions for loading maps location disk o
 """
 import re
 import mmap
+from pnpc import PyNotifyPropertyChanged, notify_property
 from halolib.haloaccess import access_over_file, access_over_memory
 from halolib.halostruct import plugin_classes, load_plugins
 from halolib.halotag import HaloTag
 
-class HaloMap(object):
-    def __init__(self, mmap_f=None, f=None):
+class HaloMap(PyNotifyPropertyChanged):
+    def __init__(self, mmap_f=None, f=None, *args, **kwargs):
         self.mmap_f = mmap_f
         self.file = f
+        super(HaloMap, self).__init__(*args, **kwargs)
 
     def init(self, map_header, index_header, taglist, map_magic, file=None):
-        self.map_header = map_header
-        self.index_header = index_header
-        self.map_magic = map_magic
+        self._map_header = map_header
+        self._index_header = index_header
+        self._map_magic = map_magic
+        self._asdf = 4
         self.file = file
         self.tags = {tag.ident: tag for tag in taglist}
+
+    @notify_property('asdf')
+    def asdf(self):
+        return self._asdf
+
+    @asdf.setter
+    def asdf(self, value):
+        self._asdf = value
+
+    @notify_property('map_header')
+    def map_header(self):
+        return self._map_header
+
+    @map_header.setter
+    def map_header(self, value):
+        self._map_header = value
+
+    @notify_property('index_header')
+    def index_header(self):
+        return self._index_header
+
+    @index_header.setter
+    def index_header(self, value):
+        self._index_header = value
+
+    @notify_property('map_magic')
+    def map_magic(self):
+        return self._map_magic
+
+    @map_magic.setter
+    def map_magic(self, value):
+        self._map_magic = value
+
 
     def __str__(self):
         return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))

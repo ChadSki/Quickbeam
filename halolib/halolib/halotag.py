@@ -68,17 +68,9 @@ class HaloTag(object):
         except KeyError:
             return plugin_classes['unknown'](self.meta_access, self.map_magic, self.halomap)
 
-    def export(self):
-        ached_self = CachedHaloTag()
-        cached_self.index_entry = self.index_entry.access.read_all_bytes()
-
-        cached_self.reflexives = {}
-        for reflx in self.reflexive_names:
-            cached_self.reflexives[reflx] = []
-            for chunk in getattr(self, reflx):
-                cached_self.reflexives[reflx].append(chunk.export())
-
-        return cached_self
+    @meta.setter
+    def meta(self, value):
+        raise Exception('Replacing entire meta at once not yet implemented.')
 
     def __getattr__(self, name):
         """HaloTag (using magic) sort of merges the attributes of self.index_entry and self.meta alongside its own.
