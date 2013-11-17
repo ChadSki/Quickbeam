@@ -22,7 +22,7 @@
 
 """halomap.py
 
-Defines the HaloMap class, as well as functions for loading maps location disk or memory.
+Defines the HaloMap class, as well an independent loading procedure, which reads maps from either disk or memory.
 """
 import re
 import mmap
@@ -189,10 +189,10 @@ def load_map(map_path=None):
 
     tags = [HaloTag(
                 index_entry,
-                ByteAccess(
+                ByteAccess( # name
                     index_entry.name_offset_raw - map_magic,
                     256),
-                ByteAccess(
+                ByteAccess( # meta
                     index_entry.meta_offset_raw - map_magic,
                     meta_sizes[index_entry.meta_offset_raw]),
                 map_magic,

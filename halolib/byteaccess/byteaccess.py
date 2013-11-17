@@ -33,25 +33,31 @@ class ByteAccess(object):
         self.offset = offset
         self.size = size
 
+    def addr_within_bounds(self, addr):
+        return 0 <= addr <= self.size
+
     def create_subaccess(self, offset, size):
-        if offset + size > self.size: raise Exception("Cannot allocate past end of Access. %s" % str(self))
+        if not self.addr_within_bounds(offset + size):
+            raise Exception("Cannot allocate past end of Access. %s, attempted %d-%d" %( str(self), offset, offset + size))
         return self.__class__(self.offset + offset, size)
 
     def __str__(self):
-        return 'offset:%d size:%d self.size:%d' % (offset, size, self.size)
+        return 'offset:%d size:%d' % (self.offset, self.size)
 
     def read_all_bytes(self):
         return self.read_bytes(0, self.size)
 
     def read_bytes(self, offset, size):
-        if offset + size > self.size: raise Exception("Cannot read past end of Access. %s" % str(self))
+        if not self.addr_within_bounds(offset + size):
+            raise Exception("Cannot read past end of Access. %s, attempted %d-%d" %( str(self), offset, offset + size))
         return self._read_bytes(offset, size)
 
     def _read_bytes(self, offset, size):
         raise Exception("Reading not implemented in abstract class")
 
     def write_bytes(self, to_write, offset):
-        if offset + len(to_write) > self.size: raise Exception("Cannot write past end of Access. %s" % str(self))
+        if not self.addr_within_bounds(offset + len(to_write)):
+            raise Exception("Cannot write past end of Access. %s, attempted %d-%d" %( str(self), offset, offset + len(to_write)))
         self._write_bytes(to_write, offset)
 
     def _write_bytes(self, to_write, offset):

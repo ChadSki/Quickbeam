@@ -1,6 +1,6 @@
 import halolib
 import time
-m = halolib.load_map("./beavercreek.map")
+m = halolib.load_map("./beavercreek2.map")
 
 #print(repr(m))
 
@@ -16,6 +16,7 @@ def print_data(x):
             print_data(each)
 
 print(m.get_tag('bipd'))
+print()
 
 m.asdf = 123
 
