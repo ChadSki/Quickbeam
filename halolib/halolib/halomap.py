@@ -108,45 +108,29 @@ class HaloMap(PyNotifyPropertyChanged):
             self.file.close()
             self.file = None
 
-class HaloOffsets(object):
-    def __init__(self, location):
-        if location == 'file':
-            # map_offsets known ahead of time
-            self.MapHeader = 0
-
-            # map_offsets determined at runtime
-            self.IndexHeader = None
-            self.Index = None
-
-        elif location == 'mem':
-            # map_offsets known ahead of time
-            self.MapHeader = 0x6A8154
-            self.IndexHeader = 0x40440000
-            self.Executable = 0x400000
-            self.WMKillHandler = self.Executable + 0x142538
-
-            # map_offsets determined at runtime
-            self.Index = None
-
-        else:
-            raise Exception("Bad argument, cannot load Halo from '%s'" % location)
-
 def load_map_common(*, location, map_path=None):
-    map_offsets = HaloOffsets(location)
-
     if location == 'file':
         f = open(map_path, 'r+b')
         mmap_f = mmap.mmap(f.fileno(), 0)
         ByteAccess = access_over_file(mmap_f)
         halomap = HaloMap(mmap_f, f)
 
+        # offsets known ahead of time
+        map_header_offset = 0
+
     elif location == 'mem':
         ByteAccess = access_over_memory()
         halomap = HaloMap()
 
+        # offsets known ahead of time
+        map_header_offset = 0x6A8154
+        index_header_offset = 0x40440000
+        exe_offset = 0x400000
+        wmkillHandler_offset = exe_offset + 0x142538
+
         # Force Halo to render video even when window is deselected
         if True: #if fix_video_render:
-            ByteAccess(map_offsets.WMKillHandler, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
+            ByteAccess(wmkillHandler_offset, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
 
     else:
         raise Exception("Bad argument, cannot load Halo from '%s'" % location)
@@ -173,17 +157,17 @@ def load_map_common(*, location, map_path=None):
 
     map_header = MapHeader(
                     ByteAccess(
-                        map_offsets.MapHeader,
+                        map_header_offset,
                         MapHeader.struct_size),
                     0,
                     halomap)
 
     if location == 'file':
-        map_offsets.IndexHeader = map_header.index_offset
+        index_header_offset = map_header.index_offset
 
     index_header = IndexHeader(
                     ByteAccess(
-                        map_offsets.IndexHeader,
+                        index_header_offset,
                         IndexHeader.struct_size),
                     0,
                     halomap)
@@ -191,22 +175,22 @@ def load_map_common(*, location, map_path=None):
     if location == 'file':
         # Usually the tag index directly follows the index header. However,
         # some forms of map protection move the tag index to other locations.
-        map_offsets.Index = map_header.index_offset + index_header.primary_magic - 0x40440000
+        index_offset = map_header.index_offset + index_header.primary_magic - 0x40440000
 
         # On disk, we need to use a magic value to convert pointers into file offsets.
         # The magic value is based on the index location.
-        map_magic = index_header.primary_magic - map_offsets.Index
+        map_magic = index_header.primary_magic - index_offset
 
     elif location == 'mem':
         # Almost always 0x40440028, unless the map has been protected in a specific way
-        map_offsets.Index = index_header.primary_magic
+        index_offset = index_header.primary_magic
 
         # In memory, offsets are just raw pointers and require no adjustment.
         map_magic = 0
 
     index_entries = [IndexEntry(
                         ByteAccess(
-                            IndexEntry.struct_size * i + map_offsets.Index,
+                            IndexEntry.struct_size * i + index_offset,
                             IndexEntry.struct_size),
                         map_magic,
                         halomap) for i in range(index_header.tag_count)]
