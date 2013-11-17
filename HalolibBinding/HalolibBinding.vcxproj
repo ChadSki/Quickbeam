@@ -81,9 +81,11 @@
       <Command>rmdir $(OutDir)byteaccess /S /Q
 rmdir $(OutDir)halolib /S /Q
 rmdir $(OutDir)plugins /S /Q
+rmdir $(OutDir)pnpc /S /Q
 xcopy $(SolutionDir)Halolib\byteaccess $(OutDir)byteaccess /E /Y /I
 xcopy $(SolutionDir)Halolib\halolib $(OutDir)halolib /E /Y /I
 xcopy $(SolutionDir)Halolib\plugins $(OutDir)plugins /E /Y /I
+xcopy $(SolutionDir)Halolib\pnpc $(OutDir)pnpc /E /Y /I
 xcopy $(SolutionDir)vendor\cpython\PCbuild $(OutDir) /E /Y /I
 xcopy $(SolutionDir)vendor\cpython\Lib $(OutDir) /E /Y /I</Command>
     </PreBuildEvent>
@@ -114,9 +116,11 @@ xcopy $(SolutionDir)vendor\cpython\Lib $(OutDir) /E /Y /I</Command>
       <Command>rmdir $(OutDir)byteaccess /S /Q
 rmdir $(OutDir)halolib /S /Q
 rmdir $(OutDir)plugins /S /Q
+rmdir $(OutDir)pnpc /S /Q
 xcopy $(SolutionDir)Halolib\byteaccess $(OutDir)byteaccess /E /Y /I
 xcopy $(SolutionDir)Halolib\halolib $(OutDir)halolib /E /Y /I
 xcopy $(SolutionDir)Halolib\plugins $(OutDir)plugins /E /Y /I
+xcopy $(SolutionDir)Halolib\pnpc $(OutDir)pnpc /E /Y /I
 xcopy $(SolutionDir)vendor\cpython\PCbuild $(OutDir) /E /Y /I
 xcopy $(SolutionDir)vendor\cpython\Lib $(OutDir) /E /Y /I</Command>
     </PreBuildEvent>

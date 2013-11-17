@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HalolibBinding", "HalolibBi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{DD0A19F3-B796-4078-9003-5A692DED90C4}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "halolib", "halolib\halolib.pyproj", "{9F624802-EC7B-4FD7-B927-4BD356C4C35D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,16 @@ Global
 		{DD0A19F3-B796-4078-9003-5A692DED90C4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD0A19F3-B796-4078-9003-5A692DED90C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD0A19F3-B796-4078-9003-5A692DED90C4}.Release|Win32.ActiveCfg = Release|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9F624802-EC7B-4FD7-B927-4BD356C4C35D}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

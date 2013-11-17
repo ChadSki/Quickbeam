@@ -23,6 +23,27 @@
 // This is the main DLL file.
 
 #include "stdafx.hpp"
-
 #include "HalolibBinding.hpp"
 
+namespace HalolibBinding {
+
+    int callback(BoundPyObject* slf, char* name)
+    {
+        slf->OnPropertyChanged(name);
+        return 0;
+    }
+
+    BoundPyObject::BoundPyObject(PyObject* po)
+        : _po(po)
+    {
+        PyObject* result0 = PyObject_CallMethod(po, "register_callback", "II", // (uint, uint)
+            reinterpret_cast<UINT32>(&callback),
+            reinterpret_cast<UINT32>(this));
+    }
+
+    void BoundPyObject::OnPropertyChanged(char* name)
+    {
+        std::cout << name << " changed! (C++ OnPropertyChanged)" << std::endl;
+    }
+
+}

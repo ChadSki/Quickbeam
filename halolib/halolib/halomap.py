@@ -26,19 +26,22 @@ Defines the HaloMap class, as well as functions for loading maps location disk o
 """
 import re
 import mmap
-from halolib.haloaccess import access_over_file, access_over_memory
+from pnpc import PyNotifyPropertyChanged
+from halolib.haloaccess import access_over_file, access_over_process
 from halolib.halostruct import plugin_classes, load_plugins
 from halolib.halotag import HaloTag
 
-class HaloMap(object):
-    def __init__(self, mmap_f=None, f=None):
+class HaloMap(PyNotifyPropertyChanged('asdf', 'map_header', 'index_header', 'map_magic')):
+    def __init__(self, mmap_f=None, f=None, *args, **kwargs):
         self.mmap_f = mmap_f
         self.file = f
+        super(HaloMap, self).__init__(*args, **kwargs)
 
     def init(self, map_header, index_header, taglist, map_magic, file=None):
-        self.map_header = map_header
-        self.index_header = index_header
-        self.map_magic = map_magic
+        self._map_header = map_header
+        self._index_header = index_header
+        self._map_magic = map_magic
+        self._asdf = 4
         self.file = file
         self.tags = {tag.ident: tag for tag in taglist}
 
@@ -72,48 +75,35 @@ class HaloMap(object):
             self.file.close()
             self.file = None
 
-class HaloOffsets(object):
-    def __init__(self, location):
-        if location == 'file':
-            # map_offsets known ahead of time
-            self.MapHeader = 0
-
-            # map_offsets determined at runtime
-            self.IndexHeader = None
-            self.Index = None
-
-        elif location == 'mem':
-            # map_offsets known ahead of time
-            self.MapHeader = 0x6A8154
-            self.IndexHeader = 0x40440000
-            self.Executable = 0x400000
-            self.WMKillHandler = self.Executable + 0x142538
-
-            # map_offsets determined at runtime
-            self.Index = None
-
-        else:
-            raise Exception("Bad argument, cannot load Halo from '%s'" % location)
-
-def load_map_common(*, location, map_path=None):
-    map_offsets = HaloOffsets(location)
-
-    if location == 'file':
+def load_map(map_path=None):
+    if map_path != None:
+        location = 'file'
         f = open(map_path, 'r+b')
-        mmap_f = mmap.mmap(f.fileno(), 0)
+        mmap_f = mmap.mmap(f.fileno(), 0)   # Memory-mapped files are addressable as memory
+                                            # despite remaining on-disk. It is both faster and
+                                            # easier to read/write small amounts of data to a
+                                            # mmap'd file than a normally accessed one.
+
         ByteAccess = access_over_file(mmap_f)
         halomap = HaloMap(mmap_f, f)
 
-    elif location == 'mem':
-        ByteAccess = access_over_memory()
+        # offsets known ahead of time
+        map_header_offset = 0
+
+    else:
+        location='mem'
+        ByteAccess = access_over_process('halo.exe')
         halomap = HaloMap()
+
+        # offsets known ahead of time
+        map_header_offset = 0x6A8154
+        index_header_offset = 0x40440000
+        exe_offset = 0x400000
+        wmkillHandler_offset = exe_offset + 0x142538
 
         # Force Halo to render video even when window is deselected
         if True: #if fix_video_render:
-            ByteAccess(map_offsets.WMKillHandler, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
-
-    else:
-        raise Exception("Bad argument, cannot load Halo from '%s'" % location)
+            ByteAccess(wmkillHandler_offset, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
 
     # ensure plugins are loaded
     if len(plugin_classes) == 0:
@@ -124,30 +114,30 @@ def load_map_common(*, location, map_path=None):
     IndexHeader = plugin_classes['index_header']
     IndexEntry = plugin_classes['index_entry']
 
-    # runtime-only structures
-    ObjectTable = plugin_classes['object_table']
-    #PlayerTable = plugin_classes['player_table']
-
     if location == 'mem':
-        object_table = ObjectTable(HaloMemAccess(0x400506B4, 64), 0, halomap)
+        # runtime-only structures
+        ObjectTable = plugin_classes['object_table']
+        PlayerTable = plugin_classes['player_table']
+
+        object_table = ObjectTable(ByteAccess(0x400506B4, 64), 0, halomap)
         print(object_table)
         
-        player_table = HaloMemAccess(0x402AAF94, 64)
+        player_table = ByteAccess(0x402AAF94, 64)
         print(player_table.read_all_bytes())
 
     map_header = MapHeader(
                     ByteAccess(
-                        map_offsets.MapHeader,
+                        map_header_offset,
                         MapHeader.struct_size),
                     0,
                     halomap)
 
     if location == 'file':
-        map_offsets.IndexHeader = map_header.index_offset
+        index_header_offset = map_header.index_offset
 
     index_header = IndexHeader(
                     ByteAccess(
-                        map_offsets.IndexHeader,
+                        index_header_offset,
                         IndexHeader.struct_size),
                     0,
                     halomap)
@@ -155,22 +145,22 @@ def load_map_common(*, location, map_path=None):
     if location == 'file':
         # Usually the tag index directly follows the index header. However,
         # some forms of map protection move the tag index to other locations.
-        map_offsets.Index = map_header.index_offset + index_header.primary_magic - 0x40440000
+        index_offset = map_header.index_offset + index_header.primary_magic - 0x40440000
 
         # On disk, we need to use a magic value to convert pointers into file offsets.
         # The magic value is based on the index location.
-        map_magic = index_header.primary_magic - map_offsets.Index
+        map_magic = index_header.primary_magic - index_offset
 
     elif location == 'mem':
-        # Almost always 0x40440028, unless the map has been protected in a specific way
-        map_offsets.Index = index_header.primary_magic
+        # Almost always 0x40440028, unless the map has been protected in a specific way.
+        index_offset = index_header.primary_magic
 
         # In memory, offsets are just raw pointers and require no adjustment.
         map_magic = 0
 
     index_entries = [IndexEntry(
                         ByteAccess(
-                            IndexEntry.struct_size * i + map_offsets.Index,
+                            IndexEntry.struct_size * i + index_offset,
                             IndexEntry.struct_size),
                         map_magic,
                         halomap) for i in range(index_header.tag_count)]
@@ -210,9 +200,3 @@ def load_map_common(*, location, map_path=None):
 
     halomap.init(map_header, index_header, tags, map_magic)
     return halomap
-
-def load_map(map_path=None):
-    if map_path != None:
-        return load_map_common(location='file', map_path=map_path)
-    else:
-        return load_map_common(location='mem')

@@ -27,19 +27,21 @@ import os
 import xml.etree.ElementTree as et
 from halolib.cythonutil cimport *
 from halolib.cythonutil import *
+from pnpc import notify_property, PyNotifyPropertyChanged
 
 plugin_classes = {}
 
-class HaloStruct(object):
+class HaloStruct(PyNotifyPropertyChanged()):
     """A base class for Halo structs which contain primitive (int, float, string)
     and composite (reference, RGB color) fields. Additionally, a struct may
     contain 'reflexives', which involve pointers to other structs. Struct layouts
     are defined in XML.
     """
-    def __init__(self, access, map_magic, halomap):
+    def __init__(self, access, map_magic, halomap, *args, **kwargs):
         self.access = access
         self.map_magic = map_magic
         self.halomap = halomap
+        super(HaloStruct, self).__init__(*args, **kwargs)
 
     def __str__(self):
         def struct_to_s(struct, answer='', indent='\n    '):
@@ -59,13 +61,13 @@ class HaloStruct(object):
         return struct_to_s(self) + '\n'
 
 
-def make_field_property(field_type, reflexive_class=None, **kwargs):
+def make_field_property(field_name, field_type, reflexive_class=None, **kwargs):
     """Defines a property which reads/writes to a field of a plugin-defined HaloStruct."""
 
     offset = int(kwargs.get('offset'), base=0)
 
     if field_type == 'reflexive':
-        @property
+        @notify_property(field_name)
         def field(self):
             buf = self.access.read_bytes(offset, 8)
             count = read_uint32(<int><char*>buf)
@@ -88,7 +90,7 @@ def make_field_property(field_type, reflexive_class=None, **kwargs):
     elif field_type == 'reference':
         offset += 12 # since we only care to read the ident, 12 bytes into a reference
 
-        @property
+        @notify_property(field_name)
         def field(self):
             buf = self.access.read_bytes(offset, 4)
             ident = read_uint32(<int><char*>buf)
@@ -115,7 +117,7 @@ def make_field_property(field_type, reflexive_class=None, **kwargs):
         length = int(kwargs.get('length', '0'), base=0)
         reverse = kwargs.get('reverse', 'false')
 
-        @property
+        @notify_property(field_name)
         def field(self):
             buf = self.access.read_bytes(offset, length)
             answer = b'\x00' * length
@@ -138,7 +140,7 @@ def make_field_property(field_type, reflexive_class=None, **kwargs):
     elif field_type == 'asciiz':
         maxlength = int(kwargs.get('maxlength', '0'), base=0)
 
-        @property
+        @notify_property(field_name)
         def field(self):
             buf = self.access.read_bytes(offset, maxlength)
 
@@ -177,7 +179,7 @@ def make_field_property(field_type, reflexive_class=None, **kwargs):
             'uint64':  (read_uint64,  write_uint64,  8),
         }[field_type]
 
-        @property
+        @notify_property(field_name)
         def field(self):
             buf = self.access.read_bytes(offset, size_of)
             return read_fn(<int><char*>buf)
@@ -214,8 +216,12 @@ def class_from_xml(layout):
             new_class.reflexive_names.append(field_name)
             reflexive_class = class_from_xml(node)
 
-        setattr(new_class, field_name,
-            make_field_property(field_type, reflexive_class, **field_options))
+        field_property = make_field_property(
+            field_name,
+            field_type,
+            reflexive_class,
+            **field_options)
+        setattr(new_class, field_name, field_property)
 
     return new_class
 

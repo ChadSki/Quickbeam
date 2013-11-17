@@ -21,28 +21,68 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
-
 #include "Stdafx.hpp"
-#include <cstdio>
 
 using namespace System;
 
 namespace HalolibBinding {
 
-	public ref class MyClass
-	{
+#pragma managed(push, off)
+
+    /// Wraps a PyObject known to implement pnpc databinding.
+    ///
+    public class BoundPyObject
+    {
     public:
+        /// Constructor
+        ///
+        BoundPyObject(PyObject* po);
+
+        /// Triggered whenever a property of the bound PyObject
+        /// is updated.
+        ///
+        void OnPropertyChanged(char* name);
+    private:
+        PyObject* _po;
+    };
+
+    /// Callback function to be passed to pnpc Python objects.
+    ///
+    int callback(BoundPyObject* slf, char* name);
+
+#pragma managed(pop)
+
+    /// Class to wrap the pseudo-main function.
+    ///
+    public ref class MyClass
+    {
+    public:
+        /// Pseudo-main function for developing purposes.
+        ///
         static void doThing()
         {
             Py_Initialize();
             PyRun_SimpleString(
                 "import os\n"
-                "print(os.getcwd())\n"
-                "print()\n"
                 "import halolib\n"
-                "print(repr(halolib.load_map('beavercreek.map')))\n"
+
+                "m = halolib.load_map('beavercreek.map')\n"
+
+                "t = m.get_tag('bipd')\n"
+                "t.turn_speed *= 1.05\n"
                 );
+
+            PyObject* sys_mod_dict = PyImport_GetModuleDict();
+            PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
+            PyObject* halomap = PyObject_GetAttrString(main_mod, "m");
+
+            BoundPyObject* bpo = new BoundPyObject(halomap);
+
+            int result = PyObject_SetAttr(halomap, PyUnicode_FromString("asdf"), PyUnicode_FromString("qwer"));
+
             Py_Finalize();
         }
-	};
+    };
 }
+
+
