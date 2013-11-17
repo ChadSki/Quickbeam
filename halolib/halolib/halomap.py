@@ -26,12 +26,12 @@ Defines the HaloMap class, as well as functions for loading maps location disk o
 """
 import re
 import mmap
-from pnpc import PyNotifyPropertyChanged, notify_property
-from halolib.haloaccess import access_over_file, access_over_memory
+from pnpc import PyNotifyPropertyChanged
+from halolib.haloaccess import access_over_file, access_over_process
 from halolib.halostruct import plugin_classes, load_plugins
 from halolib.halotag import HaloTag
 
-class HaloMap(PyNotifyPropertyChanged):
+class HaloMap(PyNotifyPropertyChanged('asdf', 'map_header', 'index_header', 'map_magic')):
     def __init__(self, mmap_f=None, f=None, *args, **kwargs):
         self.mmap_f = mmap_f
         self.file = f
@@ -44,39 +44,6 @@ class HaloMap(PyNotifyPropertyChanged):
         self._asdf = 4
         self.file = file
         self.tags = {tag.ident: tag for tag in taglist}
-
-    @notify_property('asdf')
-    def asdf(self):
-        return self._asdf
-
-    @asdf.setter
-    def asdf(self, value):
-        self._asdf = value
-
-    @notify_property('map_header')
-    def map_header(self):
-        return self._map_header
-
-    @map_header.setter
-    def map_header(self, value):
-        self._map_header = value
-
-    @notify_property('index_header')
-    def index_header(self):
-        return self._index_header
-
-    @index_header.setter
-    def index_header(self, value):
-        self._index_header = value
-
-    @notify_property('map_magic')
-    def map_magic(self):
-        return self._map_magic
-
-    @map_magic.setter
-    def map_magic(self, value):
-        self._map_magic = value
-
 
     def __str__(self):
         return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))
@@ -108,18 +75,24 @@ class HaloMap(PyNotifyPropertyChanged):
             self.file.close()
             self.file = None
 
-def load_map_common(*, location, map_path=None):
-    if location == 'file':
+def load_map(map_path=None):
+    if map_path != None:
+        location = 'file'
         f = open(map_path, 'r+b')
-        mmap_f = mmap.mmap(f.fileno(), 0)
+        mmap_f = mmap.mmap(f.fileno(), 0)   # Memory-mapped files are addressable as memory
+                                            # despite remaining on-disk. It is both faster and
+                                            # easier to read/write small amounts of data to a
+                                            # mmap'd file than a normally accessed one.
+
         ByteAccess = access_over_file(mmap_f)
         halomap = HaloMap(mmap_f, f)
 
         # offsets known ahead of time
         map_header_offset = 0
 
-    elif location == 'mem':
-        ByteAccess = access_over_memory()
+    else:
+        location='mem'
+        ByteAccess = access_over_process('halo.exe')
         halomap = HaloMap()
 
         # offsets known ahead of time
@@ -132,9 +105,6 @@ def load_map_common(*, location, map_path=None):
         if True: #if fix_video_render:
             ByteAccess(wmkillHandler_offset, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
 
-    else:
-        raise Exception("Bad argument, cannot load Halo from '%s'" % location)
-
     # ensure plugins are loaded
     if len(plugin_classes) == 0:
         load_plugins()
@@ -144,15 +114,15 @@ def load_map_common(*, location, map_path=None):
     IndexHeader = plugin_classes['index_header']
     IndexEntry = plugin_classes['index_entry']
 
-    # runtime-only structures
-    ObjectTable = plugin_classes['object_table']
-    #PlayerTable = plugin_classes['player_table']
-
     if location == 'mem':
-        object_table = ObjectTable(HaloMemAccess(0x400506B4, 64), 0, halomap)
+        # runtime-only structures
+        ObjectTable = plugin_classes['object_table']
+        PlayerTable = plugin_classes['player_table']
+
+        object_table = ObjectTable(ByteAccess(0x400506B4, 64), 0, halomap)
         print(object_table)
         
-        player_table = HaloMemAccess(0x402AAF94, 64)
+        player_table = ByteAccess(0x402AAF94, 64)
         print(player_table.read_all_bytes())
 
     map_header = MapHeader(
@@ -182,7 +152,7 @@ def load_map_common(*, location, map_path=None):
         map_magic = index_header.primary_magic - index_offset
 
     elif location == 'mem':
-        # Almost always 0x40440028, unless the map has been protected in a specific way
+        # Almost always 0x40440028, unless the map has been protected in a specific way.
         index_offset = index_header.primary_magic
 
         # In memory, offsets are just raw pointers and require no adjustment.
@@ -230,9 +200,3 @@ def load_map_common(*, location, map_path=None):
 
     halomap.init(map_header, index_header, tags, map_magic)
     return halomap
-
-def load_map(map_path=None):
-    if map_path != None:
-        return load_map_common(location='file', map_path=map_path)
-    else:
-        return load_map_common(location='mem')

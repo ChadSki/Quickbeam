@@ -31,7 +31,7 @@ from pnpc import notify_property, PyNotifyPropertyChanged
 
 plugin_classes = {}
 
-class HaloStruct(PyNotifyPropertyChanged):
+class HaloStruct(PyNotifyPropertyChanged()):
     """A base class for Halo structs which contain primitive (int, float, string)
     and composite (reference, RGB color) fields. Additionally, a struct may
     contain 'reflexives', which involve pointers to other structs. Struct layouts
