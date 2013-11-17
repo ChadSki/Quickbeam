@@ -34,9 +34,9 @@ namespace HalolibBinding {
     public class BoundPyObject
     {
     public:
-        /// Constructor
-        ///
         BoundPyObject(PyObject* po);
+        BoundPyObject(const BoundPyObject &po);
+        ~BoundPyObject();
 
         /// Triggered whenever a property of the bound PyObject
         /// is updated.
@@ -63,9 +63,7 @@ namespace HalolibBinding {
         {
             Py_Initialize();
             PyRun_SimpleString(
-                "import os\n"
                 "import halolib\n"
-
                 "m = halolib.load_map('beavercreek.map')\n"
 
                 "t = m.get_tag('bipd')\n"
@@ -78,7 +76,7 @@ namespace HalolibBinding {
 
             BoundPyObject* bpo = new BoundPyObject(halomap);
 
-            int result = PyObject_SetAttr(halomap, PyUnicode_FromString("asdf"), PyUnicode_FromString("qwer"));
+            int result = PyObject_SetAttr(halomap, PyUnicode_FromString("asdf"), PyLong_FromLong(14));
 
             Py_Finalize();
         }
