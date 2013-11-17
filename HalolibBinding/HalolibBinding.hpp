@@ -74,9 +74,11 @@ namespace HalolibBinding {
             PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
             PyObject* halomap = PyObject_GetAttrString(main_mod, "m");
 
+            int result = PyObject_SetAttr(halomap, PyUnicode_FromString("asdf"), PyLong_FromLong(321) /*PyUnicode_FromString("qwer")*/);
+
             BoundPyObject* bpo = new BoundPyObject(halomap);
 
-            int result = PyObject_SetAttr(halomap, PyUnicode_FromString("asdf"), PyLong_FromLong(14));
+            result = PyObject_SetAttr(halomap, PyUnicode_FromString("asdf"), PyLong_FromLong(123) /*PyUnicode_FromString("qwer")*/);
 
             Py_Finalize();
         }

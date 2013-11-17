@@ -41,7 +41,7 @@ def simple_notify_property(property_name):
     notify_property which wraps a simple '_'-prefixed private member.
     """
     @notify_property(property_name)
-    def foo(self): getattr(self, '_' + property_name)
+    def foo(self): return getattr(self, '_' + property_name)
     @foo.setter
     def foo(self, value): setattr(self, '_' + property_name, value)
     return foo

@@ -17,4 +17,6 @@ def print_data(x):
 
 print(m.get_tag('bipd'))
 
+m.asdf = 123
+
 m.close()

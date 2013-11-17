@@ -129,7 +129,7 @@ def load_map(map_path=None):
                     ByteAccess(
                         map_header_offset,
                         MapHeader.struct_size),
-                    0,
+                    0, # the map header never requires magic
                     halomap)
 
     if location == 'file':
@@ -139,7 +139,7 @@ def load_map(map_path=None):
                     ByteAccess(
                         index_header_offset,
                         IndexHeader.struct_size),
-                    0,
+                    0, # the index header never requires magic
                     halomap)
 
     if location == 'file':
