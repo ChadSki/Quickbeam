@@ -79,31 +79,21 @@ def load_map(map_path=None):
     if map_path != None:
         location = 'file'
         f = open(map_path, 'r+b')
-        mmap_f = mmap.mmap(f.fileno(), 0)   # Memory-mapped files are addressable as memory
-                                            # despite remaining on-disk. It is both faster and
-                                            # easier to read/write small amounts of data to a
-                                            # mmap'd file than a normally accessed one.
-
-        ByteAccess = access_over_file(mmap_f)
+        mmap_f = mmap.mmap(f.fileno(), 0)       # It is both faster and easier to read/write small
+        ByteAccess = access_over_file(mmap_f)   # amounts of data to a memory-mapped file than a
+                                                # normally accessed one.
         halomap = HaloMap(mmap_f, f)
-
-        # offsets known ahead of time
-        map_header_offset = 0
 
     else:
         location='mem'
         ByteAccess = access_over_process('halo.exe')
         halomap = HaloMap()
 
-        # offsets known ahead of time
-        map_header_offset = 0x6A8154
-        index_header_offset = 0x40440000
         exe_offset = 0x400000
         wmkillHandler_offset = exe_offset + 0x142538
 
         # Force Halo to render video even when window is deselected
-        if True: #if fix_video_render:
-            ByteAccess(wmkillHandler_offset, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
+        ByteAccess(wmkillHandler_offset, 4).write_bytes(b'\xe9\x91\x00\x00', 0)
 
     # ensure plugins are loaded
     if len(plugin_classes) == 0:
@@ -115,7 +105,7 @@ def load_map(map_path=None):
     IndexEntry = plugin_classes['index_entry']
 
     if location == 'mem':
-        # runtime-only structures
+        # runtime-only structures (under construction!)
         ObjectTable = plugin_classes['object_table']
         PlayerTable = plugin_classes['player_table']
 
@@ -125,6 +115,7 @@ def load_map(map_path=None):
         player_table = ByteAccess(0x402AAF94, 64)
         print(player_table.read_all_bytes())
 
+    map_header_offset = {'file': 0, 'mem': 0x6A8154}[location]
     map_header = MapHeader(
                     ByteAccess(
                         map_header_offset,
@@ -132,9 +123,7 @@ def load_map(map_path=None):
                     0, # the map header never requires magic
                     halomap)
 
-    if location == 'file':
-        index_header_offset = map_header.index_offset
-
+    index_header_offset = {'file': map_header.index_offset, 'mem': 0x40440000}[location]
     index_header = IndexHeader(
                     ByteAccess(
                         index_header_offset,
@@ -148,7 +137,8 @@ def load_map(map_path=None):
         index_offset = map_header.index_offset + index_header.primary_magic - 0x40440000
 
         # On disk, we need to use a magic value to convert pointers into file offsets.
-        # The magic value is based on the index location.
+        # The magic value is based on the index location within the file, since this
+        # always appears at the same place in memory.
         map_magic = index_header.primary_magic - index_offset
 
     elif location == 'mem':
@@ -187,14 +177,18 @@ def load_map(map_path=None):
     # Just give BSP's meta a size of zero for now
     meta_sizes.update({bsp_offset: 0})
 
+    name_maxlen = 256 # Not sure what the actual limit is; just picking some value
     tags = [HaloTag(
                 index_entry,
+
                 ByteAccess( # name
                     index_entry.name_offset_raw - map_magic,
-                    256),
+                    name_maxlen),
+
                 ByteAccess( # meta
                     index_entry.meta_offset_raw - map_magic,
                     meta_sizes[index_entry.meta_offset_raw]),
+
                 map_magic,
                 halomap) for index_entry in index_entries]
 
