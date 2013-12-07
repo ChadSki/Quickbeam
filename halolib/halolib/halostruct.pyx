@@ -76,7 +76,10 @@ def make_field_property(field_name, field_type, reflexive_class=None, **kwargs):
             start_offset = raw_offset - self.map_magic
 
             if not self.access.addr_within_bounds(start_offset + reflexive_class.struct_size * count):
-                print("Warning: reflexive struct address out of bounds.")
+                for tag in self.halomap.tags.values():
+                    if tag.meta.access.offset == self.access.offset:
+                        print("Warning: reflexive struct address out of bounds for %s" % tag)
+                        break
 
             # list of reflexive structs
             return [reflexive_class(

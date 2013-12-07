@@ -34,7 +34,7 @@ class ByteAccess(object):
         self.size = size
 
     def addr_within_bounds(self, addr):
-        return 0 <= addr <= self.size
+        return (0 <= addr <= self.size) or (self.offset <= addr <= (self.offset + self.size))
 
     def create_subaccess(self, offset, size):
         if not self.addr_within_bounds(offset + size):
