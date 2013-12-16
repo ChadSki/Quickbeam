@@ -1,8 +1,8 @@
 import halolib
 m = halolib.load_map()
 
-print(repr(m))
-
+#print(repr(m))
+print(repr(m.get_tag('bipd')))
 
 # weaps
 rifle = m.get_tag('weap', 'assault rifle')
@@ -23,4 +23,4 @@ plasma.final_velocity = 0.2
 # do swaps
 rifle.triggers[0].projectile = charged
 
-print(repr(rifle))
+print(rifle)

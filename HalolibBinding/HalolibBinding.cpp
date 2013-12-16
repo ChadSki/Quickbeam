@@ -41,6 +41,11 @@ namespace HalolibBinding {
             reinterpret_cast<UINT32>(this));
     }
 
+    BoundPyObject::~BoundPyObject()
+    {
+        // TODO
+    }
+
     void BoundPyObject::OnPropertyChanged(char* name)
     {
         std::cout << name << " changed! (C++ OnPropertyChanged)" << std::endl;
