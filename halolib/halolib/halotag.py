@@ -27,12 +27,6 @@ Defines the HaloTag class, which encapsulates an index entry, tag name, and meta
 from halolib.cythonutil import py_strlen
 from halolib.halostruct import plugin_classes
 
-class CachedHaloTag(object):
-    """An object for storing tags in limbo between exportation from one map
-    and importation into another.
-    """
-    pass #__slots__ = ['index_entry_data', 'name_data', 'meta_data']
-
 class HaloTag(object):
     def __init__(self, index_entry, name_access, meta_access, map_magic, halomap):
         # these attributes are all protected from erroneous assignment

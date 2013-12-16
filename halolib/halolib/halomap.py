@@ -31,7 +31,7 @@ from halolib.haloaccess import access_over_file, access_over_process
 from halolib.halostruct import plugin_classes, load_plugins
 from halolib.halotag import HaloTag
 
-class HaloMap(PyNotifyPropertyChanged('asdf', 'map_header', 'index_header', 'map_magic')):
+class HaloMap(PyNotifyPropertyChanged('map_header', 'index_header', 'map_magic')):
     def __init__(self, mmap_f=None, f=None, *args, **kwargs):
         self.mmap_f = mmap_f
         self.file = f
@@ -41,7 +41,6 @@ class HaloMap(PyNotifyPropertyChanged('asdf', 'map_header', 'index_header', 'map
         self._map_header = map_header
         self._index_header = index_header
         self._map_magic = map_magic
-        self._asdf = 4
         self.file = file
         self.tags = {tag.ident: tag for tag in taglist}
 

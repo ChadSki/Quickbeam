@@ -47,7 +47,7 @@ def simple_notify_property(property_name):
 ctypedef void (*FunctionCall)(void*, char*)
 
 cdef void default_callback(void* opaque, char* name):
-    print('%s was changed! (default callback)\n\n' % name)
+    print('%s was changed! (default callback)\n' % str(name))
 
 cdef class PnpcBase:
     cdef:

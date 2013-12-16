@@ -14,6 +14,4 @@ t.turn_speed *= 1.05
 print(m.get_tag('bipd'))
 print()
 
-m.asdf = 123
-
 m.close()
