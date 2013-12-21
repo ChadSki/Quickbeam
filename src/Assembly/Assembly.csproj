@@ -155,10 +155,6 @@
     <Compile Include="Helpers\Converters\TagBookmarkForeground.cs" />
     <Compile Include="Helpers\Converters\TagBookmarkVisibility.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
-    <Compile Include="Helpers\Cryptography\AES.cs" />
-    <Compile Include="Helpers\Cryptography\MD5.cs" />
-    <Compile Include="Helpers\Cryptography\RSA.cs" />
-    <Compile Include="Helpers\Cryptography\SHA1.cs" />
     <Compile Include="Helpers\DDSConversion.cs" />
     <Compile Include="Helpers\ExceptionDictionary.cs" />
     <Compile Include="Helpers\FileDefaults.cs" />
@@ -166,10 +162,8 @@
     <Compile Include="Helpers\INIClass.cs" />
     <Compile Include="Helpers\JumpLists.cs" />
     <Compile Include="Helpers\Native\ShellChanges.cs" />
-    <Compile Include="Helpers\Models\ObjExporter.cs" />
     <Compile Include="Helpers\Net\HttpExtensions.cs" />
     <Compile Include="Helpers\Net\HttpRequests.cs" />
-    <Compile Include="Helpers\Net\SignIn.cs" />
     <Compile Include="Helpers\Plugins\ThirdGenPluginVisitor.cs" />
     <Compile Include="Helpers\Net\AssemblyServer.cs" />
     <Compile Include="Helpers\Net\Imgur.cs" />
