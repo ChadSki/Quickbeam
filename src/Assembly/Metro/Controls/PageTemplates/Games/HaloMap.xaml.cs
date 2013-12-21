@@ -32,7 +32,6 @@ using Blamite.Util;
 using CloseableTabItemDemo;
 using Microsoft.Win32;
 using Newtonsoft.Json;
-using XBDMCommunicator;
 
 namespace Assembly.Metro.Controls.PageTemplates.Games
 {
@@ -201,10 +200,6 @@ namespace Assembly.Metro.Controls.PageTemplates.Games
 				{
 					case EngineType.SecondGeneration:
 						_rteProvider = new H2VistaRTEProvider("halo2.exe");
-						break;
-
-					case EngineType.ThirdGeneration:
-						_rteProvider = new XBDMRTEProvider(App.AssemblyStorage.AssemblySettings.Xbdm);
 						break;
 				}
 

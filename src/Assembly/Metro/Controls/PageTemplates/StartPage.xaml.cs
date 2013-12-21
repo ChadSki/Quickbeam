@@ -51,15 +51,6 @@ namespace Assembly.Metro.Controls.PageTemplates
 					case Settings.RecentFileType.Cache:
 						App.AssemblyStorage.AssemblySettings.HomeWindow.AddCacheTabModule(senderEntry.FilePath);
 						break;
-					case Settings.RecentFileType.Blf:
-						App.AssemblyStorage.AssemblySettings.HomeWindow.AddImageTabModule(senderEntry.FilePath);
-						break;
-					case Settings.RecentFileType.MapInfo:
-						App.AssemblyStorage.AssemblySettings.HomeWindow.AddInfooTabModule(senderEntry.FilePath);
-						break;
-					case Settings.RecentFileType.Campaign:
-						App.AssemblyStorage.AssemblySettings.HomeWindow.AddCampaignTabModule(senderEntry.FilePath);
-						break;
 					default:
 						MetroMessageBox.Show("wut.", "This content type doesn't even exist, how the fuck did you manage that?");
 						break;
@@ -143,21 +134,6 @@ namespace Assembly.Metro.Controls.PageTemplates
 		private void btnOpenCacheFile_Click(object sender, RoutedEventArgs e)
 		{
 			App.AssemblyStorage.AssemblySettings.HomeWindow.OpenContentFile(Home.ContentTypes.Map);
-		}
-
-		private void btnOpenCacheInfo_Click(object sender, RoutedEventArgs e)
-		{
-			App.AssemblyStorage.AssemblySettings.HomeWindow.OpenContentFile(Home.ContentTypes.MapInfo);
-		}
-
-		private void btnOpenCacheImag_Click(object sender, RoutedEventArgs e)
-		{
-			App.AssemblyStorage.AssemblySettings.HomeWindow.OpenContentFile(Home.ContentTypes.MapImage);
-		}
-
-		private void btnOpenCampaign_Click(object sender, RoutedEventArgs e)
-		{
-			App.AssemblyStorage.AssemblySettings.HomeWindow.OpenContentFile(Home.ContentTypes.Campaign);
 		}
 
 		#endregion

@@ -11,7 +11,6 @@ using Assembly.Windows;
 using Blamite.Flexibility;
 using Blamite.Flexibility.Settings;
 using Newtonsoft.Json;
-using XBDMCommunicator;
 
 namespace Assembly.Helpers
 {
@@ -140,7 +139,6 @@ namespace Assembly.Helpers
 		private bool _startpageShowRecentsMap = true;
 		private bool _startpageShowRecentsMapInfo = true;
 		private bool _startpageShowRecentsCampaign = true;
-		private Xbdm _xbdm;
 		private bool _xdkAutoSave;
 		private string _xdkNameIp = "192.168.0.1";
 		private bool _xdkResizeImages;
@@ -392,9 +390,6 @@ namespace Assembly.Helpers
 			set
 			{
 				SetField(ref _xdkNameIp, value, "XdkNameIp");
-
-				if (Xbdm != null)
-					Xbdm.UpdateDeviceIdent(value);
 			}
 		}
 
@@ -612,15 +607,6 @@ namespace Assembly.Helpers
 		{
 			get { return _homeWindow; }
 			set { SetField(ref _homeWindow, value, "HomeWindow"); }
-		}
-
-		/// <summary>
-		/// </summary>
-		[JsonIgnore]
-		public Xbdm Xbdm
-		{
-			get { return _xbdm; }
-			set { SetField(ref _xbdm, value, "Xbdm"); }
 		}
 
 		/// <summary>

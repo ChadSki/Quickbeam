@@ -13,7 +13,7 @@
 			<ComboBox x:Name="cbEnumOptions"
 			          ItemsSource="{Binding Values}"
 			          SelectedValue="{Binding SelectedValue}"
-			          HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Width="250">
+			          HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Width="175">
 				<ComboBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True"

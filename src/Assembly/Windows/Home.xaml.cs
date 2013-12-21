@@ -15,8 +15,6 @@ using Assembly.Helpers.Native;
 using Assembly.Helpers.Net;
 using Assembly.Metro.Controls.PageTemplates;
 using Assembly.Metro.Controls.PageTemplates.Games;
-using Assembly.Metro.Controls.PageTemplates.Tools;
-using Assembly.Metro.Controls.PageTemplates.Tools.Halo4;
 using Assembly.Metro.Dialogs;
 using AvalonDock.Layout;
 using Blamite.Blam.ThirdGen;
@@ -136,58 +134,16 @@ namespace Assembly.Windows
 			OpenContentFile(ContentTypes.Map);
 		}
 
-		private void menuOpenCacheInfomation_Click(object sender, RoutedEventArgs e)
-		{
-			OpenContentFile(ContentTypes.MapInfo);
-		}
-
-		private void menuOpenCacheImage_Click(object sender, RoutedEventArgs e)
-		{
-			OpenContentFile(ContentTypes.MapImage);
-		}
-
-		private void menuOpenCampaign_Click(object sender, RoutedEventArgs e)
-		{
-			OpenContentFile(ContentTypes.Campaign);
-		}
-
-		// Edit
-		private void menuOpenSettings_Click(object sender, EventArgs e)
-		{
-			AddTabModule(TabGenre.Settings);
-		}
-
-		// Tools
-		private void menuToolHalo4VoxelConverter_Click(object sender, RoutedEventArgs e)
-		{
-			AddTabModule(TabGenre.VoxelConverter);
-		}
-
-		// View
+        // View
 		private void menuViewStartPage_Click(object sender, RoutedEventArgs e)
 		{
 			AddTabModule(TabGenre.StartPage);
 		}
 
-		private void menuPatches_Click(object sender, RoutedEventArgs e)
-		{
-			AddPatchTabModule();
-		}
-
-		private void menuPostGenerator_Click(object sender, RoutedEventArgs e)
-		{
-			AddTabModule(TabGenre.PostGenerator, false);
-		}
-
-		private void menuPluginGeneration_Click(object sender, RoutedEventArgs e)
-		{
-			AddTabModule(TabGenre.PluginGenerator);
-		}
-
-		private void menuPluginConverter_Click(object sender, RoutedEventArgs e)
-		{
-			AddTabModule(TabGenre.PluginConverter);
-		}
+        private void menuOpenSettings_Click(object sender, EventArgs e)
+        {
+            AddTabModule(TabGenre.Settings);
+        }
 
 		// Help
 		private void menuHelpAbout_Click(object sender, RoutedEventArgs e)
@@ -363,10 +319,7 @@ namespace Assembly.Windows
 
 		public enum ContentTypes
 		{
-			Map,
-			MapInfo,
-			MapImage,
-			Campaign
+			Map
 		}
 
 		private readonly Dictionary<ContentTypes, ContentFileHandler> _contentFileHandlers = new Dictionary
@@ -377,24 +330,6 @@ namespace Assembly.Windows
 					"Assembly - Open Blam Cache File",
 					"Blam Cache File (*.map)|*.map",
 					(home, file) => home.AddCacheTabModule(file))
-			},
-			{
-				ContentTypes.MapImage, new ContentFileHandler(
-					"Assembly - Open Blam Map Image File",
-					"Blam Map Image File (*.blf)|*.blf",
-					(home, file) => home.AddImageTabModule(file))
-			},
-			{
-				ContentTypes.MapInfo, new ContentFileHandler(
-					"Assembly - Open Blam Map Info File",
-					"Blam Map Info File (*.mapinfo)|*.mapinfo",
-					(home, file) => home.AddInfooTabModule(file))
-			},
-			{
-				ContentTypes.Campaign, new ContentFileHandler(
-					"Assembly - Open Blam Campaign File",
-					"Blam Campaign File (*.campaign)|*.campaign",
-					(home, file) => home.AddCampaignTabModule(file))
 			},
 		};
 
@@ -528,96 +463,8 @@ namespace Assembly.Windows
 				Title = "Screenshot",
 				ToolTip = tempImageLocation
 			};
-			newScreenshotTab.Content = new HaloScreenshot(tempImageLocation, newScreenshotTab);
 			documentManager.Children.Add(newScreenshotTab);
 			documentManager.SelectedContentIndex = documentManager.IndexOfChild(newScreenshotTab);
-		}
-
-		/// <summary>
-		///     Add a new BLF Editor Container
-		/// </summary>
-		/// <param name="imageLocation">Path to the BLF file</param>
-		public void AddImageTabModule(string imageLocation)
-		{
-			// Check File isn't already open
-			foreach (LayoutContent tab in documentManager.Children.Where(tab => tab.ContentId == imageLocation))
-			{
-				documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
-				return;
-			}
-
-			var newMapImageTab = new LayoutDocument
-			{
-				ContentId = imageLocation,
-				Title = "Image",
-				ToolTip = imageLocation
-			};
-			newMapImageTab.Content = new HaloImage(imageLocation, newMapImageTab);
-			documentManager.Children.Add(newMapImageTab);
-			documentManager.SelectedContentIndex = documentManager.IndexOfChild(newMapImageTab);
-		}
-
-		/// <summary>
-		///     Add a new MapInfo Editor Container
-		/// </summary>
-		/// <param name="infooLocation">Path to the MapInfo file</param>
-		public void AddInfooTabModule(string infooLocation)
-		{
-			// Check File isn't already open
-			foreach (LayoutContent tab in documentManager.Children.Where(tab => tab.ContentId == infooLocation))
-			{
-				documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
-				return;
-			}
-
-			var newMapInfoTab = new LayoutDocument
-			{
-				ContentId = infooLocation,
-				Title = "Info",
-				ToolTip = infooLocation
-			};
-			newMapInfoTab.Content = new HaloInfo(infooLocation, newMapInfoTab);
-			documentManager.Children.Add(newMapInfoTab);
-			documentManager.SelectedContentIndex = documentManager.IndexOfChild(newMapInfoTab);
-		}
-
-		/// <summary>
-		///     Add a new Campaign Editor Container
-		/// </summary>
-		/// <param name="campiagnLocation">Path to the Campaign file</param>
-		public void AddCampaignTabModule(string campiagnLocation)
-		{
-			// Check File isn't already open
-			foreach (LayoutContent tab in documentManager.Children.Where(tab => tab.ContentId == campiagnLocation))
-			{
-				documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
-				return;
-			}
-
-			var newCampaignTab = new LayoutDocument
-			{
-				ContentId = campiagnLocation,
-				Title = "Campaign",
-				ToolTip = campiagnLocation
-			};
-			newCampaignTab.Content = new HaloCampaign(campiagnLocation, newCampaignTab);
-			documentManager.Children.Add(newCampaignTab);
-			documentManager.SelectedContentIndex = documentManager.IndexOfChild(newCampaignTab);
-		}
-
-		/// <summary>
-		///     Add a new Patch Control
-		/// </summary>
-		/// <param name="patchLocation">Path to the Patch file</param>
-		public void AddPatchTabModule(string patchLocation = null)
-		{
-			var newPatchTab = new LayoutDocument
-			{
-				Title = "Patcher",
-				Content = (patchLocation != null) ? new PatchControl(patchLocation) : new PatchControl()
-			};
-			documentManager.Children.Add(newPatchTab);
-			documentManager.SelectedContentIndex = documentManager.IndexOfChild(newPatchTab);
 		}
 
 		public void AddTabModule(TabGenre tabG, bool singleInstance = true)
@@ -638,31 +485,9 @@ namespace Assembly.Windows
 					tab.Title = "Settings";
 					tab.Content = new SettingsPage();
 					break;
-				case TabGenre.NetworkPoking:
-					tab.Title = "Network Poking";
-					tab.Content = new NetworkGrouping();
-					break;
-				case TabGenre.PluginGenerator:
-					tab.Title = "Plugin Generator";
-					tab.Content = new HaloPluginGenerator();
-					break;
 				case TabGenre.PluginConverter:
 					tab.Title = "Plugin Converter";
 					tab.Content = new HaloPluginConverter();
-					break;
-
-
-				case TabGenre.MemoryManager:
-					tab.Title = "Memory Manager";
-					tab.Content = new MemoryManager();
-					break;
-				case TabGenre.VoxelConverter:
-					tab.Title = "Voxel Converter";
-					tab.Content = new VoxelConverter();
-					break;
-				case TabGenre.PostGenerator:
-					tab.Title = "Post Generator";
-					tab.Content = new PostGenerator();
 					break;
 			}
 
@@ -808,34 +633,6 @@ namespace Assembly.Windows
 						case "daeh":
 							// Map File
 							AddCacheTabModule(path);
-							return;
-
-						case "asmp":
-							// Patch File
-							AddPatchTabModule(path);
-							return;
-
-						case "_blf":
-							// BLF Container, needs more checking
-							var blf = new PureBLF(path);
-							blf.Close();
-							if (blf.BLFChunks.Count > 2)
-							{
-								switch (blf.BLFChunks[1].ChunkMagic)
-								{
-									case "levl":
-										AddInfooTabModule(path);
-										return;
-									case "mapi":
-										AddImageTabModule(path);
-										return;
-								}
-							}
-							MetroMessageBox.Show("Unsupported BLF Type", "The selected BLF file is not supported in assembly.");
-							return;
-
-						default:
-							MetroMessageBox.Show("Unsupported file type", "The selected file is not supported in assembly.");
 							return;
 					}
 				}

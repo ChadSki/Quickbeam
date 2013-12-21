@@ -12,7 +12,7 @@
 		<Image Source="/Assembly;component/Metro/Images/background_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
 		       Margin="320,108,166,-102" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
 
-		<Grid x:Name="sideBar" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="350" Background="#2d2d30">
+		<Grid x:Name="sideBar" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="250" Background="#2d2d30">
 			<Rectangle Fill="#FF545456" Width="2" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Right"
 			           d:LayoutOverrides="Height" />
 
@@ -44,12 +44,6 @@
 						<StackPanel Margin="-5,10,0,0">
 							<Button Content="Open Blam Cache File (.map)" x:Name="btnOpenCacheFile"
 							        Style="{StaticResource TabActiveButtons}" HorizontalAlignment="Stretch" Click="btnOpenCacheFile_Click" />
-							<Button Content="Open Map Infomation File (.mapinfo)" x:Name="btnOpenCacheInfo"
-							        Style="{StaticResource TabActiveButtons}" HorizontalAlignment="Stretch" Click="btnOpenCacheInfo_Click" />
-							<Button Content="Open Map Image File (.blf)" x:Name="btnOpenCacheImag" Style="{StaticResource TabActiveButtons}"
-							        HorizontalAlignment="Stretch" Click="btnOpenCacheImag_Click" />
-							<Button Content="Open Campaign File (.campaign)" x:Name="btnOpenCampaign" Style="{StaticResource TabActiveButtons}"
-							        HorizontalAlignment="Stretch" Click="btnOpenCampaign_Click" />
 						</StackPanel>
 
 						<Rectangle Fill="#FF363639" Height="1" Width="250" Margin="0,20,0,15" VerticalAlignment="Top"
