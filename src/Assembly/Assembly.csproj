@@ -145,7 +145,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\0xabad1dea.cs" />
     <Compile Include="Helpers\AssemblyProtocol.cs" />
     <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLAttribute.cs" />
     <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLTag.cs" />
@@ -465,18 +464,6 @@
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusUpdater.cs" />
-    <Page Include="Helpers\0xabad1dea\DingDong.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Helpers\0xabad1dea\Galo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Helpers\0xabad1dea\TragicSans.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Metro\Controls\ActionButtons\CloseButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -933,7 +920,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SyntaxHighlighting\XMLPurple.xshd" />
-    <Resource Include="Helpers\0xabad1dea\GodOfAllThingsHolyAndModdy.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

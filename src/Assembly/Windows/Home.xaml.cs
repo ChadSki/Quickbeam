@@ -170,16 +170,6 @@ namespace Assembly.Windows
 			//var app = (App)Application.Current;
 		}
 
-		private void Home_PreviewKeyDown(object sender, KeyEventArgs e)
-		{
-			_0xabad1dea.TragicSans.KeyDown(e.Key);
-		}
-
-		private void btnIWff_Click(object sender, RoutedEventArgs e)
-		{
-			_0xabad1dea.IWff.CleanUp();
-		}
-
 		private void Window_PreviewDrop_1(object sender, DragEventArgs e)
 		{
 		}

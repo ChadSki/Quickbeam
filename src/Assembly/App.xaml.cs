@@ -67,9 +67,6 @@ namespace Assembly
 			// Try and delete all temp data
 			VariousFunctions.EmptyUpdaterLocations();
 
-			// Dubs, checkem
-			_0xabad1dea.CheckServerStatus();
-
 			// Update File Defaults
 			FileDefaults.UpdateFileDefaults();
 

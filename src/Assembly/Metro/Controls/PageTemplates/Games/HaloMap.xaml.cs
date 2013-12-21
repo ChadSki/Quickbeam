@@ -167,16 +167,9 @@ namespace Assembly.Metro.Controls.PageTemplates.Games
 				{
 					Dispatcher.Invoke(new Action(delegate
 					{
-						if (!_0xabad1dea.IWff.Heman(reader))
-						{
-							StatusUpdater.Update("Not a supported target engine");
-							MetroMessageBox.Show("Unable to open cache file",
-								ex.Message + ".\r\nWhy not add support in the 'Formats' folder?");
-						}
-						else
-						{
-							StatusUpdater.Update("HEYYEYAAEYAAAEYAEYAA");
-						}
+                        StatusUpdater.Update("Not a supported target engine");
+                        MetroMessageBox.Show("Unable to open cache file",
+                            ex.Message + ".\r\nWhy not add support in the 'Formats' folder?");
 
 						App.AssemblyStorage.AssemblySettings.HomeWindow.ExternalTabClose(_tab);
 					}));
