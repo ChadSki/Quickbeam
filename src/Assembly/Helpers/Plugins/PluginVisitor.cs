@@ -11,7 +11,7 @@ using Blamite.Util;
 
 namespace Assembly.Helpers.Plugins
 {
-    public class ThirdGenPluginVisitor : IPluginVisitor
+    public class PluginVisitor : IPluginVisitor
     {
         // Private Members
 
@@ -25,7 +25,7 @@ namespace Assembly.Helpers.Plugins
         private EnumData _currentEnum;
         private ReflexiveData _currentReflexive;
 
-        public ThirdGenPluginVisitor(TagHierarchy tags, Trie stringIDTrie, FileSegmentGroup metaArea,
+        public PluginVisitor(TagHierarchy tags, Trie stringIDTrie, FileSegmentGroup metaArea,
             bool showInvisibles)
         {
             _tags = tags;
