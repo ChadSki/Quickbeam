@@ -760,7 +760,6 @@ namespace Blamite.Blam.Scripting.Analysis
                 } while (buffer.Pos < tokEPos && ch != ScanBuff.EndOfFile);
                 buffer.Pos = save;
                 return count;
-#endif // BYTEMODE
             }
         }
 

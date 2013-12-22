@@ -149,7 +149,6 @@
     <Compile Include="Helpers\DDSConversion.cs" />
     <Compile Include="Helpers\ExceptionDictionary.cs" />
     <Compile Include="Helpers\FileDefaults.cs" />
-    <Compile Include="Helpers\HoldingVault.cs" />
     <Compile Include="Helpers\INIClass.cs" />
     <Compile Include="Helpers\JumpLists.cs" />
     <Compile Include="Helpers\Native\ShellChanges.cs" />
@@ -442,8 +441,6 @@
     <Compile Include="Helpers\Native\DwmDropShadow.cs" />
     <Compile Include="Helpers\Native\Monitor_Workarea.cs" />
     <Compile Include="Helpers\Native\WindowMovement.cs" />
-    <Compile Include="Helpers\PostGeneration\AssemblyPostGenerator.cs" />
-    <Compile Include="Helpers\PostGeneration\ModPostInfo.cs" />
     <Compile Include="SyntaxHighlighting\HighlightLoader.cs" />
     <Compile Include="Windows\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>

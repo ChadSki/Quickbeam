@@ -160,7 +160,7 @@ namespace Blamite.Blam.Resources.Models
 
                 case VertexElementType.D3DColor:
                     w = reader.ReadByte()/255.0f;
-                        // W is set here because alpha comes first but ends up last in the vector
+                    // W is set here because alpha comes first but ends up last in the vector
                     y = reader.ReadByte()/255.0f;
                     z = reader.ReadByte()/255.0f;
                     x = reader.ReadByte()/255.0f;

@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using Assembly.Helpers;
-using Assembly.Metro.Controls.PageTemplates.Games.Components;
 using Assembly.Metro.Dialogs;
 using Assembly.Windows;
 
@@ -19,10 +18,6 @@ namespace Assembly.Metro.Controls.PageTemplates
 
             cbClosePageOnLoad.IsChecked = App.AssemblyStorage.AssemblySettings.StartpageHideOnLaunch;
             cbShowOnStartUp.IsChecked = App.AssemblyStorage.AssemblySettings.StartpageShowOnLoad;
-
-            // Load RSS feeds
-            tutHalo3.Content = new RssPage(HoldingVault.XboxChaosH3Tuts);
-            tutHaloReach.Content = new RssPage(HoldingVault.XboxChaosHReachTuts);
         }
 
         public bool Close()
