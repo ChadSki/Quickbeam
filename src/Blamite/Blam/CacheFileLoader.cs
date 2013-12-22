@@ -1,6 +1,5 @@
 ﻿using System;
 using Blamite.Blam.SecondGen;
-using Blamite.Blam.ThirdGen;
 using Blamite.Flexibility;
 using Blamite.IO;
 
@@ -56,9 +55,6 @@ namespace Blamite.Blam
 			{
 				case EngineType.SecondGeneration:
 					return new SecondGenCacheFile(reader, engineInfo, version.BuildString);
-
-				case EngineType.ThirdGeneration:
-					return new ThirdGenCacheFile(reader, engineInfo, version.BuildString);
 
 				default:
 					throw new NotSupportedException("Engine not supported");

@@ -17,7 +17,6 @@ using Assembly.Metro.Controls.PageTemplates;
 using Assembly.Metro.Controls.PageTemplates.Games;
 using Assembly.Metro.Dialogs;
 using AvalonDock.Layout;
-using Blamite.Blam.ThirdGen;
 using Blamite.IO;
 using Microsoft.Win32;
 
