@@ -1004,6 +1004,14 @@
     <Resource Include="Metro\Controls\AvalonDockMetro\Images\Locked.png" />
     <Resource Include="Metro\Controls\AvalonDockMetro\Images\PinRestore.png" />
     <Resource Include="Metro\Images\DockPaneImageTile.png" />
+    <Content Include="DLLs\BetterTab.dll" />
+    <Content Include="DLLs\BetterWpfControls.dll" />
+    <Content Include="DLLs\DevIL.NET.dll" />
+    <Content Include="DLLs\ICSharpCode.AvalonEdit.dll" />
+    <Resource Include="DLLs\ICSharpCode.AvalonEdit.xml" />
+    <Content Include="DLLs\System.Windows.Controls.Input.Toolkit.dll" />
+    <Content Include="DLLs\WPFToolkit.dll" />
+    <Content Include="DLLs\WPFToolkit.Extended.dll" />
     <Content Include="Plugins\Examples\ThirdGenExample.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
