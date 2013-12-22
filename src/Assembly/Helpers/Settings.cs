@@ -14,8 +14,6 @@ using Newtonsoft.Json;
 
 namespace Assembly.Helpers
 {
-    /// <summary>
-    /// </summary>
     public class Storage : INotifyPropertyChanged
     {
         private Settings _assemblySettings = new Settings();
@@ -74,15 +72,11 @@ namespace Assembly.Helpers
 
         #endregion
 
-        /// <summary>
-        /// </summary>
         public Storage()
         {
             Load();
         }
 
-        /// <summary>
-        /// </summary>
         public Settings AssemblySettings
         {
             get { return _assemblySettings; }
@@ -106,8 +100,6 @@ namespace Assembly.Helpers
         }
     }
 
-    /// <summary>
-    /// </summary>
     public class Settings : INotifyPropertyChanged
     {
         private Accents _applicationAccent = Accents.Blue;
@@ -152,8 +144,6 @@ namespace Assembly.Helpers
 
         #region Enums
 
-        /// <summary>
-        /// </summary>
         public enum Accents
         {
             Blue,
@@ -162,8 +152,6 @@ namespace Assembly.Helpers
             Green
         }
 
-        /// <summary>
-        /// </summary>
         public enum LastMetaEditorType
         {
             Info,
@@ -174,16 +162,12 @@ namespace Assembly.Helpers
             Bsp
         }
 
-        /// <summary>
-        /// </summary>
         public enum MapInfoDockSide
         {
             Left,
             Right
         }
 
-        /// <summary>
-        /// </summary>
         public enum RecentFileType
         {
             Cache,
@@ -192,16 +176,12 @@ namespace Assembly.Helpers
             Campaign
         }
 
-        /// <summary>
-        /// </summary>
         public enum TagOpenMode
         {
             NewTab,
             ExistingTab
         }
 
-        /// <summary>
-        /// </summary>
         public enum TagSort
         {
             TagClass,
@@ -213,8 +193,6 @@ namespace Assembly.Helpers
 
         #region Classes
 
-        /// <summary>
-        /// </summary>
         public class RecentFileEntry
         {
             public string FileName { get; set; }
@@ -292,8 +270,6 @@ namespace Assembly.Helpers
             set { SetField(ref _applicationUpdateOnStartup, value, "ApplicationUpdateOnStartup"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool ApplicationEasterEggs
         {
             get { return _applicationEasterEggs; }
@@ -309,208 +285,156 @@ namespace Assembly.Helpers
             set { SetField(ref _applicationRecents, value, "ApplicationRecents"); }
         }
 
-        /// <summary>
-        /// </summary>
         public double ApplicationSizeWidth
         {
             get { return _applicationSizeWidth; }
             set { SetField(ref _applicationSizeWidth, value, "ApplicationSizeWidth"); }
         }
 
-        /// <summary>
-        /// </summary>
         public double ApplicationSizeHeight
         {
             get { return _applicationSizeHeight; }
             set { SetField(ref _applicationSizeHeight, value, "ApplicationSizeHeight"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool ApplicationSizeMaximize
         {
             get { return _applicationSizeMaximize; }
             set { SetField(ref _applicationSizeMaximize, value, "ApplicationSizeMaximize"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool StartpageShowOnLoad
         {
             get { return _startpageShowOnLoad; }
             set { SetField(ref _startpageShowOnLoad, value, "StartpageShowOnLoad"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool StartpageHideOnLaunch
         {
             get { return _startpageHideOnLaunch; }
             set { SetField(ref _startpageHideOnLaunch, value, "StartpageHideOnLaunch"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool StartpageShowRecentsMap
         {
             get { return _startpageShowRecentsMap; }
             set { SetField(ref _startpageShowRecentsMap, value, "StartpageShowRecentsMap"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool StartpageShowRecentsBlf
         {
             get { return _startpageShowRecentsBlf; }
             set { SetField(ref _startpageShowRecentsBlf, value, "StartpageShowRecentsBlf"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool StartpageShowRecentsMapInfo
         {
             get { return _startpageShowRecentsMapInfo; }
             set { SetField(ref _startpageShowRecentsMapInfo, value, "StartpageShowRecentsMapInfo"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool StartpageShowRecentsCampaign
         {
             get { return _startpageShowRecentsCampaign; }
             set { SetField(ref _startpageShowRecentsCampaign, value, "StartpageShowRecentsCampaign"); }
         }
 
-        /// <summary>
-        /// </summary>
         public string XdkNameIp
         {
             get { return _xdkNameIp; }
             set { SetField(ref _xdkNameIp, value, "XdkNameIp"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool XdkAutoSave
         {
             get { return _xdkAutoSave; }
             set { SetField(ref _xdkAutoSave, value, "XdkAutoSave"); }
         }
 
-        /// <summary>
-        /// </summary>
         public string XdkScreenshotPath
         {
             get { return _xdkScreenshotPath; }
             set { SetField(ref _xdkScreenshotPath, value, "XdkScreenshotPath"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool XdkResizeImages
         {
             get { return _xdkResizeImages; }
             set { SetField(ref _xdkResizeImages, value, "XdkResizeImages"); }
         }
 
-        /// <summary>
-        /// </summary>
         public int XdkResizeScreenshotHeight
         {
             get { return _xdkResizeScreenshotHeight; }
             set { SetField(ref _xdkResizeScreenshotHeight, value, "XdkResizeScreenshotHeight"); }
         }
 
-        /// <summary>
-        /// </summary>
         public int XdkResizeScreenshotWidth
         {
             get { return _xdkResizeScreenshotWidth; }
             set { SetField(ref _xdkResizeScreenshotWidth, value, "XdkResizeScreenshotWidth"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool XdkScreenshotGammaCorrect
         {
             get { return _xdkScreenshotGammaCorrect; }
             set { SetField(ref _xdkScreenshotGammaCorrect, value, "XdkScreenshotGammaCorrect"); }
         }
 
-        /// <summary>
-        /// </summary>
         public double XdkScreenshotGammaModifier
         {
             get { return _xdkScreenshotGammaModifier; }
             set { SetField(ref _xdkScreenshotGammaModifier, value, "XdkScreenshotGammaModifier"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool XdkScreenshotFreeze
         {
             get { return _xdkScreenshotFreeze; }
             set { SetField(ref _xdkScreenshotFreeze, value, "XdkScreenshotFreeze"); }
         }
 
-        /// <summary>
-        /// </summary>
         public TagSort HalomapTagSort
         {
             get { return _halomapTagSort; }
             set { SetField(ref _halomapTagSort, value, "HalomapTagSort"); }
         }
 
-        /// <summary>
-        /// </summary>
         public TagOpenMode HalomapTagOpenMode
         {
             get { return _halomapTagOpenMode; }
             set { SetField(ref _halomapTagOpenMode, value, "HalomapTagOpenMode"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool HalomapShowEmptyClasses
         {
             get { return _halomapShowEmptyClasses; }
             set { SetField(ref _halomapShowEmptyClasses, value, "HalomapShowEmptyClasses"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool HalomapOnlyShowBookmarkedTags
         {
             get { return _halomapOnlyShowBookmarkedTags; }
             set { SetField(ref _halomapOnlyShowBookmarkedTags, value, "HalomapOnlyShowBookmarkedTags"); }
         }
 
-        /// <summary>
-        /// </summary>
         public MapInfoDockSide HalomapMapInfoDockSide
         {
             get { return _halomapMapInfoDockSide; }
             set { SetField(ref _halomapMapInfoDockSide, value, "HalomapMapInfoDockSide"); }
         }
 
-        /// <summary>
-        /// </summary>
         public string XsdPath
         {
             get { return _xsdPath; }
             set { SetField(ref _xsdPath, value, "XsdPath"); }
         }
 
-        /// <summary>
-        /// </summary>
         public LastMetaEditorType HalomapLastSelectedMetaEditor
         {
             get { return _halomapLastSelectedMetaEditor; }
             set { SetField(ref _halomapLastSelectedMetaEditor, value, "HalomapLastSelectedMetaEditor"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool PluginsShowInvisibles
         {
             get { return _pluginsShowInvisibles; }
@@ -523,16 +447,12 @@ namespace Assembly.Helpers
             set { SetField(ref _pluginsShowInformation, value, "PluginsShowInformation"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool PluginsShowComments
         {
             get { return _pluginsShowComments; }
             set { SetField(ref _pluginsShowComments, value, "PluginsShowComments"); }
         }
 
-        /// <summary>
-        /// </summary>
         public bool DefaultMap
         {
             get { return _defaultMap; }
@@ -544,8 +464,6 @@ namespace Assembly.Helpers
             }
         }
 
-        /// <summary>
-        /// </summary>
         public bool DefaultBlf
         {
             get { return _defaultBlf; }
@@ -557,8 +475,6 @@ namespace Assembly.Helpers
             }
         }
 
-        /// <summary>
-        /// </summary>
         public bool DefaultMif
         {
             get { return _defaultMif; }
@@ -570,8 +486,6 @@ namespace Assembly.Helpers
             }
         }
 
-        /// <summary>
-        /// </summary>
         public bool DefaultCif
         {
             get { return _defaultCif; }
@@ -583,8 +497,6 @@ namespace Assembly.Helpers
             }
         }
 
-        /// <summary>
-        /// </summary>
         public bool DefaultAmp
         {
             get { return _defaultAmp; }
@@ -596,8 +508,6 @@ namespace Assembly.Helpers
             }
         }
 
-        /// <summary>
-        /// </summary>
         [JsonIgnore]
         public Home HomeWindow
         {
@@ -605,8 +515,6 @@ namespace Assembly.Helpers
             set { SetField(ref _homeWindow, value, "HomeWindow"); }
         }
 
-        /// <summary>
-        /// </summary>
         [JsonIgnore]
         public EngineDatabase DefaultDatabase
         {
@@ -614,13 +522,11 @@ namespace Assembly.Helpers
             set { SetField(ref _defaultDatabase, value, "DefaultDatabase"); }
         }
 
-        /// <summary>
-        /// </summary>
         public void UpdateAssemblyAccent()
         {
             string theme =
                 CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
-                    Enum.Parse(typeof (Accents), ApplicationAccent.ToString()).ToString());
+                    Enum.Parse(typeof(Accents), ApplicationAccent.ToString()).ToString());
             try
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
@@ -638,8 +544,6 @@ namespace Assembly.Helpers
         }
     }
 
-    /// <summary>
-    /// </summary>
     public class TempStorage
     {
         public static MetroMessageBox.MessageBoxResult MessageBoxButtonStorage;
@@ -647,8 +551,6 @@ namespace Assembly.Helpers
         public static KeyValuePair<string, int> TagBookmarkSaver;
     }
 
-    /// <summary>
-    /// </summary>
     public class RecentFiles
     {
         public static void AddNewEntry(string filename, string filepath, string game, Settings.RecentFileType type)
