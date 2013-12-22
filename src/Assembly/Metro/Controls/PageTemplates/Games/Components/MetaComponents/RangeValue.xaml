@@ -6,9 +6,10 @@
              mc:Ignorable="d"
              d:DesignHeight="35" d:DesignWidth="580"
              HorizontalAlignment="Left">
-	<Grid>
-		<TextBlock x:Name="lblName" ToolTip="{Binding Path=Name}" Text="Value" Style="{DynamicResource GenericTextblock}"
-		           VerticalAlignment="Center" Margin="0,13.1,400,11.9" TextTrimming="CharacterEllipsis" />
-		<Slider HorizontalAlignment="Left" Height="20" Margin="185,7,0,0" VerticalAlignment="Top" Width="385" />
-	</Grid>
+    <Grid>
+        <TextBlock x:Name="lblName" ToolTip="{Binding Path=Name}" Text="Value"
+                   Style="{DynamicResource GenericTextblock}"
+                   VerticalAlignment="Center" Margin="0,13.1,400,11.9" TextTrimming="CharacterEllipsis" />
+        <Slider HorizontalAlignment="Left" Height="20" Margin="185,7,0,0" VerticalAlignment="Top" Width="385" />
+    </Grid>
 </UserControl>

@@ -7,559 +7,577 @@
              mc:Ignorable="d"
              Background="#28282b"
              d:DesignHeight="1200" d:DesignWidth="1400">
-	<UserControl.Resources>
-		<!-- General -->
-		<Storyboard x:Key="ShowGeneralTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsGeneral">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsGeneral">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsGeneral">
-				<EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="HideGeneralTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsGeneral">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsGeneral">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsGeneral">
-				<EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
+    <UserControl.Resources>
+        <!-- General -->
+        <Storyboard x:Key="ShowGeneralTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsGeneral">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsGeneral">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsGeneral">
+                <EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideGeneralTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsGeneral">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsGeneral">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsGeneral">
+                <EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
 
-		<!-- Xbox 360 Dev -->
-		<Storyboard x:Key="ShowXboxDevTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsXboxDev">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsXboxDev">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsXboxDev">
-				<EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="HideXboxDevTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsXboxDev">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsXboxDev">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsXboxDev">
-				<EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
+        <!-- Xbox 360 Dev -->
+        <Storyboard x:Key="ShowXboxDevTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsXboxDev">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsXboxDev">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsXboxDev">
+                <EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideXboxDevTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsXboxDev">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsXboxDev">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsXboxDev">
+                <EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
 
-		<!-- Map Editor -->
-		<Storyboard x:Key="ShowMapEditTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsMapEdit">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsMapEdit">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsMapEdit">
-				<EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="HideMapEditTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsMapEdit">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsMapEdit">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsMapEdit">
-				<EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
+        <!-- Map Editor -->
+        <Storyboard x:Key="ShowMapEditTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsMapEdit">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsMapEdit">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsMapEdit">
+                <EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideMapEditTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsMapEdit">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsMapEdit">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsMapEdit">
+                <EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
 
-		<!-- Plugins -->
-		<Storyboard x:Key="ShowPluginsTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsPlugins">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsPlugins">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsPlugins">
-				<EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="HidePluginsTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsPlugins">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsPlugins">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsPlugins">
-				<EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
+        <!-- Plugins -->
+        <Storyboard x:Key="ShowPluginsTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsPlugins">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsPlugins">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsPlugins">
+                <EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HidePluginsTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsPlugins">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsPlugins">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsPlugins">
+                <EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
 
 
-		<!-- Start Page-->
-		<Storyboard x:Key="ShowStrtpgeTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsStrtPge">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsStrtPge">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsStrtPge">
-				<EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="HideStrtpgeTab">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-			                               Storyboard.TargetName="settingsStrtPge">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1" />
-				<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
-			</DoubleAnimationUsingKeyFrames>
-			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-			                               Storyboard.TargetName="settingsStrtPge">
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
-				<DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
-			</ObjectAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
-			                                  Storyboard.TargetName="settingsStrtPge">
-				<EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
-				<EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
-			</ThicknessAnimationUsingKeyFrames>
-		</Storyboard>
+        <!-- Start Page-->
+        <Storyboard x:Key="ShowStrtpgeTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsStrtPge">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsStrtPge">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsStrtPge">
+                <EasingThicknessKeyFrame KeyTime="0" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideStrtpgeTab">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="settingsStrtPge">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="settingsStrtPge">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="settingsStrtPge">
+                <EasingThicknessKeyFrame KeyTime="0" Value="30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
 
-	</UserControl.Resources>
+    </UserControl.Resources>
 
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="250" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-		<Image Source="/Assembly;component/Metro/Images/settings_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
-		       HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="336" Width="338" Margin="320,0,0,-77"
-		       Grid.ColumnSpan="2" />
-		<Grid Grid.Column="0" Background="#2d2d30">
-			<TextBlock x:Name="lblHeader" FontFamily="{DynamicResource MetroFontLight}" Text="Settings" Foreground="White"
-			           FontSize="32" Margin="25,36.5,13,0" Height="50" VerticalAlignment="Top" />
-			<ed:RegularPolygon Fill="#FF4A4A4C" HorizontalAlignment="Left" Height="19" InnerRadius="1" Margin="-16,51,0,0"
-			                   PointCount="3" Stretch="Fill" VerticalAlignment="Top" Width="48" RenderTransformOrigin="0.5,0.5">
-				<ed:RegularPolygon.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform />
-						<SkewTransform />
-						<RotateTransform Angle="90" />
-						<TranslateTransform />
-					</TransformGroup>
-				</ed:RegularPolygon.RenderTransform>
-			</ed:RegularPolygon>
+        <Image Source="/Assembly;component/Metro/Images/settings_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="336" Width="338" Margin="320,0,0,-77"
+               Grid.ColumnSpan="2" />
+        <Grid Grid.Column="0" Background="#2d2d30">
+            <TextBlock x:Name="lblHeader" FontFamily="{DynamicResource MetroFontLight}" Text="Settings"
+                       Foreground="White"
+                       FontSize="32" Margin="25,36.5,13,0" Height="50" VerticalAlignment="Top" />
+            <ed:RegularPolygon Fill="#FF4A4A4C" HorizontalAlignment="Left" Height="19" InnerRadius="1"
+                               Margin="-16,51,0,0"
+                               PointCount="3" Stretch="Fill" VerticalAlignment="Top" Width="48"
+                               RenderTransformOrigin="0.5,0.5">
+                <ed:RegularPolygon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="90" />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </ed:RegularPolygon.RenderTransform>
+            </ed:RegularPolygon>
 
-			<StackPanel Margin="25,114,25,0">
-				<Rectangle Fill="#FF363639" Height="1" VerticalAlignment="Top" d:LayoutOverrides="Height" />
+            <StackPanel Margin="25,114,25,0">
+                <Rectangle Fill="#FF363639" Height="1" VerticalAlignment="Top" d:LayoutOverrides="Height" />
 
-				<ToggleButton x:Name="BtnSelectGeneral" Content="General" Margin="0,40,0,0" HorizontalAlignment="Left"
-				              Style="{DynamicResource ToggleTabChoser}"
-				              Tag="General" Click="btnTabSelection_Clicked" />
-				<ToggleButton x:Name="BtnSelectXboxDev" Content="Xbox 360 Development" Margin="0,0,0,0" HorizontalAlignment="Left"
-				              Style="{DynamicResource ToggleTabChoser}"
-				              Tag="XboxDev" Click="btnTabSelection_Clicked" />
-				<ToggleButton x:Name="BtnSelectMapEdit" Content="Map Editor" Margin="0,0,0,0" HorizontalAlignment="Left"
-				              Style="{DynamicResource ToggleTabChoser}"
-				              Tag="MapEdit" Click="btnTabSelection_Clicked" />
-				<ToggleButton x:Name="BtnSelectPlugins" Content="Plugins" Margin="0,0,0,0" HorizontalAlignment="Left"
-				              Style="{DynamicResource ToggleTabChoser}"
-				              Tag="Plugins" Click="btnTabSelection_Clicked" />
-				<ToggleButton x:Name="BtnSelectStrtpge" Content="Start Page" Margin="0,0,0,0" HorizontalAlignment="Left"
-				              Style="{DynamicResource ToggleTabChoser}"
-				              Tag="Strtpge" Click="btnTabSelection_Clicked" />
-			</StackPanel>
+                <ToggleButton x:Name="BtnSelectGeneral" Content="General" Margin="0,40,0,0" HorizontalAlignment="Left"
+                              Style="{DynamicResource ToggleTabChoser}"
+                              Tag="General" Click="btnTabSelection_Clicked" />
+                <ToggleButton x:Name="BtnSelectXboxDev" Content="Xbox 360 Development" Margin="0,0,0,0"
+                              HorizontalAlignment="Left"
+                              Style="{DynamicResource ToggleTabChoser}"
+                              Tag="XboxDev" Click="btnTabSelection_Clicked" />
+                <ToggleButton x:Name="BtnSelectMapEdit" Content="Map Editor" Margin="0,0,0,0"
+                              HorizontalAlignment="Left"
+                              Style="{DynamicResource ToggleTabChoser}"
+                              Tag="MapEdit" Click="btnTabSelection_Clicked" />
+                <ToggleButton x:Name="BtnSelectPlugins" Content="Plugins" Margin="0,0,0,0" HorizontalAlignment="Left"
+                              Style="{DynamicResource ToggleTabChoser}"
+                              Tag="Plugins" Click="btnTabSelection_Clicked" />
+                <ToggleButton x:Name="BtnSelectStrtpge" Content="Start Page" Margin="0,0,0,0"
+                              HorizontalAlignment="Left"
+                              Style="{DynamicResource ToggleTabChoser}"
+                              Tag="Strtpge" Click="btnTabSelection_Clicked" />
+            </StackPanel>
 
-		</Grid>
+        </Grid>
 
-		<GridSplitter Width="2" Background="#FF545456" Foreground="{x:Null}" ResizeDirection="Columns" IsEnabled="False" />
+        <GridSplitter Width="2" Background="#FF545456" Foreground="{x:Null}" ResizeDirection="Columns"
+                      IsEnabled="False" />
 
-		<Grid Grid.Column="1" Margin="30,0,0,40">
-			<Grid x:Name="settingsGeneral" Visibility="Visible">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="25" />
-					<ColumnDefinition Width="140" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<!-- Header -->
-					<RowDefinition Height="40" />
-					<RowDefinition Height="40" />
+        <Grid Grid.Column="1" Margin="30,0,0,40">
+            <Grid x:Name="settingsGeneral" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!-- Header -->
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
 
-					<!-- Accents -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
+                    <!-- Accents -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
-					<!-- Updates -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
+                    <!-- Updates -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
-					<!-- Default File Types -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
+                    <!-- Default File Types -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
 
-					<!-- Footer -->
-					<RowDefinition />
-				</Grid.RowDefinitions>
+                    <!-- Footer -->
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-				<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
-				           Text="general" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
-				           FontFamily="{DynamicResource MetroFontSemiLight}" />
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
+                           Text="general" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
+                           FontFamily="{DynamicResource MetroFontSemiLight}" />
 
-				<!-- Accents -->
-				<TextBlock Grid.Column="1" Grid.Row="3"
-				           Text="Accent Theme:" Foreground="White" Margin="0,4,0,0" FontFamily="{DynamicResource MetroFontRegular}" />
-				<ComboBox x:Name="ComboBoxAccents" Grid.Column="2" Grid.Row="3" Width="250"
-				          SelectedItem="{Binding Path=ApplicationAccent, Mode=TwoWay}" HorizontalAlignment="Left" />
+                <!-- Accents -->
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="Accent Theme:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <ComboBox x:Name="ComboBoxAccents" Grid.Column="2" Grid.Row="3" Width="250"
+                          SelectedItem="{Binding Path=ApplicationAccent, Mode=TwoWay}" HorizontalAlignment="Left" />
 
-				<!-- Updates on Startup -->
-				<TextBlock Grid.Column="1" Grid.Row="5"
-				           Text="Updates on Startup:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" Margin="0,0,0,0"
-				          IsChecked="{Binding Path=ApplicationUpdateOnStartup, Mode=TwoWay}"
-				          Content="Check for updates on startup." />
+                <!-- Updates on Startup -->
+                <TextBlock Grid.Column="1" Grid.Row="5"
+                           Text="Updates on Startup:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" Margin="0,0,0,0"
+                          IsChecked="{Binding Path=ApplicationUpdateOnStartup, Mode=TwoWay}"
+                          Content="Check for updates on startup." />
 
-				<!-- Default File Types -->
-				<TextBlock Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"
-				           Text="Default Editor for:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Content=".map files" IsChecked="{Binding Path=DefaultMap, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Content=".blf files" IsChecked="{Binding Path=DefaultBlf, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Content=".mapinfo files" IsChecked="{Binding Path=DefaultMif, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Content=".campaign files" IsChecked="{Binding Path=DefaultCif, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="11" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Content=".asmp files" IsChecked="{Binding Path=DefaultAmp, Mode=TwoWay}" />
-			</Grid>
+                <!-- Default File Types -->
+                <TextBlock Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Text="Default Editor for:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Content=".map files" IsChecked="{Binding Path=DefaultMap, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Content=".blf files" IsChecked="{Binding Path=DefaultBlf, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Content=".mapinfo files" IsChecked="{Binding Path=DefaultMif, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Content=".campaign files" IsChecked="{Binding Path=DefaultCif, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="11" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Content=".asmp files" IsChecked="{Binding Path=DefaultAmp, Mode=TwoWay}" />
+            </Grid>
 
-			<Grid x:Name="settingsXboxDev" Visibility="Collapsed">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="25" />
-					<ColumnDefinition Width="140" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<!-- Header -->
-					<RowDefinition Height="40" />
-					<RowDefinition Height="40" />
+            <Grid x:Name="settingsXboxDev" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!-- Header -->
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
 
-					<!-- Xbox Name/IP -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
+                    <!-- Xbox Name/IP -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
-					<!-- Freeze Console on Screen capture -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
+                    <!-- Freeze Console on Screen capture -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
-					<!-- Xbox Screenshots -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
+                    <!-- Xbox Screenshots -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
 
-					<!-- Image Resizing -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="30" />
-					<RowDefinition Height="30" />
+                    <!-- Image Resizing -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
 
-					<!-- Gamma Adjustment -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
+                    <!-- Gamma Adjustment -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
 
-					<!-- Footer -->
-					<RowDefinition />
-				</Grid.RowDefinitions>
+                    <!-- Footer -->
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-				<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
-				           Text="xbox 360 development kit" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
-				           FontFamily="{DynamicResource MetroFontSemiLight}" />
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
+                           Text="xbox 360 development kit" Foreground="{DynamicResource ExtryzeAccentBrush}"
+                           FontSize="30"
+                           FontFamily="{DynamicResource MetroFontSemiLight}" />
 
-				<!-- Xbox Name/IP -->
-				<TextBlock Grid.Column="1" Grid.Row="3"
-				           Text="Xbox Name/IP:" Foreground="White" Margin="0,4,0,0" FontFamily="{DynamicResource MetroFontRegular}" />
-				<TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"
-				         Width="250" Text="{Binding Path=XdkNameIp, Mode=TwoWay}" />
+                <!-- Xbox Name/IP -->
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="Xbox Name/IP:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"
+                         Width="250" Text="{Binding Path=XdkNameIp, Mode=TwoWay}" />
 
-				<!-- Freeze Console on Screen capture -->
-				<TextBlock Grid.Column="1" Grid.Row="5"
-				           Text="Freeze Console:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Margin="0,0,0,0" Width="400" IsChecked="{Binding Path=XdkScreenshotFreeze, Mode=TwoWay}"
-				          Content="Freeze console while taking screenshots (makes screenshots smoother)" />
+                <!-- Freeze Console on Screen capture -->
+                <TextBlock Grid.Column="1" Grid.Row="5"
+                           Text="Freeze Console:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Margin="0,0,0,0" Width="400" IsChecked="{Binding Path=XdkScreenshotFreeze, Mode=TwoWay}"
+                          Content="Freeze console while taking screenshots (makes screenshots smoother)" />
 
-				<!-- Xbox Screenshots -->
-				<TextBlock Grid.Column="1" Grid.Row="7"
-				           Text="Xbox 360 Screenshots:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          IsChecked="{Binding Path=XdkAutoSave, Mode=TwoWay}" Content="Automatically save screenshots" />
-				<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="8">
-					<TextBox
-						x:Name="txtAutoSaveDirectory" Width="400" Text="{Binding Path=XdkScreenshotPath, Mode=TwoWay}" />
-					<Button
-						Margin="10,0,0,0" Width="75" Content="Browse..."
-						Click="btnAutoSaveScreenshotDirectory_Click" />
-				</StackPanel>
+                <!-- Xbox Screenshots -->
+                <TextBlock Grid.Column="1" Grid.Row="7"
+                           Text="Xbox 360 Screenshots:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          IsChecked="{Binding Path=XdkAutoSave, Mode=TwoWay}" Content="Automatically save screenshots" />
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="8">
+                    <TextBox
+                        x:Name="txtAutoSaveDirectory" Width="400" Text="{Binding Path=XdkScreenshotPath, Mode=TwoWay}" />
+                    <Button
+                        Margin="10,0,0,0" Width="75" Content="Browse..."
+                        Click="btnAutoSaveScreenshotDirectory_Click" />
+                </StackPanel>
 
-				<!-- Image Resizing -->
-				<TextBlock Grid.Column="1" Grid.Row="10"
-				           Text="Image Resizing:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          IsChecked="{Binding Path=XdkResizeImages, Mode=TwoWay}" Content="Resize screenshots" />
-				<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="11">
-					<TextBlock Text="Width:" Foreground="White" VerticalAlignment="Center" Width="50" Margin="0,0,0,0"
-					           FontFamily="{DynamicResource MetroFontRegular}" />
-					<TextBox Text="{Binding Path=XdkResizeScreenshotWidth, Mode=TwoWay}" Width="100" />
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="12">
-					<TextBlock Text="Height:" Foreground="White" VerticalAlignment="Center" Width="50" Margin="0,0,0,0"
-					           FontFamily="{DynamicResource MetroFontRegular}" />
-					<TextBox Text="{Binding Path=XdkResizeScreenshotHeight, Mode=TwoWay}" Width="100" />
-				</StackPanel>
+                <!-- Image Resizing -->
+                <TextBlock Grid.Column="1" Grid.Row="10"
+                           Text="Image Resizing:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          IsChecked="{Binding Path=XdkResizeImages, Mode=TwoWay}" Content="Resize screenshots" />
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="11">
+                    <TextBlock Text="Width:" Foreground="White" VerticalAlignment="Center" Width="50" Margin="0,0,0,0"
+                               FontFamily="{DynamicResource MetroFontRegular}" />
+                    <TextBox Text="{Binding Path=XdkResizeScreenshotWidth, Mode=TwoWay}" Width="100" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="12">
+                    <TextBlock Text="Height:" Foreground="White" VerticalAlignment="Center" Width="50" Margin="0,0,0,0"
+                               FontFamily="{DynamicResource MetroFontRegular}" />
+                    <TextBox Text="{Binding Path=XdkResizeScreenshotHeight, Mode=TwoWay}" Width="100" />
+                </StackPanel>
 
-				<!-- Gamma Adjustment -->
-				<TextBlock Grid.Column="1" Grid.Row="14"
-				           Text="Gamma Adjustment:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="14" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          IsChecked="{Binding Path=XdkScreenshotGammaCorrect, Mode=TwoWay}" Content="Adjust Gamma" />
-				<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="15">
-					<TextBlock x:Name="LblXdkScreenGammaValue" Text="Gamma (0.55):" Foreground="White" Width="90"
-					           VerticalAlignment="Center" Margin="0,0,0,0" FontFamily="{DynamicResource MetroFontRegular}" />
-					<Slider
-						TickFrequency=".01"
-						IsSnapToTickEnabled="true"
-						TickPlacement="None"
-						Value="{Binding Path=XdkScreenshotGammaModifier, Mode=TwoWay}"
-						Maximum="1"
-						Minimum="0"
-						Width="100"
-						ValueChanged="sliderXDKScreenGammaModifier_ValueChanged" />
-				</StackPanel>
-			</Grid>
+                <!-- Gamma Adjustment -->
+                <TextBlock Grid.Column="1" Grid.Row="14"
+                           Text="Gamma Adjustment:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="14" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          IsChecked="{Binding Path=XdkScreenshotGammaCorrect, Mode=TwoWay}" Content="Adjust Gamma" />
+                <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="15">
+                    <TextBlock x:Name="LblXdkScreenGammaValue" Text="Gamma (0.55):" Foreground="White" Width="90"
+                               VerticalAlignment="Center" Margin="0,0,0,0"
+                               FontFamily="{DynamicResource MetroFontRegular}" />
+                    <Slider
+                        TickFrequency=".01"
+                        IsSnapToTickEnabled="true"
+                        TickPlacement="None"
+                        Value="{Binding Path=XdkScreenshotGammaModifier, Mode=TwoWay}"
+                        Maximum="1"
+                        Minimum="0"
+                        Width="100"
+                        ValueChanged="sliderXDKScreenGammaModifier_ValueChanged" />
+                </StackPanel>
+            </Grid>
 
-			<Grid x:Name="settingsMapEdit" Visibility="Collapsed">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="25" />
-					<ColumnDefinition Width="140" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<!-- Header -->
-					<RowDefinition Height="40" />
-					<RowDefinition Height="40" />
+            <Grid x:Name="settingsMapEdit" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!-- Header -->
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
 
-					<!-- Info Panel Location -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
+                    <!-- Info Panel Location -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
-					<!-- Tag Sort Method -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
+                    <!-- Tag Sort Method -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
                     <!-- XSD Path -->
                     <RowDefinition Height="10" />
                     <RowDefinition Height="25" />
 
                     <!-- Footer -->
-					<RowDefinition />
-				</Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-				<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
-				           Text="map editor" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
-				           FontFamily="{DynamicResource MetroFontSemiLight}" />
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
+                           Text="map editor" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
+                           FontFamily="{DynamicResource MetroFontSemiLight}" />
 
-				<!-- Info Panel Location -->
-				<TextBlock Grid.Column="1" Grid.Row="3"
-				           Text="Info Panel Location:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<ComboBox x:Name="ComboBoxMapInfoDockSide" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"
-				          SelectedItem="{Binding Path=HalomapMapInfoDockSide, Mode=TwoWay}" Width="250" />
+                <!-- Info Panel Location -->
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="Info Panel Location:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <ComboBox x:Name="ComboBoxMapInfoDockSide" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"
+                          SelectedItem="{Binding Path=HalomapMapInfoDockSide, Mode=TwoWay}" Width="250" />
 
-				<!-- Tag Sort Method -->
-				<TextBlock Grid.Column="1" Grid.Row="5"
-				           Text="Tag Sorting Method:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<ComboBox x:Name="ComboBoxMapTagSort" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" IsEnabled="False"
-				          SelectedItem="{Binding Path=HalomapTagSort, Mode=TwoWay}" Width="250">
+                <!-- Tag Sort Method -->
+                <TextBlock Grid.Column="1" Grid.Row="5"
+                           Text="Tag Sorting Method:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <ComboBox x:Name="ComboBoxMapTagSort" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left"
+                          IsEnabled="False"
+                          SelectedItem="{Binding Path=HalomapTagSort, Mode=TwoWay}" Width="250">
                     <!--
 					<ComboBoxItem Content="By Object Hierarchy" />
 					<ComboBoxItem Content="By Path Hierarchy" />
 					-->
-				</ComboBox>
+                </ComboBox>
 
                 <!-- XSD Path -->
                 <TextBlock Grid.Column="1" Grid.Row="7"
-				        Text="xsd.exe Path:" Foreground="White" Margin="0,4,0,0"
-				        FontFamily="{DynamicResource MetroFontRegular}" />
-                <TextBox x:Name="txtXsdPath" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" Width="250" Text="{Binding XsdPath, Mode=TwoWay}" />
-                <Button x:Name="btnBrowseXsd" Grid.Column="2" Grid.Row="7" Margin="260,0,0,0" Width="75" HorizontalAlignment="Left" Click="btnBrowseXsd_Click">Browse...</Button>
+                           Text="xsd.exe Path:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <TextBox x:Name="txtXsdPath" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" Width="250"
+                         Text="{Binding XsdPath, Mode=TwoWay}" />
+                <Button x:Name="btnBrowseXsd" Grid.Column="2" Grid.Row="7" Margin="260,0,0,0" Width="75"
+                        HorizontalAlignment="Left" Click="btnBrowseXsd_Click">
+                    Browse...
+                </Button>
             </Grid>
 
-			<Grid x:Name="settingsPlugins" Visibility="Collapsed">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="25" />
-					<ColumnDefinition Width="140" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<!-- Header -->
-					<RowDefinition Height="40" />
-					<RowDefinition Height="40" />
+            <Grid x:Name="settingsPlugins" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!-- Header -->
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
 
-					<!-- Show Comments -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
-					
-					<!-- Show Information -->
-					<RowDefinition Height="25" />
+                    <!-- Show Comments -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
 
-					<!-- Footer -->
-					<RowDefinition />
-				</Grid.RowDefinitions>
+                    <!-- Show Information -->
+                    <RowDefinition Height="25" />
 
-				<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
-				           Text="plugins" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
-				           FontFamily="{DynamicResource MetroFontSemiLight}" />
+                    <!-- Footer -->
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-				<!-- Show Comments -->
-				<TextBlock Grid.Column="1" Grid.Row="3"
-				           Text="Meta Editor Settings:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          IsChecked="{Binding Path=PluginsShowComments, Mode=TwoWay}" Width="400"
-				          Content="Show comments in the meta editor" />
-				<!-- Show Information -->
-				<CheckBox Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          IsChecked="{Binding Path=PluginsShowInformation, Mode=TwoWay}" Width="400"
-				          Content="Show tag block information by default in the meta editor" />
-			</Grid>
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
+                           Text="plugins" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
+                           FontFamily="{DynamicResource MetroFontSemiLight}" />
 
-			<Grid x:Name="settingsStrtPge" Visibility="Collapsed">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="25" />
-					<ColumnDefinition Width="140" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<!-- Header -->
-					<RowDefinition Height="40" />
-					<RowDefinition Height="40" />
+                <!-- Show Comments -->
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="Meta Editor Settings:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          IsChecked="{Binding Path=PluginsShowComments, Mode=TwoWay}" Width="400"
+                          Content="Show comments in the meta editor" />
+                <!-- Show Information -->
+                <CheckBox Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          IsChecked="{Binding Path=PluginsShowInformation, Mode=TwoWay}" Width="400"
+                          Content="Show tag block information by default in the meta editor" />
+            </Grid>
 
-					<!-- Show Recent File Types -->
-					<RowDefinition Height="10" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
-					<RowDefinition Height="25" />
+            <Grid x:Name="settingsStrtPge" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!-- Header -->
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
 
-					<!-- Footer -->
-					<RowDefinition />
-				</Grid.RowDefinitions>
+                    <!-- Show Recent File Types -->
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
 
-				<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
-				           Text="start page" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
-				           FontFamily="{DynamicResource MetroFontSemiLight}" />
+                    <!-- Footer -->
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-				<!-- Show Recent File Types -->
-				<TextBlock Grid.Column="1" Grid.Row="3"
-				           Text="Show Recent File Types:" Foreground="White" Margin="0,4,0,0"
-				           FontFamily="{DynamicResource MetroFontRegular}" />
-				<CheckBox Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Margin="0,2,0,0" Content=".map files" IsChecked="{Binding Path=StartpageShowRecentsMap, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Margin="0,2,0,0" Content=".blf files" IsChecked="{Binding Path=StartpageShowRecentsBlf, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Margin="0,2,0,0" Content=".mapinfo files"
-				          IsChecked="{Binding Path=StartpageShowRecentsMapInfo, Mode=TwoWay}" />
-				<CheckBox Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left"
-				          Margin="0,2,0,0" Content=".campaign files"
-				          IsChecked="{Binding Path=StartpageShowRecentsCampaign, Mode=TwoWay}" />
-			</Grid>
-		</Grid>
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"
+                           Text="start page" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
+                           FontFamily="{DynamicResource MetroFontSemiLight}" />
 
-		<StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1" Orientation="Vertical"
-		            Margin="0,0,5,5">
-			<TextBlock HorizontalAlignment="Right" Text="Where is my save button?"
-			           FontFamily="{DynamicResource MetroFontSemiBold}">
-				<TextBlock.Foreground>
-					<SolidColorBrush Color="{DynamicResource ExtryzeAccentBrushColour}" />
-				</TextBlock.Foreground>
-			</TextBlock>
-			<TextBlock Text="Just change your settings, they get saved as you edit them."
-			           FontFamily="{DynamicResource MetroFontRegular}" Foreground="White" />
-		</StackPanel>
-	</Grid>
+                <!-- Show Recent File Types -->
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="Show Recent File Types:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+                <CheckBox Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Margin="0,2,0,0" Content=".map files"
+                          IsChecked="{Binding Path=StartpageShowRecentsMap, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Margin="0,2,0,0" Content=".blf files"
+                          IsChecked="{Binding Path=StartpageShowRecentsBlf, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Margin="0,2,0,0" Content=".mapinfo files"
+                          IsChecked="{Binding Path=StartpageShowRecentsMapInfo, Mode=TwoWay}" />
+                <CheckBox Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Margin="0,2,0,0" Content=".campaign files"
+                          IsChecked="{Binding Path=StartpageShowRecentsCampaign, Mode=TwoWay}" />
+            </Grid>
+        </Grid>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1" Orientation="Vertical"
+                    Margin="0,0,5,5">
+            <TextBlock HorizontalAlignment="Right" Text="Where is my save button?"
+                       FontFamily="{DynamicResource MetroFontSemiBold}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{DynamicResource ExtryzeAccentBrushColour}" />
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBlock Text="Just change your settings, they get saved as you edit them."
+                       FontFamily="{DynamicResource MetroFontRegular}" Foreground="White" />
+        </StackPanel>
+    </Grid>
 </UserControl>

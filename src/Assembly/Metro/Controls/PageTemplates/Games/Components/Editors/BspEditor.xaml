@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="1000">
-	<Grid>
-		<TextBlock Text="BSP Editing :):) xoxo" Foreground="#FFC1C1C1" Margin="20,20,0,0" HorizontalAlignment="Left"
-		           VerticalAlignment="Top" FontSize="24" FontFamily="{DynamicResource MetroFontLight}" />
-	</Grid>
+    <Grid>
+        <TextBlock Text="BSP Editing :):) xoxo" Foreground="#FFC1C1C1" Margin="20,20,0,0" HorizontalAlignment="Left"
+                   VerticalAlignment="Top" FontSize="24" FontFamily="{DynamicResource MetroFontLight}" />
+    </Grid>
 </Page>

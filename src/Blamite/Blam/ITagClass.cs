@@ -18,29 +18,29 @@
 
 namespace Blamite.Blam
 {
-	/// <summary>
-	///     Information about a single tag class in a cache file.
-	/// </summary>
-	public interface ITagClass
-	{
-		/// <summary>
-		///     The class's magic as a character string constant.
-		/// </summary>
-		int Magic { get; set; }
+    /// <summary>
+    ///     Information about a single tag class in a cache file.
+    /// </summary>
+    public interface ITagClass
+    {
+        /// <summary>
+        ///     The class's magic as a character string constant.
+        /// </summary>
+        int Magic { get; set; }
 
-		/// <summary>
-		///     The parent class's magic, or -1 if none.
-		/// </summary>
-		int ParentMagic { get; set; }
+        /// <summary>
+        ///     The parent class's magic, or -1 if none.
+        /// </summary>
+        int ParentMagic { get; set; }
 
-		/// <summary>
-		///     The magic of the parent class's parent, or -1 if none.
-		/// </summary>
-		int GrandparentMagic { get; set; }
+        /// <summary>
+        ///     The magic of the parent class's parent, or -1 if none.
+        /// </summary>
+        int GrandparentMagic { get; set; }
 
-		/// <summary>
-		///     The stringID describing the class's purpose, if available.
-		/// </summary>
-		StringID Description { get; set; }
-	}
+        /// <summary>
+        ///     The stringID describing the class's purpose, if available.
+        /// </summary>
+        StringID Description { get; set; }
+    }
 }

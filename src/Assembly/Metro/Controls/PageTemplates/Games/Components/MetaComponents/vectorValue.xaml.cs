@@ -2,14 +2,14 @@
 
 namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaComponents
 {
-	/// <summary>
-	///     Interaction logic for VectorValue.xaml
-	/// </summary>
-	public partial class VectorValue : UserControl
-	{
-		public VectorValue()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    ///     Interaction logic for VectorValue.xaml
+    /// </summary>
+    public partial class VectorValue : UserControl
+    {
+        public VectorValue()
+        {
+            InitializeComponent();
+        }
+    }
 }
