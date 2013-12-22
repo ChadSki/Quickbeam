@@ -526,7 +526,7 @@ namespace Assembly.Helpers
         {
             string theme =
                 CultureInfo.CurrentCulture.TextInfo.ToTitleCase(
-                    Enum.Parse(typeof(Accents), ApplicationAccent.ToString()).ToString());
+                    Enum.Parse(typeof (Accents), ApplicationAccent.ToString()).ToString());
             try
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary

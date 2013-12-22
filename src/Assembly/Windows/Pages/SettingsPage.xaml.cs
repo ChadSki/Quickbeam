@@ -44,7 +44,7 @@ namespace Assembly.Windows.Pages
             string currentTabTag = _currentTag;
 
             // Disable all old buttons
-            SetAllToDisbaled();
+            SetAllToDisabled();
 
             // Update UI
             button.IsChecked = true;
@@ -57,10 +57,9 @@ namespace Assembly.Windows.Pages
             if (storyboardShow != null) storyboardShow.Begin();
         }
 
-        private void SetAllToDisbaled()
+        private void SetAllToDisabled()
         {
             BtnSelectGeneral.IsChecked = false;
-            BtnSelectXboxDev.IsChecked = false;
             BtnSelectMapEdit.IsChecked = false;
             BtnSelectPlugins.IsChecked = false;
             BtnSelectStrtpge.IsChecked = false;
@@ -69,24 +68,6 @@ namespace Assembly.Windows.Pages
         #endregion
 
         #region Inline Helpers
-
-        private void btnAutoSaveScreenshotDirectory_Click(object sender, RoutedEventArgs e)
-        {
-            var fbd = new FolderBrowserDialog
-            {
-                ShowNewFolderButton = true,
-                SelectedPath = txtAutoSaveDirectory.Text,
-                Description = "Select the folder you would like to auto-save screenshots in"
-            };
-            if (fbd.ShowDialog() == DialogResult.OK)
-                App.AssemblyStorage.AssemblySettings.XdkScreenshotPath = fbd.SelectedPath;
-        }
-
-        private void sliderXDKScreenGammaModifier_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            LblXdkScreenGammaValue.Text = string.Format("Gamma ({0}):", e.NewValue);
-        }
-
         private void btnBrowseXsd_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog
