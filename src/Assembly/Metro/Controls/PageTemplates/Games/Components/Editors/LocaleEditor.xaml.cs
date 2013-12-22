@@ -70,7 +70,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.Editors
                 string name = _cache.FileNames.GetTagName(group.SourceTag);
                 _groups.Add(new NamedStringList {Name = name, Base = group});
             }
-            _groups.Sort((g1, g2) => g1.Name.CompareTo(g2.Name));
+            _groups.Sort((g1, g2) => String.Compare(g1.Name, g2.Name, StringComparison.Ordinal));
 
             // Create a group for everything
             _groups.Insert(0, new NamedStringList {Name = "(all strings)", Base = null});
@@ -88,9 +88,8 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.Editors
         /// </summary>
         private void LoadStrings()
         {
-            _strings = new List<StringEntry>(_currentPack.StringLists.SelectMany(l => WrapStrings(l)));
-            _stringView = new LocalizedStringTableView(_strings);
-            _stringView.Filter = FilterString;
+            _strings = new List<StringEntry>(_currentPack.StringLists.SelectMany(WrapStrings));
+            _stringView = new LocalizedStringTableView(_strings) {Filter = FilterString};
         }
 
         /// <summary>
@@ -171,10 +170,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.Editors
         /// <param name="filter">The text to search for, or <c>null</c> to show everything.</param>
         private void SetSearchText(string filter)
         {
-            if (filter != null)
-                _searchText = filter.ToLower();
-            else
-                _searchText = null;
+            _searchText = filter != null ? filter.ToLower() : null;
 
             btnReset.IsEnabled = !string.IsNullOrEmpty(filter);
             _stringView.Refresh();
@@ -431,7 +427,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.Editors
             /// <summary>
             ///     Gets or sets the group that new strings should be added to.
             /// </summary>
-            public LocalizedStringList CurrentGroup { get; set; }
+            public LocalizedStringList CurrentGroup { private get; set; }
 
             /// <summary>
             ///     Starts an add transaction and returns the pending new item.
@@ -464,7 +460,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.Editors
             void IEditableCollectionView.RemoveAt(int index)
             {
                 var entry = GetItemAt(index) as StringEntry;
-                base.RemoveAt(index);
+                RemoveAt(index);
 
                 // Remove the entry from its group
                 if (entry.Base != null)

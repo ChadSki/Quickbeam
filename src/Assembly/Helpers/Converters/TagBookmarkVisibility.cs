@@ -17,7 +17,7 @@ namespace Assembly.Helpers.Converters
             if (!App.AssemblyStorage.AssemblySettings.HalomapOnlyShowBookmarkedTags)
                 return Visibility.Visible;
 
-            return (App.AssemblyStorage.AssemblySettings.HalomapOnlyShowBookmarkedTags && outputBoolean)
+            return (outputBoolean)
                 ? Visibility.Visible
                 : Visibility.Collapsed;
         }

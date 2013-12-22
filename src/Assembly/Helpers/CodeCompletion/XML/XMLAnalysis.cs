@@ -92,48 +92,50 @@ namespace Assembly.Helpers.CodeCompletion.XML
                 }
                 else if (quoteType == '\0')
                 {
-                    if (ch == '<')
+                    switch (ch)
                     {
-                        lastOpenTagPos = i;
-                        inTag = true;
-                        insideTagName = true;
-                        firstLetterPos = -1;
-                        attributes = new HashSet<string>();
-                        currentTag = null;
-                        currentAttribute = null;
-                    }
-                    else if (ch == '>')
-                    {
-                        inTag = false;
-                        insideTagName = false;
-                        firstLetterPos = -1;
-                        currentTag = null;
-                        currentAttribute = null;
-                    }
-                    else if (char.IsLetter(ch) || (firstLetterPos > 0 && char.IsDigit(ch)))
-                    {
-                        if (firstLetterPos < 0)
-                            firstLetterPos = i;
-                        lastLetterPos = i;
-                        currentAttribute = null;
-                    }
-                    else if (firstLetterPos > 0)
-                    {
-                        if (insideTagName)
-                        {
-                            currentTag = line.Substring(firstLetterPos, lastLetterPos - firstLetterPos + 1);
+                        case '<':
+                            inTag = true;
+                            insideTagName = true;
+                            firstLetterPos = -1;
+                            attributes = new HashSet<string>();
+                            currentTag = null;
+                            currentAttribute = null;
+                            break;
+                        case '>':
+                            inTag = false;
                             insideTagName = false;
-                        }
-                        else if (ch == '=')
-                        {
-                            currentAttribute = line.Substring(firstLetterPos, lastLetterPos - firstLetterPos + 1);
-                            attributes.Add(currentAttribute);
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                        firstLetterPos = -1;
+                            firstLetterPos = -1;
+                            currentTag = null;
+                            currentAttribute = null;
+                            break;
+                        default:
+                            if (char.IsLetter(ch) || (firstLetterPos > 0 && char.IsDigit(ch)))
+                            {
+                                if (firstLetterPos < 0)
+                                    firstLetterPos = i;
+                                lastLetterPos = i;
+                                currentAttribute = null;
+                            }
+                            else if (firstLetterPos > 0)
+                            {
+                                if (insideTagName)
+                                {
+                                    currentTag = line.Substring(firstLetterPos, lastLetterPos - firstLetterPos + 1);
+                                    insideTagName = false;
+                                }
+                                else if (ch == '=')
+                                {
+                                    currentAttribute = line.Substring(firstLetterPos, lastLetterPos - firstLetterPos + 1);
+                                    attributes.Add(currentAttribute);
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                                firstLetterPos = -1;
+                            }
+                            break;
                     }
                 }
             }

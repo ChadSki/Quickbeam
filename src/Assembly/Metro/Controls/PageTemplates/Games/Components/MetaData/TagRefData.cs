@@ -67,9 +67,11 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
 
         public override MetaField CloneValue()
         {
-            var result = new TagRefData(Name, Offset, FieldAddress, _allTags, _showJumpTo, _withClass, base.PluginLine);
-            result.Class = _class;
-            result.Value = _value;
+            var result = new TagRefData(Name, Offset, FieldAddress, _allTags, _showJumpTo, _withClass, base.PluginLine)
+            {
+                Class = _class,
+                Value = _value
+            };
             return result;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Assembly.Helpers.CodeCompletion.XML
 {
@@ -69,12 +70,8 @@ namespace Assembly.Helpers.CodeCompletion.XML
                 return;
 
             // Only suggest attributes which haven't been defined yet
-            var suggestions = new List<CompletableXMLAttribute>();
-            foreach (CompletableXMLAttribute attribute in tag.Attributes)
-            {
-                if (!analysis.Attributes.Contains(attribute.Name))
-                    suggestions.Add(attribute);
-            }
+            List<CompletableXMLAttribute> suggestions =
+                tag.Attributes.Where(attribute => !analysis.Attributes.Contains(attribute.Name)).ToList();
             if (suggestions.Count == 0)
                 return;
 

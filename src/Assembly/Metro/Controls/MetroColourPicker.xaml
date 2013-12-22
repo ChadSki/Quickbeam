@@ -1,8 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <Style TargetType="{x:Type ToggleButton}" x:Key="ColourPickerToggleButton">
         <Setter Property="Template">
@@ -112,7 +110,7 @@
                                                         </Binding.Converter>
                                                     </Binding>
                                                 </xctk:ButtonChrome.Visibility>
-                                                <Grid x:Name="arrowGlyph" Grid.Column="1" IsHitTestVisible="False"
+                                                <Grid x:Name="arrowGlyph" IsHitTestVisible="False"
                                                       Margin="5">
                                                     <Path
                                                         Data="M0,0L4,4 8,0z"

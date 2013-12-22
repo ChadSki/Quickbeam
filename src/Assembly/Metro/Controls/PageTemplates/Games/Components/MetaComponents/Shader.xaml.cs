@@ -41,11 +41,10 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaComponents
 
                 // Start XSD.exe with one of the /raw switches (depending upon shader type)
                 // and the microcode file
-                var startInfo = new ProcessStartInfo(xsdPath);
-                if (shaderRef.Type == ShaderType.Pixel)
-                    startInfo.Arguments = "/rawps";
-                else
-                    startInfo.Arguments = "/rawvs";
+                var startInfo = new ProcessStartInfo(xsdPath)
+                {
+                    Arguments = shaderRef.Type == ShaderType.Pixel ? "/rawps" : "/rawvs"
+                };
 
                 // Add the path to the microcode file
                 startInfo.Arguments += " \"" + microcodePath + "\"";

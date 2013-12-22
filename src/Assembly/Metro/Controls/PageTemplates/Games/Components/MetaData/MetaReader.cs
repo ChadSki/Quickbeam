@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Blamite.Blam;
 using Blamite.Flexibility;
@@ -104,7 +105,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
             if (selected == null)
             {
                 // Nothing matched, so just add an option for it
-                selected = new EnumValue(field.Value.ToString(), field.Value);
+                selected = new EnumValue(field.Value.ToString(CultureInfo.InvariantCulture), field.Value);
                 field.Values.Add(selected);
             }
             field.SelectedValue = selected;
@@ -150,9 +151,8 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
         {
             SeekToOffset(field.Offset);
 
-            string colorValue = "#";
-            foreach (char formatChar in field.Format)
-                colorValue += (_reader.ReadByte().ToString("X2"));
+            string colorValue = field.Format.Aggregate("#",
+                (current, formatChar) => current + (_reader.ReadByte().ToString("X2")));
             field.Value = colorValue;
         }
 
@@ -160,9 +160,8 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
         {
             SeekToOffset(field.Offset);
 
-            string colorValue = "#";
-            foreach (char formatChar in field.Format)
-                colorValue += ((int) (_reader.ReadFloat()*255)).ToString("X2");
+            string colorValue = field.Format.Aggregate("#",
+                (current, formatChar) => current + ((int) (_reader.ReadFloat()*255)).ToString("X2"));
             field.Value = colorValue;
         }
 

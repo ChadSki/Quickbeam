@@ -223,11 +223,13 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
 
         public override MetaField CloneValue()
         {
-            var result = new ReflexiveData(Name, Offset, FieldAddress, EntrySize, base.PluginLine, _metaArea);
-            result._expanded = _expanded;
-            result._width = _width;
-            result._currentIndex = _currentIndex;
-            result._firstEntryAddr = _firstEntryAddr;
+            var result = new ReflexiveData(Name, Offset, FieldAddress, EntrySize, base.PluginLine, _metaArea)
+            {
+                _expanded = _expanded,
+                _width = _width,
+                _currentIndex = _currentIndex,
+                _firstEntryAddr = _firstEntryAddr
+            };
             foreach (MetaField field in _template)
                 result._template.Add(field);
             foreach (ReflexivePage page in _pages)

@@ -18,10 +18,12 @@ namespace DragDropListBox
         {
             this.adornerLayer = adornerLayer;
 
-            contentPresenter = new ContentPresenter();
-            contentPresenter.Content = dragDropData;
-            contentPresenter.ContentTemplate = dragDropTemplate;
-            contentPresenter.Opacity = 0.7;
+            contentPresenter = new ContentPresenter
+            {
+                Content = dragDropData,
+                ContentTemplate = dragDropTemplate,
+                Opacity = 0.7
+            };
 
             this.adornerLayer.Add(this);
         }

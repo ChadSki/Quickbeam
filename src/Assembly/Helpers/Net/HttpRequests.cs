@@ -14,7 +14,7 @@ namespace Assembly.Helpers.Net
                 request.Method = HttpMethod.Get;
 
                 WebResponse response = request.GetResponse();
-                return response != null ? response.GetResponseStream() : null;
+                return response.GetResponseStream();
             }
             catch (Exception)
             {

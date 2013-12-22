@@ -110,9 +110,11 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.Editors
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            var sfd = new SaveFileDialog();
-            sfd.Title = "Save Script As";
-            sfd.Filter = "BlamScript Files|*.hsc|Text Files|*.txt|All Files|*.*";
+            var sfd = new SaveFileDialog
+            {
+                Title = "Save Script As",
+                Filter = "BlamScript Files|*.hsc|Text Files|*.txt|All Files|*.*"
+            };
             if (!(bool) sfd.ShowDialog())
                 return;
 

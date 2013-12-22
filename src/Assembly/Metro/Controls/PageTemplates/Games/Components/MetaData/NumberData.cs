@@ -9,7 +9,7 @@
         private string _type;
         private T _value;
 
-        public NumberData(string name, uint offset, uint address, string type, T value, uint pluginLine)
+        protected NumberData(string name, uint offset, uint address, string type, T value, uint pluginLine)
             : base(name, offset, address, pluginLine)
         {
             _type = type;

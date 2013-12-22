@@ -101,7 +101,7 @@
                     <Button x:Name="btnAddNew" Content="Add New" Width="72" VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="5,0,0,0" Click="btnAddNew_Click_1" />
-                    <TextBlock Text="Filter:" Grid.Column="0" Margin="10,0,0,0"
+                    <TextBlock Text="Filter:" Margin="10,0,0,0"
                                Style="{DynamicResource GenericTextblock}"
                                VerticalAlignment="Center" HorizontalAlignment="Left" />
                 </StackPanel>
@@ -113,7 +113,7 @@
                     <Button x:Name="btnFilter" Content="Filter" Click="btnFilter_Click" Width="60" />
                     <Button x:Name="btnReset" Content="Reset" Click="btnReset_Click" IsEnabled="False" Margin="5,0,0,0"
                             Width="60" />
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
                                Margin="10,0,10,0"
                                Text="Double-click on a string to edit it." Style="{DynamicResource GenericTextblock}" />
                 </StackPanel>

@@ -39,8 +39,7 @@
                         </Grid.RowDefinitions>
                         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
                                       Template="{DynamicResource ScrollViewerTemplate}">
-                            <TabPanel x:Name="HeaderPanel" Margin="2,2,2,0" Panel.ZIndex="1" Grid.Column="0"
-                                      Grid.Row="0"
+                            <TabPanel x:Name="HeaderPanel" Margin="2,2,2,0" Panel.ZIndex="1"
                                       KeyboardNavigation.TabIndex="1" />
                         </ScrollViewer>
                         <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0"

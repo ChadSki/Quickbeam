@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -252,10 +253,10 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
 
                         if (showActionDialog)
                         {
-                            if (onlyUpdateChanged)
-                                MetroMessageBox.Show("Meta Poked", "All changed metadata has been poked to the game.");
-                            else
-                                MetroMessageBox.Show("Meta Poked", "The metadata has been poked to the game.");
+                            MetroMessageBox.Show("Meta Poked",
+                                onlyUpdateChanged
+                                    ? "All changed metadata has been poked to the game."
+                                    : "The metadata has been poked to the game.");
                         }
                     }
                     else
@@ -358,16 +359,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
                     break;
 
                 case Key.P:
-                    if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0)
-                    {
-                        // Poke All
-                        UpdateMeta(MetaWriter.SaveType.Memory, false);
-                    }
-                    else
-                    {
-                        // Poke Changed
-                        UpdateMeta(MetaWriter.SaveType.Memory, true);
-                    }
+                    UpdateMeta(MetaWriter.SaveType.Memory, (Keyboard.Modifiers & ModifierKeys.Shift) == 0);
                     break;
 
                 case Key.R:
@@ -423,10 +415,9 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
 
         private static MetaField GetWrappedField(MetaField field)
         {
-            WrappedReflexiveEntry wrapper = null;
             while (true)
             {
-                wrapper = field as WrappedReflexiveEntry;
+                var wrapper = field as WrappedReflexiveEntry;
                 if (wrapper == null)
                     return field;
                 field = wrapper.WrappedField;
@@ -485,16 +476,9 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
 
         private bool ConfirmNewStringIds()
         {
-            var newStrings = new List<string>();
-            foreach (MetaField field in _fileChanges)
-            {
-                var stringIdField = field as StringIDData;
-                if (stringIdField != null)
-                {
-                    if (!_stringIdTrie.Contains(stringIdField.Value))
-                        newStrings.Add(stringIdField.Value);
-                }
-            }
+            List<string> newStrings = (from stringIdField in _fileChanges.OfType<StringIDData>()
+                where !_stringIdTrie.Contains(stringIdField.Value)
+                select stringIdField.Value).ToList();
             if (newStrings.Count > 0)
                 return MetroMessageBoxList.Show("New StringIDs",
                     "The following stringID(s) do not currently exist in the cache file and will be added.\r\nContinue?",
@@ -548,10 +532,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
 
         private void MetaFilterer_HighlightField(MetaField field, bool highlight)
         {
-            if (highlight)
-                field.Opacity = 1f;
-            else
-                field.Opacity = .3f;
+            field.Opacity = highlight ? 1f : .3f;
         }
 
         private void btnResetSearch_Click_1(object sender, RoutedEventArgs e)

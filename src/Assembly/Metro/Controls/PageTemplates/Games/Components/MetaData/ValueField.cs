@@ -9,7 +9,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
         private string _name;
         private uint _offset;
 
-        public ValueField(string name, uint offset, uint address, uint pluginLine)
+        protected ValueField(string name, uint offset, uint address, uint pluginLine)
         {
             _name = name;
             _offset = offset;

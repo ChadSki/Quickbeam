@@ -949,8 +949,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games
         private void InitalizeContextMenus()
         {
             // Create Lame Context Menu
-            BaseContextMenu = new ContextMenu();
-            BaseContextMenu.FontSize = 12;
+            BaseContextMenu = new ContextMenu {FontSize = 12};
             BaseContextMenu.Items.Add(new MenuItem {Header = "Close"});
             ((MenuItem) BaseContextMenu.Items[0]).Click += contextMenuClose_Click;
             BaseContextMenu.Items.Add(new MenuItem {Header = "Close All"});

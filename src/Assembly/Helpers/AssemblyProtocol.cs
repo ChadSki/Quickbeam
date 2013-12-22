@@ -7,14 +7,12 @@ namespace Assembly.Helpers
         public static void UpdateProtocol()
         {
             RegistryKey keyProtoBase = Registry.CurrentUser.CreateSubKey("Software\\Classes\\assembly\\");
-            if (keyProtoBase != null)
-            {
-                keyProtoBase.SetValue("", "URL:Assembly Application Manager");
-                keyProtoBase.SetValue("AppUserModelID", "XboxChaos.Assembly.Default");
-                keyProtoBase.SetValue("FriendlyTypeName", "Assembly Application Manager");
-                keyProtoBase.SetValue("SourceFilter", "");
-                keyProtoBase.SetValue("URL Protocol", "");
-            }
+            if (keyProtoBase == null) return;
+            keyProtoBase.SetValue("", "URL:Assembly Application Manager");
+            keyProtoBase.SetValue("AppUserModelID", "XboxChaos.Assembly.Default");
+            keyProtoBase.SetValue("FriendlyTypeName", "Assembly Application Manager");
+            keyProtoBase.SetValue("SourceFilter", "");
+            keyProtoBase.SetValue("URL Protocol", "");
 
             RegistryKey keyProtoDefaultIcon = keyProtoBase.CreateSubKey("DefaultIcon\\");
             if (keyProtoDefaultIcon != null)

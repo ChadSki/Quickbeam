@@ -70,16 +70,16 @@ namespace Assembly.Helpers.Native
         public struct RECT
         {
             /// <summary> Win32 </summary>
-            public int left;
+            public readonly int left;
 
             /// <summary> Win32 </summary>
-            public int top;
+            public readonly int top;
 
             /// <summary> Win32 </summary>
-            public int right;
+            public readonly int right;
 
             /// <summary> Win32 </summary>
-            public int bottom;
+            public readonly int bottom;
 
             /// <summary> Win32 </summary>
             public static readonly RECT Empty = new RECT();

@@ -25,12 +25,10 @@ namespace Assembly.Helpers.Net
                 streamW.Write(stringData);
 
                 WebResponse response = request.GetResponse();
-                if (response != null)
-                    using (var sr = new StreamReader(response.GetResponseStream()))
-                    {
-                        return sr.ReadToEnd();
-                    }
-                return null;
+                using (var sr = new StreamReader(response.GetResponseStream()))
+                {
+                    return sr.ReadToEnd();
+                }
             }
             catch (Exception)
             {

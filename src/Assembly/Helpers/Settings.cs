@@ -230,11 +230,8 @@ namespace Assembly.Helpers
         public Settings()
         {
             ApplicationRecents.CollectionChanged +=
-                (sender, args) =>
-                {
-                    SetField(ref _applicationRecents, sender as ObservableCollection<RecentFileEntry>,
-                        "ApplicationRecents", true);
-                };
+                (sender, args) => SetField(ref _applicationRecents, sender as ObservableCollection<RecentFileEntry>,
+                    "ApplicationRecents", true);
         }
 
         #endregion

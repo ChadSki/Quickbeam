@@ -1,8 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <Style TargetType="{x:Type xctk:SplitButton}">
         <Setter Property="Foreground" Value="#999999" />
         <Setter Property="Background" Value="#222222" />
@@ -50,7 +48,7 @@
                                 </Border>
                                 <Border x:Name="dropButtonBorder" Grid.Column="1" BorderBrush="#616161"
                                         BorderThickness="0,1,1,1">
-                                    <ToggleButton x:Name="PART_ToggleButton" Grid.Column="1" IsTabStop="False"
+                                    <ToggleButton x:Name="PART_ToggleButton" IsTabStop="False"
                                                   IsChecked="{Binding IsOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                                         <ToggleButton.IsHitTestVisible>
                                             <Binding Path="IsOpen" RelativeSource="{RelativeSource TemplatedParent}">

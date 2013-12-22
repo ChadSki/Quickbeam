@@ -39,7 +39,6 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
             {
                 XmlNode nodeRss = null;
                 XmlNode nodeChannel = null;
-                XmlNode nodeItem = null;
                 var wb = new WebClient();
 
                 // Read the RSS XML into an XmlReader, then proceed to fuck bitches
@@ -61,17 +60,18 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components
                 for (int i = 0; i < nodeChannel.ChildNodes.Count; i++)
                     if (nodeChannel.ChildNodes[i].Name == "item")
                     {
-                        nodeItem = nodeChannel.ChildNodes[i];
-
-                        var rssEntry = new RSSEntry();
-                        rssEntry.Title = nodeItem["title"].InnerText;
-                        rssEntry.Link = nodeItem["link"].InnerText;
-                        rssEntry.Description = nodeItem["description"].InnerText;
-                        rssEntry.PubDate = DateTime.Parse(nodeItem["pubDate"].InnerText);
+                        XmlNode nodeItem = nodeChannel.ChildNodes[i];
+                        var rssEntry = new RSSEntry
+                        {
+                            Title = nodeItem["title"].InnerText,
+                            Link = nodeItem["link"].InnerText,
+                            Description = nodeItem["description"].InnerText,
+                            PubDate = DateTime.Parse(nodeItem["pubDate"].InnerText)
+                        };
                         rssEntry.FriendlyPubDate = rssEntry.PubDate.ToString("dddd, dd MMMM yyyy");
                         rssEntry.GUID = nodeItem["guid"].InnerText;
 
-                        Dispatcher.Invoke(new Action(delegate { RssItems.Add(rssEntry); }));
+                        Dispatcher.Invoke(new Action(() => RssItems.Add(rssEntry)));
                     }
             }
             catch (TaskCanceledException)

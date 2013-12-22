@@ -114,21 +114,23 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
         {
             if (_propertyNames != null)
                 return;
-            _propertyNames = new HashSet<string>();
+            _propertyNames = new HashSet<string>
+            {
+                "Value",
+                "DataAddress",
+                "Length",
+                "EntrySize",
+                "FirstEntryAddress",
+                "Class",
+                "Degree",
+                "Radian",
+                "X",
+                "Y",
+                "Z"
+            };
 
             // All right, so this is dependent upon the exact property names,
             // but INotifyPropertyChanged has that problem anyway...
-            _propertyNames.Add("Value");
-            _propertyNames.Add("DataAddress"); // Datarefs
-            _propertyNames.Add("Length"); // Reflexives
-            _propertyNames.Add("EntrySize"); // Reflexives
-            _propertyNames.Add("FirstEntryAddress"); // Reflexives
-            _propertyNames.Add("Class"); // Tagrefs
-            _propertyNames.Add("Degree"); // Degrees
-            _propertyNames.Add("Radian"); // Degrees
-            _propertyNames.Add("X"); // Vectors
-            _propertyNames.Add("Y"); // Vectors
-            _propertyNames.Add("Z"); // Vectors
         }
     }
 }

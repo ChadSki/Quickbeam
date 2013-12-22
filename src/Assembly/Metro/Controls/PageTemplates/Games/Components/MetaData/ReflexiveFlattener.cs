@@ -113,11 +113,7 @@ namespace Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData
             for (int i = 0; i < _lastPage.Fields.Length; i++)
             {
                 // if _lastPage.Fields[i] is null, then we can just re-use the field from the template
-                MetaField newField;
-                if (_lastPage.Fields[i] != null)
-                    newField = _lastPage.Fields[i];
-                else
-                    newField = reflexive.Template[i];
+                MetaField newField = _lastPage.Fields[i] ?? reflexive.Template[i];
 
                 // HACK: synchronize the opacity
                 newField.Opacity = _loadedFields[i].Opacity;

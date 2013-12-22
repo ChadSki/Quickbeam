@@ -43,14 +43,7 @@ namespace DragDropListBox
 
         private static DragDropHelper Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DragDropHelper();
-                }
-                return instance;
-            }
+            get { return instance ?? (instance = new DragDropHelper()); }
         }
 
         public static bool GetIsDragSource(DependencyObject obj)
