@@ -184,33 +184,14 @@ namespace Assembly.Windows.Pages.Components
                 gridSearch.Visibility = Visibility.Visible;
                 cbShowInvisibles.Visibility = Visibility.Visible;
                 btnPluginSave.Visibility = Visibility.Visible;
-
-                // Only enable poking if RTE support is available
-                if (_rteProvider != null)
-                {
-                    sbPluginPoke.Visibility = Visibility.Visible;
-                    miPluginRefreshMem.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    sbPluginPoke.Visibility = Visibility.Collapsed;
-                    miPluginRefreshMem.Visibility = Visibility.Collapsed;
-                }
-
                 btnPluginRevisionViewer.Visibility = Visibility.Visible;
-                sbPluginRefresh.Visibility = Visibility.Visible;
             }
             else
             {
                 gridSearch.Visibility = Visibility.Collapsed;
-
                 cbShowInvisibles.Visibility = Visibility.Collapsed;
                 btnPluginSave.Visibility = Visibility.Collapsed;
-                sbPluginPoke.Visibility = Visibility.Collapsed;
                 btnPluginRevisionViewer.Visibility = Visibility.Collapsed;
-                miPluginRefreshMem.Visibility = Visibility.Collapsed;
-
-                sbPluginRefresh.Visibility = Visibility.Visible;
             }
         }
 
@@ -299,16 +280,6 @@ namespace Assembly.Windows.Pages.Components
             RefreshEditor(MetaReader.LoadType.File);
         }
 
-        private void btnPluginRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshEditor(MetaReader.LoadType.File);
-        }
-
-        private void btnPluginRefreshFromMemory_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshEditor(MetaReader.LoadType.Memory);
-        }
-
         private void btnPluginRevisionViewer_Click(object sender, RoutedEventArgs e)
         {
             RevisionViewer();
@@ -321,22 +292,6 @@ namespace Assembly.Windows.Pages.Components
             if (cbShowInvisibles.IsChecked != null)
                 App.AssemblyStorage.AssemblySettings.PluginsShowInvisibles = (bool) cbShowInvisibles.IsChecked;
             RefreshEditor(MetaReader.LoadType.File);
-        }
-
-        private void cbReflexives_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-                panelMetaComponents.ScrollIntoView(e.AddedItems[0]);
-        }
-
-        private void btnPluginPokeAll_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateMeta(MetaWriter.SaveType.Memory, false);
-        }
-
-        private void btnPluginPokeChanged_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateMeta(MetaWriter.SaveType.Memory, true);
         }
 
         private void btnPluginSave_Click(object sender, RoutedEventArgs e)
