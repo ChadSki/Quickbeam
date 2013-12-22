@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Assembly.Helpers.Native;
-using Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData;
+using Assembly.Windows.Pages.Components.MetaData;
 using Blamite.Blam;
 using Blamite.Flexibility;
 using Blamite.IO;

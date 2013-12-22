@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData;
 using Assembly.Metro.Dialogs.ControlDialogs;
+using Assembly.Windows.Pages.Components.MetaData;
 using Blamite.Blam;
 using Blamite.Flexibility;
 using Blamite.IO;

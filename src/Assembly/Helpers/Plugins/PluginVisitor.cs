@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using Assembly.Metro.Controls.PageTemplates.Games;
-using Assembly.Metro.Controls.PageTemplates.Games.Components.MetaData;
+using Assembly.Windows.Pages.Components;
+using Assembly.Windows.Pages.Components.MetaData;
 using Blamite.Blam.Shaders;
 using Blamite.IO;
 using Blamite.Plugins;
