@@ -5,45 +5,45 @@ using Blamite.Plugins;
 
 namespace Assembly.Metro.Dialogs.ControlDialogs
 {
-	/// <summary>
-	///     Interaction logic for PluginRevisionViewer.xaml
-	/// </summary>
-	public partial class PluginRevisionViewer
-	{
-		private readonly string _pluginClass;
-		private readonly string _pluginClassDescription;
-		private readonly IList<PluginRevision> _revisions = new List<PluginRevision>();
+    /// <summary>
+    ///     Interaction logic for PluginRevisionViewer.xaml
+    /// </summary>
+    public partial class PluginRevisionViewer
+    {
+        private readonly string _pluginClass;
+        private readonly string _pluginClassDescription;
+        private readonly IList<PluginRevision> _revisions = new List<PluginRevision>();
 
-		public PluginRevisionViewer(IList<PluginRevision> revisions, string pluginClass)
-		{
-			InitializeComponent();
-			DwmDropShadow.DropShadowToWindow(this);
+        public PluginRevisionViewer(IList<PluginRevision> revisions, string pluginClass)
+        {
+            InitializeComponent();
+            DwmDropShadow.DropShadowToWindow(this);
 
-			_revisions = revisions;
-			_pluginClass = pluginClass;
-			_pluginClassDescription = string.Format("Revision history for the {0} plugin:", _pluginClass);
+            _revisions = revisions;
+            _pluginClass = pluginClass;
+            _pluginClassDescription = string.Format("Revision history for the {0} plugin:", _pluginClass);
 
-			DataContext = this;
-		}
+            DataContext = this;
+        }
 
-		public IList<PluginRevision> Revisions
-		{
-			get { return _revisions; }
-		}
+        public IList<PluginRevision> Revisions
+        {
+            get { return _revisions; }
+        }
 
-		public string PluginClass
-		{
-			get { return _pluginClass; }
-		}
+        public string PluginClass
+        {
+            get { return _pluginClass; }
+        }
 
-		public string PluginClassDescription
-		{
-			get { return _pluginClassDescription; }
-		}
+        public string PluginClassDescription
+        {
+            get { return _pluginClassDescription; }
+        }
 
-		private void btnActionClose_Click(object sender, RoutedEventArgs e)
-		{
-			Close();
-		}
-	}
+        private void btnActionClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+    }
 }

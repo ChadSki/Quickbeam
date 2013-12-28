@@ -2,14 +2,14 @@
 
 namespace Assembly.Metro.Controls.Vectors
 {
-	/// <summary>
-	///     Interaction logic for ScreenshotModule.xaml
-	/// </summary>
-	public partial class ScreenshotModule : UserControl
-	{
-		public ScreenshotModule()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    ///     Interaction logic for ScreenshotModule.xaml
+    /// </summary>
+    public partial class ScreenshotModule : UserControl
+    {
+        public ScreenshotModule()
+        {
+            InitializeComponent();
+        }
+    }
 }

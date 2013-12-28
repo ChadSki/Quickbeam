@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              Width="13" Height="14">
-	<Grid>
-		<StackPanel>
-			<Rectangle Height="7" Fill="{DynamicResource ExtryzeAccentBrush}" />
-			<Rectangle Height="7" Fill="{DynamicResource ExtryzeAccentBrush}" />
-		</StackPanel>
+    <Grid>
+        <StackPanel>
+            <Rectangle Height="7" Fill="{DynamicResource ExtryzeAccentBrush}" />
+            <Rectangle Height="7" Fill="{DynamicResource ExtryzeAccentBrush}" />
+        </StackPanel>
 
-		<Rectangle Fill="#232324" VerticalAlignment="Top" Height="4" Margin="1,2,1,0" />
-		<Rectangle Fill="#232324" VerticalAlignment="Bottom" Height="4" Margin="1,0,1,1" />
-	</Grid>
+        <Rectangle Fill="#232324" VerticalAlignment="Top" Height="4" Margin="1,2,1,0" />
+        <Rectangle Fill="#232324" VerticalAlignment="Bottom" Height="4" Margin="1,0,1,1" />
+    </Grid>
 </UserControl>

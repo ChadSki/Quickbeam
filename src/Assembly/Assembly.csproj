@@ -93,33 +93,27 @@
       <HintPath>..\packages\AvalonDock.2.0.1746\lib\net40\AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit">
-      <HintPath>..\DLLs\ICSharpCode.AvalonEdit.dll</HintPath>
+      <HintPath>.\DLLs\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing" />
-    <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLLs\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+      <HintPath>.\DLLs\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -128,14 +122,11 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLLs\WPFToolkit.dll</HintPath>
+      <HintPath>.\DLLs\WPFToolkit.dll</HintPath>
     </Reference>
     <Reference Include="WPFToolkit.Extended, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Extended.Wpf.Toolkit.1.8.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.DataGrid">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.1.8.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
     </Reference>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -145,7 +136,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\0xabad1dea.cs" />
     <Compile Include="Helpers\AssemblyProtocol.cs" />
     <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLAttribute.cs" />
     <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLTag.cs" />
@@ -156,22 +146,15 @@
     <Compile Include="Helpers\Converters\TagBookmarkForeground.cs" />
     <Compile Include="Helpers\Converters\TagBookmarkVisibility.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
-    <Compile Include="Helpers\Cryptography\AES.cs" />
-    <Compile Include="Helpers\Cryptography\MD5.cs" />
-    <Compile Include="Helpers\Cryptography\RSA.cs" />
-    <Compile Include="Helpers\Cryptography\SHA1.cs" />
     <Compile Include="Helpers\DDSConversion.cs" />
     <Compile Include="Helpers\ExceptionDictionary.cs" />
     <Compile Include="Helpers\FileDefaults.cs" />
-    <Compile Include="Helpers\HoldingVault.cs" />
     <Compile Include="Helpers\INIClass.cs" />
     <Compile Include="Helpers\JumpLists.cs" />
     <Compile Include="Helpers\Native\ShellChanges.cs" />
-    <Compile Include="Helpers\Models\ObjExporter.cs" />
     <Compile Include="Helpers\Net\HttpExtensions.cs" />
     <Compile Include="Helpers\Net\HttpRequests.cs" />
-    <Compile Include="Helpers\Net\SignIn.cs" />
-    <Compile Include="Helpers\Plugins\ThirdGenPluginVisitor.cs" />
+    <Compile Include="Helpers\Plugins\PluginVisitor.cs" />
     <Compile Include="Helpers\Net\AssemblyServer.cs" />
     <Compile Include="Helpers\Net\Imgur.cs" />
     <Compile Include="Helpers\Net\Updates.cs" />
@@ -222,89 +205,89 @@
     <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\VTabGroup.xaml.cs">
       <DependentUpon>VTabGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\Converters\ImageConverter.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\DebugTools.xaml.cs">
+    <Compile Include="Windows\Pages\Components\Converters\ImageConverter.cs" />
+    <Compile Include="Windows\Pages\Components\DebugTools.xaml.cs">
       <DependentUpon>DebugTools.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\Editors\BspEditor.xaml.cs">
+    <Compile Include="Windows\Pages\Components\Editors\BspEditor.xaml.cs">
       <DependentUpon>BspEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\Editors\ScriptEditor.xaml.cs">
+    <Compile Include="Windows\Pages\Components\Editors\ScriptEditor.xaml.cs">
       <DependentUpon>ScriptEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\Editors\LocaleEditor.xaml.cs">
+    <Compile Include="Windows\Pages\Components\Editors\LocaleEditor.xaml.cs">
       <DependentUpon>LocaleEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\Editors\StringEditor.xaml.cs">
+    <Compile Include="Windows\Pages\Components\Editors\StringEditor.xaml.cs">
       <DependentUpon>StringEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\InputBindingsManager.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MapHeaderEntry.xaml.cs">
+    <Compile Include="Windows\Pages\Components\InputBindingsManager.cs" />
+    <Compile Include="Windows\Pages\Components\MapHeaderEntry.xaml.cs">
       <DependentUpon>MapHeaderEntry.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\AsciiValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\AsciiValue.xaml.cs">
       <DependentUpon>AsciiValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Bitfield.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\Bitfield.xaml.cs">
       <DependentUpon>Bitfield.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\ColourValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\ColourValue.xaml.cs">
       <DependentUpon>ColourValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\DegreeValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\DegreeValue.xaml.cs">
       <DependentUpon>DegreeValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\LowercaseConverter.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Shader.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\LowercaseConverter.cs" />
+    <Compile Include="Windows\Pages\Components\MetaComponents\Shader.xaml.cs">
       <DependentUpon>Shader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\StringIDValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\StringIDValue.xaml.cs">
       <DependentUpon>StringIDValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\VectorValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\VectorValue.xaml.cs">
       <DependentUpon>VectorValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\BitfieldData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\ColourData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\CommentData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\DataRef.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\DegreeData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\EnumData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\FieldChangeSet.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\FieldChangeTracker.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\IMetaFieldVisitor.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\MetaField.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\MetaFilterer.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\MetaReader.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\MetaWriter.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\NumberData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\RawData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\ReflexiveFlattener.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\ShaderRef.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\StringIDData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\ValueField.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaInformation.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaData\BitfieldData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\ColourData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\CommentData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\DataRef.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\DegreeData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\EnumData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\FieldChangeSet.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\FieldChangeTracker.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\IMetaFieldVisitor.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\MetaField.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\MetaFilterer.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\MetaReader.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\MetaWriter.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\NumberData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\RawData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\ReflexiveFlattener.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\ShaderRef.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\StringIDData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\ValueField.cs" />
+    <Compile Include="Windows\Pages\Components\MetaInformation.xaml.cs">
       <DependentUpon>MetaInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\PluginEditor.xaml.cs">
+    <Compile Include="Windows\Pages\Components\PluginEditor.xaml.cs">
       <DependentUpon>PluginEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\PropertyChangeNotifier.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\ReflexiveData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\WrappedReflexiveEntry.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\StringData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\TagRefData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\VectorData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaData\WidthCalculator.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\RssPage.xaml.cs">
+    <Compile Include="Windows\Pages\Components\PropertyChangeNotifier.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\ReflexiveData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\WrappedReflexiveEntry.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\StringData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\TagRefData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\VectorData.cs" />
+    <Compile Include="Windows\Pages\Components\MetaData\WidthCalculator.cs" />
+    <Compile Include="Windows\Pages\Components\RssPage.xaml.cs">
       <DependentUpon>RssPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CodeCompletion\XML\XMLAttributeCompletionData.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\HaloPluginConverter.xaml.cs">
+    <Compile Include="Windows\Pages\HaloPluginConverter.xaml.cs">
       <DependentUpon>HaloPluginConverter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\TagHierarchy.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\WelcomePage.xaml.cs">
+    <Compile Include="Windows\Pages\Components\TagHierarchy.cs" />
+    <Compile Include="Windows\Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Metro\Controls\StringIDInput.xaml.cs">
@@ -383,46 +366,46 @@
     <Compile Include="Metro\Dialogs\MetroException.cs" />
     <Compile Include="Metro\Dialogs\MetroPluginRevisionViewer.cs" />
     <Compile Include="Metro\Dialogs\MetroImgurUpload.cs" />
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Comment.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\Comment.xaml.cs">
       <DependentUpon>Comment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Enumeration.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\Enumeration.xaml.cs">
       <DependentUpon>Enumeration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\IntValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\IntValue.xaml.cs">
       <DependentUpon>IntValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\RawBlock.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\RawBlock.xaml.cs">
       <DependentUpon>RawBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\MetaChunk.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\MetaChunk.xaml.cs">
       <DependentUpon>MetaChunk.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\TagValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\TagValue.xaml.cs">
       <DependentUpon>TagValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\RangeValue.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaComponents\RangeValue.xaml.cs">
       <DependentUpon>RangeValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaContainer.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaContainer.xaml.cs">
       <DependentUpon>MetaContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaEditor.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaEditor.xaml.cs">
       <DependentUpon>MetaEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaIdent.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaIdent.xaml.cs">
       <DependentUpon>MetaIdent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\Components\MetaReflexive.xaml.cs">
+    <Compile Include="Windows\Pages\Components\MetaReflexive.xaml.cs">
       <DependentUpon>MetaReflexive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\Games\HaloMap.xaml.cs">
+    <Compile Include="Windows\Pages\HaloMap.xaml.cs">
       <DependentUpon>HaloMap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\SettingsPage.xaml.cs">
+    <Compile Include="Windows\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\PageTemplates\StartPage.xaml.cs">
+    <Compile Include="Windows\Pages\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Metro\Controls\Vectors\CloseModule.xaml.cs">
@@ -458,25 +441,11 @@
     <Compile Include="Helpers\Native\DwmDropShadow.cs" />
     <Compile Include="Helpers\Native\Monitor_Workarea.cs" />
     <Compile Include="Helpers\Native\WindowMovement.cs" />
-    <Compile Include="Helpers\PostGeneration\AssemblyPostGenerator.cs" />
-    <Compile Include="Helpers\PostGeneration\ModPostInfo.cs" />
     <Compile Include="SyntaxHighlighting\HighlightLoader.cs" />
     <Compile Include="Windows\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusUpdater.cs" />
-    <Page Include="Helpers\0xabad1dea\DingDong.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Helpers\0xabad1dea\Galo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Helpers\0xabad1dea\TragicSans.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Metro\Controls\ActionButtons\CloseButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -637,135 +606,135 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\DebugTools.xaml">
+    <Page Include="Windows\Pages\Components\DebugTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\Editors\BspEditor.xaml">
+    <Page Include="Windows\Pages\Components\Editors\BspEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\Editors\ScriptEditor.xaml">
+    <Page Include="Windows\Pages\Components\Editors\ScriptEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\Editors\LocaleEditor.xaml">
+    <Page Include="Windows\Pages\Components\Editors\LocaleEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\Editors\StringEditor.xaml">
+    <Page Include="Windows\Pages\Components\Editors\StringEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MapHeaderEntry.xaml">
+    <Page Include="Windows\Pages\Components\MapHeaderEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\AsciiValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\AsciiValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Bitfield.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\Bitfield.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\ColourValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\ColourValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Comment.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\Comment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\ComponentDictionary.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\ComponentDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\DegreeValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\DegreeValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Enumeration.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\Enumeration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\IntValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\IntValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\RawBlock.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\RawBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\MetaChunk.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\MetaChunk.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\Shader.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\Shader.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\StringIDValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\StringIDValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\TagValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\TagValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\RangeValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\RangeValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaComponents\VectorValue.xaml">
+    <Page Include="Windows\Pages\Components\MetaComponents\VectorValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaContainer.xaml">
+    <Page Include="Windows\Pages\Components\MetaContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaEditor.xaml">
+    <Page Include="Windows\Pages\Components\MetaEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaIdent.xaml">
+    <Page Include="Windows\Pages\Components\MetaIdent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaInformation.xaml">
+    <Page Include="Windows\Pages\Components\MetaInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\MetaReflexive.xaml">
+    <Page Include="Windows\Pages\Components\MetaReflexive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\PluginEditor.xaml">
+    <Page Include="Windows\Pages\Components\PluginEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\Components\RssPage.xaml">
+    <Page Include="Windows\Pages\Components\RssPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\HaloMap.xaml">
+    <Page Include="Windows\Pages\HaloMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\Games\HaloPluginConverter.xaml">
+    <Page Include="Windows\Pages\HaloPluginConverter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\SettingsPage.xaml">
+    <Page Include="Windows\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\StartPage.xaml">
+    <Page Include="Windows\Pages\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\PageTemplates\WelcomePage.xaml">
+    <Page Include="Windows\Pages\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -933,7 +902,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SyntaxHighlighting\XMLPurple.xshd" />
-    <Resource Include="Helpers\0xabad1dea\GodOfAllThingsHolyAndModdy.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1036,6 +1004,14 @@
     <Resource Include="Metro\Controls\AvalonDockMetro\Images\Locked.png" />
     <Resource Include="Metro\Controls\AvalonDockMetro\Images\PinRestore.png" />
     <Resource Include="Metro\Images\DockPaneImageTile.png" />
+    <Content Include="DLLs\BetterTab.dll" />
+    <Content Include="DLLs\BetterWpfControls.dll" />
+    <Content Include="DLLs\DevIL.NET.dll" />
+    <Content Include="DLLs\ICSharpCode.AvalonEdit.dll" />
+    <Resource Include="DLLs\ICSharpCode.AvalonEdit.xml" />
+    <Content Include="DLLs\System.Windows.Controls.Input.Toolkit.dll" />
+    <Content Include="DLLs\WPFToolkit.dll" />
+    <Content Include="DLLs\WPFToolkit.Extended.dll" />
     <Content Include="Plugins\Examples\ThirdGenExample.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

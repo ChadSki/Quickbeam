@@ -8,13 +8,13 @@
              Height="22"
              d:DesignWidth="300"
              x:Name="control">
-	<i:AutoCompleteBox x:Name="textbox"
-	                   Text="{Binding Text, ElementName=control, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-	                   MinimumPopulateDelay="200"
-	                   IsTextCompletionEnabled="False"
-	                   VerticalAlignment="Top"
-	                   HorizontalAlignment="Stretch"
-	                   Height="22"
-	                   Populating="textbox_Populating"
-	                   GotFocus="textbox_GotFocus" />
+    <i:AutoCompleteBox x:Name="textbox"
+                       Text="{Binding Text, ElementName=control, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                       MinimumPopulateDelay="200"
+                       IsTextCompletionEnabled="False"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Stretch"
+                       Height="22"
+                       Populating="textbox_Populating"
+                       GotFocus="textbox_GotFocus" />
 </UserControl>

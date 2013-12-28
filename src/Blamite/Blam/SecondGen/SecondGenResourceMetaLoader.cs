@@ -6,27 +6,27 @@ using Blamite.IO;
 
 namespace Blamite.Blam.SecondGen
 {
-	// Just a dummy for now...
-	public class SecondGenResourceMetaLoader : IResourceMetaLoader
-	{
-		public bool SupportsRenderModels
-		{
-			get { return false; }
-		}
+    // Just a dummy for now...
+    public class SecondGenResourceMetaLoader : IResourceMetaLoader
+    {
+        public bool SupportsRenderModels
+        {
+            get { return false; }
+        }
 
-		public IRenderModel LoadRenderModelMeta(ITag modeTag, IReader reader)
-		{
-			throw new NotImplementedException();
-		}
+        public IRenderModel LoadRenderModelMeta(ITag modeTag, IReader reader)
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool SupportsScenarioBSPs
-		{
-			get { return false; }
-		}
+        public bool SupportsScenarioBSPs
+        {
+            get { return false; }
+        }
 
-		public IScenarioBSP LoadScenarioBSPMeta(ITag sbspTag, IReader reader)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public IScenarioBSP LoadScenarioBSPMeta(ITag sbspTag, IReader reader)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

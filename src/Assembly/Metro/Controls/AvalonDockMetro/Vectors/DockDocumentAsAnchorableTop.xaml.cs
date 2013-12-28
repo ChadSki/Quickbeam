@@ -2,14 +2,14 @@
 
 namespace Assembly.Metro.Controls.AvalonDockMetro.Vectors
 {
-	/// <summary>
-	///     Interaction logic for DockDocumentAsAnchorableTop.xaml
-	/// </summary>
-	public partial class DockDocumentAsAnchorableTop : UserControl
-	{
-		public DockDocumentAsAnchorableTop()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    ///     Interaction logic for DockDocumentAsAnchorableTop.xaml
+    /// </summary>
+    public partial class DockDocumentAsAnchorableTop : UserControl
+    {
+        public DockDocumentAsAnchorableTop()
+        {
+            InitializeComponent();
+        }
+    }
 }

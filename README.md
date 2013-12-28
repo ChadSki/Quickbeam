@@ -1,19 +1,7 @@
-# Assembly #
+# AssemblyLite
+AssemblyLite is a free, open-source mapfile editor for Halo 2 Vista. Based on [Assembly](https://github.com/XboxChaos/Assembly), this project drops support for all Xbox versions of Halo.
 
-### Multi-Generation Blam Engine Research Tool ###
-__Build Status:__ <img src="http://build.xeraxic.com/app/rest/builds/buildType:(id:asm_master_release)/statusIcon" />
+### Rationale
+[MetroWPFTemplate](https://github.com/Xerax/MetroWPFTemplate) is a stripped-down version of Assembly which is supposed to provide a good starting point for WPF applications with a Metro appearance. MetroWPFTemplate falls flat, however, due to lack of updates and numerous rough edges. Many GUI improvements to Assembly have not been backported to MetroWPFTemplate.
 
-__Downloads are now made available through [GitHub's release system](https://github.com/XboxChaos/Assembly/releases). The SourceForge page will remain up for some time, but will not be updated anymore.__
-
-__Some features may have bugs. You are encouraged to submit bug reports through our issue tracker: [https://github.com/XboxChaos/Assembly/issues/new](https://github.com/XboxChaos/Assembly/issues/new "Assembly Issue Tracker").__
-
-__An Xbox 360 capable of running unsigned code is required, for Xbox 360 supported games, in order to use modifications created with Assembly. Flashed disc drives will not work.__
-
-
-Assembly is a free, open-source Halo cache file (.map) editor that was built from the ground up. It allows users to create and distribute creative patches for game content.
-
-Assembly was designed with three goals in mind: 
-
-* __Flexibility__ - Assembly is capable of opening files targeted for Halo 2: Vista, Halo 3, Halo: Reach, and Halo 4. And includes a system which allows users to add in support for other formats with ease.
-* __Speed__ - Spend more time researching and less time waiting for trivial tasks to complete. Even the largest tags load extremely quickly with invisible fields enabled, and the meta editor's search feature allows users to find values with ease.
-* __Usability__ - Built using Windows Presentation Foundation and utilizing modern UI design concepts, Assembly is both easy to use and easy to look at.
+AssemblyLite was created to be a better MetroWPFTemplate, which includes updates made to Assembly's GUI framework as well as fully-functioning controls for editing Halo 2 mapfiles, which serve as examples of how to develop one's own Metro-styled WPF controls.
