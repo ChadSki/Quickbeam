@@ -23,7 +23,7 @@ namespace Assembly.Metro.Dialogs.ControlDialogs
             var keypair = new KeyValuePair<string, int>(null, -1);
             var sfd = new SaveFileDialog
             {
-                Title = "Assembly - Select where to save your Tag Bookmarks",
+                Title = "Quickbeam - Select where to save your Tag Bookmarks",
                 Filter = "Assembly Tag Bookmark File (*.astb)|*.astb"
             };
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)

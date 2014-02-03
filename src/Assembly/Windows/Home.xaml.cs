@@ -316,7 +316,7 @@ namespace Assembly.Windows
         {
             {
                 ContentTypes.Map, new ContentFileHandler(
-                    "Assembly - Open Blam Cache File",
+                    "Quickbeam - Open Blam Cache File",
                     "Blam Cache File (*.map)|*.map",
                     (home, file) => home.AddCacheTabModule(file))
             },
@@ -507,7 +507,7 @@ namespace Assembly.Windows
         /// <param name="title">Current Title, Assembly shall add the rest for you.</param>
         public void UpdateTitleText(string title)
         {
-            string suffix = "Assembly";
+            string suffix = "Quickbeam";
             if (!string.IsNullOrWhiteSpace(title))
                 suffix = " - " + suffix;
 

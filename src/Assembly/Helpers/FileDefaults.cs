@@ -21,7 +21,7 @@ namespace Assembly.Helpers
             changed |= RegisterOpenCommand("assembly.xboxchaos.cif", App.AssemblyStorage.AssemblySettings.DefaultCif,
                 "Blam Campaign File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
             changed |= RegisterOpenCommand("assembly.xboxchaos.amp", App.AssemblyStorage.AssemblySettings.DefaultAmp,
-                "Assembly Patch File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
+                "Quickbeam Patch File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
 
             // Assign Valid apptypes
             changed |= RegisterExtension(".map", App.AssemblyStorage.AssemblySettings.DefaultMap,

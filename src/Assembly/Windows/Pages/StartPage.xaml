@@ -16,7 +16,7 @@
             <Rectangle Fill="#FF545456" Width="2" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Right"
                        d:LayoutOverrides="Height" />
 
-            <TextBlock x:Name="lblTitle" FontFamily="{DynamicResource MetroFontLight}" Text="Assembly"
+            <TextBlock x:Name="lblTitle" FontFamily="{DynamicResource MetroFontLight}" Text="Quickbeam"
                        Foreground="White"
                        FontSize="32" Margin="25,36.5,13,0" Height="50" VerticalAlignment="Top" />
             <ed:RegularPolygon Fill="#FF4A4A4C" HorizontalAlignment="Left" Height="19" InnerRadius="1"

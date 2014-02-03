@@ -5,7 +5,7 @@
         xmlns:Vectors="clr-namespace:Assembly.Metro.Controls.Vectors"
         AllowsTransparency="True" ResizeMode="CanResize" WindowStyle="None" WindowStartupLocation="CenterOwner"
         SnapsToDevicePixels="True"
-        Width="760" Height="580" ShowInTaskbar="False" Title="Meta Value Viewer - Assembly"
+        Width="760" Height="580" ShowInTaskbar="False" Title="Meta Value Viewer - Quickbeam"
         n:WindowMovement.IsDraggable="True">
     <Window.Resources>
         <ResourceDictionary>
@@ -60,7 +60,7 @@
                         </TransformGroup>
                     </Path.RenderTransform>
                 </Path>
-                <TextBlock x:Name="lblTitle" Text="Meta Value Viewer - Assembly" Foreground="#989898"
+                <TextBlock x:Name="lblTitle" Text="Meta Value Viewer - Quickbeam" Foreground="#989898"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Stretch" FontSize="15" Margin="45,12,141,0"
                            FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis" />

@@ -7,7 +7,7 @@
         xmlns:n="clr-namespace:Assembly.Helpers.Native"
         AllowsTransparency="True" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner"
         SnapsToDevicePixels="True"
-        Width="546" Height="350" Title="Assembly - Plugin Revisions" ShowInTaskbar="False"
+        Width="546" Height="350" Title="Quickbeam - Plugin Revisions" ShowInTaskbar="False"
         n:WindowMovement.IsDraggable="True">
     <Border Background="#FF2E2E31" BorderThickness="1,1,1,5" BorderBrush="{DynamicResource ExtryzeAccentBrush}"
             VerticalAlignment="Stretch">
@@ -26,7 +26,7 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <TextBlock x:Name="lblTitle" Text="Plugin History - Assembly" Foreground="#989898" VerticalAlignment="Top"
+            <TextBlock x:Name="lblTitle" Text="Plugin History - Quickbeam" Foreground="#989898" VerticalAlignment="Top"
                        HorizontalAlignment="Stretch" FontSize="15" Margin="45,12,141,0"
                        FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis" />
 

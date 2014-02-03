@@ -31,7 +31,7 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <TextBlock Grid.Row="0" x:Name="lblTitle" Text="Tag Bookmark Saver - Assembly" Foreground="#989898"
+            <TextBlock Grid.Row="0" x:Name="lblTitle" Text="Tag Bookmark Saver - Quickbeam" Foreground="#989898"
                        VerticalAlignment="Top" HorizontalAlignment="Stretch" FontSize="15" Margin="45,12,141,0"
                        FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis" />
 

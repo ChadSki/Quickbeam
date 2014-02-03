@@ -908,8 +908,8 @@ namespace Assembly.Windows.Pages
 
             var ofd = new OpenFileDialog
             {
-                Title = "Assembly - Select a Tag Bookmark File",
-                Filter = "Assembly Tag Bookmark File (*.astb)|*.astb"
+                Title = "Quickbeam - Select a Tag Bookmark File",
+                Filter = "Quickbeam Tag Bookmark File (*.astb)|*.astb"
             };
             if (!(bool) ofd.ShowDialog())
                 return;
