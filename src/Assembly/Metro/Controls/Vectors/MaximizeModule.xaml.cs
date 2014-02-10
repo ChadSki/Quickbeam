@@ -3,11 +3,11 @@
 namespace Assembly.Metro.Controls.Vectors
 {
     /// <summary>
-    ///     Interaction logic for MaxamizeModule.xaml
+    ///     Interaction logic for MaximizeModule.xaml
     /// </summary>
-    public partial class MaxamizeModule : UserControl
+    public partial class MaximizeModule : UserControl
     {
-        public MaxamizeModule()
+        public MaximizeModule()
         {
             InitializeComponent();
         }

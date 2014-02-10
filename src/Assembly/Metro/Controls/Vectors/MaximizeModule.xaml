@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    x:Class="Assembly.Metro.Controls.Vectors.MaxamizeModule"
+    x:Class="Assembly.Metro.Controls.Vectors.MaximizeModule"
     x:Name="UserControl"
     d:DesignWidth="640" d:DesignHeight="480" Width="10" Height="10">
 

@@ -147,7 +147,6 @@
     <Compile Include="Helpers\Net\HttpExtensions.cs" />
     <Compile Include="Helpers\Net\HttpRequests.cs" />
     <Compile Include="Helpers\Net\AssemblyServer.cs" />
-    <Compile Include="Helpers\Net\Imgur.cs" />
     <Compile Include="Helpers\Net\Updates.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\SingleInstance.cs" />
@@ -194,6 +193,9 @@
     </Compile>
     <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\VTabGroup.xaml.cs">
       <DependentUpon>VTabGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Metro\Controls\Vectors\MaximizeModule.xaml.cs">
+      <DependentUpon>MaximizeModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
@@ -267,9 +269,6 @@
     </Compile>
     <Compile Include="Metro\Controls\Vectors\CloseModule.xaml.cs">
       <DependentUpon>CloseModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\MaxamizeModule.xaml.cs">
-      <DependentUpon>MaxamizeModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Metro\Controls\Vectors\MinimizeModule.xaml.cs">
       <DependentUpon>MinimizeModule.xaml</DependentUpon>
@@ -463,6 +462,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Metro\Controls\Vectors\MaximizeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -494,10 +497,6 @@
     <Page Include="Metro\Controls\Vectors\ImportModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\MaxamizeModule.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Metro\Controls\Vectors\MinimizeModule.xaml">
       <Generator>MSBuild:Compile</Generator>

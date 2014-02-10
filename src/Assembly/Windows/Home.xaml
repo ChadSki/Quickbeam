@@ -65,9 +65,9 @@
                                 Style="{StaticResource WindowActionButton}" Click="btnActionRestore_Click">
                             <vectors:RestoreModule Width="34" Height="26" />
                         </Button>
-                        <Button x:Name="btnActionMaxamize" ToolTip="Maxamize" Width="34" Height="26" Margin="0"
-                                Style="{StaticResource WindowActionButton}" Click="btnActionMaxamize_Click">
-                            <vectors:MaxamizeModule Width="34" Height="26" />
+                        <Button x:Name="btnActionMaximize" ToolTip="Maximize" Width="34" Height="26" Margin="0"
+                                Style="{StaticResource WindowActionButton}" Click="btnActionMaximize_Click">
+                            <vectors:MaximizeModule Width="34" Height="26" />
                         </Button>
 
                         <Button x:Name="btnActionClose" ToolTip="Close" Width="34" Height="26" Margin="0"

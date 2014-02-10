@@ -122,7 +122,7 @@ namespace Assembly.Helpers
         private bool _pluginsShowComments = true;
         private bool _pluginsShowInformation;
         private bool _pluginsShowInvisibles;
-		private bool _pluginsShowEnumIndex = false;
+		private bool _pluginsShowEnumIndex;
         private bool _startpageHideOnLaunch;
         private bool _startpageShowOnLoad = true;
         private bool _startpageShowRecentsBlf = true;

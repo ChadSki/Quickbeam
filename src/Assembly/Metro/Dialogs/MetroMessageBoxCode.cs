@@ -24,9 +24,9 @@ namespace Assembly.Metro.Dialogs
         ///     Show a Metro Message Box
         /// </summary>
         /// <param name="message">The code to display</param>
-        public static void Show(string code)
+        public static void Show(string message)
         {
-            Show("Assembly - Message Box", code);
+            Show("Assembly - Message Box", message);
         }
     }
 }

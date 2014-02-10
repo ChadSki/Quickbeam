@@ -208,7 +208,7 @@ namespace Assembly.Windows
                 case WindowState.Normal:
                     borderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
                     btnActionRestore.Visibility = Visibility.Collapsed;
-                    btnActionMaxamize.Visibility =
+                    btnActionMaximize.Visibility =
                         ResizeDropVector.Visibility =
                             ResizeDrop.Visibility =
                                 ResizeRight.Visibility = ResizeBottom.Visibility = Visibility.Visible;
@@ -216,7 +216,7 @@ namespace Assembly.Windows
                 case WindowState.Maximized:
                     borderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
                     btnActionRestore.Visibility = Visibility.Visible;
-                    btnActionMaxamize.Visibility =
+                    btnActionMaximize.Visibility =
                         ResizeDropVector.Visibility =
                             ResizeDrop.Visibility =
                                 ResizeRight.Visibility = ResizeBottom.Visibility = Visibility.Collapsed;
@@ -245,7 +245,7 @@ namespace Assembly.Windows
             WindowState = WindowState.Normal;
         }
 
-        private void btnActionMaxamize_Click(object sender, RoutedEventArgs e)
+        private void btnActionMaximize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
         }
