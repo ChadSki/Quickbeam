@@ -136,17 +136,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\AssemblyProtocol.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLAttribute.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLTag.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\CompletableXMLValue.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\XMLAnalysis.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\XMLCodeCompleter.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\XMLValueCompletionData.cs" />
     <Compile Include="Helpers\Converters\TagBookmarkForeground.cs" />
     <Compile Include="Helpers\Converters\TagBookmarkVisibility.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
-    <Compile Include="Helpers\DDSConversion.cs" />
     <Compile Include="Helpers\ExceptionDictionary.cs" />
     <Compile Include="Helpers\FileDefaults.cs" />
     <Compile Include="Helpers\INIClass.cs" />
@@ -154,7 +146,6 @@
     <Compile Include="Helpers\Native\ShellChanges.cs" />
     <Compile Include="Helpers\Net\HttpExtensions.cs" />
     <Compile Include="Helpers\Net\HttpRequests.cs" />
-    <Compile Include="Helpers\Plugins\PluginVisitor.cs" />
     <Compile Include="Helpers\Net\AssemblyServer.cs" />
     <Compile Include="Helpers\Net\Imgur.cs" />
     <Compile Include="Helpers\Net\Updates.cs" />
@@ -164,7 +155,6 @@
     <Compile Include="Helpers\UIX\ImagerLoader.cs" />
     <Compile Include="Helpers\Updater.cs" />
     <Compile Include="Helpers\VariousFunctions.cs" />
-    <Compile Include="Helpers\CodeCompletion\XML\XMLTagCompletionData.cs" />
     <Compile Include="Metro\Controls\AvalonDockMetro\MetroTheme.cs" />
     <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableBottom.xaml.cs">
       <DependentUpon>DockDocumentAsAnchorableBottom.xaml</DependentUpon>
@@ -205,93 +195,8 @@
     <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\VTabGroup.xaml.cs">
       <DependentUpon>VTabGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Pages\Components\Converters\ImageConverter.cs" />
-    <Compile Include="Windows\Pages\Components\DebugTools.xaml.cs">
-      <DependentUpon>DebugTools.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\Editors\BspEditor.xaml.cs">
-      <DependentUpon>BspEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\Editors\ScriptEditor.xaml.cs">
-      <DependentUpon>ScriptEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\Editors\LocaleEditor.xaml.cs">
-      <DependentUpon>LocaleEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\Editors\StringEditor.xaml.cs">
-      <DependentUpon>StringEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\InputBindingsManager.cs" />
-    <Compile Include="Windows\Pages\Components\MapHeaderEntry.xaml.cs">
-      <DependentUpon>MapHeaderEntry.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\AsciiValue.xaml.cs">
-      <DependentUpon>AsciiValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\Bitfield.xaml.cs">
-      <DependentUpon>Bitfield.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\ColourValue.xaml.cs">
-      <DependentUpon>ColourValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\DegreeValue.xaml.cs">
-      <DependentUpon>DegreeValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\LowercaseConverter.cs" />
-    <Compile Include="Windows\Pages\Components\MetaComponents\Shader.xaml.cs">
-      <DependentUpon>Shader.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\StringIDValue.xaml.cs">
-      <DependentUpon>StringIDValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\VectorValue.xaml.cs">
-      <DependentUpon>VectorValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaData\BitfieldData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\ColourData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\CommentData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\DataRef.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\DegreeData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\EnumData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\FieldChangeSet.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\FieldChangeTracker.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\IMetaFieldVisitor.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\MetaField.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\MetaFilterer.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\MetaReader.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\MetaWriter.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\NumberData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\RawData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\ReflexiveFlattener.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\ShaderRef.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\StringIDData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\ValueField.cs" />
-    <Compile Include="Windows\Pages\Components\MetaInformation.xaml.cs">
-      <DependentUpon>MetaInformation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\PluginEditor.xaml.cs">
-      <DependentUpon>PluginEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\PropertyChangeNotifier.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\ReflexiveData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\WrappedReflexiveEntry.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\StringData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\TagRefData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\VectorData.cs" />
-    <Compile Include="Windows\Pages\Components\MetaData\WidthCalculator.cs" />
-    <Compile Include="Windows\Pages\Components\RssPage.xaml.cs">
-      <DependentUpon>RssPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\CodeCompletion\XML\XMLAttributeCompletionData.cs" />
-    <Compile Include="Windows\Pages\HaloPluginConverter.xaml.cs">
-      <DependentUpon>HaloPluginConverter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\TagHierarchy.cs" />
     <Compile Include="Windows\Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\StringIDInput.xaml.cs">
-      <DependentUpon>StringIDInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Metro\Controls\TabClosing\CloseableTabItem.cs" />
     <Compile Include="Metro\Controls\TabReorg\DragDropHelper.cs" />
@@ -342,21 +247,10 @@
     <Compile Include="Metro\Dialogs\ControlDialogs\PostGeneratorViewer.xaml.cs">
       <DependentUpon>PostGeneratorViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\TagBookmarkSaver.xaml.cs">
-      <DependentUpon>TagBookmarkSaver.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\ViewValueAs.xaml.cs">
-      <DependentUpon>ViewValueAs.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Metro\Dialogs\MetroInputBox.cs" />
     <Compile Include="Metro\Dialogs\MetroMessageBoxCode.cs" />
     <Compile Include="Metro\Dialogs\MetroMessageBoxList.cs" />
     <Compile Include="Metro\Dialogs\MetroPostGeneratorViewer.cs" />
-    <Compile Include="Metro\Dialogs\MetroTagBookmarkSaver.cs" />
-    <Compile Include="Metro\Dialogs\MetroViewValueAs.cs" />
-    <Compile Include="Metro\Dialogs\ControlDialogs\PluginRevisionViewer.xaml.cs">
-      <DependentUpon>PluginRevisionViewer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Metro\Dialogs\ControlDialogs\ImgurUpload.xaml.cs">
       <DependentUpon>ImgurUpload.xaml</DependentUpon>
     </Compile>
@@ -364,44 +258,7 @@
       <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
     <Compile Include="Metro\Dialogs\MetroException.cs" />
-    <Compile Include="Metro\Dialogs\MetroPluginRevisionViewer.cs" />
     <Compile Include="Metro\Dialogs\MetroImgurUpload.cs" />
-    <Compile Include="Windows\Pages\Components\MetaComponents\Comment.xaml.cs">
-      <DependentUpon>Comment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\Enumeration.xaml.cs">
-      <DependentUpon>Enumeration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\IntValue.xaml.cs">
-      <DependentUpon>IntValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\RawBlock.xaml.cs">
-      <DependentUpon>RawBlock.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\MetaChunk.xaml.cs">
-      <DependentUpon>MetaChunk.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\TagValue.xaml.cs">
-      <DependentUpon>TagValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaComponents\RangeValue.xaml.cs">
-      <DependentUpon>RangeValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaContainer.xaml.cs">
-      <DependentUpon>MetaContainer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaEditor.xaml.cs">
-      <DependentUpon>MetaEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaIdent.xaml.cs">
-      <DependentUpon>MetaIdent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\Components\MetaReflexive.xaml.cs">
-      <DependentUpon>MetaReflexive.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Pages\HaloMap.xaml.cs">
-      <DependentUpon>HaloMap.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -606,126 +463,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Pages\Components\DebugTools.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\Editors\BspEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\Editors\ScriptEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Pages\Components\Editors\LocaleEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\Editors\StringEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MapHeaderEntry.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\AsciiValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\Bitfield.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\ColourValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\Comment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\ComponentDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\DegreeValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\Enumeration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\IntValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\RawBlock.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\MetaChunk.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\Shader.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\StringIDValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\TagValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\RangeValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaComponents\VectorValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaContainer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaIdent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaInformation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\MetaReflexive.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\PluginEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\Components\RssPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\HaloMap.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Pages\HaloPluginConverter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -737,10 +474,6 @@
     <Page Include="Windows\Pages\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\StringIDInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Metro\Controls\TabClosing\CloseStyleing.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -834,10 +567,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\PluginRevisionViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Metro\Dialogs\ControlDialogs\ImgurUpload.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -846,15 +575,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\TagBookmarkSaver.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Metro\Dialogs\ControlDialogs\Updater.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\ViewValueAs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -966,10 +687,6 @@
     <Resource Include="Metro\Images\logo_small.png" />
     <Resource Include="Metro\Images\background_logo.png" />
     <Resource Include="Metro\Images\settings_logo.png" />
-    <ProjectReference Include="..\Blamite\Blamite.csproj">
-      <Project>{6b105ab9-84a0-4774-b319-75e9cab3db4b}</Project>
-      <Name>Blamite</Name>
-    </ProjectReference>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>

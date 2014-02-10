@@ -15,7 +15,6 @@ using Assembly.Helpers.Net;
 using Assembly.Metro.Dialogs;
 using Assembly.Windows.Pages;
 using AvalonDock.Layout;
-using Blamite.IO;
 using Microsoft.Win32;
 
 namespace Assembly.Windows
@@ -438,8 +437,8 @@ namespace Assembly.Windows
                 Title = "",
                 ToolTip = cacheLocation
             };
-            newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
-                App.AssemblyStorage.AssemblySettings.HalomapTagSort);
+            /*newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
+                App.AssemblyStorage.AssemblySettings.HalomapTagSort);*/
             documentManager.Children.Add(newCacheTab);
             documentManager.SelectedContentIndex = documentManager.IndexOfChild(newCacheTab);
         }
@@ -477,10 +476,6 @@ namespace Assembly.Windows
                 case TabGenre.Settings:
                     tab.Title = "Settings";
                     tab.Content = new SettingsPage();
-                    break;
-                case TabGenre.PluginConverter:
-                    tab.Title = "Plugin Converter";
-                    tab.Content = new HaloPluginConverter();
                     break;
             }
 
@@ -614,7 +609,7 @@ namespace Assembly.Windows
             try
             {
                 if (File.Exists(path))
-                {
+                {/*
                     // Magic Check
                     string magic;
                     using (var stream = new EndianReader(File.OpenRead(path), Endian.BigEndian))
@@ -627,7 +622,7 @@ namespace Assembly.Windows
                             // Map File
                             AddCacheTabModule(path);
                             return;
-                    }
+                    }*/
                 }
 
                 MetroMessageBox.Show("Unable to find file", "The selected file could no longer be found");
