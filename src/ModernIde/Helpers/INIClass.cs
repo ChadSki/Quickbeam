@@ -27,7 +27,7 @@ namespace ModernIde.Helpers
         public string IniReadValue(string Section, string Key)
         {
             var temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(Section, Key, "", temp, 255, path);
+            GetPrivateProfileString(Section, Key, "", temp, 255, path);
             return temp.ToString();
         }
     }
