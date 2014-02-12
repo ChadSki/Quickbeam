@@ -26,7 +26,7 @@ namespace Assembly.Metro.Dialogs.ControlDialogs
             _info = info;
             if (!available)
             {
-                lblAvailable.Text = "Your version of Assembly is up-to-date.";
+                lblAvailable.Text = "Your version of Quickbeam is up-to-date.";
                 lblAvailable.FontWeight = FontWeights.Normal;
                 updateButtons.Visibility = Visibility.Collapsed;
                 noUpdate.Visibility = Visibility.Visible;

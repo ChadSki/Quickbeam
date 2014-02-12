@@ -15,7 +15,6 @@ using Assembly.Helpers.Net;
 using Assembly.Metro.Dialogs;
 using Assembly.Windows.Pages;
 using AvalonDock.Layout;
-using Blamite.IO;
 using Microsoft.Win32;
 
 namespace Assembly.Windows
@@ -209,7 +208,7 @@ namespace Assembly.Windows
                 case WindowState.Normal:
                     borderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
                     btnActionRestore.Visibility = Visibility.Collapsed;
-                    btnActionMaxamize.Visibility =
+                    btnActionMaximize.Visibility =
                         ResizeDropVector.Visibility =
                             ResizeDrop.Visibility =
                                 ResizeRight.Visibility = ResizeBottom.Visibility = Visibility.Visible;
@@ -217,7 +216,7 @@ namespace Assembly.Windows
                 case WindowState.Maximized:
                     borderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
                     btnActionRestore.Visibility = Visibility.Visible;
-                    btnActionMaxamize.Visibility =
+                    btnActionMaximize.Visibility =
                         ResizeDropVector.Visibility =
                             ResizeDrop.Visibility =
                                 ResizeRight.Visibility = ResizeBottom.Visibility = Visibility.Collapsed;
@@ -246,7 +245,7 @@ namespace Assembly.Windows
             WindowState = WindowState.Normal;
         }
 
-        private void btnActionMaxamize_Click(object sender, RoutedEventArgs e)
+        private void btnActionMaximize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
         }
@@ -316,7 +315,7 @@ namespace Assembly.Windows
         {
             {
                 ContentTypes.Map, new ContentFileHandler(
-                    "Assembly - Open Blam Cache File",
+                    "Quickbeam - Open Blam Cache File",
                     "Blam Cache File (*.map)|*.map",
                     (home, file) => home.AddCacheTabModule(file))
             },
@@ -438,8 +437,8 @@ namespace Assembly.Windows
                 Title = "",
                 ToolTip = cacheLocation
             };
-            newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
-                App.AssemblyStorage.AssemblySettings.HalomapTagSort);
+            /*newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
+                App.AssemblyStorage.AssemblySettings.HalomapTagSort);*/
             documentManager.Children.Add(newCacheTab);
             documentManager.SelectedContentIndex = documentManager.IndexOfChild(newCacheTab);
         }
@@ -478,10 +477,6 @@ namespace Assembly.Windows
                     tab.Title = "Settings";
                     tab.Content = new SettingsPage();
                     break;
-                case TabGenre.PluginConverter:
-                    tab.Title = "Plugin Converter";
-                    tab.Content = new HaloPluginConverter();
-                    break;
             }
 
             if (singleInstance)
@@ -507,7 +502,7 @@ namespace Assembly.Windows
         /// <param name="title">Current Title, Assembly shall add the rest for you.</param>
         public void UpdateTitleText(string title)
         {
-            string suffix = "Assembly";
+            string suffix = "Quickbeam";
             if (!string.IsNullOrWhiteSpace(title))
                 suffix = " - " + suffix;
 
@@ -614,7 +609,7 @@ namespace Assembly.Windows
             try
             {
                 if (File.Exists(path))
-                {
+                {/*
                     // Magic Check
                     string magic;
                     using (var stream = new EndianReader(File.OpenRead(path), Endian.BigEndian))
@@ -627,7 +622,7 @@ namespace Assembly.Windows
                             // Map File
                             AddCacheTabModule(path);
                             return;
-                    }
+                    }*/
                 }
 
                 MetroMessageBox.Show("Unable to find file", "The selected file could no longer be found");

@@ -17,7 +17,7 @@ namespace Assembly.Helpers
 				App.AssemblyStorage.AssemblySettings.HomeWindow.Dispatcher.Invoke(new Action(
 					() =>
 						MetroMessageBox.Show("Update Check Failed",
-							"Assembly is unable to check for updates at this time. Sorry :(")));
+							"Quickbeam is unable to check for updates at this time. Sorry :(")));
 				return;
 			}
 

@@ -139,11 +139,12 @@ namespace Assembly.Helpers.Native
             /// <summary> Determine if 2 RECT are equal (deep compare) </summary>
             public override bool Equals(object obj)
             {
-                if (!(obj is Rect))
+                if (obj is Rect)
                 {
-                    return false;
+                    return (this == (RECT) obj);
                 }
-                return (this == (RECT) obj);
+                return false;
+                
             }
 
             /// <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>

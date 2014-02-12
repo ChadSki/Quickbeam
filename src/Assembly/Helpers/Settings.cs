@@ -8,8 +8,6 @@ using System.Linq;
 using System.Windows;
 using Assembly.Metro.Dialogs;
 using Assembly.Windows;
-using Blamite.Flexibility;
-using Blamite.Flexibility.Settings;
 using Newtonsoft.Json;
 
 namespace Assembly.Helpers
@@ -112,7 +110,6 @@ namespace Assembly.Helpers
         private bool _defaultAmp;
         private bool _defaultBlf;
         private bool _defaultCif;
-        private EngineDatabase _defaultDatabase = XMLEngineDatabaseLoader.LoadDatabase("Formats/Engines.xml");
         private bool _defaultMap;
         private bool _defaultMif;
         private LastMetaEditorType _halomapLastSelectedMetaEditor = LastMetaEditorType.Info;
@@ -125,7 +122,7 @@ namespace Assembly.Helpers
         private bool _pluginsShowComments = true;
         private bool _pluginsShowInformation;
         private bool _pluginsShowInvisibles;
-		private bool _pluginsShowEnumIndex = false;
+		private bool _pluginsShowEnumIndex;
         private bool _startpageHideOnLaunch;
         private bool _startpageShowOnLoad = true;
         private bool _startpageShowRecentsBlf = true;
@@ -524,13 +521,6 @@ namespace Assembly.Helpers
         {
             get { return _homeWindow; }
             set { SetField(ref _homeWindow, value, "HomeWindow"); }
-        }
-
-        [JsonIgnore]
-        public EngineDatabase DefaultDatabase
-        {
-            get { return _defaultDatabase; }
-            set { SetField(ref _defaultDatabase, value, "DefaultDatabase"); }
         }
 
         public void UpdateAssemblyAccent()

@@ -56,9 +56,6 @@ namespace Assembly
             // Create Assembly Storage
             AssemblyStorage = new Storage();
 
-            // Update Assembly Protocol
-            AssemblyProtocol.UpdateProtocol();
-
             // Create jumplist
             JumpLists.UpdateJumplists();
 

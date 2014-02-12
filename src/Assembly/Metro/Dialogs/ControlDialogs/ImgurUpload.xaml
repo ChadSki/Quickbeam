@@ -23,7 +23,7 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <TextBlock Text="Image upload to Imgur - Assembly" Foreground="#989898" VerticalAlignment="Top"
+            <TextBlock Text="Image upload to Imgur - Quickbeam" Foreground="#989898" VerticalAlignment="Top"
                        HorizontalAlignment="Stretch" FontSize="15" Margin="45,12,141,0"
                        FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis" />
 
