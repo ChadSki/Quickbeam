@@ -5,8 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using DragDropListBox;
 
-namespace DragDropListBox
+namespace Assembly.Metro.Controls.DragDropListBox
 {
     public class DragDropHelper
     {
