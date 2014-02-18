@@ -301,6 +301,7 @@
     <Compile Include="Helpers\Net\Updates.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\SingleInstance.cs" />
+    <Compile Include="Helpers\Storage.cs" />
     <Compile Include="Helpers\UIX\AnimationHelper.cs" />
     <Compile Include="Helpers\UIX\ImagerLoader.cs" />
     <Compile Include="Helpers\Updater.cs" />
