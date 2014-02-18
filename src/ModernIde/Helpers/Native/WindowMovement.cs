@@ -81,9 +81,9 @@ namespace ModernIde.Helpers.Native
         /// </summary>
         /// <param name="window">The Visual to set the property on.</param>
         /// <param name="value">The value to set the property to.</param>
-        public static void SetDragsWindow(Visual visual, bool value)
+        public static void SetDragsWindow(Visual window, bool value)
         {
-            visual.SetValue(DragsWindow, value);
+            window.SetValue(DragsWindow, value);
         }
 
         /// <summary>
@@ -91,9 +91,9 @@ namespace ModernIde.Helpers.Native
         /// </summary>
         /// <param name="window">The Visual to set the property on.</param>
         /// <returns>The value of the property on the Visual.</returns>
-        public static bool GetDragsWindow(Visual visual)
+        public static bool GetDragsWindow(Visual window)
         {
-            return (bool) visual.GetValue(DragsWindow);
+            return (bool)window.GetValue(DragsWindow);
         }
 
         /// <summary>

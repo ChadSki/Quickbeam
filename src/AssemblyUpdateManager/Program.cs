@@ -35,8 +35,7 @@ namespace AssemblyUpdateManager
                 }
 
                 // Extract the update zip
-                var fz = new FastZip();
-                fz.CreateEmptyDirectories = true;
+                var fz = new FastZip {CreateEmptyDirectories = true};
                 for (int i = 0; i < 5; i++)
                 {
                     try
