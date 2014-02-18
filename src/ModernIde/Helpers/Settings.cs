@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using ModernIde.Metro.Dialogs;
+using ModernIde.Dialogs;
 using ModernIde.Windows;
 using Newtonsoft.Json;
 
@@ -532,14 +532,14 @@ namespace ModernIde.Helpers
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
                 {
-                    Source = new Uri("/ModernIde;component/Metro/Themes/" + theme + ".xaml", UriKind.Relative)
+                    Source = new Uri("/ModernIde;component/Themes/" + theme + ".xaml", UriKind.Relative)
                 });
             }
             catch
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
                 {
-                    Source = new Uri("/ModernIde;component/Metro/Themes/Blue.xaml", UriKind.Relative)
+                    Source = new Uri("/ModernIde;component/Themes/Blue.xaml", UriKind.Relative)
                 });
             }
         }

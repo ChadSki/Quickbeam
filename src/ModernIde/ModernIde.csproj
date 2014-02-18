@@ -43,7 +43,8 @@
     <RestorePackages>true</RestorePackages>
     <StartupObject>ModernIde.App</StartupObject>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <ApplicationIcon>Metro\Images\app_icon_large.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +90,29 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="Images\app_icon_large.ico" />
+    <Resource Include="Images\app_icon_large.png" />
+    <Resource Include="Images\background_logo.png" />
+    <Resource Include="Images\blue_logo.png" />
+    <Resource Include="Images\blue_logo_small.png" />
+    <Resource Include="Images\DockPaneImageTile.png" />
+    <Resource Include="Images\green_logo.png" />
+    <Resource Include="Images\green_logo_small.png" />
+    <Resource Include="Images\logo_small.png" />
+    <Resource Include="Images\orange_logo.png" />
+    <Resource Include="Images\orange_logo_small.png" />
+    <Resource Include="Images\Placeholder\c_m20.jpg" />
+    <Resource Include="Images\Placeholder\c_sc110.jpg" />
+    <Resource Include="Images\Placeholder\m_riverworld.jpg" />
+    <Resource Include="Images\Placeholder\wargames_z11_valhalla.jpg" />
+    <Resource Include="Images\purple_logo.png" />
+    <Resource Include="Images\purple_logo_small.png" />
+    <Resource Include="Images\settings_logo.png" />
+    <Resource Include="Images\super_patcher.png" />
+    <Resource Include="Images\Vectored\freezeVector.png" />
+    <Resource Include="Images\Vectored\rebootVector.png" />
+    <Resource Include="Images\Vectored\screenshotVector.png" />
+    <Resource Include="Images\Vectored\unfreezeVector.png" />
     <Reference Include="AvalonDock">
       <HintPath>..\packages\AvalonDock.2.0.1746\lib\net40\AvalonDock.dll</HintPath>
     </Reference>
@@ -136,6 +160,133 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\AvalonDockMetro\MetroTheme.cs" />
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableBottom.xaml.cs">
+      <DependentUpon>DockDocumentAsAnchorableBottom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableLeft.xaml.cs">
+      <DependentUpon>DockDocumentAsAnchorableLeft.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableRight.xaml.cs">
+      <DependentUpon>DockDocumentAsAnchorableRight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableTop.xaml.cs">
+      <DependentUpon>DockDocumentAsAnchorableTop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentBottom.xaml.cs">
+      <DependentUpon>DockDocumentBottom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentInside.xaml.cs">
+      <DependentUpon>DockDocumentInside.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentLeft.xaml.cs">
+      <DependentUpon>DockDocumentLeft.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentRight.xaml.cs">
+      <DependentUpon>DockDocumentRight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentTop.xaml.cs">
+      <DependentUpon>DockDocumentTop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockPaneEmpty.xaml.cs">
+      <DependentUpon>DockPaneEmpty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\DockPaneLargeEmpty.xaml.cs">
+      <DependentUpon>DockPaneLargeEmpty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\HTabGroup.xaml.cs">
+      <DependentUpon>HTabGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AvalonDockMetro\Vectors\VTabGroup.xaml.cs">
+      <DependentUpon>VTabGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragDropListBox\DragDropHelper.cs" />
+    <Compile Include="Controls\DragDropListBox\DraggedAdorner.cs" />
+    <Compile Include="Controls\DragDropListBox\InsertionAdorner.cs" />
+    <Compile Include="Controls\DragDropListBox\Utilities.cs" />
+    <Compile Include="Controls\TabClosing\CloseableTabItem.cs" />
+    <Compile Include="Controls\Vectors\CloseModule.xaml.cs">
+      <DependentUpon>CloseModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\ExportModule.xaml.cs">
+      <DependentUpon>ExportModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\FreezeModule.xaml.cs">
+      <DependentUpon>FreezeModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\ImportModule.xaml.cs">
+      <DependentUpon>ImportModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\MaximizeModule.xaml.cs">
+      <DependentUpon>MaximizeModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\MinimizeModule.xaml.cs">
+      <DependentUpon>MinimizeModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\PinModule.xaml.cs">
+      <DependentUpon>PinModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\PokeModule.xaml.cs">
+      <DependentUpon>PokeModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\RebootVector.xaml.cs">
+      <DependentUpon>RebootVector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\ResizeModule.xaml.cs">
+      <DependentUpon>ResizeModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\RestoreModule.xaml.cs">
+      <DependentUpon>RestoreModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\ScreenshotModule.xaml.cs">
+      <DependentUpon>ScreenshotModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Vectors\UnFreezeModule.xaml.cs">
+      <DependentUpon>UnFreezeModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WP7Controls\ProgressionBar.xaml.cs">
+      <DependentUpon>ProgressionBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WPFTreeView\MetroTreeView.cs" />
+    <Compile Include="Controls\WPFTreeView\MetroTreeViewItem.cs" />
+    <Compile Include="Controls\XamlStyleSandbox.xaml.cs">
+      <DependentUpon>XamlStyleSandbox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\Exception.xaml.cs">
+      <DependentUpon>Exception.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\MessageBoxCode.xaml.cs">
+      <DependentUpon>MessageBoxCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\MessageBoxInput.xaml.cs">
+      <DependentUpon>MessageBoxInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\MessageBoxList.xaml.cs">
+      <DependentUpon>MessageBoxList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\MessageBoxOptions.xaml.cs">
+      <DependentUpon>MessageBoxOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\PostGeneratorViewer.xaml.cs">
+      <DependentUpon>PostGeneratorViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ControlDialogs\Updater.xaml.cs">
+      <DependentUpon>Updater.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MetroAbout.cs" />
+    <Compile Include="Dialogs\MetroException.cs" />
+    <Compile Include="Dialogs\MetroInputBox.cs" />
+    <Compile Include="Dialogs\MetroMessageBox.cs" />
+    <Compile Include="Dialogs\MetroMessageBoxCode.cs" />
+    <Compile Include="Dialogs\MetroMessageBoxList.cs" />
+    <Compile Include="Dialogs\MetroPostGeneratorViewer.cs" />
+    <Compile Include="Dialogs\MetroUpdateDialog.cs" />
     <Compile Include="Helpers\Converters\TagBookmarkForeground.cs" />
     <Compile Include="Helpers\Converters\TagBookmarkVisibility.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
@@ -154,146 +305,15 @@
     <Compile Include="Helpers\UIX\ImagerLoader.cs" />
     <Compile Include="Helpers\Updater.cs" />
     <Compile Include="Helpers\VariousFunctions.cs" />
-    <Compile Include="Metro\Controls\AvalonDockMetro\MetroTheme.cs" />
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableBottom.xaml.cs">
-      <DependentUpon>DockDocumentAsAnchorableBottom.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableLeft.xaml.cs">
-      <DependentUpon>DockDocumentAsAnchorableLeft.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableRight.xaml.cs">
-      <DependentUpon>DockDocumentAsAnchorableRight.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableTop.xaml.cs">
-      <DependentUpon>DockDocumentAsAnchorableTop.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentBottom.xaml.cs">
-      <DependentUpon>DockDocumentBottom.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentInside.xaml.cs">
-      <DependentUpon>DockDocumentInside.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentLeft.xaml.cs">
-      <DependentUpon>DockDocumentLeft.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentRight.xaml.cs">
-      <DependentUpon>DockDocumentRight.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentTop.xaml.cs">
-      <DependentUpon>DockDocumentTop.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockPaneEmpty.xaml.cs">
-      <DependentUpon>DockPaneEmpty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\DockPaneLargeEmpty.xaml.cs">
-      <DependentUpon>DockPaneLargeEmpty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\HTabGroup.xaml.cs">
-      <DependentUpon>HTabGroup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\AvalonDockMetro\Vectors\VTabGroup.xaml.cs">
-      <DependentUpon>VTabGroup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\MaximizeModule.xaml.cs">
-      <DependentUpon>MaximizeModule.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\TabClosing\CloseableTabItem.cs" />
-    <Compile Include="Metro\Controls\DragDropListBox\DragDropHelper.cs" />
-    <Compile Include="Metro\Controls\DragDropListBox\DraggedAdorner.cs" />
-    <Compile Include="Metro\Controls\DragDropListBox\InsertionAdorner.cs" />
-    <Compile Include="Metro\Controls\DragDropListBox\Utilities.cs" />
-    <Compile Include="Metro\Controls\Vectors\ExportModule.xaml.cs">
-      <DependentUpon>ExportModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\FreezeModule.xaml.cs">
-      <DependentUpon>FreezeModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\ImportModule.xaml.cs">
-      <DependentUpon>ImportModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\PinModule.xaml.cs">
-      <DependentUpon>PinModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\PokeModule.xaml.cs">
-      <DependentUpon>PokeModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\RebootVector.xaml.cs">
-      <DependentUpon>RebootVector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\ScreenshotModule.xaml.cs">
-      <DependentUpon>ScreenshotModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\UnFreezeModule.xaml.cs">
-      <DependentUpon>UnFreezeModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\WPFTreeView\MetroTreeView.cs" />
-    <Compile Include="Metro\Controls\WPFTreeView\MetroTreeViewItem.cs" />
-    <Compile Include="Metro\Controls\XamlStyleSandbox.xaml.cs">
-      <DependentUpon>XamlStyleSandbox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\MessageBoxCode.xaml.cs">
-      <DependentUpon>MessageBoxCode.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\MessageBoxList.xaml.cs">
-      <DependentUpon>MessageBoxList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\Exception.xaml.cs">
-      <DependentUpon>Exception.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\MessageBoxInput.xaml.cs">
-      <DependentUpon>MessageBoxInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\PostGeneratorViewer.xaml.cs">
-      <DependentUpon>PostGeneratorViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\MetroInputBox.cs" />
-    <Compile Include="Metro\Dialogs\MetroMessageBoxCode.cs" />
-    <Compile Include="Metro\Dialogs\MetroMessageBoxList.cs" />
-    <Compile Include="Metro\Dialogs\MetroPostGeneratorViewer.cs" />
-    <Compile Include="Metro\Dialogs\ControlDialogs\ImgurUpload.xaml.cs">
-      <DependentUpon>ImgurUpload.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\Updater.xaml.cs">
-      <DependentUpon>Updater.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\MetroException.cs" />
-    <Compile Include="Metro\Dialogs\MetroImgurUpload.cs" />
     <Compile Include="Windows\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Pages\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Metro\Controls\Vectors\CloseModule.xaml.cs">
-      <DependentUpon>CloseModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\MinimizeModule.xaml.cs">
-      <DependentUpon>MinimizeModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\ResizeModule.xaml.cs">
-      <DependentUpon>ResizeModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\Vectors\RestoreModule.xaml.cs">
-      <DependentUpon>RestoreModule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Controls\WP7Controls\ProgressionBar.xaml.cs">
-      <DependentUpon>ProgressionBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\MessageBox.xaml.cs">
-      <DependentUpon>MessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\ControlDialogs\MessageBoxOptions.xaml.cs">
-      <DependentUpon>MessageBoxOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Metro\Dialogs\MetroAbout.cs" />
-    <Compile Include="Metro\Dialogs\MetroMessageBox.cs" />
-    <Compile Include="Metro\Dialogs\MetroUpdateDialog.cs" />
     <Compile Include="Helpers\Native\DwmDropShadow.cs" />
     <Compile Include="Helpers\Native\Monitor_Workarea.cs" />
     <Compile Include="Helpers\Native\WindowMovement.cs" />
@@ -301,167 +321,291 @@
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusUpdater.cs" />
-    <Page Include="Metro\Controls\ActionButtons\CloseButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Brushes.xaml">
+    <Page Include="Controls\ActionButtons\CloseButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Theme.xaml">
+    <Page Include="Controls\AvalonDockMetro\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableBottom.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableLeft.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableRight.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableTop.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentBottom.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentInside.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentLeft.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentRight.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockDocumentTop.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockPaneEmpty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\DockPaneLargeEmpty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\HTabGroup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\AvalonDockMetro\Vectors\VTabGroup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroSplitButton.xaml">
+    <Page Include="Controls\AvalonDockMetro\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\MetroAutoCompleteBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroButtons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroColourPicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroDataGrid.xaml">
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableBottom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\MetroActiveButtons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroCheckBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroComboBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroContextMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroFonts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroMenuStrip.xaml">
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableLeft.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\MetroControls.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroProgressbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroScrollBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroScrollViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroTabControlBottom.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroTabControlDrag.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroTabControlTop.xaml">
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableRight.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\MetroTabDocker.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableTop.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\MetroTooltip.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\MetroTreeView.xaml">
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentBottom.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\OtherMetroTabs.xaml">
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentInside.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Metro\Controls\Vectors\MaximizeModule.xaml">
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentLeft.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentRight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockDocumentTop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockPaneEmpty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AvalonDockMetro\Vectors\DockPaneLargeEmpty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AvalonDockMetro\Vectors\HTabGroup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AvalonDockMetro\Vectors\VTabGroup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroActiveButtons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroAutoCompleteBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroButtons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroCheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroColourPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroFonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroMenuStrip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroProgressbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroScrollViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroSplitButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTabControlBottom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTabControlDrag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTabControlTop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTabDocker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTabs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTooltip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MetroTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OtherMetroTabs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TabClosing\CloseStyleing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\CloseModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\ExportModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\FreezeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\ImportModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\MaximizeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\MinimizeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\PinModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\PokeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\RebootVector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\ResizeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\RestoreModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\ScreenshotModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Vectors\UnFreezeModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\WP7Controls\ProgressionBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\XamlStyleSandbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\Exception.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\MessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\MessageBoxCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\MessageBoxInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\MessageBoxList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\MessageBoxOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\PostGeneratorViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\ControlDialogs\Updater.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Orange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Purple.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -474,126 +618,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Pages\WelcomePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\TabClosing\CloseStyleing.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\CloseModule.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\ExportModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\FreezeModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\ImportModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\MinimizeModule.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\PinModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\PokeModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\RebootVector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\ResizeModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\RestoreModule.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\ScreenshotModule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\Vectors\UnFreezeModule.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Controls\WP7Controls\ProgressionBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Controls\XamlStyleSandbox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\About.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\MessageBoxCode.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\MessageBoxList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\Exception.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\MessageBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\MessageBoxInput.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\MessageBoxOptions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\ImgurUpload.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\PostGeneratorViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Dialogs\ControlDialogs\Updater.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Themes\Blue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Themes\Green.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Themes\Light.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Themes\Orange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Metro\Themes\Purple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -620,14 +644,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Metro\Images\app_icon_large.ico" />
-    <Resource Include="Metro\Images\app_icon_large.png" />
     <BlendEmbeddedFont Include="Fonts\Halo3.ttf" />
-    <Page Include="Metro\Themes\Dark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <None Include="app.config" />
+    <None Include="Controls\MetroControls.xaml.orig" />
+    <None Include="Controls\MetroMenuStrip.xaml.orig" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
@@ -668,15 +688,6 @@
       <All>True</All>
       <AutoFill>True</AutoFill>
     </BlendEmbeddedFont>
-    <Resource Include="Metro\Images\blue_logo.png" />
-    <Resource Include="Metro\Images\orange_logo.png" />
-    <Resource Include="Metro\Images\purple_logo.png" />
-    <Resource Include="Metro\Images\blue_logo_small.png" />
-    <Resource Include="Metro\Images\orange_logo_small.png" />
-    <Resource Include="Metro\Images\purple_logo_small.png" />
-    <Resource Include="Metro\Images\logo_small.png" />
-    <Resource Include="Metro\Images\background_logo.png" />
-    <Resource Include="Metro\Images\settings_logo.png" />
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -697,20 +708,8 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-    <Resource Include="Metro\Images\green_logo.png" />
-    <Resource Include="Metro\Images\green_logo_small.png" />
-    <Resource Include="Metro\Images\Vectored\screenshotVector.png" />
-    <Resource Include="Metro\Images\Vectored\freezeVector.png" />
-    <Resource Include="Metro\Images\Vectored\unfreezeVector.png" />
-    <Resource Include="Metro\Images\Vectored\rebootVector.png" />
-    <Resource Include="Metro\Images\super_patcher.png" />
-    <Resource Include="Metro\Images\Placeholder\wargames_z11_valhalla.jpg" />
-    <Resource Include="Metro\Images\Placeholder\c_m20.jpg" />
-    <Resource Include="Metro\Images\Placeholder\m_riverworld.jpg" />
-    <Resource Include="Metro\Images\Placeholder\c_sc110.jpg" />
-    <Resource Include="Metro\Controls\AvalonDockMetro\Images\Locked.png" />
-    <Resource Include="Metro\Controls\AvalonDockMetro\Images\PinRestore.png" />
-    <Resource Include="Metro\Images\DockPaneImageTile.png" />
+    <Resource Include="Controls\AvalonDockMetro\Images\Locked.png" />
+    <Resource Include="Controls\AvalonDockMetro\Images\PinRestore.png" />
     <Content Include="DLLs\BetterTab.dll" />
     <Content Include="DLLs\BetterWpfControls.dll" />
     <Content Include="DLLs\DevIL.NET.dll" />

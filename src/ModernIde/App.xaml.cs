@@ -1,5 +1,5 @@
 ﻿#if !DEBUG
-using Assembly.Metro.Dialogs;
+using ModernIde.Dialogs;
 #endif
 using System;
 using System.Collections.Generic;

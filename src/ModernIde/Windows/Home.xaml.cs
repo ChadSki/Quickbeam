@@ -14,7 +14,7 @@ using Microsoft.Win32;
 using ModernIde.Helpers;
 using ModernIde.Helpers.Native;
 using ModernIde.Helpers.Net;
-using ModernIde.Metro.Dialogs;
+using ModernIde.Dialogs;
 using ModernIde.Windows.Pages;
 
 namespace ModernIde.Windows

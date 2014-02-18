@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using ModernIde.Helpers;
-using ModernIde.Metro.Dialogs;
+using ModernIde.Dialogs;
 
 namespace ModernIde.Windows.Pages
 {

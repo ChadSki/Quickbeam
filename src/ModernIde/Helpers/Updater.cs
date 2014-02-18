@@ -1,6 +1,6 @@
 ﻿using System;
 using ModernIde.Helpers.Net;
-using ModernIde.Metro.Dialogs;
+using ModernIde.Dialogs;
 
 namespace ModernIde.Helpers
 {
