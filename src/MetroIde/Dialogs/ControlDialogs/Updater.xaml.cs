@@ -128,11 +128,11 @@ namespace MetroIde.Dialogs.ControlDialogs
                 if (zipDLL != null) zipDLL.CopyTo(zipFileStream);
             if (zipDLL != null) zipDLL.Close();
 
-            // Extract AssemblyUpdateManager.exe
+            // Extract MetroIdeUpdateManager.exe
             Stream exeUpd =
                 System.Reflection.Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("Assembly.Update.AssemblyUpdateManager.exe");
-            string updaterPath = Path.Combine(tempDir, "AssemblyUpdateManager.exe");
+                    .GetManifestResourceStream("Assembly.Update.MetroIdeUpdateManager.exe");
+            string updaterPath = Path.Combine(tempDir, "MetroIdeUpdateManager.exe");
             using (var exeFileStream = new FileStream(updaterPath, FileMode.Create))
                 if (exeUpd != null) exeUpd.CopyTo(exeFileStream);
             if (exeUpd != null) exeUpd.Close();

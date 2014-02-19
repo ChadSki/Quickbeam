@@ -31,11 +31,11 @@ namespace MetroIde.Helpers
         public static void EmptyUpdaterLocations()
         {
             string tempDir = Path.GetTempPath();
-            string updaterPath = Path.Combine(tempDir, "AssemblyUpdateManager.exe");
+            string updaterPath = Path.Combine(tempDir, "MetroIdeUpdateManager.exe");
             string dllPath = Path.Combine(tempDir, "ICSharpCode.SharpZipLib.dll");
 
             // Wait for the updater to close
-            Process[] updaterProcesses = Process.GetProcessesByName("AssemblyUpdateManager.exe");
+            Process[] updaterProcesses = Process.GetProcessesByName("MetroIdeUpdateManager.exe");
             foreach (Process process in updaterProcesses.Where(process => !process.HasExited))
             {
                 process.WaitForExit();

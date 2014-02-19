@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace AssemblyUpdateManager
+namespace MetroIdeUpdateManager
 {
     internal class Program
     {
@@ -14,7 +14,7 @@ namespace AssemblyUpdateManager
             if (args.Length != 3)
             {
                 Console.Error.WriteLine("Error: not enough arguments");
-                Console.Error.WriteLine("Usage: AssemblyUpdateManager <update zip> <assembly exe> <parent pid>");
+                Console.Error.WriteLine("Usage: MetroIdeUpdateManager <update zip> <metroide exe> <parent pid>");
                 return;
             }
             string zipPath = args[0];
