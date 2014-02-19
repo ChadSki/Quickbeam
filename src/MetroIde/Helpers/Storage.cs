@@ -7,7 +7,7 @@ namespace MetroIde.Helpers
 {
     public class Storage : INotifyPropertyChanged
     {
-        private Settings _modernIdeSettings = new Settings();
+        private Settings _metroIdeSettings = new Settings();
 
         #region Helpers
 
@@ -17,24 +17,24 @@ namespace MetroIde.Helpers
 
             // Get File Path
             string jsonString = null;
-            if (File.Exists("AssemblySettings.ason"))
-                jsonString = File.ReadAllText("AssemblySettings.ason");
+            if (File.Exists("MetroIdeSettings.json"))
+                jsonString = File.ReadAllText("MetroIdeSettings.json");
 
             try
             {
                 if (jsonString == null)
-                    _modernIdeSettings = new Settings();
+                    _metroIdeSettings = new Settings();
                 else
-                    _modernIdeSettings = JsonConvert.DeserializeObject<Settings>(jsonString) ?? new Settings();
+                    _metroIdeSettings = JsonConvert.DeserializeObject<Settings>(jsonString) ?? new Settings();
             }
             catch (JsonSerializationException)
             {
-                _modernIdeSettings = new Settings();
+                _metroIdeSettings = new Settings();
             }
-            _modernIdeSettings.Loaded = true;
+            _metroIdeSettings.Loaded = true;
 
             // Update Accent
-            _modernIdeSettings.UpdateAssemblyAccent();
+            _metroIdeSettings.UpdateAssemblyAccent();
 
             #endregion
         }
@@ -70,20 +70,20 @@ namespace MetroIde.Helpers
 
         public Settings MetroIdeSettings
         {
-            get { return _modernIdeSettings; }
+            get { return _metroIdeSettings; }
             set
             {
                 // Set Data
-                SetField(ref _modernIdeSettings, value, "AssemblySettings");
+                SetField(ref _metroIdeSettings, value, "AssemblySettings");
 
                 // Write Changes
                 string jsonData = JsonConvert.SerializeObject(value);
 
                 // Get File Path
-                File.WriteAllText("AssemblySettings.ason", jsonData);
+                File.WriteAllText("MetroIdeSettings.json", jsonData);
 
                 // Update Accent
-                _modernIdeSettings.UpdateAssemblyAccent();
+                _metroIdeSettings.UpdateAssemblyAccent();
 
                 // Update File Defaults
                 FileDefaults.UpdateFileDefaults();

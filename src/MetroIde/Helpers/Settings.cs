@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using MetroIde.Dialogs;
-using MetroIde;
 using Newtonsoft.Json;
 
 namespace MetroIde.Helpers
@@ -153,7 +152,7 @@ namespace MetroIde.Helpers
 
             // Write Changes
             string jsonData = JsonConvert.SerializeObject(this);
-            File.WriteAllText("AssemblySettings.ason", jsonData);
+            File.WriteAllText("MetroIdeSettings.json", jsonData);
 
             return true;
         }
