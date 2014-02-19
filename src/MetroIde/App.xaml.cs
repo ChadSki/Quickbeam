@@ -1,9 +1,7 @@
-﻿#if !DEBUG
-using MetroIde.Dialogs;
-#endif
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using MetroIde.Dialogs;
 using Microsoft.Shell;
 using MetroIde.Helpers;
 
@@ -44,14 +42,13 @@ namespace MetroIde
         {
             base.OnStartup(e);
 
-#if !DEBUG
+            // Snazzy exception dialog
 			Current.DispatcherUnhandledException += (o, args) =>
 			{
 				MetroException.Show(args.Exception);
 
 				args.Handled = true;
 			};
-#endif
 
             // Create Assembly Storage
             MetroIdeStorage = new Storage();
