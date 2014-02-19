@@ -15,9 +15,9 @@ using MetroIde.Helpers;
 using MetroIde.Helpers.Native;
 using MetroIde.Helpers.Net;
 using MetroIde.Dialogs;
-using MetroIde.Windows.Pages;
+using MetroIde.Pages;
 
-namespace MetroIde.Windows
+namespace MetroIde
 {
     /// <summary>
     ///     Interaction logic for Home.xaml

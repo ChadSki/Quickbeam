@@ -6,7 +6,7 @@
     xmlns:n="clr-namespace:MetroIde.Helpers.Native"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-    x:Class="MetroIde.Windows.Home"
+    x:Class="MetroIde.Home"
     xmlns:avalonDock="http://avalondock.codeplex.com"
     xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro"
     Title="Home Window - MetroIde"

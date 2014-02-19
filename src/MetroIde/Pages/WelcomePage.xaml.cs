@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MetroIde.Windows.Pages
+namespace MetroIde.Pages
 {
     /// <summary>
     ///     Interaction logic for WelcomePage.xaml

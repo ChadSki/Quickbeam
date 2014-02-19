@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using MetroIde.Dialogs;
-using MetroIde.Windows;
+using MetroIde;
 using Newtonsoft.Json;
 
 namespace MetroIde.Helpers

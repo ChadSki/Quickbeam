@@ -4,7 +4,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
-    x:Class="MetroIde.Windows.Pages.StartPage"
+    x:Class="MetroIde.Pages.StartPage"
     mc:Ignorable="d"
     Background="#28282b"
     d:DesignWidth="1000" d:DesignHeight="600">

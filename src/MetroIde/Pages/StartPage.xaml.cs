@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using MetroIde.Helpers;
 using MetroIde.Dialogs;
 
-namespace MetroIde.Windows.Pages
+namespace MetroIde.Pages
 {
     /// <summary>
     ///     Interaction logic for StartPage.xaml

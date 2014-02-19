@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using MetroIde.Helpers;
 
-namespace MetroIde.Windows.Pages
+namespace MetroIde.Pages
 {
     /// <summary>
     ///     Interaction logic for SettingsPage.xaml

@@ -1,4 +1,4 @@
-﻿namespace MetroIde.Windows
+﻿namespace MetroIde
 {
     public static class StatusUpdater
     {
