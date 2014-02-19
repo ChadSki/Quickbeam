@@ -12,9 +12,7 @@ namespace MetroIde.Dialogs
         /// <param name="ex">The exception to pass into the dialog.</param>
         public static void Show(Exception ex)
         {
-            // Run it though the dictionary, see if it can be made more user-friendlyKK
-
-            ex = ExceptionDictionary.GetFriendlyException(ex);
+            // Run it though the dictionary, see if it can be made more user-friendly
 
             if (App.MetroIdeStorage.MetroIdeSettings.HomeWindow != null)
                 App.MetroIdeStorage.MetroIdeSettings.HomeWindow.ShowMask();
