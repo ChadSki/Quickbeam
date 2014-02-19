@@ -7,12 +7,12 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Assembly")]
-[assembly: AssemblyDescription("Third Generation Blam Cache File Editor")]
+[assembly: AssemblyTitle("MetroIde")]
+[assembly: AssemblyDescription("WPF Template for Metro-styled IDE-like applications")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("XboxChaos")]
-[assembly: AssemblyProduct("Assembly")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MetroIdeTemplate")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -55,4 +55,4 @@ using System.Windows;
 
 [assembly: AssemblyVersion("1.1.*")]
 [assembly: AssemblyFileVersion("1.1.0")]
-[assembly: NeutralResourcesLanguage("en-GB")]
+[assembly: NeutralResourcesLanguage("en-US")]
