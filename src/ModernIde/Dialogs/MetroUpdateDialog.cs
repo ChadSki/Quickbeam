@@ -9,14 +9,14 @@ namespace ModernIde.Dialogs
         public static void Show(UpdateInfo info, bool available)
         {
             // ill up date u
-            App.AssemblyStorage.AssemblySettings.HomeWindow.ShowMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.ShowMask();
             var updater = new Updater(info, available)
             {
-                Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             updater.ShowDialog();
-            App.AssemblyStorage.AssemblySettings.HomeWindow.HideMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.HideMask();
         }
     }
 }

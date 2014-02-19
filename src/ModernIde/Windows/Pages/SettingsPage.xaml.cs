@@ -17,7 +17,7 @@ namespace ModernIde.Windows.Pages
             InitializeComponent();
 
             // Set DataContext
-            DataContext = App.AssemblyStorage.AssemblySettings;
+            DataContext = App.ModernIdeStorage.ModernIdeSettings;
 
             // Setup Combo Boxes
             ComboBoxAccents.ItemsSource = Enum.GetValues(typeof (Settings.Accents));
@@ -73,11 +73,11 @@ namespace ModernIde.Windows.Pages
             var dialog = new OpenFileDialog
             {
                 Filter = "Executable Files|*.exe|All Files|*.*",
-                FileName = App.AssemblyStorage.AssemblySettings.XsdPath,
+                FileName = App.ModernIdeStorage.ModernIdeSettings.XsdPath,
                 Title = "Open xsd.exe"
             };
             if (dialog.ShowDialog() == DialogResult.OK)
-                App.AssemblyStorage.AssemblySettings.XsdPath = dialog.FileName;
+                App.ModernIdeStorage.ModernIdeSettings.XsdPath = dialog.FileName;
         }
 
         #endregion

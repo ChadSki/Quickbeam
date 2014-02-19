@@ -14,14 +14,14 @@ namespace ModernIde.Helpers
 			// If the request failed, tell the user to gtfo
 			if (info == null || !info.Successful)
 			{
-				App.AssemblyStorage.AssemblySettings.HomeWindow.Dispatcher.Invoke(new Action(
+				App.ModernIdeStorage.ModernIdeSettings.HomeWindow.Dispatcher.Invoke(new Action(
 					() =>
 						MetroMessageBox.Show("Update Check Failed",
 							"ModernIde is unable to check for updates at this time. Sorry :(")));
 				return;
 			}
 
-			App.AssemblyStorage.AssemblySettings.HomeWindow.Dispatcher.Invoke(
+			App.ModernIdeStorage.ModernIdeSettings.HomeWindow.Dispatcher.Invoke(
 				new Action(() => MetroUpdateDialog.Show(info, UpdateAvailable(info))));
 		}
 

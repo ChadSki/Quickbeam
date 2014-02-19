@@ -8,7 +8,7 @@
         /// <param name="update">The new status</param>
         public static void Update(string update)
         {
-            App.AssemblyStorage.AssemblySettings.HomeWindow.UpdateStatusText(update);
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.UpdateStatusText(update);
         }
     }
 }

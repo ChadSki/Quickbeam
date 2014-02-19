@@ -7,7 +7,7 @@ namespace ModernIde.Helpers
 {
     public class Storage : INotifyPropertyChanged
     {
-        private Settings _assemblySettings = new Settings();
+        private Settings _modernIdeSettings = new Settings();
 
         #region Helpers
 
@@ -23,18 +23,18 @@ namespace ModernIde.Helpers
             try
             {
                 if (jsonString == null)
-                    _assemblySettings = new Settings();
+                    _modernIdeSettings = new Settings();
                 else
-                    _assemblySettings = JsonConvert.DeserializeObject<Settings>(jsonString) ?? new Settings();
+                    _modernIdeSettings = JsonConvert.DeserializeObject<Settings>(jsonString) ?? new Settings();
             }
             catch (JsonSerializationException)
             {
-                _assemblySettings = new Settings();
+                _modernIdeSettings = new Settings();
             }
-            _assemblySettings.Loaded = true;
+            _modernIdeSettings.Loaded = true;
 
             // Update Accent
-            _assemblySettings.UpdateAssemblyAccent();
+            _modernIdeSettings.UpdateAssemblyAccent();
 
             #endregion
         }
@@ -68,13 +68,13 @@ namespace ModernIde.Helpers
             Load();
         }
 
-        public Settings AssemblySettings
+        public Settings ModernIdeSettings
         {
-            get { return _assemblySettings; }
+            get { return _modernIdeSettings; }
             set
             {
                 // Set Data
-                SetField(ref _assemblySettings, value, "AssemblySettings");
+                SetField(ref _modernIdeSettings, value, "AssemblySettings");
 
                 // Write Changes
                 string jsonData = JsonConvert.SerializeObject(value);
@@ -83,7 +83,7 @@ namespace ModernIde.Helpers
                 File.WriteAllText("AssemblySettings.ason", jsonData);
 
                 // Update Accent
-                _assemblySettings.UpdateAssemblyAccent();
+                _modernIdeSettings.UpdateAssemblyAccent();
 
                 // Update File Defaults
                 FileDefaults.UpdateFileDefaults();

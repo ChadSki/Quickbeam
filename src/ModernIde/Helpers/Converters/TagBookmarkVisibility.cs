@@ -14,7 +14,7 @@ namespace ModernIde.Helpers.Converters
             if (value != null)
                 outputBoolean = (bool) value;
 
-            if (!App.AssemblyStorage.AssemblySettings.HalomapOnlyShowBookmarkedTags)
+            if (!App.ModernIdeStorage.ModernIdeSettings.HalomapOnlyShowBookmarkedTags)
                 return Visibility.Visible;
 
             return (outputBoolean)

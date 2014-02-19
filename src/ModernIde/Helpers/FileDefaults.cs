@@ -12,31 +12,31 @@ namespace ModernIde.Helpers
             bool changed = false;
 
             // Assign open commands
-            changed |= RegisterOpenCommand("assembly.xboxchaos.map", App.AssemblyStorage.AssemblySettings.DefaultMap,
+            changed |= RegisterOpenCommand("assembly.xboxchaos.map", App.ModernIdeStorage.ModernIdeSettings.DefaultMap,
                 "Blam Cache File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
-            changed |= RegisterOpenCommand("assembly.xboxchaos.blf", App.AssemblyStorage.AssemblySettings.DefaultBlf,
+            changed |= RegisterOpenCommand("assembly.xboxchaos.blf", App.ModernIdeStorage.ModernIdeSettings.DefaultBlf,
                 "Blam BLF File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
-            changed |= RegisterOpenCommand("assembly.xboxchaos.mif", App.AssemblyStorage.AssemblySettings.DefaultMif,
+            changed |= RegisterOpenCommand("assembly.xboxchaos.mif", App.ModernIdeStorage.ModernIdeSettings.DefaultMif,
                 "Blam Map Information File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
-            changed |= RegisterOpenCommand("assembly.xboxchaos.cif", App.AssemblyStorage.AssemblySettings.DefaultCif,
+            changed |= RegisterOpenCommand("assembly.xboxchaos.cif", App.ModernIdeStorage.ModernIdeSettings.DefaultCif,
                 "Blam Campaign File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
-            changed |= RegisterOpenCommand("assembly.xboxchaos.amp", App.AssemblyStorage.AssemblySettings.DefaultAmp,
+            changed |= RegisterOpenCommand("assembly.xboxchaos.amp", App.ModernIdeStorage.ModernIdeSettings.DefaultAmp,
                 "ModernIde Patch File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
 
             // Assign Valid apptypes
-            changed |= RegisterExtension(".map", App.AssemblyStorage.AssemblySettings.DefaultMap,
+            changed |= RegisterExtension(".map", App.ModernIdeStorage.ModernIdeSettings.DefaultMap,
                 "assembly.xboxchaos.map",
                 "assembly/map", "");
-            changed |= RegisterExtension(".blf", App.AssemblyStorage.AssemblySettings.DefaultBlf,
+            changed |= RegisterExtension(".blf", App.ModernIdeStorage.ModernIdeSettings.DefaultBlf,
                 "assembly.xboxchaos.blf",
                 "assembly/blf", "");
-            changed |= RegisterExtension(".mapinfo", App.AssemblyStorage.AssemblySettings.DefaultMif,
+            changed |= RegisterExtension(".mapinfo", App.ModernIdeStorage.ModernIdeSettings.DefaultMif,
                 "assembly.xboxchaos.mif",
                 "assembly/mapinfo", "");
-            changed |= RegisterExtension(".campaign", App.AssemblyStorage.AssemblySettings.DefaultCif,
+            changed |= RegisterExtension(".campaign", App.ModernIdeStorage.ModernIdeSettings.DefaultCif,
                 "assembly.xboxchaos.cif",
                 "assembly/campaign", "");
-            changed |= RegisterExtension(".asmp", App.AssemblyStorage.AssemblySettings.DefaultAmp,
+            changed |= RegisterExtension(".asmp", App.ModernIdeStorage.ModernIdeSettings.DefaultAmp,
                 "assembly.xboxchaos.amp",
                 "assembly/patch", "");
 

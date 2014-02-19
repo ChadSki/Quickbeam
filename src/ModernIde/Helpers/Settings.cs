@@ -472,13 +472,13 @@ namespace ModernIde.Helpers
         {
             Settings.RecentFileEntry alreadyExistsEntry = null;
 
-            if (App.AssemblyStorage.AssemblySettings.ApplicationRecents == null)
-                App.AssemblyStorage.AssemblySettings.ApplicationRecents =
+            if (App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents == null)
+                App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents =
                     new ObservableCollection<Settings.RecentFileEntry>();
 
             foreach (
                 Settings.RecentFileEntry entry in
-                    App.AssemblyStorage.AssemblySettings.ApplicationRecents.Where(
+                    App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Where(
                         entry => entry.FileName == filename && entry.FilePath == filepath && entry.FileGame == game))
                 alreadyExistsEntry = entry;
 
@@ -492,13 +492,13 @@ namespace ModernIde.Helpers
                     FilePath = filepath,
                     FileType = type
                 };
-                App.AssemblyStorage.AssemblySettings.ApplicationRecents.Insert(0, newEntry);
+                App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Insert(0, newEntry);
             }
             else
             {
                 // Move existing Entry
-                App.AssemblyStorage.AssemblySettings.ApplicationRecents.Remove(alreadyExistsEntry);
-                App.AssemblyStorage.AssemblySettings.ApplicationRecents.Insert(0, alreadyExistsEntry);
+                App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Remove(alreadyExistsEntry);
+                App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Insert(0, alreadyExistsEntry);
             }
 
             JumpLists.UpdateJumplists();
@@ -506,7 +506,7 @@ namespace ModernIde.Helpers
 
         public static void RemoveEntry(Settings.RecentFileEntry entry)
         {
-            App.AssemblyStorage.AssemblySettings.ApplicationRecents.Remove(entry);
+            App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Remove(entry);
         }
     }
 }

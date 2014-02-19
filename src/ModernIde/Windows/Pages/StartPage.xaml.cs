@@ -15,8 +15,8 @@ namespace ModernIde.Windows.Pages
         {
             InitializeComponent();
 
-            cbClosePageOnLoad.IsChecked = App.AssemblyStorage.AssemblySettings.StartpageHideOnLaunch;
-            cbShowOnStartUp.IsChecked = App.AssemblyStorage.AssemblySettings.StartpageShowOnLoad;
+            cbClosePageOnLoad.IsChecked = App.ModernIdeStorage.ModernIdeSettings.StartpageHideOnLaunch;
+            cbShowOnStartUp.IsChecked = App.ModernIdeStorage.ModernIdeSettings.StartpageShowOnLoad;
         }
 
         public bool Close()
@@ -43,7 +43,7 @@ namespace ModernIde.Windows.Pages
                 switch (senderEntry.FileType)
                 {
                     case Settings.RecentFileType.Cache:
-                        App.AssemblyStorage.AssemblySettings.HomeWindow.AddCacheTabModule(senderEntry.FilePath);
+                        App.ModernIdeStorage.ModernIdeSettings.HomeWindow.AddCacheTabModule(senderEntry.FilePath);
                         break;
                     default:
                         MetroMessageBox.Show("wut.",
@@ -56,10 +56,10 @@ namespace ModernIde.Windows.Pages
         {
             panelRecents.Children.Clear();
 
-            if (App.AssemblyStorage.AssemblySettings.ApplicationRecents.Count != 0)
+            if (App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Count != 0)
             {
                 int recentsCount = 0;
-                foreach (Settings.RecentFileEntry entry in App.AssemblyStorage.AssemblySettings.ApplicationRecents)
+                foreach (Settings.RecentFileEntry entry in App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents)
                 {
                     if (recentsCount > 9)
                         break;
@@ -74,25 +74,25 @@ namespace ModernIde.Windows.Pages
                     btnRecent.Click += LoadRecentItem;
 
                     if (entry.FileType == Settings.RecentFileType.Cache &&
-                        App.AssemblyStorage.AssemblySettings.StartpageShowRecentsMap)
+                        App.ModernIdeStorage.ModernIdeSettings.StartpageShowRecentsMap)
                     {
                         btnRecent.Content = string.Format("{0} - {1}", entry.FileGame, entry.FileName.Replace("_", "__"));
                         panelRecents.Children.Add(btnRecent);
                     }
                     else if (entry.FileType == Settings.RecentFileType.Blf &&
-                             App.AssemblyStorage.AssemblySettings.StartpageShowRecentsBlf)
+                             App.ModernIdeStorage.ModernIdeSettings.StartpageShowRecentsBlf)
                     {
                         btnRecent.Content = string.Format("Map Image - {0}", entry.FileName.Replace("_", "__"));
                         panelRecents.Children.Add(btnRecent);
                     }
                     else if (entry.FileType == Settings.RecentFileType.MapInfo &&
-                             App.AssemblyStorage.AssemblySettings.StartpageShowRecentsMapInfo)
+                             App.ModernIdeStorage.ModernIdeSettings.StartpageShowRecentsMapInfo)
                     {
                         btnRecent.Content = string.Format("Map Info - {0}", entry.FileName.Replace("_", "__"));
                         panelRecents.Children.Add(btnRecent);
                     }
                     else if (entry.FileType == Settings.RecentFileType.Campaign &&
-                             App.AssemblyStorage.AssemblySettings.StartpageShowRecentsCampaign)
+                             App.ModernIdeStorage.ModernIdeSettings.StartpageShowRecentsCampaign)
                     {
                         btnRecent.Content = string.Format("Campaign - {0}", entry.FileName.Replace("_", "__"));
                         panelRecents.Children.Add(btnRecent);
@@ -101,7 +101,7 @@ namespace ModernIde.Windows.Pages
                     recentsCount++;
                 }
             }
-            else if (App.AssemblyStorage.AssemblySettings.ApplicationRecents.Count == 0)
+            else if (App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Count == 0)
                 panelRecents.Children.Add(new TextBlock
                 {
                     Text = "It's lonely in here, get modding ;)",
@@ -115,13 +115,13 @@ namespace ModernIde.Windows.Pages
         private void cbClosePageOnLoad_Update(object sender, RoutedEventArgs e)
         {
             if (cbClosePageOnLoad.IsChecked != null)
-                App.AssemblyStorage.AssemblySettings.StartpageHideOnLaunch = (bool) cbClosePageOnLoad.IsChecked;
+                App.ModernIdeStorage.ModernIdeSettings.StartpageHideOnLaunch = (bool) cbClosePageOnLoad.IsChecked;
         }
 
         private void cbShowOnStartUp_Update(object sender, RoutedEventArgs e)
         {
             if (cbShowOnStartUp.IsChecked != null)
-                App.AssemblyStorage.AssemblySettings.StartpageShowOnLoad = (bool) cbShowOnStartUp.IsChecked;
+                App.ModernIdeStorage.ModernIdeSettings.StartpageShowOnLoad = (bool) cbShowOnStartUp.IsChecked;
         }
 
         #endregion
@@ -130,7 +130,7 @@ namespace ModernIde.Windows.Pages
 
         private void btnOpenCacheFile_Click(object sender, RoutedEventArgs e)
         {
-            App.AssemblyStorage.AssemblySettings.HomeWindow.OpenContentFile(Home.ContentTypes.Map);
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.OpenContentFile(Home.ContentTypes.Map);
         }
 
         #endregion

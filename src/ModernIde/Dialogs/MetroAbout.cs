@@ -10,14 +10,14 @@ namespace ModernIde.Dialogs
         /// </summary>
         public static void Show()
         {
-            App.AssemblyStorage.AssemblySettings.HomeWindow.ShowMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.ShowMask();
             var about = new About
             {
-                Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             about.ShowDialog();
-            App.AssemblyStorage.AssemblySettings.HomeWindow.HideMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.HideMask();
         }
     }
 }

@@ -18,13 +18,13 @@ namespace ModernIde
 
         public bool SignalExternalCommandLineArgs(IList<string> args)
         {
-            return AssemblyStorage.AssemblySettings.HomeWindow == null ||
-                   AssemblyStorage.AssemblySettings.HomeWindow.ProcessCommandLineArgs(args);
+            return ModernIdeStorage.ModernIdeSettings.HomeWindow == null ||
+                   ModernIdeStorage.ModernIdeSettings.HomeWindow.ProcessCommandLineArgs(args);
         }
 
         #endregion
 
-        public static Storage AssemblyStorage;
+        public static Storage ModernIdeStorage;
 
         [STAThread]
         public static void Main()
@@ -54,7 +54,7 @@ namespace ModernIde
 #endif
 
             // Create Assembly Storage
-            AssemblyStorage = new Storage();
+            ModernIdeStorage = new Storage();
 
             // Create jumplist
             JumpLists.UpdateJumplists();
@@ -69,14 +69,14 @@ namespace ModernIde
             Current.Exit += (o, args) =>
             {
                 // Update Settings with Window Width/Height
-                AssemblyStorage.AssemblySettings.ApplicationSizeMaximize =
-                    (AssemblyStorage.AssemblySettings.HomeWindow.WindowState == WindowState.Maximized);
-                if (AssemblyStorage.AssemblySettings.ApplicationSizeMaximize) return;
+                ModernIdeStorage.ModernIdeSettings.ApplicationSizeMaximize =
+                    (ModernIdeStorage.ModernIdeSettings.HomeWindow.WindowState == WindowState.Maximized);
+                if (ModernIdeStorage.ModernIdeSettings.ApplicationSizeMaximize) return;
 
-                AssemblyStorage.AssemblySettings.ApplicationSizeWidth =
-                    AssemblyStorage.AssemblySettings.HomeWindow.Width;
-                AssemblyStorage.AssemblySettings.ApplicationSizeHeight =
-                    AssemblyStorage.AssemblySettings.HomeWindow.Height;
+                ModernIdeStorage.ModernIdeSettings.ApplicationSizeWidth =
+                    ModernIdeStorage.ModernIdeSettings.HomeWindow.Width;
+                ModernIdeStorage.ModernIdeSettings.ApplicationSizeHeight =
+                    ModernIdeStorage.ModernIdeSettings.HomeWindow.Height;
             };
         }
     }

@@ -16,20 +16,20 @@ namespace ModernIde.Dialogs
 
             ex = ExceptionDictionary.GetFriendlyException(ex);
 
-            if (App.AssemblyStorage.AssemblySettings.HomeWindow != null)
-                App.AssemblyStorage.AssemblySettings.HomeWindow.ShowMask();
+            if (App.ModernIdeStorage.ModernIdeSettings.HomeWindow != null)
+                App.ModernIdeStorage.ModernIdeSettings.HomeWindow.ShowMask();
 
-            ControlDialogs.Exception exceptionDialog = App.AssemblyStorage.AssemblySettings.HomeWindow != null
+            ControlDialogs.Exception exceptionDialog = App.ModernIdeStorage.ModernIdeSettings.HomeWindow != null
                 ? new ControlDialogs.Exception(ex)
                 {
-                    Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                    Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
                 }
                 : new ControlDialogs.Exception(ex);
             exceptionDialog.ShowDialog();
 
-            if (App.AssemblyStorage.AssemblySettings.HomeWindow != null)
-                App.AssemblyStorage.AssemblySettings.HomeWindow.HideMask();
+            if (App.ModernIdeStorage.ModernIdeSettings.HomeWindow != null)
+                App.ModernIdeStorage.ModernIdeSettings.HomeWindow.HideMask();
         }
     }
 }

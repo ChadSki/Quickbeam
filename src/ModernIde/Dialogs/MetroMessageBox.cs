@@ -36,14 +36,14 @@ namespace ModernIde.Dialogs
         /// <param name="message">The message to be displayed in the Message Box</param>
         public static void Show(string title, string message)
         {
-            App.AssemblyStorage.AssemblySettings.HomeWindow.ShowMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.ShowMask();
             var msgBox = new ControlDialogs.MessageBox(title, message)
             {
-                Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             msgBox.ShowDialog();
-            App.AssemblyStorage.AssemblySettings.HomeWindow.HideMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.HideMask();
         }
 
         /// <summary>
@@ -64,14 +64,14 @@ namespace ModernIde.Dialogs
         /// <returns>The button the user clicked</returns>
         public static MessageBoxResult Show(string title, string message, MessageBoxButtons buttons)
         {
-            App.AssemblyStorage.AssemblySettings.HomeWindow.ShowMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.ShowMask();
             var msgBox = new ControlDialogs.MessageBoxOptions(title, message, buttons)
             {
-                Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             msgBox.ShowDialog();
-            App.AssemblyStorage.AssemblySettings.HomeWindow.HideMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.HideMask();
 
             return TempStorage.MessageBoxButtonStorage;
         }

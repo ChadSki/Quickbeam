@@ -10,16 +10,16 @@ namespace ModernIde.Helpers
             var jump = new JumpList();
             JumpList.SetJumpList(Application.Current, jump);
 
-            if (App.AssemblyStorage.AssemblySettings.ApplicationRecents != null)
+            if (App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents != null)
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    if (i > App.AssemblyStorage.AssemblySettings.ApplicationRecents.Count - 1)
+                    if (i > App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents.Count - 1)
                         break;
 
                     var task = new JumpTask();
                     int iconIndex = -200;
-                    switch (App.AssemblyStorage.AssemblySettings.ApplicationRecents[i].FileType)
+                    switch (App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents[i].FileType)
                     {
                         case Settings.RecentFileType.Blf:
                             iconIndex = -200;
@@ -34,18 +34,18 @@ namespace ModernIde.Helpers
 
                     task.ApplicationPath = VariousFunctions.GetApplicationAssemblyLocation();
                     task.Arguments = string.Format("assembly://open \"{0}\"",
-                        App.AssemblyStorage.AssemblySettings.ApplicationRecents[i].FilePath);
+                        App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents[i].FilePath);
                     task.WorkingDirectory = VariousFunctions.GetApplicationLocation();
 
                     task.IconResourcePath = VariousFunctions.GetApplicationLocation() + "AssemblyIconLibrary.dll";
                     task.IconResourceIndex = iconIndex;
 
                     task.CustomCategory = "Recent";
-                    task.Title = App.AssemblyStorage.AssemblySettings.ApplicationRecents[i].FileName + " - " +
-                                 App.AssemblyStorage.AssemblySettings.ApplicationRecents[i].FileGame;
+                    task.Title = App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents[i].FileName + " - " +
+                                 App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents[i].FileGame;
                     task.Description = string.Format("Open {0} in Assembly. ({1})",
-                        App.AssemblyStorage.AssemblySettings.ApplicationRecents[i].FileName,
-                        App.AssemblyStorage.AssemblySettings.ApplicationRecents[i].FilePath);
+                        App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents[i].FileName,
+                        App.ModernIdeStorage.ModernIdeSettings.ApplicationRecents[i].FilePath);
 
                     jump.JumpItems.Add(task);
                 }

@@ -12,14 +12,14 @@ namespace ModernIde.Dialogs
         /// <param name="modAuthor">The author of the mod.</param>
         public static void Show(string bbcode, string modAuthor)
         {
-            App.AssemblyStorage.AssemblySettings.HomeWindow.ShowMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.ShowMask();
             var msgBox = new PostGeneratorViewer(bbcode, modAuthor)
             {
-                Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             msgBox.ShowDialog();
-            App.AssemblyStorage.AssemblySettings.HomeWindow.HideMask();
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow.HideMask();
         }
     }
 }

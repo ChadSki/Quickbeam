@@ -16,7 +16,7 @@ namespace ModernIde.Dialogs
         {
             var msgBox = new MessageBoxList(title, message, items)
             {
-                Owner = App.AssemblyStorage.AssemblySettings.HomeWindow,
+                Owner = App.ModernIdeStorage.ModernIdeSettings.HomeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             msgBox.ShowDialog();

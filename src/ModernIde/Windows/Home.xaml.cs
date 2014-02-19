@@ -38,7 +38,7 @@ namespace ModernIde.Windows
             //Window_StateChanged(null, null);
             ClearTabs();
 
-            if (App.AssemblyStorage.AssemblySettings.StartpageShowOnLoad)
+            if (App.ModernIdeStorage.ModernIdeSettings.StartpageShowOnLoad)
                 AddTabModule(TabGenre.StartPage);
 
             // Do sidebar Loading stuff
@@ -46,20 +46,20 @@ namespace ModernIde.Windows
             //XBDMSidebarTimerEvent();
 
             // Set width/height/state from last session
-            if (!double.IsNaN(App.AssemblyStorage.AssemblySettings.ApplicationSizeHeight) &&
-                App.AssemblyStorage.AssemblySettings.ApplicationSizeHeight > MinHeight)
-                Height = App.AssemblyStorage.AssemblySettings.ApplicationSizeHeight;
-            if (!double.IsNaN(App.AssemblyStorage.AssemblySettings.ApplicationSizeWidth) &&
-                App.AssemblyStorage.AssemblySettings.ApplicationSizeWidth > MinWidth)
-                Width = App.AssemblyStorage.AssemblySettings.ApplicationSizeWidth;
+            if (!double.IsNaN(App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeHeight) &&
+                App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeHeight > MinHeight)
+                Height = App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeHeight;
+            if (!double.IsNaN(App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeWidth) &&
+                App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeWidth > MinWidth)
+                Width = App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeWidth;
 
-            WindowState = App.AssemblyStorage.AssemblySettings.ApplicationSizeMaximize
+            WindowState = App.ModernIdeStorage.ModernIdeSettings.ApplicationSizeMaximize
                 ? WindowState.Maximized
                 : WindowState.Normal;
             Window_StateChanged(null, null);
 
             AllowDrop = true;
-            App.AssemblyStorage.AssemblySettings.HomeWindow = this;
+            App.ModernIdeStorage.ModernIdeSettings.HomeWindow = this;
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -73,7 +73,7 @@ namespace ModernIde.Windows
 
             ProcessCommandLineArgs(Environment.GetCommandLineArgs());
 
-            if (App.AssemblyStorage.AssemblySettings.ApplicationUpdateOnStartup)
+            if (App.ModernIdeStorage.ModernIdeSettings.ApplicationUpdateOnStartup)
                 StartUpdateCheck();
         }
 
