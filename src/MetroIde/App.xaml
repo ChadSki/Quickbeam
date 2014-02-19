@@ -1,0 +1,38 @@
+﻿<Application x:Class="MetroIde.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Windows/Home.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Blue.xaml" />
+                <ResourceDictionary Source="Themes/Dark.xaml" />
+                <ResourceDictionary Source="Controls/ActionButtons/CloseButton.xaml" />
+                <ResourceDictionary Source="Controls/MetroButtons.xaml" />
+                <ResourceDictionary Source="Controls/MetroCheckBox.xaml" />
+                <ResourceDictionary Source="Controls/MetroColourPicker.xaml" />
+                <ResourceDictionary Source="Controls/MetroControls.xaml" />
+                <ResourceDictionary Source="Controls/MetroContextMenu.xaml" />
+                <ResourceDictionary Source="Controls/MetroScrollBar.xaml" />
+                <ResourceDictionary Source="Controls/MetroScrollViewer.xaml" />
+                <ResourceDictionary Source="Controls/MetroSplitButton.xaml" />
+                <ResourceDictionary Source="Controls/MetroMenuStrip.xaml" />
+                <ResourceDictionary Source="Controls/MetroTabControlTop.xaml" />
+                <ResourceDictionary Source="Controls/MetroTabControlBottom.xaml" />
+                <ResourceDictionary Source="Controls/MetroTabDocker.xaml" />
+                <ResourceDictionary Source="Controls/MetroTooltip.xaml" />
+                <ResourceDictionary Source="Controls/MetroActiveButtons.xaml" />
+                <ResourceDictionary Source="Controls/MetroTreeView.xaml" />
+                <ResourceDictionary Source="Controls/MetroComboBox.xaml" />
+                <ResourceDictionary Source="Controls/MetroListView.xaml" />
+                <ResourceDictionary Source="Controls/MetroDataGrid.xaml" />
+                <ResourceDictionary Source="Controls/MetroSlider.xaml" />
+                <ResourceDictionary Source="Controls/MetroProgressbar.xaml" />
+                <ResourceDictionary Source="Controls/MetroFonts.xaml" />
+                <ResourceDictionary Source="Controls/MetroAutoCompleteBox.xaml" />
+                <ResourceDictionary Source="Controls/OtherMetroTabs.xaml" />
+                <ResourceDictionary Source="Controls/TabClosing/CloseStyleing.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
