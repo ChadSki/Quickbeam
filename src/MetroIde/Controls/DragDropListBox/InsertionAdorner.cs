@@ -2,20 +2,20 @@
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace DragDropListBox
+namespace MetroIde.Controls.DragDropListBox
 {
     public class InsertionAdorner : Adorner
     {
-        private static readonly Pen pen;
-        private static readonly PathGeometry triangle;
-        private readonly AdornerLayer adornerLayer;
-        private readonly bool isSeparatorHorizontal;
+        private static readonly Pen Pen;
+        private static readonly PathGeometry Triangle;
+        private readonly AdornerLayer _adornerLayer;
+        private readonly bool _isSeparatorHorizontal;
 
         // Create the pen and triangle in a static constructor and freeze them to improve performance.
         static InsertionAdorner()
         {
-            pen = new Pen {Brush = Brushes.White, Thickness = 2};
-            pen.Freeze();
+            Pen = new Pen {Brush = Brushes.White, Thickness = 2};
+            Pen.Freeze();
 
             var firstLine = new LineSegment(new Point(0, -5), false);
             firstLine.Freeze();
@@ -27,21 +27,21 @@ namespace DragDropListBox
             figure.Segments.Add(secondLine);
             figure.Freeze();
 
-            triangle = new PathGeometry();
-            triangle.Figures.Add(figure);
-            triangle.Freeze();
+            Triangle = new PathGeometry();
+            Triangle.Figures.Add(figure);
+            Triangle.Freeze();
         }
 
         public InsertionAdorner(bool isSeparatorHorizontal, bool isInFirstHalf, UIElement adornedElement,
             AdornerLayer adornerLayer)
             : base(adornedElement)
         {
-            this.isSeparatorHorizontal = isSeparatorHorizontal;
+            _isSeparatorHorizontal = isSeparatorHorizontal;
             IsInFirstHalf = isInFirstHalf;
-            this.adornerLayer = adornerLayer;
+            _adornerLayer = adornerLayer;
             IsHitTestVisible = false;
 
-            this.adornerLayer.Add(this);
+            _adornerLayer.Add(this);
         }
 
         public bool IsInFirstHalf { get; set; }
@@ -53,9 +53,9 @@ namespace DragDropListBox
             Point endPoint;
 
             CalculateStartAndEndPoint(out startPoint, out endPoint);
-            drawingContext.DrawLine(pen, startPoint, endPoint);
+            drawingContext.DrawLine(Pen, startPoint, endPoint);
 
-            if (isSeparatorHorizontal)
+            if (_isSeparatorHorizontal)
             {
                 DrawTriangle(drawingContext, startPoint, 0);
                 DrawTriangle(drawingContext, endPoint, 180);
@@ -72,7 +72,7 @@ namespace DragDropListBox
             drawingContext.PushTransform(new TranslateTransform(origin.X, origin.Y));
             drawingContext.PushTransform(new RotateTransform(angle));
 
-            drawingContext.DrawGeometry(pen.Brush, null, triangle);
+            drawingContext.DrawGeometry(Pen.Brush, null, Triangle);
 
             drawingContext.Pop();
             drawingContext.Pop();
@@ -86,7 +86,7 @@ namespace DragDropListBox
             double width = AdornedElement.RenderSize.Width;
             double height = AdornedElement.RenderSize.Height;
 
-            if (isSeparatorHorizontal)
+            if (_isSeparatorHorizontal)
             {
                 endPoint.X = width;
                 if (!IsInFirstHalf)
@@ -108,7 +108,7 @@ namespace DragDropListBox
 
         public void Detach()
         {
-            adornerLayer.Remove(this);
+            _adornerLayer.Remove(this);
         }
     }
 }
