@@ -694,14 +694,17 @@
     </BootstrapperPackage>
     <Resource Include="Controls\AvalonDockMetro\Images\Locked.png" />
     <Resource Include="Controls\AvalonDockMetro\Images\PinRestore.png" />
-    <Content Include="DLLs\BetterTab.dll" />
-    <Content Include="DLLs\BetterWpfControls.dll" />
-    <Content Include="DLLs\DevIL.NET.dll" />
     <Content Include="DLLs\ICSharpCode.AvalonEdit.dll" />
     <Resource Include="DLLs\ICSharpCode.AvalonEdit.xml" />
     <Content Include="DLLs\System.Windows.Controls.Input.Toolkit.dll" />
     <Content Include="DLLs\WPFToolkit.dll" />
     <Content Include="DLLs\WPFToolkit.Extended.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetroIdeControls\MetroIdeControls.csproj">
+      <Project>{323549e7-263e-4f36-8904-011a6a114d80}</Project>
+      <Name>MetroIdeControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.0\Microsoft.Expression.Blend.WPF.targets" />
