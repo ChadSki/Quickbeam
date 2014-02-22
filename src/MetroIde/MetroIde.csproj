@@ -252,9 +252,6 @@
     </Compile>
     <Compile Include="Controls\WPFTreeView\MetroTreeView.cs" />
     <Compile Include="Controls\WPFTreeView\MetroTreeViewItem.cs" />
-    <Compile Include="Controls\XamlStyleSandbox.xaml.cs">
-      <DependentUpon>XamlStyleSandbox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ControlDialogs\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -538,10 +535,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\XamlStyleSandbox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Dialogs\ControlDialogs\About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -639,8 +632,6 @@
     </EmbeddedResource>
     <BlendEmbeddedFont Include="Fonts\Halo3.ttf" />
     <None Include="app.config" />
-    <None Include="Controls\MetroControls.xaml.orig" />
-    <None Include="Controls\MetroMenuStrip.xaml.orig" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
