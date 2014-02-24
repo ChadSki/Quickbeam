@@ -13,8 +13,7 @@ namespace MetroIde.Helpers
 {
     public class Settings : INotifyPropertyChanged
     {
-        private Accents _applicationAccent = Accents.Blue;
-        private bool _applicationEasterEggs = true;
+        private Accents _applicationAccent = Accents.Orange;
         private ObservableCollection<RecentFileEntry> _applicationRecents = new ObservableCollection<RecentFileEntry>();
         private double _applicationSizeHeight = 600;
         private bool _applicationSizeMaximize;
@@ -25,32 +24,13 @@ namespace MetroIde.Helpers
         private bool _defaultCif;
         private bool _defaultMap;
         private bool _defaultMif;
-        private LastMetaEditorType _halomapLastSelectedMetaEditor = LastMetaEditorType.Info;
-        private MapInfoDockSide _halomapMapInfoDockSide = MapInfoDockSide.Left;
-        private bool _halomapOnlyShowBookmarkedTags;
-        private bool _halomapShowEmptyClasses;
-        private TagOpenMode _halomapTagOpenMode = TagOpenMode.NewTab;
-        private TagSort _halomapTagSort = TagSort.TagClass;
         private Home _homeWindow;
-        private bool _pluginsShowComments = true;
-        private bool _pluginsShowInformation;
-        private bool _pluginsShowInvisibles;
-		private bool _pluginsShowEnumIndex;
         private bool _startpageHideOnLaunch;
         private bool _startpageShowOnLoad = true;
         private bool _startpageShowRecentsBlf = true;
         private bool _startpageShowRecentsCampaign = true;
         private bool _startpageShowRecentsMap = true;
         private bool _startpageShowRecentsMapInfo = true;
-        private bool _xdkAutoSave;
-        private string _xdkNameIp = "192.168.0.1";
-        private bool _xdkResizeImages;
-        private int _xdkResizeScreenshotHeight = 1080;
-        private int _xdkResizeScreenshotWidth = 1920;
-        private bool _xdkScreenshotFreeze = true;
-        private bool _xdkScreenshotGammaCorrect = true;
-        private double _xdkScreenshotGammaModifier = 0.5;
-        private string _xdkScreenshotPath = "";
         private string _xsdPath = "";
 
         #region Enums
@@ -61,16 +41,6 @@ namespace MetroIde.Helpers
             Purple,
             Orange,
             Green
-        }
-
-        public enum LastMetaEditorType
-        {
-            Info,
-            MetaEditor,
-            PluginEditor,
-            Sound,
-            Model,
-            Bsp
         }
 
         public enum MapInfoDockSide
@@ -87,12 +57,6 @@ namespace MetroIde.Helpers
             Campaign
         }
 
-        public enum TagOpenMode
-        {
-            NewTab,
-            ExistingTab
-        }
-
         public enum TagSort
         {
             TagClass,
@@ -102,8 +66,6 @@ namespace MetroIde.Helpers
 
         #endregion
 
-        #region Classes
-
         public class RecentFileEntry
         {
             public string FileName { get; set; }
@@ -112,20 +74,12 @@ namespace MetroIde.Helpers
             public string FilePath { get; set; }
         }
 
-        #endregion
-
-        #region Methods
-
         public Settings()
         {
             ApplicationRecents.CollectionChanged +=
                 (sender, args) => SetField(ref _applicationRecents, sender as ObservableCollection<RecentFileEntry>,
                     "ApplicationRecents", true);
         }
-
-        #endregion
-
-        #region Interface
 
         [JsonIgnore]
         public bool Loaded { get; set; }
@@ -157,8 +111,6 @@ namespace MetroIde.Helpers
             return true;
         }
 
-        #endregion
-
         /// <summary>
         ///     The Accent colour the user has selected. Defaults to Assembly Blue.
         /// </summary>
@@ -179,12 +131,6 @@ namespace MetroIde.Helpers
         {
             get { return _applicationUpdateOnStartup; }
             set { SetField(ref _applicationUpdateOnStartup, value, "ApplicationUpdateOnStartup"); }
-        }
-
-        public bool ApplicationEasterEggs
-        {
-            get { return _applicationEasterEggs; }
-            set { SetField(ref _applicationEasterEggs, value, "ApplicationEasterEggs"); }
         }
 
         /// <summary>
@@ -250,128 +196,10 @@ namespace MetroIde.Helpers
             set { SetField(ref _startpageShowRecentsCampaign, value, "StartpageShowRecentsCampaign"); }
         }
 
-        public string XdkNameIp
-        {
-            get { return _xdkNameIp; }
-            set { SetField(ref _xdkNameIp, value, "XdkNameIp"); }
-        }
-
-        public bool XdkAutoSave
-        {
-            get { return _xdkAutoSave; }
-            set { SetField(ref _xdkAutoSave, value, "XdkAutoSave"); }
-        }
-
-        public string XdkScreenshotPath
-        {
-            get { return _xdkScreenshotPath; }
-            set { SetField(ref _xdkScreenshotPath, value, "XdkScreenshotPath"); }
-        }
-
-        public bool XdkResizeImages
-        {
-            get { return _xdkResizeImages; }
-            set { SetField(ref _xdkResizeImages, value, "XdkResizeImages"); }
-        }
-
-        public int XdkResizeScreenshotHeight
-        {
-            get { return _xdkResizeScreenshotHeight; }
-            set { SetField(ref _xdkResizeScreenshotHeight, value, "XdkResizeScreenshotHeight"); }
-        }
-
-        public int XdkResizeScreenshotWidth
-        {
-            get { return _xdkResizeScreenshotWidth; }
-            set { SetField(ref _xdkResizeScreenshotWidth, value, "XdkResizeScreenshotWidth"); }
-        }
-
-        public bool XdkScreenshotGammaCorrect
-        {
-            get { return _xdkScreenshotGammaCorrect; }
-            set { SetField(ref _xdkScreenshotGammaCorrect, value, "XdkScreenshotGammaCorrect"); }
-        }
-
-        public double XdkScreenshotGammaModifier
-        {
-            get { return _xdkScreenshotGammaModifier; }
-            set { SetField(ref _xdkScreenshotGammaModifier, value, "XdkScreenshotGammaModifier"); }
-        }
-
-        public bool XdkScreenshotFreeze
-        {
-            get { return _xdkScreenshotFreeze; }
-            set { SetField(ref _xdkScreenshotFreeze, value, "XdkScreenshotFreeze"); }
-        }
-
-        public TagSort HalomapTagSort
-        {
-            get { return _halomapTagSort; }
-            set { SetField(ref _halomapTagSort, value, "HalomapTagSort"); }
-        }
-
-        public TagOpenMode HalomapTagOpenMode
-        {
-            get { return _halomapTagOpenMode; }
-            set { SetField(ref _halomapTagOpenMode, value, "HalomapTagOpenMode"); }
-        }
-
-        public bool HalomapShowEmptyClasses
-        {
-            get { return _halomapShowEmptyClasses; }
-            set { SetField(ref _halomapShowEmptyClasses, value, "HalomapShowEmptyClasses"); }
-        }
-
-        public bool HalomapOnlyShowBookmarkedTags
-        {
-            get { return _halomapOnlyShowBookmarkedTags; }
-            set { SetField(ref _halomapOnlyShowBookmarkedTags, value, "HalomapOnlyShowBookmarkedTags"); }
-        }
-
-        public MapInfoDockSide HalomapMapInfoDockSide
-        {
-            get { return _halomapMapInfoDockSide; }
-            set { SetField(ref _halomapMapInfoDockSide, value, "HalomapMapInfoDockSide"); }
-        }
-
         public string XsdPath
         {
             get { return _xsdPath; }
             set { SetField(ref _xsdPath, value, "XsdPath"); }
-        }
-
-        public LastMetaEditorType HalomapLastSelectedMetaEditor
-        {
-            get { return _halomapLastSelectedMetaEditor; }
-            set { SetField(ref _halomapLastSelectedMetaEditor, value, "HalomapLastSelectedMetaEditor"); }
-        }
-
-        public bool PluginsShowInvisibles
-        {
-            get { return _pluginsShowInvisibles; }
-            set { SetField(ref _pluginsShowInvisibles, value, "PluginsShowInvisibles"); }
-        }
-
-		/// <summary>
-		/// </summary>
-        public bool PluginsShowInformation
-        {
-            get { return _pluginsShowInformation; }
-            set { SetField(ref _pluginsShowInformation, value, "PluginsShowInformation"); }
-		}
-
-		/// <summary>
-		/// </summary>
-		public bool PluginsShowEnumIndex
-		{
-			get { return _pluginsShowEnumIndex; }
-			set { SetField(ref _pluginsShowEnumIndex, value, "PluginsShowEnumIndex"); }
-        }
-
-        public bool PluginsShowComments
-        {
-            get { return _pluginsShowComments; }
-            set { SetField(ref _pluginsShowComments, value, "PluginsShowComments"); }
         }
 
         public bool DefaultMap
