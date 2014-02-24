@@ -701,12 +701,6 @@
     <Content Include="DLLs\WPFToolkit.dll" />
     <Content Include="DLLs\WPFToolkit.Extended.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MetroIdeControls\MetroIdeControls.csproj">
-      <Project>{323549e7-263e-4f36-8904-011a6a114d80}</Project>
-      <Name>MetroIdeControls</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.0\Microsoft.Expression.Blend.WPF.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

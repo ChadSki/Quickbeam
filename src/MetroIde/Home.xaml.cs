@@ -25,6 +25,49 @@ namespace MetroIde
     public partial class Home
     {
         private int _lastDocumentIndex = -1;
+        
+        #region Startup
+
+        public bool ProcessCommandLineArgs(IList<string> args)
+        {
+            if (args != null && args.Count > 1)
+            {
+                string[] commandArgs = args.Skip(1).ToArray();
+                if (commandArgs[0].StartsWith("assembly://"))
+                    commandArgs[0] = commandArgs[0].Substring(11).Trim('/');
+
+                // Decide what to do
+                Activate();
+                switch (commandArgs[0].ToLower())
+                {
+                    case "open":
+                        // Determine type of file, and start it up, yo
+                        if (commandArgs.Length > 1)
+                            StartupDetermineType(commandArgs[1]);
+                        break;
+
+                    case "update":
+                        // Show Update
+                        menuHelpUpdater_Click(null, null);
+                        break;
+
+                    case "about":
+                        // Show About
+                        menuHelpAbout_Click(null, null);
+                        break;
+
+                    case "settings":
+                        // Show Settings
+                        menuOpenSettings_Click(null, null);
+                        break;
+
+                    default:
+                        return true;
+                }
+            }
+
+            return true;
+        }
 
         public Home()
         {
@@ -33,7 +76,7 @@ namespace MetroIde
             DwmDropShadow.DropShadowToWindow(this);
 
             UpdateTitleText("");
-            UpdateStatusText("Ready...");
+            UpdateStatusText("Ready");
 
             //Window_StateChanged(null, null);
             ClearTabs();
@@ -85,6 +128,38 @@ namespace MetroIde
             worker.RunWorkerAsync();
         }
 
+        private void StartupDetermineType(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {/*
+                    // Magic Check
+                    string magic;
+                    using (var stream = new EndianReader(File.OpenRead(path), Endian.BigEndian))
+                        magic = stream.ReadAscii(0x04).ToLower();
+
+                    switch (magic)
+                    {
+                        case "head":
+                        case "daeh":
+                            // Map File
+                            AddCacheTabModule(path);
+                            return;
+                    }*/
+                }
+
+                MetroMessageBox.Show("Unable to find file", "The selected file could no longer be found");
+            }
+            catch (Exception ex)
+            {
+                MetroException.Show(ex);
+            }
+        }
+
+        #endregion
+
+        #region Updates
         private void CheckForUpdates(object sender, DoWorkEventArgs e)
         {
             // Grab JSON Update package from the server
@@ -101,29 +176,9 @@ namespace MetroIde
                 MetroUpdateDialog.Show(updateInfo, true);
         }
 
-        private void dockManager_ActiveContentChanged(object sender, EventArgs e)
-        {
-            if (documentManager.SelectedContentIndex != _lastDocumentIndex)
-            {
-                // Selection Changed, lets do dis
-                LayoutContent tab = documentManager.SelectedContent;
+        #endregion
 
-                if (tab != null)
-                    UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", ""));
-
-                if (tab != null && tab.Title == "Start Page")
-                    ((StartPage) tab.Content).UpdateRecents();
-
-                if (tab == null)
-                {
-                    documentManager.SelectedContentIndex = 0;
-                    UpdateTitleText("");
-                }
-
-                _lastDocumentIndex = documentManager.SelectedContentIndex;
-            }
-        }
-
+        #region MenuButtons
         // File
         private void menuOpenCacheFile_Click(object sender, RoutedEventArgs e)
         {
@@ -159,81 +214,9 @@ namespace MetroIde
             Application.Current.Shutdown();
         }
 
-        #region Waste of Space, idk man
-
-        private void Home_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            //var app = (App)Application.Current;
-        }
-
-        private void Window_PreviewDrop_1(object sender, DragEventArgs e)
-        {
-        }
-
         #endregion
 
-        #region More WPF Annoyance
-
-        private void ResizeDrop_DragDelta(object sender, DragDeltaEventArgs e)
-        {
-            double yadjust = Height + e.VerticalChange;
-            double xadjust = Width + e.HorizontalChange;
-
-            if (xadjust > MinWidth)
-                Width = xadjust;
-            if (yadjust > MinHeight)
-                Height = yadjust;
-        }
-
-        private void ResizeRight_DragDelta(object sender, DragDeltaEventArgs e)
-        {
-            double xadjust = Width + e.HorizontalChange;
-
-            if (xadjust > MinWidth)
-                Width = xadjust;
-        }
-
-        private void ResizeBottom_DragDelta(object sender, DragDeltaEventArgs e)
-        {
-            double yadjust = Height + e.VerticalChange;
-
-            if (yadjust > MinHeight)
-                Height = yadjust;
-        }
-
-        private void Window_StateChanged(object sender, EventArgs e)
-        {
-            switch (WindowState)
-            {
-                case WindowState.Normal:
-                    borderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
-                    btnActionRestore.Visibility = Visibility.Collapsed;
-                    btnActionMaximize.Visibility =
-                        ResizeDropVector.Visibility =
-                            ResizeDrop.Visibility =
-                                ResizeRight.Visibility = ResizeBottom.Visibility = Visibility.Visible;
-                    break;
-                case WindowState.Maximized:
-                    borderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
-                    btnActionRestore.Visibility = Visibility.Visible;
-                    btnActionMaximize.Visibility =
-                        ResizeDropVector.Visibility =
-                            ResizeDrop.Visibility =
-                                ResizeRight.Visibility = ResizeBottom.Visibility = Visibility.Collapsed;
-                    break;
-            }
-            /*
-			 * ResizeDropVector
-			 * ResizeDrop
-			 * ResizeRight
-			 * ResizeBottom
-			 */
-        }
-
-        private void btnActionSupport_Click(object sender, RoutedEventArgs e)
-        {
-            // Load support page?
-        }
+        #region ChromeButtons
 
         private void btnActionMinimize_Click(object sender, RoutedEventArgs e)
         {
@@ -253,6 +236,249 @@ namespace MetroIde
         private void btnActionClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        #endregion
+
+        #region Resizing
+
+        public void ResizeBottomRightThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var yAdjust = Height + e.VerticalChange;
+            var xAdjust = Width + e.HorizontalChange;
+
+            if (xAdjust > MinWidth)
+            {
+                Width = xAdjust;
+            }
+            else
+            {
+                Width = MinWidth;
+            }
+
+            if (yAdjust > MinHeight)
+            {
+                Height = yAdjust;
+            }
+            else
+            {
+                Height = MinHeight;
+            }
+        }
+
+        public void ResizeBottomLeftThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var yAdjust = Height + e.VerticalChange;
+            var xAdjust = Width - e.HorizontalChange;
+
+            if (xAdjust > MinWidth)
+            {
+                Left += e.HorizontalChange;
+                Width -= e.HorizontalChange;
+            }
+            else
+            {
+                var diff = Width - MinWidth;
+                if (diff > 0)
+                {
+                    Left += diff; // mirror following change
+                    Width -= diff; // Width = MinWidth
+                }
+                else
+                {
+                    Left -= diff; // mirror following change
+                    Width += diff; // Width = MinWidth
+                }
+            }
+
+            if (yAdjust > MinHeight)
+            {
+                Height = yAdjust;
+            }
+            else
+            {
+                Height = MinHeight;
+            }
+        }
+
+        public void ResizeTopRightThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var yAdjust = Height - e.VerticalChange;
+            var xAdjust = Width + e.HorizontalChange;
+
+            if (xAdjust > MinWidth)
+            {
+                Width = xAdjust;
+            }
+            else
+            {
+                Width = MinWidth;
+            }
+
+            if (yAdjust > MinHeight)
+            {
+                Top += e.VerticalChange;
+                Height -= e.VerticalChange;
+            }
+            else
+            {
+                var diff = Height - MinHeight;
+                if (diff > 0)
+                {
+                    Top += diff;	// mirror following change
+                    Height -= diff; // Height = MinHeight
+                }
+                else
+                {
+                    Top -= diff;	// mirror following change
+                    Height += diff; // Height = MinHeight
+                }
+            }
+        }
+
+        public void ResizeTopLeftThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var yAdjust = Height - e.VerticalChange;
+            var xAdjust = Width - e.HorizontalChange;
+
+            if (xAdjust > MinWidth)
+            {
+                Left += e.HorizontalChange;
+                Width -= e.HorizontalChange;
+            }
+            else
+            {
+                var diff = Width - MinWidth;
+                if (diff > 0)
+                {
+                    Left += diff; // mirror following change
+                    Width -= diff; // Width = MinWidth
+                }
+                else
+                {
+                    Left -= diff; // mirror following change
+                    Width += diff; // Width = MinWidth
+                }
+            }
+
+            if (yAdjust > MinHeight)
+            {
+                Top += e.VerticalChange;
+                Height -= e.VerticalChange;
+            }
+            else
+            {
+                var diff = Height - MinHeight;
+                if (diff > 0)
+                {
+                    Top += diff;	// mirror following change
+                    Height -= diff; // Height = MinHeight
+                }
+                else
+                {
+                    Top -= diff;	// mirror following change
+                    Height += diff; // Height = MinHeight
+                }
+            }
+        }
+
+        public void ResizeRightThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var xAdjust = Width + e.HorizontalChange;
+
+            if (xAdjust > MinWidth)
+            {
+                Width = xAdjust;
+            }
+            else
+            {
+                Width = MinWidth;
+            }
+        }
+
+        public void ResizeBottomThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var yAdjust = Height + e.VerticalChange;
+
+            if (yAdjust > MinHeight)
+            {
+                Height = yAdjust;
+            }
+            else
+            {
+                Height = MinHeight;
+            }
+        }
+
+        public void ResizeLeftThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var xAdjust = Width - e.HorizontalChange;
+
+            if (xAdjust > MinWidth)
+            {
+                Left += e.HorizontalChange;
+                Width -= e.HorizontalChange;
+            }
+            else
+            {
+                var diff = Width - MinWidth;
+                if (diff > 0)
+                {
+                    Left += diff; // mirror following change
+                    Width -= diff; // Width = MinWidth
+                }
+                else
+                {
+                    Left -= diff; // mirror following change
+                    Width += diff; // Width = MinWidth
+                }
+            }
+        }
+
+        public void ResizeTopThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            var yAdjust = Height - e.VerticalChange;
+
+            if (yAdjust > MinHeight)
+            {
+                Top += e.VerticalChange;
+                Height -= e.VerticalChange;
+            }
+            else
+            {
+                var diff = Height - MinHeight;
+                if (diff > 0)
+                {
+                    Top += diff;	// mirror following change
+                    Height -= diff; // Height = MinHeight
+                }
+                else
+                {
+                    Top -= diff;	// mirror following change
+                    Height += diff; // Height = MinHeight
+                }
+            }
+        }
+
+        #endregion
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            switch (WindowState)
+            {
+                case WindowState.Normal:
+                    borderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
+                    btnActionRestore.Visibility = Visibility.Collapsed;
+                    btnActionMaximize.Visibility =
+                        homeResizing.Visibility = Visibility.Visible;
+                    break;
+                case WindowState.Maximized:
+                    borderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
+                    btnActionRestore.Visibility = Visibility.Visible;
+                    btnActionMaximize.Visibility =
+                        homeResizing.Visibility = Visibility.Collapsed;
+                    break;
+            }
         }
 
         #region Maximize Workspace Workarounds
@@ -298,8 +524,6 @@ namespace MetroIde
 
             Marshal.StructureToPtr(mmi, lParam, true);
         }
-
-        #endregion
 
         #endregion
 
@@ -366,7 +590,7 @@ namespace MetroIde
 
         #endregion
 
-        #region Tab Manager
+        #region Tabs
 
         public enum TabGenre
         {
@@ -380,37 +604,6 @@ namespace MetroIde
             MemoryManager,
             VoxelConverter,
             PostGenerator
-        }
-
-        public void ExternalTabClose(TabGenre tabGenre)
-        {
-            string tabHeader = "";
-            switch (tabGenre)
-            {
-                case TabGenre.StartPage:
-                    tabHeader = "Start Page";
-                    break;
-                case TabGenre.Settings:
-                    tabHeader = "Settings";
-                    break;
-            }
-
-            LayoutDocument toRemove = null;
-            foreach (
-                LayoutContent tab in
-                    documentManager.Children.Where(tab => tab.Title == tabHeader && tab is LayoutDocument))
-                toRemove = (LayoutDocument) tab;
-
-            if (toRemove != null)
-                documentManager.Children.Remove(toRemove);
-        }
-
-        public void ExternalTabClose(LayoutDocument tab)
-        {
-            documentManager.Children.Remove(tab);
-
-            if (documentManager.Children.Count > 0)
-                documentManager.SelectedContentIndex = documentManager.Children.Count - 1;
         }
 
         public void ClearTabs()
@@ -443,22 +636,6 @@ namespace MetroIde
             documentManager.SelectedContentIndex = documentManager.IndexOfChild(newCacheTab);
         }
 
-        /// <summary>
-        ///     Add a new XBox Screenshot Editor Container
-        /// </summary>
-        /// <param name="tempImageLocation">Path to the temporary location of the image</param>
-        public void AddScrenTabModule(string tempImageLocation)
-        {
-            var newScreenshotTab = new LayoutDocument
-            {
-                ContentId = tempImageLocation,
-                Title = "Screenshot",
-                ToolTip = tempImageLocation
-            };
-            documentManager.Children.Add(newScreenshotTab);
-            documentManager.SelectedContentIndex = documentManager.IndexOfChild(newScreenshotTab);
-        }
-
         public void AddTabModule(TabGenre tabG, bool singleInstance = true)
         {
             var tab = new LayoutDocument();
@@ -488,6 +665,29 @@ namespace MetroIde
 
             documentManager.Children.Add(tab);
             documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
+        }
+
+        private void dockManager_ActiveContentChanged(object sender, EventArgs e)
+        {
+            if (documentManager.SelectedContentIndex != _lastDocumentIndex)
+            {
+                // Selection Changed, lets do dis
+                LayoutContent tab = documentManager.SelectedContent;
+
+                if (tab != null)
+                    UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", ""));
+
+                if (tab != null && tab.Title == "Start Page")
+                    ((StartPage)tab.Content).UpdateRecents();
+
+                if (tab == null)
+                {
+                    documentManager.SelectedContentIndex = 0;
+                    UpdateTitleText("");
+                }
+
+                _lastDocumentIndex = documentManager.SelectedContentIndex;
+            }
         }
 
         #endregion
@@ -526,7 +726,7 @@ namespace MetroIde
 
         private void statusUpdateCleaner_Clear(object sender, EventArgs e)
         {
-            Status.Text = "Ready...";
+            Status.Text = "Ready";
         }
 
         #endregion
@@ -553,84 +753,14 @@ namespace MetroIde
 
         #region Drag&Drop Support
 
+        private void HomeWindow_PreviewDrop(object sender, DragEventArgs e)
+        {
+        }
+
         private void HomeWindow_Drop(object sender, DragEventArgs e)
         {
             // FIXME: Boot into Win7, to fix this. (Win8's UAC is so fucked up... No drag and drop on win8 it seems...)
             //string[] draggedFiles = (string[])e.Data.GetData(DataFormats.FileDrop, true);
-        }
-
-        #endregion
-
-        #region Startup
-
-        public bool ProcessCommandLineArgs(IList<string> args)
-        {
-            if (args != null && args.Count > 1)
-            {
-                string[] commandArgs = args.Skip(1).ToArray();
-                if (commandArgs[0].StartsWith("assembly://"))
-                    commandArgs[0] = commandArgs[0].Substring(11).Trim('/');
-
-                // Decide what to do
-                Activate();
-                switch (commandArgs[0].ToLower())
-                {
-                    case "open":
-                        // Determine type of file, and start it up, yo
-                        if (commandArgs.Length > 1)
-                            StartupDetermineType(commandArgs[1]);
-                        break;
-
-                    case "update":
-                        // Show Update
-                        menuHelpUpdater_Click(null, null);
-                        break;
-
-                    case "about":
-                        // Show About
-                        menuHelpAbout_Click(null, null);
-                        break;
-
-                    case "settings":
-                        // Show Settings
-                        menuOpenSettings_Click(null, null);
-                        break;
-
-                    default:
-                        return true;
-                }
-            }
-
-            return true;
-        }
-
-        private void StartupDetermineType(string path)
-        {
-            try
-            {
-                if (File.Exists(path))
-                {/*
-                    // Magic Check
-                    string magic;
-                    using (var stream = new EndianReader(File.OpenRead(path), Endian.BigEndian))
-                        magic = stream.ReadAscii(0x04).ToLower();
-
-                    switch (magic)
-                    {
-                        case "head":
-                        case "daeh":
-                            // Map File
-                            AddCacheTabModule(path);
-                            return;
-                    }*/
-                }
-
-                MetroMessageBox.Show("Unable to find file", "The selected file could no longer be found");
-            }
-            catch (Exception ex)
-            {
-                MetroException.Show(ex);
-            }
         }
 
         #endregion

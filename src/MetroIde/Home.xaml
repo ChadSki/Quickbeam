@@ -2,7 +2,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vectors="clr-namespace:MetroIde.Controls.Vectors"
-    xmlns:closeableTab="clr-namespace:CloseableTabItemDemo"
     xmlns:n="clr-namespace:MetroIde.Helpers.Native"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
@@ -12,14 +11,13 @@
     Title="Home Window - MetroIde"
     WindowStartupLocation="CenterScreen" AllowsTransparency="True" ResizeMode="CanResize" WindowStyle="None"
     Background="{DynamicResource MainBackgroundBrush}" SnapsToDevicePixels="True"
-    StateChanged="Window_StateChanged" IsVisibleChanged="Home_IsVisibleChanged"
-    Drop="HomeWindow_Drop" AllowDrop="True" PreviewDrop="Window_PreviewDrop_1"
+    StateChanged="Window_StateChanged"
+    Drop="HomeWindow_Drop" AllowDrop="True" PreviewDrop="HomeWindow_PreviewDrop"
     MinWidth="380" MinHeight="86"
     n:WindowMovement.IsDraggable="True">
 
     <Border x:Name="borderFrame" BorderBrush="{DynamicResource ExtryzeAccentBrush}" BorderThickness="1,1,1,23">
         <Grid>
-            <Grid x:Name="containerFrame">
                 <Grid x:Name="homeHeader" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="60"
                       IsHitTestVisible="True"
                       Background="Transparent"
@@ -45,16 +43,10 @@
                                FontSize="15" Margin="45,12,141,0" FontFamily="{DynamicResource MetroFontLight}"
                                TextTrimming="CharacterEllipsis" />
 
-                    <StackPanel x:Name="homeHeaderActionButtons" Orientation="Horizontal" VerticalAlignment="Top"
+                <StackPanel x:Name="homeHeaderActionButtons" Orientation="Horizontal" VerticalAlignment="Top"
                                 HorizontalAlignment="Right" Height="26" Margin="0,0,0,0">
-                        <Button x:Name="btnActionSupport" ToolTip="Support" Width="34" Height="26" Margin="0"
-                                Style="{StaticResource WindowActionButton}" VerticalAlignment="Top"
-                                d:LayoutOverrides="Height"
-                                Click="btnActionSupport_Click" Visibility="Collapsed">
-                            <TextBlock Text="?" FontFamily="/MetroIde;component/Fonts/#Segoe WP Semibold" FontSize="14" />
-                        </Button>
 
-                        <Button x:Name="btnActionMinimize" ToolTip="Minimize" Width="34" Height="26" Margin="0"
+                    <Button x:Name="btnActionMinimize" ToolTip="Minimize" Width="34" Height="26" Margin="0"
                                 Style="{StaticResource WindowActionButton}" VerticalAlignment="Top"
                                 d:LayoutOverrides="Height"
                                 Click="btnActionMinimize_Click">
@@ -103,7 +95,6 @@
                     </Menu>
                 </Grid>
                 <Grid x:Name="homeContent" Margin="0, 62, 0, 0">
-                    <Grid x:Name="tabContent">
                         <avalonDock:DockingManager Grid.Row="1" x:Name="dockManager"
                                                    ActiveContentChanged="dockManager_ActiveContentChanged"
                                                    AllowMixedOrientation="True"
@@ -119,40 +110,56 @@
                                 </avalonDock:LayoutPanel>
                             </avalonDock:LayoutRoot>
                         </avalonDock:DockingManager>
-                    </Grid>
-                    <Grid x:Name="xbdmContent" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Stretch" />
                 </Grid>
-            </Grid>
 
             <TextBlock x:Name="Status" Margin="5,0,0,-19" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                       Text="Ready..."
+                       Text="Ready"
                        Foreground="{DynamicResource TextBrushPrimary}" FontFamily="{DynamicResource MetroFontRegular}" />
 
-            <Grid x:Name="maskingIWff" Visibility="Collapsed">
-                <Rectangle Fill="{DynamicResource HomeIWffBrush}" />
-                <MediaElement x:Name="mediaIWff" Volume="1" />
-            </Grid>
-
             <Grid Margin="-1, -1, -1, -23" x:Name="homeResizing">
-                <!--Resize-->
-                <!--Corner-->
+                <!--Resize Grip-->
                 <vectors:ResizeModule x:Name="ResizeDropVector" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                                       Margin="0,0,5,5" Cursor="SizeNWSE" />
-                <Thumb x:Name="ResizeDrop" DragDelta="ResizeDrop_DragDelta" Opacity="0" Background="{x:Null}"
-                       Foreground="{x:Null}"
-                       Width="11" Height="11" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,1,1"
-                       Cursor="SizeNWSE" />
 
-                <!--Side-->
-                <Thumb x:Name="ResizeRight" DragDelta="ResizeRight_DragDelta" Opacity="0" Background="{x:Null}"
-                       Foreground="{x:Null}" Width="8" Margin="0,27.333,0,11" HorizontalAlignment="Right"
+                <!--Right-->
+                <Thumb x:Name="ResizeRight" DragDelta="ResizeRightThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Width="11" Margin="0,6,0,22" HorizontalAlignment="Right"
                        VerticalAlignment="Stretch" Cursor="SizeWE" />
 
+                <!--Left-->
+                <Thumb x:Name="ResizeLeft" DragDelta="ResizeLeftThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Width="11" HorizontalAlignment="Left"
+                       VerticalAlignment="Stretch" Cursor="SizeWE" />
+
+                <!--Top-->
+                <Thumb x:Name="ResizeTop" DragDelta="ResizeTopThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Height="11" HorizontalAlignment="Stretch" Margin="0,0,6,0"
+                       VerticalAlignment="Top" Cursor="SizeNS" />
+
                 <!--Bottom-->
-                <Thumb x:Name="ResizeBottom" DragDelta="ResizeBottom_DragDelta" Opacity="0" Background="{x:Null}"
-                       Foreground="{x:Null}" Height="8" Margin="0,0,11,0" HorizontalAlignment="Stretch"
-                       VerticalAlignment="Bottom"
-                       Cursor="SizeNS" />
+                <Thumb x:Name="ResizeBottom" DragDelta="ResizeBottomThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Height="11" HorizontalAlignment="Stretch"
+                       VerticalAlignment="Bottom" Cursor="SizeNS" />
+
+                <!--BottomRight Corner-->
+                <Thumb x:Name="ResizeBottomRight" DragDelta="ResizeBottomRightThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Width="22" Height="22"
+                       HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" />
+
+                <!--BottomLeft Corner-->
+                <Thumb x:Name="ResizeBottomLeft" DragDelta="ResizeBottomLeftThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Width="22" Height="22"
+                       HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="SizeNESW" />
+
+                <!--TopRight Corner (smaller)-->
+                <Thumb x:Name="ResizeTopRight" DragDelta="ResizeTopRightThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Width="6" Height="6"
+                       HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="SizeNESW" />
+
+                <!--TopLeft Corner-->
+                <Thumb x:Name="ResizeTopLeft" DragDelta="ResizeTopLeftThumb_DragDelta" Opacity="0" Background="{x:Null}"
+                       Foreground="{x:Null}" Width="22" Height="22"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="SizeNWSE" />
             </Grid>
 
             <Rectangle x:Name="OpacityRect" Opacity="0.65" Fill="{DynamicResource HomeOpacityBrush}"
