@@ -47,7 +47,7 @@ namespace MetroIde.Pages
                         break;
                     default:
                         MetroMessageBox.Show("wut.",
-                            "This content type doesn't even exist, how the fuck did you manage that?");
+                            "This content type doesn't even exist, how did you manage that?");
                         break;
                 }
         }
