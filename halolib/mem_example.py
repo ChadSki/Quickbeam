@@ -24,3 +24,8 @@ plasma.final_velocity = 0.2
 rifle.triggers[0].projectile = charged
 
 print(rifle)
+
+
+#def chainspawnRocket(map, tag):
+#    tag.onDetonate = map.inject(quickbeam.$('effe', 'spawner'), True)
+#    tag.onDetonate.spawn = map.$('proj', 'rocket').clone(True)
