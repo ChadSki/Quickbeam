@@ -163,7 +163,7 @@ namespace MetroIde
         private void CheckForUpdates(object sender, DoWorkEventArgs e)
         {
             // Grab JSON Update package from the server
-            e.Result = Updates.GetUpdateInfo();
+            // e.Result = Updates.GetUpdateInfo();
         }
 
         private void UpdateCheckCompleted(object sender, RunWorkerCompletedEventArgs e)
