@@ -1,0 +1,6 @@
+[submodule "vendor/cpython"]
+	path = vendor/cpython
+	url = https://github.com/akheron/cpython.git
+[submodule "vendor/cython"]
+	path = vendor/cython
+	url = https://github.com/cython/cython.git

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="proj" struct_size="0x248">
+    <reference name="model" offset="0x28" />
+    <reference name="animation" offset="0x38" />
+    <reference name="collision" offset="0x70" />
+    <reference name="physics" offset="0x80" />
+    
+    <float32 name="initial_velocity" offset="0x1E4" />
+    <float32 name="final_velocity" offset="0x1E8" />
+</plugin>

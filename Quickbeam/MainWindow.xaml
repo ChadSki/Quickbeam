@@ -83,7 +83,7 @@
                               Width="{Binding ElementName=widthSlider, Path=Value}"
                               Height="{Binding ElementName=heightSlider, Path=Value}">
                             <Rectangle Fill="#FF1e1e1e" Stroke="#AA000000" />
-                            <Grid local:MarginSetter.Margin="3">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="50" />

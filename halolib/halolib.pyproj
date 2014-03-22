@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9f624802-ec7b-4fd7-b927-4bd356c4c35d}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>disk_example.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
+    <InterpreterVersion>3.3</InterpreterVersion>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Compile Include="disk_example.py" />
+    <Compile Include="mem_example.py" />
+    <Compile Include="byteaccess\byteaccess.py" />
+    <Compile Include="byteaccess\fileaccess.py" />
+    <Compile Include="byteaccess\macmemaccess.py" />
+    <Compile Include="byteaccess\winmemaccess.py" />
+    <Compile Include="byteaccess\__init__.py" />
+    <Compile Include="halolib\haloaccess.py" />
+    <Compile Include="halolib\halomap.py" />
+    <Compile Include="halolib\halotag.py" />
+    <Compile Include="halolib\setup.py" />
+    <Compile Include="halolib\__init__.py" />
+    <Compile Include="pnpc\__init__.py" />
+    <Content Include="halolib\cythonutil.pyx" />
+    <Content Include="halolib\halostruct.pyx" />
+    <Content Include="ent datatypes.txt" />
+    <Content Include="pnpc\notifyproperty.pyx">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="byteaccess" />
+    <Folder Include="halolib" />
+    <Folder Include="pnpc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

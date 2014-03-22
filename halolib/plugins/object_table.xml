@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="object_table" struct_size="40">
+    <asciiz name="name" offset="0" maxlength="32" />
+    <uint16 name="max_objects" offset="32" />
+    <uint16 name="size" offset="34" />
+    <uint16 name="max" offset="50" />
+
+</plugin>
