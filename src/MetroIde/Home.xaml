@@ -123,7 +123,7 @@
 
                 <!--Right-->
                 <Thumb x:Name="ResizeRight" DragDelta="ResizeRightThumb_DragDelta" Opacity="0" Background="{x:Null}"
-                       Foreground="{x:Null}" Width="11" Margin="0,6,0,22" HorizontalAlignment="Right"
+                       Foreground="{x:Null}" Width="11" Margin="0,26,0,22" HorizontalAlignment="Right"
                        VerticalAlignment="Stretch" Cursor="SizeWE" />
 
                 <!--Left-->
@@ -133,7 +133,7 @@
 
                 <!--Top-->
                 <Thumb x:Name="ResizeTop" DragDelta="ResizeTopThumb_DragDelta" Opacity="0" Background="{x:Null}"
-                       Foreground="{x:Null}" Height="11" HorizontalAlignment="Stretch" Margin="0,0,6,0"
+                       Foreground="{x:Null}" Height="11" HorizontalAlignment="Stretch" Margin="0,0,102,0"
                        VerticalAlignment="Top" Cursor="SizeNS" />
 
                 <!--Bottom-->
