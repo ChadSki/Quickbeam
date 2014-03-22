@@ -21,7 +21,7 @@ namespace MetroIde.Helpers
             changed |= RegisterOpenCommand("assembly.xboxchaos.cif", App.MetroIdeStorage.MetroIdeSettings.DefaultCif,
                 "Blam Campaign File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
             changed |= RegisterOpenCommand("assembly.xboxchaos.amp", App.MetroIdeStorage.MetroIdeSettings.DefaultAmp,
-                "MetroIde Patch File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
+                "Assembly Patch File", string.Format("\"{0}\" open \"%1\"", assemblyPath));
 
             // Assign Valid apptypes
             changed |= RegisterExtension(".map", App.MetroIdeStorage.MetroIdeSettings.DefaultMap,

@@ -37,7 +37,7 @@
                         </Path.RenderTransform>
                     </Path>
 
-                    <TextBlock IsHitTestVisible="False" x:Name="lblTitle" Text="Start Page - MetroIde"
+                    <TextBlock IsHitTestVisible="False" x:Name="lblTitle" Text="Start Page - Quickbeam"
                                Foreground="{DynamicResource TextBrushSecondary}" VerticalAlignment="Top"
                                HorizontalAlignment="Stretch"
                                FontSize="15" Margin="45,12,141,0" FontFamily="{DynamicResource MetroFontLight}"
@@ -90,7 +90,7 @@
                                   BorderBrush="{x:Null}" FontSize="12">
                             <MenuItem Header="Check for Updates" x:Name="menuHelpUpdater" Click="menuHelpUpdater_Click" />
                             <Separator />
-                            <MenuItem Header="About MetroIde" x:Name="menuHelpAbout" Click="menuHelpAbout_Click" />
+                            <MenuItem Header="About Quickbeam" x:Name="menuHelpAbout" Click="menuHelpAbout_Click" />
                         </MenuItem>
                     </Menu>
                 </Grid>

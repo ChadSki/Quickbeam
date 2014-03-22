@@ -5,7 +5,7 @@
         xmlns:n="clr-namespace:MetroIde.Helpers.Native"
         AllowsTransparency="True" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner"
         SnapsToDevicePixels="True"
-        Width="546" Height="590" ShowInTaskbar="False" Title="MetroIde - About"
+        Width="546" Height="590" ShowInTaskbar="False" Title="Quickbeam - About"
         n:WindowMovement.IsDraggable="True">
     <Border Background="#FF2E2E31" BorderThickness="1,1,1,5" BorderBrush="{DynamicResource ExtryzeAccentBrush}">
         <Grid>
@@ -23,7 +23,7 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <TextBlock x:Name="lblTitle" Text="About MetroIde {version}" Foreground="#989898" VerticalAlignment="Top"
+            <TextBlock x:Name="lblTitle" Text="About Quickbeam {version}" Foreground="#989898" VerticalAlignment="Top"
                        HorizontalAlignment="Stretch" FontSize="15" Margin="45,12,141,0"
                        FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis" />
 

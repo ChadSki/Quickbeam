@@ -52,7 +52,7 @@
                 <Vectors:CloseModule Width="34" Height="26" />
             </Button>
 
-            <TextBlock x:Name="lblTitle" IsHitTestVisible="False" Text="Updater - MetroIde" Foreground="#989898"
+            <TextBlock x:Name="lblTitle" IsHitTestVisible="False" Text="Updater - Quickbeam" Foreground="#989898"
                        VerticalAlignment="Top" HorizontalAlignment="Stretch" FontSize="15" Margin="45,12,34,0"
                        FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis" />
 
@@ -83,9 +83,6 @@
                                            Margin="10,2,0,0"
                                            Foreground="{DynamicResource ExtryzeAccentBrush}"
                                            Style="{DynamicResource GenericTextblock}" />
-
-                                <!--<TextBlock Text="Updated MetroIde Hash (MD5):" Margin="0,5,0,0" Style="{DynamicResource GenericTextblock}" />
-                                <TextBlock x:Name="lblServerHash" Text="&lt;/updated_assembly_hash_md5&gt;" Margin="10,2,0,0" Foreground="{DynamicResource ExtryzeAccentBrush}" Style="{DynamicResource GenericTextblock}" />-->
                             </StackPanel>
                             <StackPanel x:Name="updateButtons" VerticalAlignment="Bottom" Margin="0,0,0,10">
                                 <Button x:Name="btnApplyUpdate" Content="Apply Update" Margin="15,10,20,0" Height="30"

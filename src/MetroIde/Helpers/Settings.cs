@@ -106,7 +106,7 @@ namespace MetroIde.Helpers
 
             // Write Changes
             string jsonData = JsonConvert.SerializeObject(this);
-            File.WriteAllText("MetroIdeSettings.json", jsonData);
+            File.WriteAllText("QuickbeamSettings.json", jsonData);
 
             return true;
         }

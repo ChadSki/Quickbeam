@@ -539,7 +539,7 @@ namespace MetroIde
         {
             {
                 ContentTypes.Map, new ContentFileHandler(
-                    "MetroIde - Open Blam Cache File",
+                    "Quickbeam - Open Blam Cache File",
                     "Blam Cache File (*.map)|*.map",
                     (home, file) => home.AddCacheTabModule(file))
             },
@@ -702,7 +702,7 @@ namespace MetroIde
         /// <param name="title">Current Title, Assembly shall add the rest for you.</param>
         public void UpdateTitleText(string title)
         {
-            string suffix = "MetroIde";
+            string suffix = "Quickbeam";
             if (!string.IsNullOrWhiteSpace(title))
                 suffix = " - " + suffix;
 
