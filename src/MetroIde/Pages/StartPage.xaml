@@ -4,6 +4,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+    xmlns:helpers="clr-namespace:MetroIde.Helpers"
     x:Class="MetroIde.Pages.StartPage"
     mc:Ignorable="d"
     Background="#28282b"
@@ -12,16 +13,16 @@
         <Image Source="/MetroIde;component/Images/background_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
                Margin="320,108,166,-102" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
 
-        <Grid x:Name="sideBar" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="250" Background="#2d2d30">
+        <Grid x:Name="SideBar" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="250" Background="#2d2d30">
             <Rectangle Fill="#FF545456" Width="2" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Right"
                        d:LayoutOverrides="Height" />
 
-            <TextBlock x:Name="lblTitle" FontFamily="{DynamicResource MetroFontLight}" Text="Quickbeam"
+            <TextBlock x:Name="LblTitle" FontFamily="{DynamicResource MetroFontLight}" Text="Quickbeam"
                        Foreground="White"
-                       FontSize="32" Margin="25,36.5,13,0" Height="50" VerticalAlignment="Top" />
-            <ed:RegularPolygon Fill="#FF4A4A4C" HorizontalAlignment="Left" Height="19" InnerRadius="1"
-                               Margin="-16,51,0,0"
-                               PointCount="3" Stretch="Fill" VerticalAlignment="Top" Width="48"
+                       FontSize="32" Margin="25,40,13,0" Height="50" VerticalAlignment="Top" />
+            <ed:RegularPolygon Fill="#FF4A4A4C" HorizontalAlignment="Left" Height="20" InnerRadius="1"
+                               Margin="-16,50,0,0"
+                               PointCount="3" Stretch="Fill" VerticalAlignment="Top" Width="50"
                                RenderTransformOrigin="0.5,0.5">
                 <ed:RegularPolygon.RenderTransform>
                     <TransformGroup>
@@ -33,50 +34,44 @@
                 </ed:RegularPolygon.RenderTransform>
             </ed:RegularPolygon>
 
-            <Rectangle Fill="#FF363639" Height="1" Margin="25,114.25,25,0" VerticalAlignment="Top"
-                       d:LayoutOverrides="Height" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="265" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="60" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="25,135,15,21">
-                    <StackPanel>
-                        <TextBlock FontFamily="{DynamicResource MetroFontSemiLight}" Text="Start" Foreground="White"
-                                   FontSize="16" />
-                        <StackPanel Margin="-5,10,0,0">
-                            <Button Content="Open Blam Cache File (.map)" x:Name="btnOpenCacheFile"
-                                    Style="{StaticResource TabActiveButtons}" HorizontalAlignment="Stretch"
-                                    Click="btnOpenCacheFile_Click" />
-                        </StackPanel>
+            <StackPanel Margin="25,120,25,0" VerticalAlignment="Top">
+                <Rectangle Fill="#FF363639" Height="1" d:LayoutOverrides="Height" />
+                
+                <TextBlock FontFamily="{DynamicResource MetroFontSemiLight}" FontSize="16"
+                           Text="Start" Foreground="White"
+                           Margin="0,20,0,0"/>
 
-                        <Rectangle Fill="#FF363639" Height="1" Width="250" Margin="0,20,0,15" VerticalAlignment="Top"
-                                   d:LayoutOverrides="Height" />
-                    </StackPanel>
-                </Grid>
-                <StackPanel Grid.Row="1" Margin="25,0,15,0">
-                    <TextBlock FontFamily="{DynamicResource MetroFontSemiLight}" Text="Recent" Foreground="White"
-                               FontSize="16"
-                               VerticalAlignment="Top" />
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel x:Name="panelRecents" Margin="-5,15,0,10" />
-                    </ScrollViewer>
+                <Button Content="Launch Halo" x:Name="LaunchHaloButton"
+                        Style="{StaticResource TabActiveButtons}" HorizontalAlignment="Stretch"
+                        Margin="0,10,0,0" />
 
-                    <Rectangle Fill="#FF363639" Height="1" Margin="0,20,0,15" VerticalAlignment="Top"
-                               d:LayoutOverrides="Height" />
-                </StackPanel>
+                <Button Content="Open Blam Cache File (.map)" x:Name="BtnOpenCacheFile"
+                        Style="{StaticResource TabActiveButtons}" HorizontalAlignment="Stretch"
+                        Margin="0,10,0,0" />
 
-                <StackPanel VerticalAlignment="Bottom" Grid.Row="2" Margin="25, 0, 0, 15">
-                    <CheckBox x:Name="cbClosePageOnLoad" Content="Close page after content loads" Margin="0,5,0,0"
+                <Rectangle Fill="#FF363639" Height="1" Margin="0,25,0,0" d:LayoutOverrides="Height" />
+                
+                <TextBlock FontFamily="{DynamicResource MetroFontSemiLight}" FontSize="16"
+                           Text="Recent" Foreground="White"
+                           Margin="0,20,0,0"/>
+                
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="PanelRecents" Margin="0,15,0,10" />
+                </ScrollViewer>
+
+                <Rectangle Fill="#FF363639" Height="1" Margin="0,25,0,0" d:LayoutOverrides="Height" />
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Bottom" Grid.Row="2" Margin="25, 0, 0, 15">
+                <CheckBox x:Name="CbClosePageOnLoad" Content="Close page after content loads" Margin="0,5,0,0"
                               Checked="cbClosePageOnLoad_Update" Unchecked="cbClosePageOnLoad_Update" />
-                    <CheckBox x:Name="cbShowOnStartUp" Content="Show page on startup" Margin="0,5,0,0" IsChecked="True"
+                <CheckBox x:Name="CbShowOnStartUp" Content="Show page on startup" Margin="0,5,0,0" IsChecked="True"
                               Checked="cbShowOnStartUp_Update" Unchecked="cbShowOnStartUp_Update" />
-                </StackPanel>
-            </Grid>
+            </StackPanel>
         </Grid>
 
-        <Grid x:Name="mainContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="400, 25, 0, 0">
+        <Grid x:Name="MainContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="250, 0, 0, 0">
+            <helpers:HaloWindow MaxWidth="800" MaxHeight="600" />
         </Grid>
     </Grid>
 </UserControl>

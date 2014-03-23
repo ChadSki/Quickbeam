@@ -247,23 +247,8 @@ namespace MetroIde
             var yAdjust = Height + e.VerticalChange;
             var xAdjust = Width + e.HorizontalChange;
 
-            if (xAdjust > MinWidth)
-            {
-                Width = xAdjust;
-            }
-            else
-            {
-                Width = MinWidth;
-            }
-
-            if (yAdjust > MinHeight)
-            {
-                Height = yAdjust;
-            }
-            else
-            {
-                Height = MinHeight;
-            }
+            Width = xAdjust > MinWidth ? xAdjust : MinWidth;
+            Height = yAdjust > MinHeight ? yAdjust : MinHeight;
         }
 
         public void ResizeBottomLeftThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -291,14 +276,7 @@ namespace MetroIde
                 }
             }
 
-            if (yAdjust > MinHeight)
-            {
-                Height = yAdjust;
-            }
-            else
-            {
-                Height = MinHeight;
-            }
+            Height = yAdjust > MinHeight ? yAdjust : MinHeight;
         }
 
         public void ResizeTopRightThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -306,14 +284,7 @@ namespace MetroIde
             var yAdjust = Height - e.VerticalChange;
             var xAdjust = Width + e.HorizontalChange;
 
-            if (xAdjust > MinWidth)
-            {
-                Width = xAdjust;
-            }
-            else
-            {
-                Width = MinWidth;
-            }
+            Width = xAdjust > MinWidth ? xAdjust : MinWidth;
 
             if (yAdjust > MinHeight)
             {
@@ -467,16 +438,16 @@ namespace MetroIde
             switch (WindowState)
             {
                 case WindowState.Normal:
-                    borderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
-                    btnActionRestore.Visibility = Visibility.Collapsed;
-                    btnActionMaximize.Visibility =
-                        homeResizing.Visibility = Visibility.Visible;
+                    BorderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
+                    BtnActionRestore.Visibility = Visibility.Collapsed;
+                    BtnActionMaximize.Visibility =
+                        HomeResizing.Visibility = Visibility.Visible;
                     break;
                 case WindowState.Maximized:
-                    borderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
-                    btnActionRestore.Visibility = Visibility.Visible;
-                    btnActionMaximize.Visibility =
-                        homeResizing.Visibility = Visibility.Collapsed;
+                    BorderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
+                    BtnActionRestore.Visibility = Visibility.Visible;
+                    BtnActionMaximize.Visibility =
+                        HomeResizing.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -608,7 +579,7 @@ namespace MetroIde
 
         public void ClearTabs()
         {
-            documentManager.Children.Clear();
+            DocumentManager.Children.Clear();
         }
 
         /// <summary>
@@ -618,9 +589,9 @@ namespace MetroIde
         public void AddCacheTabModule(string cacheLocation)
         {
             // Check Map isn't already open
-            foreach (LayoutContent tab in documentManager.Children.Where(tab => tab.ContentId == cacheLocation))
+            foreach (LayoutContent tab in DocumentManager.Children.Where(tab => tab.ContentId == cacheLocation))
             {
-                documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
+                DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
                 return;
             }
 
@@ -632,8 +603,8 @@ namespace MetroIde
             };
             /*newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
                 App.AssemblyStorage.AssemblySettings.HalomapTagSort);*/
-            documentManager.Children.Add(newCacheTab);
-            documentManager.SelectedContentIndex = documentManager.IndexOfChild(newCacheTab);
+            DocumentManager.Children.Add(newCacheTab);
+            DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(newCacheTab);
         }
 
         public void AddTabModule(TabGenre tabG, bool singleInstance = true)
@@ -657,22 +628,22 @@ namespace MetroIde
             }
 
             if (singleInstance)
-                foreach (LayoutContent tabb in documentManager.Children.Where(tabb => tabb.Title == tab.Title))
+                foreach (LayoutContent tabb in DocumentManager.Children.Where(tabb => tabb.Title == tab.Title))
                 {
-                    documentManager.SelectedContentIndex = documentManager.IndexOfChild(tabb);
+                    DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tabb);
                     return;
                 }
 
-            documentManager.Children.Add(tab);
-            documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
+            DocumentManager.Children.Add(tab);
+            DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
         }
 
         private void dockManager_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (documentManager.SelectedContentIndex != _lastDocumentIndex)
+            if (DocumentManager.SelectedContentIndex != _lastDocumentIndex)
             {
                 // Selection Changed, lets do dis
-                LayoutContent tab = documentManager.SelectedContent;
+                LayoutContent tab = DocumentManager.SelectedContent;
 
                 if (tab != null)
                     UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", ""));
@@ -682,11 +653,11 @@ namespace MetroIde
 
                 if (tab == null)
                 {
-                    documentManager.SelectedContentIndex = 0;
+                    DocumentManager.SelectedContentIndex = 0;
                     UpdateTitleText("");
                 }
 
-                _lastDocumentIndex = documentManager.SelectedContentIndex;
+                _lastDocumentIndex = DocumentManager.SelectedContentIndex;
             }
         }
 
@@ -707,7 +678,7 @@ namespace MetroIde
                 suffix = " - " + suffix;
 
             Title = title + suffix;
-            lblTitle.Text = title + suffix;
+            LblTitle.Text = title + suffix;
         }
 
         /// <summary>
