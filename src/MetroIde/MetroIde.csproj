@@ -332,7 +332,7 @@
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Native\DwmDropShadow.cs" />
-    <Compile Include="Helpers\Native\Monitor_Workarea.cs" />
+    <Compile Include="Helpers\Native\MonitorWorkArea.cs" />
     <Compile Include="Helpers\Native\WindowMovement.cs" />
     <Page Include="Controls\ActionButtons\CloseButton.xaml">
       <Generator>MSBuild:Compile</Generator>

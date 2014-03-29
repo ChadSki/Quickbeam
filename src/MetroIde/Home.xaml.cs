@@ -468,18 +468,18 @@ namespace MetroIde
 
         private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
         {
-            var mmi = (Monitor_Workarea.MINMAXINFO) Marshal.PtrToStructure(lParam, typeof (Monitor_Workarea.MINMAXINFO));
+            var mmi = (MonitorWorkArea.MinMaxInfo) Marshal.PtrToStructure(lParam, typeof (MonitorWorkArea.MinMaxInfo));
 
             // Adjust the maximized size and position to fit the work area of the correct monitor
             const int monitorDefaulttonearest = 0x00000002;
-            IntPtr monitor = Monitor_Workarea.MonitorFromWindow(hwnd, monitorDefaulttonearest);
+            IntPtr monitor = MonitorWorkArea.MonitorFromWindow(hwnd, monitorDefaulttonearest);
 
             if (monitor != IntPtr.Zero)
             {
-                var monitorInfo = new Monitor_Workarea.MONITORINFO();
-                Monitor_Workarea.GetMonitorInfo(monitor, monitorInfo);
-                Monitor_Workarea.RECT rcWorkArea = monitorInfo.rcWork;
-                Monitor_Workarea.RECT rcMonitorArea = monitorInfo.rcMonitor;
+                var monitorInfo = new MonitorWorkArea.MonitorInfo();
+                MonitorWorkArea.GetMonitorInfo(monitor, monitorInfo);
+                MonitorWorkArea.Rect rcWorkArea = monitorInfo.rcWork;
+                MonitorWorkArea.Rect rcMonitorArea = monitorInfo.rcMonitor;
                 mmi.ptMaxPosition.x = Math.Abs(rcWorkArea.left - rcMonitorArea.left);
                 mmi.ptMaxPosition.y = Math.Abs(rcWorkArea.top - rcMonitorArea.top);
                 mmi.ptMaxSize.x = Math.Abs(rcWorkArea.right - rcWorkArea.left);

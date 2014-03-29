@@ -1,13 +1,12 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 namespace MetroIde.Helpers.Native
 {
-    internal static class Monitor_Workarea
+    internal static class MonitorWorkArea
     {
         [DllImport("user32")]
-        internal static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
+        internal static extern bool GetMonitorInfo(IntPtr hMonitor, MonitorInfo lpmi);
 
         /// <summary>
         /// </summary>
@@ -15,43 +14,43 @@ namespace MetroIde.Helpers.Native
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MINMAXINFO
+        public struct MinMaxInfo
         {
-            public POINT ptReserved;
-            public POINT ptMaxSize;
-            public POINT ptMaxPosition;
-            public POINT ptMinTrackSize;
-            public POINT ptMaxTrackSize;
+            public Point ptReserved;
+            public Point ptMaxSize;
+            public Point ptMaxPosition;
+            public Point ptMinTrackSize;
+            public Point ptMaxTrackSize;
         };
 
         /// <summary>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        public class MONITORINFO
+        public class MonitorInfo
         {
-            public MONITORINFO()
+            public MonitorInfo()
             {
-                cbSize = (uint) Marshal.SizeOf(typeof (MONITORINFO));
+                cbSize = (uint) Marshal.SizeOf(typeof (MonitorInfo));
             }
 
             public uint cbSize;
 
             /// <summary>
             /// </summary>
-            public RECT rcMonitor = new RECT();
+            public Rect rcMonitor = new Rect();
 
             /// <summary>
             /// </summary>
-            public RECT rcWork = new RECT();
+            public Rect rcWork = new Rect();
 
             public uint dwFlags;
         }
 
         /// <summary>
-        ///     POINT aka POINTAPI
+        ///     Point aka POINTAPI
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
+        public struct Point
         {
             /// <summary>
             ///     x coordinate of point.
@@ -67,7 +66,7 @@ namespace MetroIde.Helpers.Native
 
         /// <summary> Win32 </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
-        public struct RECT
+        public struct Rect
         {
             /// <summary> Win32 </summary>
             public readonly int left;
@@ -82,7 +81,7 @@ namespace MetroIde.Helpers.Native
             public readonly int bottom;
 
             /// <summary> Win32 </summary>
-            public static readonly RECT Empty = new RECT();
+            public static readonly Rect Empty = new Rect();
 
             /// <summary> Win32 </summary>
             public int Width
@@ -97,7 +96,7 @@ namespace MetroIde.Helpers.Native
             }
 
             /// <summary> Win32 </summary>
-            public RECT(int left, int top, int right, int bottom)
+            public Rect(int left, int top, int right, int bottom)
             {
                 this.left = left;
                 this.top = top;
@@ -107,7 +106,7 @@ namespace MetroIde.Helpers.Native
 
 
             /// <summary> Win32 </summary>
-            public RECT(RECT rcSrc)
+            public Rect(Rect rcSrc)
             {
                 left = rcSrc.left;
                 top = rcSrc.top;
@@ -130,18 +129,18 @@ namespace MetroIde.Helpers.Native
             {
                 if (this == Empty)
                 {
-                    return "RECT {Empty}";
+                    return "Rect {Empty}";
                 }
-                return "RECT { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom +
+                return "Rect { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom +
                        " }";
             }
 
-            /// <summary> Determine if 2 RECT are equal (deep compare) </summary>
+            /// <summary> Determine if 2 Rect are equal (deep compare) </summary>
             public override bool Equals(object obj)
             {
                 if (obj is Rect)
                 {
-                    return (this == (RECT) obj);
+                    return (this == (Rect) obj);
                 }
                 return false;
                 
@@ -154,15 +153,15 @@ namespace MetroIde.Helpers.Native
             }
 
 
-            /// <summary> Determine if 2 RECT are equal (deep compare)</summary>
-            public static bool operator ==(RECT rect1, RECT rect2)
+            /// <summary> Determine if 2 Rect are equal (deep compare)</summary>
+            public static bool operator ==(Rect rect1, Rect rect2)
             {
                 return (rect1.left == rect2.left && rect1.top == rect2.top && rect1.right == rect2.right &&
                         rect1.bottom == rect2.bottom);
             }
 
-            /// <summary> Determine if 2 RECT are different(deep compare)</summary>
-            public static bool operator !=(RECT rect1, RECT rect2)
+            /// <summary> Determine if 2 Rect are different(deep compare)</summary>
+            public static bool operator !=(Rect rect1, Rect rect2)
             {
                 return !(rect1 == rect2);
             }
