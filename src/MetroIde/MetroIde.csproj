@@ -114,6 +114,9 @@
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HaloPage.xaml.cs">
+      <DependentUpon>HaloPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StatusUpdater.cs" />
     <Resource Include="Images\app_icon_large.ico" />
     <Resource Include="Images\app_icon_large.png" />
@@ -597,6 +600,10 @@
     <Page Include="Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\HaloPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

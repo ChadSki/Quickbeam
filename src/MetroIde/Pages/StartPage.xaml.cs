@@ -21,11 +21,6 @@ namespace MetroIde.Pages
             CbShowOnStartUp.IsChecked = App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad;
         }
 
-        public bool Close()
-        {
-            return true;
-        }
-
         public void LoadRecentItem(object sender, RoutedEventArgs e)
         {
             var senderEntry = (Settings.RecentFileEntry) ((Button) sender).Tag;
@@ -125,10 +120,6 @@ namespace MetroIde.Pages
             if (CbShowOnStartUp.IsChecked != null)
                 App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad = (bool) CbShowOnStartUp.IsChecked;
         }
-
-        #endregion
-
-        #region Open Types of Cache Files
 
         #endregion
     }

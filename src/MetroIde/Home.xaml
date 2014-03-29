@@ -99,14 +99,13 @@
                 </Menu>
             </Grid>
             <avalonDock:DockingManager x:Name="DockManager" Margin="0, 62, 0, 0"
-                                                   ActiveContentChanged="dockManager_ActiveContentChanged"
-                                                   AllowMixedOrientation="True"
-                                                   Background="Transparent">
+                                       ActiveContentChanged="dockManager_ActiveContentChanged"
+                                       AllowMixedOrientation="True">
                 <avalonDock:DockingManager.Theme>
                     <avalonDockThemes:MetroTheme />
                 </avalonDock:DockingManager.Theme>
                 <avalonDock:LayoutRoot>
-                    <avalonDock:LayoutPanel Orientation="Horizontal">
+                    <avalonDock:LayoutPanel>
                         <avalonDock:LayoutDocumentPaneGroup>
                             <avalonDock:LayoutDocumentPane x:Name="DocumentManager" />
                         </avalonDock:LayoutDocumentPaneGroup>

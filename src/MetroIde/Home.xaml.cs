@@ -82,7 +82,10 @@ namespace MetroIde
             ClearTabs();
 
             if (App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad)
+            {
                 AddTabModule(TabGenre.StartPage);
+                AddTabModule(TabGenre.HaloPage);
+            }
 
             // Do sidebar Loading stuff
             //SwitchXBDMSidebarLocation(App.AssemblyStorage.AssemblySettings.applicationXBDMSidebarLocation);
@@ -574,7 +577,8 @@ namespace MetroIde
 
             MemoryManager,
             VoxelConverter,
-            PostGenerator
+            PostGenerator,
+            HaloPage
         }
 
         public void ClearTabs()
@@ -624,6 +628,10 @@ namespace MetroIde
                 case TabGenre.Settings:
                     tab.Title = "Settings";
                     tab.Content = new SettingsPage();
+                    break;
+                case TabGenre.HaloPage:
+                    tab.Title = "Halo";
+                    tab.Content = new HaloPage();
                     break;
             }
 
