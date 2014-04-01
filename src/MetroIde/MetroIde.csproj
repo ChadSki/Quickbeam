@@ -110,7 +110,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
     <Compile Include="Helpers\HaloWindow.cs" />
-    <Compile Include="Helpers\NativeMethods.cs" />
+    <Compile Include="Helpers\Native\NativeMethods.cs" />
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

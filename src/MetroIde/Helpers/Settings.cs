@@ -166,12 +166,6 @@ namespace MetroIde.Helpers
             set { SetField(ref _startpageShowOnLoad, value, "StartpageShowOnLoad"); }
         }
 
-        public bool StartpageHideOnLaunch
-        {
-            get { return _startpageHideOnLaunch; }
-            set { SetField(ref _startpageHideOnLaunch, value, "StartpageHideOnLaunch"); }
-        }
-
         public bool StartpageShowRecentsMap
         {
             get { return _startpageShowRecentsMap; }

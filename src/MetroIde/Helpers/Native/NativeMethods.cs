@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace MetroIde.Helpers
+namespace MetroIde.Helpers.Native
 {
     internal static class NativeMethods
     {

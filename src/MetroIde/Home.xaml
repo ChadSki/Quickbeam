@@ -8,6 +8,7 @@
     x:Class="MetroIde.Home"
     xmlns:avalonDock="http://avalondock.codeplex.com"
     xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro"
+    xmlns:helpers="clr-namespace:MetroIde.Helpers"
     Title="Home Window - MetroIde"
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="False"
@@ -100,15 +101,31 @@
             </Grid>
             <avalonDock:DockingManager x:Name="DockManager" Margin="0, 62, 0, 0"
                                        ActiveContentChanged="dockManager_ActiveContentChanged"
-                                       AllowMixedOrientation="True">
+                                       AllowMixedOrientation="True" >
                 <avalonDock:DockingManager.Theme>
                     <avalonDockThemes:MetroTheme />
                 </avalonDock:DockingManager.Theme>
                 <avalonDock:LayoutRoot>
-                    <avalonDock:LayoutPanel>
+                    <avalonDock:LayoutPanel Orientation="Horizontal">
                         <avalonDock:LayoutDocumentPaneGroup>
-                            <avalonDock:LayoutDocumentPane x:Name="DocumentManager" />
+                            <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
                         </avalonDock:LayoutDocumentPaneGroup>
+                        <avalonDock:LayoutAnchorablePaneGroup DockMinWidth="800">
+                            <avalonDock:LayoutAnchorablePane DockMinHeight="600">
+                                <avalonDock:LayoutAnchorable Title="Halo">
+                                    <Grid Name="HaloContainerGrid"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch">
+                                        <Grid HorizontalAlignment="Left"
+                                              VerticalAlignment="Top">
+                                            <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
+                                                                Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
+                                                                Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
+                                        </Grid>
+                                    </Grid>
+                                </avalonDock:LayoutAnchorable>
+                            </avalonDock:LayoutAnchorablePane>
+                        </avalonDock:LayoutAnchorablePaneGroup>
                     </avalonDock:LayoutPanel>
                 </avalonDock:LayoutRoot>
             </avalonDock:DockingManager>

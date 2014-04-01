@@ -16,9 +16,6 @@ namespace MetroIde.Pages
         public StartPage()
         {
             InitializeComponent();
-
-            CbClosePageOnLoad.IsChecked = App.MetroIdeStorage.MetroIdeSettings.StartpageHideOnLaunch;
-            CbShowOnStartUp.IsChecked = App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad;
         }
 
         public void LoadRecentItem(object sender, RoutedEventArgs e)
@@ -106,21 +103,5 @@ namespace MetroIde.Pages
                     Margin = new Thickness(20, 0, 0, 0)
                 });
         }
-
-        #region Settings Modification
-
-        private void cbClosePageOnLoad_Update(object sender, RoutedEventArgs e)
-        {
-            if (CbClosePageOnLoad.IsChecked != null)
-                App.MetroIdeStorage.MetroIdeSettings.StartpageHideOnLaunch = (bool) CbClosePageOnLoad.IsChecked;
-        }
-
-        private void cbShowOnStartUp_Update(object sender, RoutedEventArgs e)
-        {
-            if (CbShowOnStartUp.IsChecked != null)
-                App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad = (bool) CbShowOnStartUp.IsChecked;
-        }
-
-        #endregion
     }
 }

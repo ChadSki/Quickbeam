@@ -78,14 +78,7 @@ namespace MetroIde
             UpdateTitleText("");
             UpdateStatusText("Ready");
 
-            //Window_StateChanged(null, null);
-            ClearTabs();
-
-            if (App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad)
-            {
-                AddTabModule(TabGenre.StartPage);
-                AddTabModule(TabGenre.HaloPage);
-            }
+            AddTabModule(TabGenre.StartPage);
 
             // Do sidebar Loading stuff
             //SwitchXBDMSidebarLocation(App.AssemblyStorage.AssemblySettings.applicationXBDMSidebarLocation);
@@ -613,28 +606,23 @@ namespace MetroIde
 
         public void AddTabModule(TabGenre tabG, bool singleInstance = true)
         {
-            var tab = new LayoutDocument();
-
+            LayoutContent tab;
             switch (tabG)
             {
                 case TabGenre.StartPage:
-                    tab.Title = "Start Page";
-                    tab.Content = new StartPage();
+                    tab = new LayoutAnchorable { Title = "Start Page", Content = new StartPage() };
                     break;
                 case TabGenre.Welcome:
-                    tab.Title = "Welcome";
-                    tab.Content = new WelcomePage();
+                    tab = new LayoutAnchorable { Title = "Welcome", Content = new WelcomePage() };
                     break;
                 case TabGenre.Settings:
-                    tab.Title = "Settings";
-                    tab.Content = new SettingsPage();
+                    tab = new LayoutAnchorable { Title = "Settings", Content = new SettingsPage() };
                     break;
-                case TabGenre.HaloPage:
-                    tab.Title = "Halo";
-                    tab.Content = new HaloPage();
-                    break;
+                default:
+                    return;
             }
 
+            // Select the single tab rather than create a new one
             if (singleInstance)
                 foreach (LayoutContent tabb in DocumentManager.Children.Where(tabb => tabb.Title == tab.Title))
                 {

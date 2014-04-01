@@ -471,7 +471,7 @@
                             <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                 <Grid.Background>
                                     <ImageBrush TileMode="Tile" Stretch="None"
-                                                ImageSource="/Assembly;component/Metro/Images/DockPaneImageTile.png" />
+                                                ImageSource="/Images\DockPaneImageTile.png" />
                                 </Grid.Background>
                             </Grid>
 
@@ -1256,7 +1256,7 @@
                                             ToolTip="{x:Static avalonDockProperties:Resources.Window_Restore}"
                                             Grid.Column="2">
                                             <Image x:Name="PART_ImgPinRestore"
-                                                   Source="/Assembly;component/Metro/Controls/AvalonDockMetro/Images/PinRestore.png"
+                                                   Source="/Controls/AvalonDockMetro/Images/PinRestore.png"
                                                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="13" />
                                         </Button>
 

@@ -59,13 +59,6 @@
 
                 <Rectangle Fill="#FF363639" Height="1" Margin="0,25,0,0" d:LayoutOverrides="Height" />
             </StackPanel>
-
-            <StackPanel VerticalAlignment="Bottom" Grid.Row="2" Margin="25, 0, 0, 15">
-                <CheckBox x:Name="CbClosePageOnLoad" Content="Close page after content loads" Margin="0,5,0,0"
-                              Checked="cbClosePageOnLoad_Update" Unchecked="cbClosePageOnLoad_Update" />
-                <CheckBox x:Name="CbShowOnStartUp" Content="Show page on startup" Margin="0,5,0,0" IsChecked="True"
-                              Checked="cbShowOnStartUp_Update" Unchecked="cbShowOnStartUp_Update" />
-            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

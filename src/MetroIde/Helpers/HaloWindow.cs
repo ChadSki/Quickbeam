@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroIde.Helpers.Native;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -30,7 +31,7 @@ namespace MetroIde.Helpers
                 0, 0,
                 _hostWidth, _hostHeight,
                 hwndParent.Handle,
-                (IntPtr)0x00000002, //TODO ?
+                IntPtr.Zero,
                 IntPtr.Zero,
                 0);
 
