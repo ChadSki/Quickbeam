@@ -12,6 +12,7 @@ namespace MetroIde.Helpers.Native
             SwpNozorder = 0x0004,
             WsCaption = 0x00C00000,
             WsChild = 0x40000000,
+            WsClipchildren = 0x02000000,
             WsThickframe = 0x00040000,
             WsVisible = 0x10000000;
 

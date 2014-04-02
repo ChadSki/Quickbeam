@@ -27,7 +27,7 @@ namespace MetroIde.Helpers
 
             _hwndHost = NativeMethods.CreateWindowEx(
                 0, "static", "",
-                NativeMethods.WsChild | NativeMethods.WsVisible,
+                NativeMethods.WsChild | NativeMethods.WsVisible | NativeMethods.WsClipchildren,
                 0, 0,
                 _hostWidth, _hostHeight,
                 hwndParent.Handle,
