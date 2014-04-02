@@ -8,13 +8,18 @@ namespace MetroIde.Helpers.Native
         public const int
             GwlStyle = -16,
             SwShow = 5,
-            SwpNoactivate = 0x0010,
-            SwpNozorder = 0x0004,
+            SwpNoActivate = 0x0010,
+            SwpNoZOrder = 0x0004,
+            SwpNoCopyBits = 0x0100,
             WsCaption = 0x00C00000,
             WsChild = 0x40000000,
-            WsClipchildren = 0x02000000,
+            WsClipChildren = 0x02000000,
+            WsClipSiblings = 0x04000000,
             WsThickframe = 0x00040000,
             WsVisible = 0x10000000;
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("user32.dll", EntryPoint = "CreateWindowEx", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CreateWindowEx(int dwExStyle, string lpszClassName, string lpszWindowName, int style,

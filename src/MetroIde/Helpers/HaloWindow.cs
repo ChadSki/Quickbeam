@@ -27,7 +27,7 @@ namespace MetroIde.Helpers
 
             _hwndHost = NativeMethods.CreateWindowEx(
                 0, "static", "",
-                NativeMethods.WsChild | NativeMethods.WsVisible | NativeMethods.WsClipchildren,
+                NativeMethods.WsChild | NativeMethods.WsVisible | NativeMethods.WsClipChildren,
                 0, 0,
                 _hostWidth, _hostHeight,
                 hwndParent.Handle,
@@ -58,7 +58,7 @@ namespace MetroIde.Helpers
                 NativeMethods.SetWindowLong(_haloProcess.MainWindowHandle, NativeMethods.GwlStyle, style);
 
                 // resize
-                NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, 800, 600, NativeMethods.SwpNozorder | NativeMethods.SwpNoactivate);
+                NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, 800, 600, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
 
                 //TODO force render trick
             });
