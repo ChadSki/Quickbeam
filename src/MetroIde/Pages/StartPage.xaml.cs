@@ -67,28 +67,9 @@ namespace MetroIde.Pages
                     };
                     btnRecent.Click += LoadRecentItem;
 
-                    if (entry.FileType == Settings.RecentFileType.Cache &&
-                        App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsMap)
+                    if (entry.FileType == Settings.RecentFileType.Cache)
                     {
                         btnRecent.Content = string.Format("{0} - {1}", entry.FileGame, entry.FileName.Replace("_", "__"));
-                        PanelRecents.Children.Add(btnRecent);
-                    }
-                    else if (entry.FileType == Settings.RecentFileType.Blf &&
-                             App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsBlf)
-                    {
-                        btnRecent.Content = string.Format("Map Image - {0}", entry.FileName.Replace("_", "__"));
-                        PanelRecents.Children.Add(btnRecent);
-                    }
-                    else if (entry.FileType == Settings.RecentFileType.MapInfo &&
-                             App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsMapInfo)
-                    {
-                        btnRecent.Content = string.Format("Map Info - {0}", entry.FileName.Replace("_", "__"));
-                        PanelRecents.Children.Add(btnRecent);
-                    }
-                    else if (entry.FileType == Settings.RecentFileType.Campaign &&
-                             App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsCampaign)
-                    {
-                        btnRecent.Content = string.Format("Campaign - {0}", entry.FileName.Replace("_", "__"));
                         PanelRecents.Children.Add(btnRecent);
                     }
 

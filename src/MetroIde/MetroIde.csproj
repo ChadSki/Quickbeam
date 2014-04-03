@@ -314,7 +314,6 @@
     <Compile Include="Dialogs\MetroMessageBoxList.cs" />
     <Compile Include="Dialogs\MetroUpdateDialog.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
-    <Compile Include="Helpers\FileDefaults.cs" />
     <Compile Include="Helpers\JumpLists.cs" />
     <Compile Include="Helpers\Native\ShellChanges.cs" />
     <Compile Include="Helpers\Net\HttpExtensions.cs" />

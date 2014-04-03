@@ -84,9 +84,6 @@ namespace MetroIde.Helpers
 
                 // Update Accent
                 _metroIdeSettings.UpdateAssemblyAccent();
-
-                // Update File Defaults
-                FileDefaults.UpdateFileDefaults();
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using MetroIde.Helpers.Native;
+﻿using System.IO;
+using MetroIde.Helpers.Native;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -38,13 +39,18 @@ namespace MetroIde.Helpers
             // This code uses Thread.Sleep, so finish on a background thread
             Task.Factory.StartNew(() =>
             {
-                var psi = new ProcessStartInfo(@"D:\Program Files (x86)\Microsoft Games\Halo\halo.exe")
+                string haloExePath = App.MetroIdeStorage.MetroIdeSettings.HaloExePath;
+                string haloDirectory = Path.GetDirectoryName(haloExePath);
+
+                if (haloDirectory == null) return;
+
+                _haloProcess = Process.Start(new ProcessStartInfo(haloExePath)
                 {
-                    WorkingDirectory = @"D:\Program Files (x86)\Microsoft Games\Halo\",
+                    WorkingDirectory = haloDirectory,
                     Arguments = string.Format(@"-console -window -vidmode {0},{1},60", 800, 600),
                     WindowStyle = ProcessWindowStyle.Minimized
-                };
-                _haloProcess = Process.Start(psi);
+                });
+
                 _haloProcess.WaitForInputIdle();
                 Thread.Sleep(2000);
 

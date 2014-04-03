@@ -59,9 +59,6 @@ namespace MetroIde
             // Try and delete all temp data
             VariousFunctions.EmptyUpdaterLocations();
 
-            // Update File Defaults
-            FileDefaults.UpdateFileDefaults();
-
             // Set closing method
             Current.Exit += (o, args) =>
             {

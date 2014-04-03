@@ -21,8 +21,6 @@ namespace MetroIde.Pages
 
             // Setup Combo Boxes
             ComboBoxAccents.ItemsSource = Enum.GetValues(typeof (Settings.Accents));
-            ComboBoxMapInfoDockSide.ItemsSource = Enum.GetValues(typeof (Settings.MapInfoDockSide));
-            ComboBoxMapTagSort.ItemsSource = Enum.GetValues(typeof (Settings.TagSort));
 
             // Load UI
             btnTabSelection_Clicked(BtnSelectGeneral, null);
@@ -61,23 +59,21 @@ namespace MetroIde.Pages
         {
             BtnSelectGeneral.IsChecked = false;
             BtnSelectMapEdit.IsChecked = false;
-            BtnSelectPlugins.IsChecked = false;
-            BtnSelectStrtpge.IsChecked = false;
         }
 
         #endregion
 
         #region Inline Helpers
-        private void btnBrowseXsd_Click(object sender, RoutedEventArgs e)
+        private void BtnBrowseHaloExe_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog
             {
-                Filter = "Executable Files|*.exe|All Files|*.*",
-                FileName = App.MetroIdeStorage.MetroIdeSettings.XsdPath,
-                Title = "Open xsd.exe"
+                Filter = @"Executable Files|*.exe|All Files|*.*",
+                FileName = App.MetroIdeStorage.MetroIdeSettings.HaloExePath,
+                Title = @"Open halo.exe"
             };
             if (dialog.ShowDialog() == DialogResult.OK)
-                App.MetroIdeStorage.MetroIdeSettings.XsdPath = dialog.FileName;
+                App.MetroIdeStorage.MetroIdeSettings.HaloExePath = dialog.FileName;
         }
 
         #endregion
