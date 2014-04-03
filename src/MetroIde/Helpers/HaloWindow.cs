@@ -42,20 +42,20 @@ namespace MetroIde.Helpers
                 {
                     WorkingDirectory = @"D:\Program Files (x86)\Microsoft Games\Halo\",
                     Arguments = string.Format(@"-console -window -vidmode {0},{1},60", 800, 600),
-                    WindowStyle = ProcessWindowStyle.Normal
+                    WindowStyle = ProcessWindowStyle.Minimized
                 };
                 _haloProcess = Process.Start(psi);
                 _haloProcess.WaitForInputIdle();
                 Thread.Sleep(2000);
 
-                // reveal and relocate into our window
-                NativeMethods.ShowWindow(_haloProcess.MainWindowHandle, NativeMethods.SwShow);
-                NativeMethods.SetParent(_haloProcess.MainWindowHandle, _hwndHost);
-
                 // remove control box
                 int style = NativeMethods.GetWindowLong(_haloProcess.MainWindowHandle, NativeMethods.GwlStyle);
                 style = style & ~NativeMethods.WsCaption & ~NativeMethods.WsThickframe;
                 NativeMethods.SetWindowLong(_haloProcess.MainWindowHandle, NativeMethods.GwlStyle, style);
+
+                // reveal and relocate into our window
+                NativeMethods.SetParent(_haloProcess.MainWindowHandle, _hwndHost);
+                NativeMethods.ShowWindow(_haloProcess.MainWindowHandle, NativeMethods.SwShow);
 
                 // resize
                 NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, 800, 600, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
