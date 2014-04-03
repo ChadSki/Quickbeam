@@ -9,7 +9,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type avalondock:LayoutDocumentPaneControl}">
-                                <Grid ClipToBounds="True" SnapsToDevicePixels="True"
+                                <Grid SnapsToDevicePixels="True"
                                       KeyboardNavigation.TabNavigation="Local">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -249,7 +249,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type avalondock:LayoutAnchorablePaneControl}">
-                                <Grid ClipToBounds="True" SnapsToDevicePixels="True"
+                                <Grid SnapsToDevicePixels="True"
                                       KeyboardNavigation.TabNavigation="Local">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
