@@ -109,6 +109,7 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+    <Compile Include="Helpers\DpiDecorator.cs" />
     <Compile Include="Helpers\HaloWindow.cs" />
     <Compile Include="Helpers\Native\NativeMethods.cs" />
     <Compile Include="Home.xaml.cs">
@@ -334,7 +335,6 @@
     <Compile Include="Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Native\DwmDropShadow.cs" />
     <Compile Include="Helpers\Native\MonitorWorkArea.cs" />
     <Compile Include="Helpers\Native\WindowMovement.cs" />
     <Page Include="Controls\ActionButtons\CloseButton.xaml">

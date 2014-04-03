@@ -12,8 +12,6 @@ namespace MetroIde.Dialogs.ControlDialogs
         public MessageBoxOptions(string title, string message, MetroMessageBox.MessageBoxButtons buttons)
         {
             InitializeComponent();
-            DwmDropShadow.DropShadowToWindow(this);
-
             lblTitle.Text = title;
             lblSubInfo.Text = message;
 

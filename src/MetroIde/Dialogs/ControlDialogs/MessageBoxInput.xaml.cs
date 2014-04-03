@@ -16,8 +16,6 @@ namespace MetroIde.Dialogs.ControlDialogs
         public MessageBoxInput(string title, string message, string placeholder, string regexMatch, string defaultText)
         {
             InitializeComponent();
-            DwmDropShadow.DropShadowToWindow(this);
-
             lblTitle.Text = title;
             lblSubInfo.Text = message;
             lblPlaceholder.Text = placeholder;

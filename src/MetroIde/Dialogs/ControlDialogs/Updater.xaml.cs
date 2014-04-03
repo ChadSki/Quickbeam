@@ -21,12 +21,10 @@ namespace MetroIde.Dialogs.ControlDialogs
         public Updater(UpdateInfo info, bool available)
         {
             InitializeComponent();
-            DwmDropShadow.DropShadowToWindow(this);
-
             _info = info;
             if (!available)
             {
-                lblAvailable.Text = "Your version of MetroIde is up-to-date.";
+                lblAvailable.Text = "Your version of Quickbeam is up-to-date.";
                 lblAvailable.FontWeight = FontWeights.Normal;
                 updateButtons.Visibility = Visibility.Collapsed;
                 noUpdate.Visibility = Visibility.Visible;

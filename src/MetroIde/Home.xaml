@@ -110,19 +110,21 @@
                         <avalonDock:LayoutDocumentPaneGroup>
                             <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
                         </avalonDock:LayoutDocumentPaneGroup>
-                        <avalonDock:LayoutAnchorablePaneGroup DockMinWidth="800">
-                            <avalonDock:LayoutAnchorablePane DockMinHeight="600">
+                        <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
+                            <avalonDock:LayoutAnchorablePane>
                                 <avalonDock:LayoutAnchorable Title="Halo">
-                                    <Grid Name="HaloContainerGrid"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch">
-                                        <Grid HorizontalAlignment="Left"
-                                              VerticalAlignment="Top">
-                                            <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
-                                                                Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
-                                                                Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
+                                    <helpers:DpiDecorator>
+                                        <Grid Name="HaloContainerGrid"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch">
+                                            <Grid HorizontalAlignment="Left"
+                                                  VerticalAlignment="Top">
+                                                <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
+                                                                    Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
+                                                                    Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
+                                    </helpers:DpiDecorator>
                                 </avalonDock:LayoutAnchorable>
                             </avalonDock:LayoutAnchorablePane>
                         </avalonDock:LayoutAnchorablePaneGroup>

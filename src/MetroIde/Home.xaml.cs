@@ -73,8 +73,6 @@ namespace MetroIde
         {
             InitializeComponent();
 
-            DwmDropShadow.DropShadowToWindow(this);
-
             UpdateTitleText("");
             UpdateStatusText("Ready");
 
