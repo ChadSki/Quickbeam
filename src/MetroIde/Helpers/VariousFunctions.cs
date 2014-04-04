@@ -28,25 +28,6 @@ namespace MetroIde.Helpers
             return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        public static void EmptyUpdaterLocations()
-        {
-            string tempDir = Path.GetTempPath();
-            string updaterPath = Path.Combine(tempDir, "MetroIdeUpdateManager.exe");
-            string dllPath = Path.Combine(tempDir, "ICSharpCode.SharpZipLib.dll");
-
-            // Wait for the updater to close
-            Process[] updaterProcesses = Process.GetProcessesByName("MetroIdeUpdateManager.exe");
-            foreach (Process process in updaterProcesses.Where(process => !process.HasExited))
-            {
-                process.WaitForExit();
-            }
-
-            if (File.Exists(updaterPath))
-                File.Delete(updaterPath);
-            if (File.Exists(dllPath))
-                File.Delete(dllPath);
-        }
-
         /// <summary>
         ///     Gets the parent directory of the application's exe
         /// </summary>

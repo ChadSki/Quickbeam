@@ -15,11 +15,8 @@ namespace MetroIde.Dialogs.ControlDialogs
         public Exception(System.Exception ex)
         {
             InitializeComponent();
-            DwmDropShadow.DropShadowToWindow(this);
             _exception = ex;
-
             lblContent.Text = ex.ToString();
-
             Activate();
         }
 

@@ -17,8 +17,8 @@ namespace MetroIde.Helpers
 
             // Get File Path
             string jsonString = null;
-            if (File.Exists("MetroIdeSettings.json"))
-                jsonString = File.ReadAllText("MetroIdeSettings.json");
+            if (File.Exists("QuickbeamSettings.json"))
+                jsonString = File.ReadAllText("QuickbeamSettings.json");
 
             try
             {
@@ -80,13 +80,10 @@ namespace MetroIde.Helpers
                 string jsonData = JsonConvert.SerializeObject(value);
 
                 // Get File Path
-                File.WriteAllText("MetroIdeSettings.json", jsonData);
+                File.WriteAllText("QuickbeamSettings.json", jsonData);
 
                 // Update Accent
                 _metroIdeSettings.UpdateAssemblyAccent();
-
-                // Update File Defaults
-                FileDefaults.UpdateFileDefaults();
             }
         }
     }

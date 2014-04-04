@@ -1,32 +1,38 @@
-#################
-## Security
-#################
+############
+## Halo
+############
+*.map
 
-# Removed for security reasons
-data_vault.php
+#############
+## Python
+#############
+*.py[co]
 
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
 
-#################
-## Sublime Text
-#################
+# Installer logs
+pip-log.txt
 
-# Sublime Workspace files
-.sublime-workspace
+# Unit test / coverage reports
+.coverage
+.tox
 
-#################
-## From SVN/TFS
-#################
+#Translations
+*.mo
 
-# Original Files
-*.orig
-
-#################
-## MonoDevelop
-#################
-
-# User-specific files
-*.userprefs
-*.mdb
+#Mr Developer
+.mr.developer.cfg
 
 #################
 ## Visual Studio
@@ -40,20 +46,11 @@ data_vault.php
 *.user
 *.sln.docstates
 
-# Some optinal code in assembly required XDevkit.dll, which is copyrighted code from Microsoft. We must remove it so we don't distribute copyrighted code. If you need it, you must find it on your own.
-XDevkit.dll
-xdevkit.dll
-
-# Remove build definitions/plugins for private builds of Halo
-[Aa]ssembly/[Pp]lugins/[Hh]alo4[Nn]et[Tt]est/
-[Bb]lam[Cc]ache/[Ff]ormats/[Hh]alo4_[Nn]et[Tt]est.xml
-
 # Build results
 [Dd]ebug/
 [Rr]elease/
 *_i.c
 *_p.c
-*.lst
 *.ilk
 *.meta
 *.obj
@@ -70,9 +67,8 @@ xdevkit.dll
 *.vspscc
 .builds
 *.dotCover
-*.DotSettings
 
-# TODO: If you have NuGet Package Restore enabled, uncomment this
+## TODO: If you have NuGet Package Restore enabled, uncomment this
 packages/
 
 # Visual C++ cache files
@@ -85,10 +81,12 @@ ipch/
 # Visual Studio profiler
 *.psess
 *.vsp
-*.vspx
 
-# ReSharper is a .NET coding add-in, and is awesome
+# ReSharper is a .NET coding add-in
 _ReSharper*
+
+# VMWare debugging tools
+*.idc
 
 # Installshield output folder
 [Ee]xpress
@@ -124,7 +122,6 @@ _UpgradeReport_Files/
 Backup*/
 UpgradeLog*.XML
 
-
 ############
 ## Windows
 ############
@@ -134,3 +131,16 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
+
+############
+## OS
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Windows folder config file
+Desktop.ini
+
+# Mac crap
+.DS_Store

@@ -7,12 +7,12 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("MetroIde")]
-[assembly: AssemblyDescription("WPF Template for Metro-styled IDE-like applications")]
+[assembly: AssemblyTitle("Quickbeam")]
+[assembly: AssemblyDescription("Halo PC Memory Editor")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MetroIdeTemplate")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("Quickbeam")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,6 +53,6 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.1.*")]
-[assembly: AssemblyFileVersion("1.1.0")]
+[assembly: AssemblyVersion("0.3.*")]
+[assembly: AssemblyFileVersion("0.3.0")]
 [assembly: NeutralResourcesLanguage("en-US")]

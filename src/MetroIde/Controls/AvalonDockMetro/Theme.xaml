@@ -102,7 +102,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type avalonDockControls:LayoutDocumentPaneControl}">
-                    <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                    <Grid SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -313,7 +313,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type avalonDockControls:LayoutAnchorablePaneControl}">
-                    <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                    <Grid SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
@@ -471,7 +471,8 @@
                             <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                 <Grid.Background>
                                     <ImageBrush TileMode="Tile" Stretch="None"
-                                                ImageSource="/Assembly;component/Metro/Images/DockPaneImageTile.png" />
+                                                ImageSource="/Images\DockPaneImageTile.png" />
+                                    <!--TODO Fix ImageSource so this links correctly!-->
                                 </Grid.Background>
                             </Grid>
 
@@ -542,6 +543,7 @@
                                     Style="{StaticResource AvalonDock_ThemeMetro_ButtonStyle}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
+                                    Width="15" Height="15"
                                     Command="{Binding Path=LayoutItem.HideCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     Visibility="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                                     ToolTip="{x:Static avalonDockProperties:Resources.Anchorable_BtnClose_Hint}">
@@ -1256,7 +1258,7 @@
                                             ToolTip="{x:Static avalonDockProperties:Resources.Window_Restore}"
                                             Grid.Column="2">
                                             <Image x:Name="PART_ImgPinRestore"
-                                                   Source="/Assembly;component/Metro/Controls/AvalonDockMetro/Images/PinRestore.png"
+                                                   Source="/Controls/AvalonDockMetro/Images/PinRestore.png"
                                                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="13" />
                                         </Button>
 

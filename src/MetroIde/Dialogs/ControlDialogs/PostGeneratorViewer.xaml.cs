@@ -11,8 +11,6 @@ namespace MetroIde.Dialogs.ControlDialogs
         public PostGeneratorViewer(string bbcode, string author)
         {
             InitializeComponent();
-            DwmDropShadow.DropShadowToWindow(this);
-
             txtGeneratedBBCode.Text = bbcode;
             lblTitle.Text = string.Format("Hey {0}, your post has been Generated.", author);
         }

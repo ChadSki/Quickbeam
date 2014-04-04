@@ -19,19 +19,8 @@ namespace MetroIde.Helpers
         private bool _applicationSizeMaximize;
         private double _applicationSizeWidth = 1100;
         private bool _applicationUpdateOnStartup = true;
-        private bool _defaultAmp;
-        private bool _defaultBlf;
-        private bool _defaultCif;
-        private bool _defaultMap;
-        private bool _defaultMif;
         private Home _homeWindow;
-        private bool _startpageHideOnLaunch;
-        private bool _startpageShowOnLoad = true;
-        private bool _startpageShowRecentsBlf = true;
-        private bool _startpageShowRecentsCampaign = true;
-        private bool _startpageShowRecentsMap = true;
-        private bool _startpageShowRecentsMapInfo = true;
-        private string _xsdPath = "";
+        private string _haloExePath = "";
 
         #region Enums
 
@@ -106,7 +95,7 @@ namespace MetroIde.Helpers
 
             // Write Changes
             string jsonData = JsonConvert.SerializeObject(this);
-            File.WriteAllText("MetroIdeSettings.json", jsonData);
+            File.WriteAllText("QuickbeamSettings.json", jsonData);
 
             return true;
         }
@@ -160,101 +149,10 @@ namespace MetroIde.Helpers
             set { SetField(ref _applicationSizeMaximize, value, "ApplicationSizeMaximize"); }
         }
 
-        public bool StartpageShowOnLoad
+        public string HaloExePath
         {
-            get { return _startpageShowOnLoad; }
-            set { SetField(ref _startpageShowOnLoad, value, "StartpageShowOnLoad"); }
-        }
-
-        public bool StartpageHideOnLaunch
-        {
-            get { return _startpageHideOnLaunch; }
-            set { SetField(ref _startpageHideOnLaunch, value, "StartpageHideOnLaunch"); }
-        }
-
-        public bool StartpageShowRecentsMap
-        {
-            get { return _startpageShowRecentsMap; }
-            set { SetField(ref _startpageShowRecentsMap, value, "StartpageShowRecentsMap"); }
-        }
-
-        public bool StartpageShowRecentsBlf
-        {
-            get { return _startpageShowRecentsBlf; }
-            set { SetField(ref _startpageShowRecentsBlf, value, "StartpageShowRecentsBlf"); }
-        }
-
-        public bool StartpageShowRecentsMapInfo
-        {
-            get { return _startpageShowRecentsMapInfo; }
-            set { SetField(ref _startpageShowRecentsMapInfo, value, "StartpageShowRecentsMapInfo"); }
-        }
-
-        public bool StartpageShowRecentsCampaign
-        {
-            get { return _startpageShowRecentsCampaign; }
-            set { SetField(ref _startpageShowRecentsCampaign, value, "StartpageShowRecentsCampaign"); }
-        }
-
-        public string XsdPath
-        {
-            get { return _xsdPath; }
-            set { SetField(ref _xsdPath, value, "XsdPath"); }
-        }
-
-        public bool DefaultMap
-        {
-            get { return _defaultMap; }
-            set
-            {
-                SetField(ref _defaultMap, value, "DefaultMap");
-                if (Loaded)
-                    FileDefaults.UpdateFileDefaults();
-            }
-        }
-
-        public bool DefaultBlf
-        {
-            get { return _defaultBlf; }
-            set
-            {
-                SetField(ref _defaultBlf, value, "DefaultBlf");
-                if (Loaded)
-                    FileDefaults.UpdateFileDefaults();
-            }
-        }
-
-        public bool DefaultMif
-        {
-            get { return _defaultMif; }
-            set
-            {
-                SetField(ref _defaultMif, value, "DefaultMif");
-                if (Loaded)
-                    FileDefaults.UpdateFileDefaults();
-            }
-        }
-
-        public bool DefaultCif
-        {
-            get { return _defaultCif; }
-            set
-            {
-                SetField(ref _defaultCif, value, "DefaultCif");
-                if (Loaded)
-                    FileDefaults.UpdateFileDefaults();
-            }
-        }
-
-        public bool DefaultAmp
-        {
-            get { return _defaultAmp; }
-            set
-            {
-                SetField(ref _defaultAmp, value, "DefaultAmp");
-                if (Loaded)
-                    FileDefaults.UpdateFileDefaults();
-            }
+            get { return _haloExePath; }
+            set { SetField(ref _haloExePath, value, "HaloExePath"); }
         }
 
         [JsonIgnore]
@@ -273,14 +171,14 @@ namespace MetroIde.Helpers
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
                 {
-                    Source = new Uri("/MetroIde;component/Themes/" + theme + ".xaml", UriKind.Relative)
+                    Source = new Uri("/Quickbeam;component/Themes/" + theme + ".xaml", UriKind.Relative)
                 });
             }
             catch
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
                 {
-                    Source = new Uri("/MetroIde;component/Themes/Blue.xaml", UriKind.Relative)
+                    Source = new Uri("/Quickbeam;component/Themes/Blue.xaml", UriKind.Relative)
                 });
             }
         }

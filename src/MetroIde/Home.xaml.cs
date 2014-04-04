@@ -46,11 +46,6 @@ namespace MetroIde
                             StartupDetermineType(commandArgs[1]);
                         break;
 
-                    case "update":
-                        // Show Update
-                        menuHelpUpdater_Click(null, null);
-                        break;
-
                     case "about":
                         // Show About
                         menuHelpAbout_Click(null, null);
@@ -73,16 +68,10 @@ namespace MetroIde
         {
             InitializeComponent();
 
-            DwmDropShadow.DropShadowToWindow(this);
-
             UpdateTitleText("");
             UpdateStatusText("Ready");
 
-            //Window_StateChanged(null, null);
-            ClearTabs();
-
-            if (App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad)
-                AddTabModule(TabGenre.StartPage);
+            AddTabModule(TabGenre.StartPage);
 
             // Do sidebar Loading stuff
             //SwitchXBDMSidebarLocation(App.AssemblyStorage.AssemblySettings.applicationXBDMSidebarLocation);
@@ -115,17 +104,6 @@ namespace MetroIde
                 hwndSource.AddHook(WindowProc);
 
             ProcessCommandLineArgs(Environment.GetCommandLineArgs());
-
-            if (App.MetroIdeStorage.MetroIdeSettings.ApplicationUpdateOnStartup)
-                StartUpdateCheck();
-        }
-
-        private void StartUpdateCheck()
-        {
-            var worker = new BackgroundWorker();
-            worker.DoWork += CheckForUpdates;
-            worker.RunWorkerCompleted += UpdateCheckCompleted;
-            worker.RunWorkerAsync();
         }
 
         private void StartupDetermineType(string path)
@@ -159,24 +137,6 @@ namespace MetroIde
 
         #endregion
 
-        #region Updates
-        private void CheckForUpdates(object sender, DoWorkEventArgs e)
-        {
-            // Grab JSON Update package from the server
-            e.Result = Updates.GetUpdateInfo();
-        }
-
-        private void UpdateCheckCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled || e.Error != null)
-                return;
-
-            var updateInfo = (UpdateInfo) e.Result;
-            if (Updater.UpdateAvailable(updateInfo))
-                MetroUpdateDialog.Show(updateInfo, true);
-        }
-
-        #endregion
 
         #region MenuButtons
         // File
@@ -200,12 +160,6 @@ namespace MetroIde
         private void menuHelpAbout_Click(object sender, RoutedEventArgs e)
         {
             MetroAbout.Show();
-        }
-
-        private void menuHelpUpdater_Click(object sender, RoutedEventArgs e)
-        {
-            var thrd = new Thread(Updater.BeginUpdateProcess);
-            thrd.Start();
         }
 
         // Goodbye Sweet Evelyn
@@ -247,23 +201,8 @@ namespace MetroIde
             var yAdjust = Height + e.VerticalChange;
             var xAdjust = Width + e.HorizontalChange;
 
-            if (xAdjust > MinWidth)
-            {
-                Width = xAdjust;
-            }
-            else
-            {
-                Width = MinWidth;
-            }
-
-            if (yAdjust > MinHeight)
-            {
-                Height = yAdjust;
-            }
-            else
-            {
-                Height = MinHeight;
-            }
+            Width = xAdjust > MinWidth ? xAdjust : MinWidth;
+            Height = yAdjust > MinHeight ? yAdjust : MinHeight;
         }
 
         public void ResizeBottomLeftThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -291,14 +230,7 @@ namespace MetroIde
                 }
             }
 
-            if (yAdjust > MinHeight)
-            {
-                Height = yAdjust;
-            }
-            else
-            {
-                Height = MinHeight;
-            }
+            Height = yAdjust > MinHeight ? yAdjust : MinHeight;
         }
 
         public void ResizeTopRightThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -306,14 +238,7 @@ namespace MetroIde
             var yAdjust = Height - e.VerticalChange;
             var xAdjust = Width + e.HorizontalChange;
 
-            if (xAdjust > MinWidth)
-            {
-                Width = xAdjust;
-            }
-            else
-            {
-                Width = MinWidth;
-            }
+            Width = xAdjust > MinWidth ? xAdjust : MinWidth;
 
             if (yAdjust > MinHeight)
             {
@@ -467,16 +392,16 @@ namespace MetroIde
             switch (WindowState)
             {
                 case WindowState.Normal:
-                    borderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
-                    btnActionRestore.Visibility = Visibility.Collapsed;
-                    btnActionMaximize.Visibility =
-                        homeResizing.Visibility = Visibility.Visible;
+                    BorderFrame.BorderThickness = new Thickness(1, 1, 1, 23);
+                    BtnActionRestore.Visibility = Visibility.Collapsed;
+                    BtnActionMaximize.Visibility =
+                        HomeResizing.Visibility = Visibility.Visible;
                     break;
                 case WindowState.Maximized:
-                    borderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
-                    btnActionRestore.Visibility = Visibility.Visible;
-                    btnActionMaximize.Visibility =
-                        homeResizing.Visibility = Visibility.Collapsed;
+                    BorderFrame.BorderThickness = new Thickness(0, 0, 0, 23);
+                    BtnActionRestore.Visibility = Visibility.Visible;
+                    BtnActionMaximize.Visibility =
+                        HomeResizing.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -497,18 +422,18 @@ namespace MetroIde
 
         private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
         {
-            var mmi = (Monitor_Workarea.MINMAXINFO) Marshal.PtrToStructure(lParam, typeof (Monitor_Workarea.MINMAXINFO));
+            var mmi = (MonitorWorkArea.MinMaxInfo) Marshal.PtrToStructure(lParam, typeof (MonitorWorkArea.MinMaxInfo));
 
             // Adjust the maximized size and position to fit the work area of the correct monitor
             const int monitorDefaulttonearest = 0x00000002;
-            IntPtr monitor = Monitor_Workarea.MonitorFromWindow(hwnd, monitorDefaulttonearest);
+            IntPtr monitor = MonitorWorkArea.MonitorFromWindow(hwnd, monitorDefaulttonearest);
 
             if (monitor != IntPtr.Zero)
             {
-                var monitorInfo = new Monitor_Workarea.MONITORINFO();
-                Monitor_Workarea.GetMonitorInfo(monitor, monitorInfo);
-                Monitor_Workarea.RECT rcWorkArea = monitorInfo.rcWork;
-                Monitor_Workarea.RECT rcMonitorArea = monitorInfo.rcMonitor;
+                var monitorInfo = new MonitorWorkArea.MonitorInfo();
+                MonitorWorkArea.GetMonitorInfo(monitor, monitorInfo);
+                MonitorWorkArea.Rect rcWorkArea = monitorInfo.rcWork;
+                MonitorWorkArea.Rect rcMonitorArea = monitorInfo.rcMonitor;
                 mmi.ptMaxPosition.x = Math.Abs(rcWorkArea.left - rcMonitorArea.left);
                 mmi.ptMaxPosition.y = Math.Abs(rcWorkArea.top - rcMonitorArea.top);
                 mmi.ptMaxSize.x = Math.Abs(rcWorkArea.right - rcWorkArea.left);
@@ -539,7 +464,7 @@ namespace MetroIde
         {
             {
                 ContentTypes.Map, new ContentFileHandler(
-                    "MetroIde - Open Blam Cache File",
+                    "Quickbeam - Open Blam Cache File",
                     "Blam Cache File (*.map)|*.map",
                     (home, file) => home.AddCacheTabModule(file))
             },
@@ -603,12 +528,13 @@ namespace MetroIde
 
             MemoryManager,
             VoxelConverter,
-            PostGenerator
+            PostGenerator,
+            HaloPage
         }
 
         public void ClearTabs()
         {
-            documentManager.Children.Clear();
+            DocumentManager.Children.Clear();
         }
 
         /// <summary>
@@ -618,9 +544,9 @@ namespace MetroIde
         public void AddCacheTabModule(string cacheLocation)
         {
             // Check Map isn't already open
-            foreach (LayoutContent tab in documentManager.Children.Where(tab => tab.ContentId == cacheLocation))
+            foreach (LayoutContent tab in DocumentManager.Children.Where(tab => tab.ContentId == cacheLocation))
             {
-                documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
+                DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
                 return;
             }
 
@@ -632,47 +558,59 @@ namespace MetroIde
             };
             /*newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
                 App.AssemblyStorage.AssemblySettings.HalomapTagSort);*/
-            documentManager.Children.Add(newCacheTab);
-            documentManager.SelectedContentIndex = documentManager.IndexOfChild(newCacheTab);
+            DocumentManager.Children.Add(newCacheTab);
+            DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(newCacheTab);
         }
 
         public void AddTabModule(TabGenre tabG, bool singleInstance = true)
         {
-            var tab = new LayoutDocument();
-
+            LayoutContent tab;
             switch (tabG)
             {
                 case TabGenre.StartPage:
-                    tab.Title = "Start Page";
-                    tab.Content = new StartPage();
+                    tab = new LayoutAnchorable { Title = "Start Page", Content = new StartPage() };
                     break;
                 case TabGenre.Welcome:
-                    tab.Title = "Welcome";
-                    tab.Content = new WelcomePage();
+                    tab = new LayoutAnchorable { Title = "Welcome", Content = new WelcomePage() };
                     break;
                 case TabGenre.Settings:
-                    tab.Title = "Settings";
-                    tab.Content = new SettingsPage();
+                    tab = new LayoutAnchorable { Title = "Settings", Content = new SettingsPage() };
                     break;
+                default:
+                    return;
             }
 
+            // Select the single tab rather than create a new one
             if (singleInstance)
-                foreach (LayoutContent tabb in documentManager.Children.Where(tabb => tabb.Title == tab.Title))
+                foreach (LayoutContent tabb in DocumentManager.Children.Where(tabb => tabb.Title == tab.Title))
                 {
-                    documentManager.SelectedContentIndex = documentManager.IndexOfChild(tabb);
+                    DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tabb);
                     return;
                 }
 
-            documentManager.Children.Add(tab);
-            documentManager.SelectedContentIndex = documentManager.IndexOfChild(tab);
+            DocumentManager.Children.Add(tab);
+            DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
+        }
+
+        public void AddHaloViewport()
+        {
+            // select existing, if available
+            foreach (var tabb in RightDockManager.Children.Where(tabb => tabb.Title == "Halo Viewport"))
+            {
+                RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tabb);
+                return;
+            }
+            var tab = new LayoutAnchorable { Title = "Halo Viewport", Content = new HaloPage() };
+            RightDockManager.Children.Add(tab);
+            RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tab);
         }
 
         private void dockManager_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (documentManager.SelectedContentIndex != _lastDocumentIndex)
+            if (DocumentManager.SelectedContentIndex != _lastDocumentIndex)
             {
                 // Selection Changed, lets do dis
-                LayoutContent tab = documentManager.SelectedContent;
+                LayoutContent tab = DocumentManager.SelectedContent;
 
                 if (tab != null)
                     UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", ""));
@@ -682,11 +620,11 @@ namespace MetroIde
 
                 if (tab == null)
                 {
-                    documentManager.SelectedContentIndex = 0;
+                    DocumentManager.SelectedContentIndex = 0;
                     UpdateTitleText("");
                 }
 
-                _lastDocumentIndex = documentManager.SelectedContentIndex;
+                _lastDocumentIndex = DocumentManager.SelectedContentIndex;
             }
         }
 
@@ -702,12 +640,12 @@ namespace MetroIde
         /// <param name="title">Current Title, Assembly shall add the rest for you.</param>
         public void UpdateTitleText(string title)
         {
-            string suffix = "MetroIde";
+            string suffix = "Quickbeam";
             if (!string.IsNullOrWhiteSpace(title))
                 suffix = " - " + suffix;
 
             Title = title + suffix;
-            lblTitle.Text = title + suffix;
+            LblTitle.Text = title + suffix;
         }
 
         /// <summary>

@@ -12,8 +12,6 @@ namespace MetroIde.Dialogs.ControlDialogs
         public About()
         {
             InitializeComponent();
-            DwmDropShadow.DropShadowToWindow(this);
-
             string version = VariousFunctions.GetApplicationVersion();
             lblTitle.Text = lblTitle.Text.Replace("{version}", version);
         }

@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using MetroIde.Helpers;
 using MetroIde.Dialogs;
+using Button = System.Windows.Controls.Button;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
 namespace MetroIde.Pages
 {
@@ -14,14 +16,6 @@ namespace MetroIde.Pages
         public StartPage()
         {
             InitializeComponent();
-
-            cbClosePageOnLoad.IsChecked = App.MetroIdeStorage.MetroIdeSettings.StartpageHideOnLaunch;
-            cbShowOnStartUp.IsChecked = App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad;
-        }
-
-        public bool Close()
-        {
-            return true;
         }
 
         public void LoadRecentItem(object sender, RoutedEventArgs e)
@@ -54,7 +48,7 @@ namespace MetroIde.Pages
 
         public void UpdateRecents()
         {
-            panelRecents.Children.Clear();
+            PanelRecents.Children.Clear();
 
             if (App.MetroIdeStorage.MetroIdeSettings.ApplicationRecents.Count != 0)
             {
@@ -73,36 +67,17 @@ namespace MetroIde.Pages
                     };
                     btnRecent.Click += LoadRecentItem;
 
-                    if (entry.FileType == Settings.RecentFileType.Cache &&
-                        App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsMap)
+                    if (entry.FileType == Settings.RecentFileType.Cache)
                     {
                         btnRecent.Content = string.Format("{0} - {1}", entry.FileGame, entry.FileName.Replace("_", "__"));
-                        panelRecents.Children.Add(btnRecent);
-                    }
-                    else if (entry.FileType == Settings.RecentFileType.Blf &&
-                             App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsBlf)
-                    {
-                        btnRecent.Content = string.Format("Map Image - {0}", entry.FileName.Replace("_", "__"));
-                        panelRecents.Children.Add(btnRecent);
-                    }
-                    else if (entry.FileType == Settings.RecentFileType.MapInfo &&
-                             App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsMapInfo)
-                    {
-                        btnRecent.Content = string.Format("Map Info - {0}", entry.FileName.Replace("_", "__"));
-                        panelRecents.Children.Add(btnRecent);
-                    }
-                    else if (entry.FileType == Settings.RecentFileType.Campaign &&
-                             App.MetroIdeStorage.MetroIdeSettings.StartpageShowRecentsCampaign)
-                    {
-                        btnRecent.Content = string.Format("Campaign - {0}", entry.FileName.Replace("_", "__"));
-                        panelRecents.Children.Add(btnRecent);
+                        PanelRecents.Children.Add(btnRecent);
                     }
 
                     recentsCount++;
                 }
             }
             else if (App.MetroIdeStorage.MetroIdeSettings.ApplicationRecents.Count == 0)
-                panelRecents.Children.Add(new TextBlock
+                PanelRecents.Children.Add(new TextBlock
                 {
                     Text = "It's lonely in here, get modding ;)",
                     Style = (Style) FindResource("GenericTextblock"),
@@ -110,29 +85,19 @@ namespace MetroIde.Pages
                 });
         }
 
-        #region Settings Modification
-
-        private void cbClosePageOnLoad_Update(object sender, RoutedEventArgs e)
+        private void LaunchHaloButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (cbClosePageOnLoad.IsChecked != null)
-                App.MetroIdeStorage.MetroIdeSettings.StartpageHideOnLaunch = (bool) cbClosePageOnLoad.IsChecked;
+            string haloExePath = App.MetroIdeStorage.MetroIdeSettings.HaloExePath;
+            if (File.Exists(haloExePath))
+            {
+                string haloDirectory = Path.GetDirectoryName(haloExePath);
+                if (haloDirectory != null && Directory.Exists(haloDirectory))
+                {
+                    App.MetroIdeStorage.MetroIdeSettings.HomeWindow.AddHaloViewport();
+                    return;
+                }
+            }
+            MetroMessageBox.Show("Cannot Launch Halo", "Check your halo.exe path in Settings.");
         }
-
-        private void cbShowOnStartUp_Update(object sender, RoutedEventArgs e)
-        {
-            if (cbShowOnStartUp.IsChecked != null)
-                App.MetroIdeStorage.MetroIdeSettings.StartpageShowOnLoad = (bool) cbShowOnStartUp.IsChecked;
-        }
-
-        #endregion
-
-        #region Open Types of Cache Files
-
-        private void btnOpenCacheFile_Click(object sender, RoutedEventArgs e)
-        {
-            App.MetroIdeStorage.MetroIdeSettings.HomeWindow.OpenContentFile(Home.ContentTypes.Map);
-        }
-
-        #endregion
     }
 }
