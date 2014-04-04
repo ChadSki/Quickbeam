@@ -93,8 +93,6 @@
                     <MenuItem Margin="5,0,0,0" Header="HELP" Foreground="White"
                                   FontFamily="{DynamicResource MetroFontLight}"
                                   BorderBrush="{x:Null}" FontSize="12">
-                        <MenuItem Header="Check for Updates" x:Name="MenuHelpUpdater" Click="menuHelpUpdater_Click" />
-                        <Separator />
                         <MenuItem Header="About Quickbeam" x:Name="MenuHelpAbout" Click="menuHelpAbout_Click" />
                     </MenuItem>
                 </Menu>

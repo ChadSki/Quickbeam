@@ -46,11 +46,6 @@ namespace MetroIde
                             StartupDetermineType(commandArgs[1]);
                         break;
 
-                    case "update":
-                        // Show Update
-                        menuHelpUpdater_Click(null, null);
-                        break;
-
                     case "about":
                         // Show About
                         menuHelpAbout_Click(null, null);
@@ -109,17 +104,6 @@ namespace MetroIde
                 hwndSource.AddHook(WindowProc);
 
             ProcessCommandLineArgs(Environment.GetCommandLineArgs());
-
-            if (App.MetroIdeStorage.MetroIdeSettings.ApplicationUpdateOnStartup)
-                StartUpdateCheck();
-        }
-
-        private void StartUpdateCheck()
-        {
-            var worker = new BackgroundWorker();
-            worker.DoWork += CheckForUpdates;
-            worker.RunWorkerCompleted += UpdateCheckCompleted;
-            worker.RunWorkerAsync();
         }
 
         private void StartupDetermineType(string path)
@@ -153,24 +137,6 @@ namespace MetroIde
 
         #endregion
 
-        #region Updates
-        private void CheckForUpdates(object sender, DoWorkEventArgs e)
-        {
-            // Grab JSON Update package from the server
-            // e.Result = Updates.GetUpdateInfo();
-        }
-
-        private void UpdateCheckCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled || e.Error != null)
-                return;
-
-            var updateInfo = (UpdateInfo) e.Result;
-            if (Updater.UpdateAvailable(updateInfo))
-                MetroUpdateDialog.Show(updateInfo, true);
-        }
-
-        #endregion
 
         #region MenuButtons
         // File
@@ -194,12 +160,6 @@ namespace MetroIde
         private void menuHelpAbout_Click(object sender, RoutedEventArgs e)
         {
             MetroAbout.Show();
-        }
-
-        private void menuHelpUpdater_Click(object sender, RoutedEventArgs e)
-        {
-            var thrd = new Thread(Updater.BeginUpdateProcess);
-            thrd.Start();
         }
 
         // Goodbye Sweet Evelyn

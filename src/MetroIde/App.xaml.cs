@@ -56,9 +56,6 @@ namespace MetroIde
             // Create jumplist
             JumpLists.UpdateJumplists();
 
-            // Try and delete all temp data
-            VariousFunctions.EmptyUpdaterLocations();
-
             // Set closing method
             Current.Exit += (o, args) =>
             {

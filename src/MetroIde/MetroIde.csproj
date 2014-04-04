@@ -303,16 +303,12 @@
     <Compile Include="Dialogs\ControlDialogs\PostGeneratorViewer.xaml.cs">
       <DependentUpon>PostGeneratorViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\ControlDialogs\Updater.xaml.cs">
-      <DependentUpon>Updater.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\MetroAbout.cs" />
     <Compile Include="Dialogs\MetroException.cs" />
     <Compile Include="Dialogs\MetroInputBox.cs" />
     <Compile Include="Dialogs\MetroMessageBox.cs" />
     <Compile Include="Dialogs\MetroMessageBoxCode.cs" />
     <Compile Include="Dialogs\MetroMessageBoxList.cs" />
-    <Compile Include="Dialogs\MetroUpdateDialog.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
     <Compile Include="Helpers\JumpLists.cs" />
     <Compile Include="Helpers\Native\ShellChanges.cs" />
@@ -323,7 +319,6 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\SingleInstance.cs" />
     <Compile Include="Helpers\Storage.cs" />
-    <Compile Include="Helpers\Updater.cs" />
     <Compile Include="Helpers\VariousFunctions.cs" />
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -589,10 +584,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialogs\ControlDialogs\PostGeneratorViewer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\Updater.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
