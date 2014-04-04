@@ -148,7 +148,6 @@
             </ThicknessAnimationUsingKeyFrames>
         </Storyboard>
 
-
         <!-- Start Page-->
         <Storyboard x:Key="ShowStrtpgeTab">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
@@ -308,7 +307,7 @@
                 <TextBlock Grid.Column="1" Grid.Row="3"
                            Text="halo.exe Path:" Foreground="White" Margin="0,4,0,0"
                            FontFamily="{DynamicResource MetroFontRegular}" />
-                
+
                 <TextBox x:Name="TxtHaloExePath" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Width="250"
                          Text="{Binding HaloExePath, Mode=TwoWay}" />
 

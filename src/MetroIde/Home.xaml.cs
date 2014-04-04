@@ -25,7 +25,7 @@ namespace MetroIde
     public partial class Home
     {
         private int _lastDocumentIndex = -1;
-        
+
         #region Startup
 
         public bool ProcessCommandLineArgs(IList<string> args)
@@ -136,7 +136,6 @@ namespace MetroIde
         }
 
         #endregion
-
 
         #region MenuButtons
         // File

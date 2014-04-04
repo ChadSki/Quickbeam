@@ -79,7 +79,6 @@ namespace MetroIde.Helpers
             }
         }
 
-
         public static byte[] StreamToByteArray(Stream input)
         {
             var buffer = new byte[16*1024];

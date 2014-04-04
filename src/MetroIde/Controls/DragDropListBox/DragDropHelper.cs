@@ -56,7 +56,6 @@ namespace MetroIde.Controls.DragDropListBox
             obj.SetValue(IsDragSourceProperty, value);
         }
 
-
         public static bool GetIsDropTarget(DependencyObject obj)
         {
             return (bool) obj.GetValue(IsDropTargetProperty);

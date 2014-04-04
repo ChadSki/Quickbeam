@@ -5942,9 +5942,9 @@
     <member name="T:ICSharpCode.AvalonEdit.Rendering.TextView">
       <summary>
             A virtualizing panel producing+showing <see cref="T:ICSharpCode.AvalonEdit.Rendering.VisualLine" />s for a <see cref="T:ICSharpCode.AvalonEdit.Document.TextDocument" />.
-            
+
             This is the heart of the text editor, this class controls the text rendering process.
-            
+
             Taken as a standalone control, it's a text viewer without any editing capability.
             </summary>
     </member>
@@ -7963,7 +7963,7 @@
     <member name="T:ICSharpCode.AvalonEdit.Utils.ImmutableStack`1">
       <summary>
             An immutable stack.
-            
+
             Using 'foreach' on the stack will return the items from top to bottom (in the order they would be popped).
             </summary>
     </member>

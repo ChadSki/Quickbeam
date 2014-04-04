@@ -110,7 +110,6 @@ namespace Microsoft.Shell
         XBUTTONDBLCLK = 0x020D,
         MOUSEHWHEEL = 0x020E,
 
-
         CAPTURECHANGED = 0x0215,
 
         ENTERSIZEMOVE = 0x0231,
@@ -160,10 +159,8 @@ namespace Microsoft.Shell
         private static extern IntPtr _CommandLineToArgvW([MarshalAs(UnmanagedType.LPWStr)] string cmdLine,
             out int numArgs);
 
-
         [DllImport("kernel32.dll", EntryPoint = "LocalFree", SetLastError = true)]
         private static extern IntPtr _LocalFree(IntPtr hMem);
-
 
         public static string[] CommandLineToArgvW(string cmdLine)
         {

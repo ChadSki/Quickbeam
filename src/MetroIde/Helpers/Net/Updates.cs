@@ -26,7 +26,6 @@ namespace MetroIde.Helpers.Net
         [DataMember(Name = "change_logs")]
         public UpdateChangelog[] Changelogs { get; set; }
 
-
         /// <summary>
         ///     Contains information about what was changed in an update.
         /// </summary>

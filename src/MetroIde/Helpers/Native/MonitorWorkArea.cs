@@ -63,7 +63,6 @@ namespace MetroIde.Helpers.Native
             public int y;
         }
 
-
         /// <summary> Win32 </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         public struct Rect
@@ -104,7 +103,6 @@ namespace MetroIde.Helpers.Native
                 this.bottom = bottom;
             }
 
-
             /// <summary> Win32 </summary>
             public Rect(Rect rcSrc)
             {
@@ -143,7 +141,7 @@ namespace MetroIde.Helpers.Native
                     return (this == (Rect) obj);
                 }
                 return false;
-                
+
             }
 
             /// <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>
@@ -151,7 +149,6 @@ namespace MetroIde.Helpers.Native
             {
                 return left.GetHashCode() + top.GetHashCode() + right.GetHashCode() + bottom.GetHashCode();
             }
-
 
             /// <summary> Determine if 2 Rect are equal (deep compare)</summary>
             public static bool operator ==(Rect rect1, Rect rect2)

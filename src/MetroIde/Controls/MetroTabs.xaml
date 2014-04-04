@@ -49,7 +49,7 @@
 							<Setter Property="Panel.ZIndex" Value="1"/>
 							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource ExtryzeAccentBrush}"/>
 						</Trigger>
-						
+
 						<MultiTrigger>
 							<MultiTrigger.Conditions>
 								<Condition Property="IsSelected" Value="false"/>
@@ -65,7 +65,7 @@
 							<Setter Property="Margin" Value="-2,0,-2,0"/>
 							<Setter Property="Margin" TargetName="Content" Value="0,0,0,0"/>
 						</MultiTrigger>
-						
+
 						<Trigger Property="IsEnabled" Value="false">
 							<Setter Property="Background" TargetName="Bd" Value="{StaticResource TabItemDisabledBackground}"/>
 							<Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemDisabledBorderBrush}"/>
@@ -76,5 +76,5 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	
+
 </ResourceDictionary>
