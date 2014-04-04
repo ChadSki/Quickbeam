@@ -16,6 +16,6 @@
             <Rectangle Fill="#FFF4F4F5" Margin="1.5,0,1.5,1" Height="1" VerticalAlignment="Bottom"
                        d:LayoutOverrides="HorizontalAlignment" />
         </Grid>
-        <Rectangle Fill="White" Opacity="0" />
+
     </Grid>
 </UserControl>

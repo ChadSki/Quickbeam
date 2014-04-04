@@ -56,6 +56,6 @@
             <Rectangle Fill="#FFF4F4F5" Height="1" Margin="7,0,2,3" VerticalAlignment="Bottom" Width="1" Opacity="0.55" />
             <Rectangle Fill="#FFF4F4F5" Height="1" Margin="7,3,2,0" VerticalAlignment="Top" Width="1" Opacity="0.55" />
         </Grid>
-        <Rectangle Fill="White" Opacity="0" />
+
     </Grid>
 </UserControl>

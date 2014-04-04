@@ -160,7 +160,7 @@
                         <Grid x:Name="Pin" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0" SnapsToDevicePixels="True">
                             <Vectors:PinModule x:Name="PinVector" SnapsToDevicePixels="True" />
                         </Grid>
-                        <Rectangle Opacity="0" Fill="White" />
+                        
                     </Grid>
 
                     <ControlTemplate.Triggers>
