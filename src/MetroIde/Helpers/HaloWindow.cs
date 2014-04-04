@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Interop;
+using Quickbeam.ByteAccess.Memory;
 
 namespace MetroIde.Helpers
 {
@@ -67,7 +68,11 @@ namespace MetroIde.Helpers
                 // resize
                 NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, 800, 600, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
 
-                //TODO force render trick
+                // force video rendering
+                const int exeOffset = 0x400000;
+                const int wmkillHandlerOffset = exeOffset + 0x142538;
+                var wmkillHandler = new WinMemoryByteAccess(wmkillHandlerOffset, 4);
+                wmkillHandler.WriteBytes(0, new byte[] { 0xe9, 0x91, 0x00, 0x00 });
             });
 
             return new HandleRef(this, _hwndHost);
