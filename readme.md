@@ -1,12 +1,12 @@
 # Quickbeam
 
 Quickbeam is software for editing Halo PC mapfiles, whether on disk or
-in Halo's memory while the game is running hot. Quickbeam currently
-enables editing through the use of Python scripting.
+in Halo's memory while the game is running hot. Currently the GUI is under
+development, but memory-editing is coming soon! Proof-of-concept work for
+memory-editing can be found on the cpython3-old branch.
 
-This image shows an older proof-of-concept build of Quickbeam
-demonstrating runtime editing capabilities.
-![Quickbeam Screenshot](http://i.imgur.com/rh2ldCY.jpg)
+This image shows the 0.3 release of Quickbeam with an embedded instance of Halo.
+![Quickbeam Screenshot](http://i.imgur.com/NXJmsW2.png)
 
 ### License
 
