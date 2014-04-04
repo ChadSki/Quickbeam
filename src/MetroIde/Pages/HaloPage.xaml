@@ -7,14 +7,16 @@
     mc:Ignorable="d"
     Background="#28282b"
     d:DesignWidth="850" d:DesignHeight="650">
-    <Grid Name="ContainerGrid"
-          HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
-        <Grid HorizontalAlignment="Left"
-              VerticalAlignment="Top">
-            <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
-                                Width="{Binding ElementName=ContainerGrid,Path=ActualWidth}"
-                                Height="{Binding ElementName=ContainerGrid,Path=ActualHeight}"/>
+    <helpers:DpiDecorator>
+        <Grid Name="HaloContainerGrid"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
+                                    Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
+                                    Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </helpers:DpiDecorator>
 </UserControl>

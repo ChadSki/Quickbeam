@@ -84,5 +84,20 @@ namespace MetroIde.Pages
                     Margin = new Thickness(20, 0, 0, 0)
                 });
         }
+
+        private void LaunchHaloButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            string haloExePath = App.MetroIdeStorage.MetroIdeSettings.HaloExePath;
+            if (File.Exists(haloExePath))
+            {
+                string haloDirectory = Path.GetDirectoryName(haloExePath);
+                if (haloDirectory != null && Directory.Exists(haloDirectory))
+                {
+                    App.MetroIdeStorage.MetroIdeSettings.HomeWindow.AddHaloViewport();
+                    return;
+                }
+            }
+            MetroMessageBox.Show("Cannot Launch Halo", "Check your halo.exe path in Settings.");
+        }
     }
 }

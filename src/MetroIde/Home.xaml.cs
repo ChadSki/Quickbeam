@@ -632,6 +632,19 @@ namespace MetroIde
             DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
         }
 
+        public void AddHaloViewport()
+        {
+            // select existing, if available
+            foreach (var tabb in RightDockManager.Children.Where(tabb => tabb.Title == "Halo Viewport"))
+            {
+                RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tabb);
+                return;
+            }
+            var tab = new LayoutAnchorable { Title = "Halo Viewport", Content = new HaloPage() };
+            RightDockManager.Children.Add(tab);
+            RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tab);
+        }
+
         private void dockManager_ActiveContentChanged(object sender, EventArgs e)
         {
             if (DocumentManager.SelectedContentIndex != _lastDocumentIndex)

@@ -111,22 +111,7 @@
                             <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
                         </avalonDock:LayoutDocumentPaneGroup>
                         <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
-                            <avalonDock:LayoutAnchorablePane>
-                                <avalonDock:LayoutAnchorable Title="Halo">
-                                    <helpers:DpiDecorator>
-                                        <Grid Name="HaloContainerGrid"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch">
-                                            <Grid HorizontalAlignment="Left"
-                                                  VerticalAlignment="Top">
-                                                <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
-                                                                    Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
-                                                                    Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
-                                            </Grid>
-                                        </Grid>
-                                    </helpers:DpiDecorator>
-                                </avalonDock:LayoutAnchorable>
-                            </avalonDock:LayoutAnchorablePane>
+                            <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
                         </avalonDock:LayoutAnchorablePaneGroup>
                     </avalonDock:LayoutPanel>
                 </avalonDock:LayoutRoot>

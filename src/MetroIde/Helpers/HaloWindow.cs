@@ -40,9 +40,10 @@ namespace MetroIde.Helpers
             Task.Factory.StartNew(() =>
             {
                 string haloExePath = App.MetroIdeStorage.MetroIdeSettings.HaloExePath;
-                string haloDirectory = Path.GetDirectoryName(haloExePath);
+                if (!File.Exists(haloExePath)) return;
 
-                if (haloDirectory == null) return;
+                string haloDirectory = Path.GetDirectoryName(haloExePath);
+                if (haloDirectory == null || !Directory.Exists(haloDirectory)) return;
 
                 _haloProcess = Process.Start(new ProcessStartInfo(haloExePath)
                 {
