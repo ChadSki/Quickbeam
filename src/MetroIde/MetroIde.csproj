@@ -688,9 +688,9 @@
     <Content Include="DLLs\WPFToolkit.Extended.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ByteAccess\ByteAccess.csproj">
+    <ProjectReference Include="..\ByteAccess\Quickbeam.Low.csproj">
       <Project>{9a7f97f0-b55f-4fd4-b0b3-67da9d57b6ba}</Project>
-      <Name>ByteAccess</Name>
+      <Name>Quickbeam.Low</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

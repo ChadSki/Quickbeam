@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace Quickbeam.ByteAccess
+﻿namespace Quickbeam.Low.ByteAccess
 {
+    /// <summary>
+    /// Builder for creating multiple ByteAccesses targeting the same resource.
+    /// </summary>
     public interface IByteAccessBuilder
     {
         IByteAccess CreateByteAccess(int offset, int size);
@@ -13,11 +14,11 @@ namespace Quickbeam.ByteAccess
     /// </summary>
     public interface IByteAccess
     {
-        byte[] ReadBytes(int offset, int size);
-        string ReadAscii(int offset, int size);
+        byte[] ReadBytes(int offset, int length);
+        string ReadAscii(int offset, int length);
         string ReadAsciiz(int offset);
-        float  ReadSingle(int offset);
-        double ReadDouble(int offset);
+        float  ReadFloat32(int offset);
+        double ReadFloat64(int offset);
         sbyte  ReadInt8(int offset);
         short  ReadInt16(int offset);
         int    ReadInt32(int offset);

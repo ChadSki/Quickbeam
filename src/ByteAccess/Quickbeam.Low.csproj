@@ -7,8 +7,8 @@
     <ProjectGuid>{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Quickbeam.ByteAccess</RootNamespace>
-    <AssemblyName>Quickbeam.ByteAccess</AssemblyName>
+    <RootNamespace>Quickbeam.Low</RootNamespace>
+    <AssemblyName>Quickbeam.Low</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -55,12 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseByteAccess.cs" />
-    <Compile Include="FileByteAccess.cs" />
-    <Compile Include="HaloInterop.cs" />
-    <Compile Include="IByteAccess.cs" />
-    <Compile Include="Utility.cs" />
-    <Compile Include="WinMemoryByteAccess.cs" />
+    <Compile Include="ByteAccess\BaseByteAccess.cs" />
+    <Compile Include="ByteAccess\FileByteAccess.cs" />
+    <Compile Include="ByteAccess\IByteAccess.cs" />
+    <Compile Include="ByteAccess\NativeMethods.cs" />
+    <Compile Include="ByteAccess\WinMemoryByteAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

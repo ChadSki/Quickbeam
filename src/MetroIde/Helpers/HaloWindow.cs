@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Interop;
-using Quickbeam.ByteAccess.Memory;
+using Quickbeam.Low.ByteAccess;
 
 namespace MetroIde.Helpers
 {
@@ -14,8 +14,8 @@ namespace MetroIde.Helpers
     {
         private IntPtr _hwndHost;
         private Process _haloProcess;
-        readonly int _hostHeight;
-        readonly int _hostWidth;
+        private readonly int _hostHeight;
+        private readonly int _hostWidth;
 
         public HaloWindow()
         {
