@@ -55,18 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseHaloStruct.cs" />
     <Compile Include="ByteAccess\BaseByteAccess.cs" />
     <Compile Include="ByteAccess\FileByteAccess.cs" />
     <Compile Include="ByteAccess\IByteAccess.cs" />
     <Compile Include="ByteAccess\NativeMethods.cs" />
     <Compile Include="ByteAccess\WinMemoryByteAccess.cs" />
+    <Compile Include="ObservableDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Chadski.Utility\Chadski.Utility.csproj">
-      <Project>{c870b67f-2cd3-4f7c-84d0-d768c32c1ee7}</Project>
-      <Name>Chadski.Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

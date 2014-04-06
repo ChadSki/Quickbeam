@@ -34,7 +34,7 @@ namespace Quickbeam.Low.ByteAccess
 
         public WinMemoryByteAccessBuilder(string processName)
         {
-            var processesByName = Process.GetProcessesByName(processName); // "halo"
+            var processesByName = Process.GetProcessesByName(processName);
             if (processesByName.Length > 0)
             {
                 _processId = NativeMethods.OpenProcess(NativeMethods.ProcessAllAccess, false, processesByName[0].Id);
@@ -56,10 +56,10 @@ namespace Quickbeam.Low.ByteAccess
     /// </summary>
     public class WinMemoryByteAccess : BaseByteAccess
     {
-        private readonly IntPtr _processId = IntPtr.Zero;
+        private readonly IntPtr _processId;
 
-        public WinMemoryByteAccess(int beginAccessOffset, int accessSize, IntPtr processId)
-            : base(beginAccessOffset, accessSize)
+        public WinMemoryByteAccess(int offset, int size, IntPtr processId)
+            : base(offset, size)
         {
             _processId = processId;
         }

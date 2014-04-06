@@ -38,8 +38,8 @@ namespace Quickbeam.Low.ByteAccess
         // Halo strings are ascii-only
         protected static readonly ASCIIEncoding Encoding = new ASCIIEncoding();
 
-        protected int Offset;
-        protected int Size;
+        protected int Offset { get; set; }
+        protected int Size { get; set; }
 
         protected BaseByteAccess(int offset, int size)
         {

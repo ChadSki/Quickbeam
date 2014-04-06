@@ -71,7 +71,7 @@ namespace MetroIde.Helpers
                 // force video rendering
                 const int exeOffset = 0x400000;
                 const int wmkillHandlerOffset = exeOffset + 0x142538;
-                var wmkillHandler = new WinMemoryByteAccess(wmkillHandlerOffset, 4);
+                var wmkillHandler = new WinMemoryByteAccess(wmkillHandlerOffset, 4, (IntPtr)_haloProcess.Id);
                 wmkillHandler.WriteBytes(0, new byte[] { 0xe9, 0x91, 0x00, 0x00 });
             });
 
