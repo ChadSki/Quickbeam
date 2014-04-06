@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Quickbeam.Low
 {
-    public class ObservableDictionary<T1, T2>
+    public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyCollectionChanged
     {
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

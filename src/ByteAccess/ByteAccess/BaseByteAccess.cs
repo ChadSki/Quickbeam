@@ -67,7 +67,7 @@ namespace Quickbeam.Low.ByteAccess
         public void WriteBytes(int offset, byte[] data)
         {
             if ((offset + data.Length) > (Offset + Size))
-                throw new ArgumentException("Not allowed to write outside of MapAccess range");
+                throw new ArgumentException("offset + data.Length too large: not allowed to write outside of MapAccess range");
 
             WriteBytesImpl(offset, data);
         }
@@ -98,9 +98,9 @@ namespace Quickbeam.Low.ByteAccess
 
             do
             {
-                strBytes = ReadBytesImpl(offset, bytesToRead);
+                strBytes = ReadBytes(offset, bytesToRead);
                 bytesToRead *= 2;
-            } while (!strBytes.Any(b => b == (byte)0x00) && (bytesToRead < maxToRead));
+            } while ((bytesToRead < maxToRead) && !strBytes.Any(b => b == (byte)0x00));
 
             var pinnedStrBytes = GCHandle.Alloc(strBytes, GCHandleType.Pinned);
             var addrOfName = pinnedStrBytes.AddrOfPinnedObject();
@@ -127,14 +127,14 @@ namespace Quickbeam.Low.ByteAccess
         #endregion
 
         #region integer types
-        public sbyte ReadInt8(int offset) { return (sbyte)ReadBytesImpl(offset, 1).First(); }
-        public short ReadInt16(int offset) { return BitConverter.ToInt16(ReadBytesImpl(offset, 2), 0); }
-        public int ReadInt32(int offset) { return BitConverter.ToInt32(ReadBytesImpl(offset, 4), 0); }
-        public long ReadInt64(int offset) { return BitConverter.ToInt64(ReadBytesImpl(offset, 8), 0); }
-        public byte ReadUInt8(int offset) { return ReadBytesImpl(offset, 1).First(); }
-        public ushort ReadUInt16(int offset) { return BitConverter.ToUInt16(ReadBytesImpl(offset, 2), 0); }
-        public uint ReadUInt32(int offset) { return BitConverter.ToUInt32(ReadBytesImpl(offset, 4), 0); }
-        public ulong ReadUInt64(int offset) { return BitConverter.ToUInt64(ReadBytesImpl(offset, 8), 0); }
+        public sbyte ReadInt8(int offset) { return (sbyte)ReadBytes(offset, 1).First(); }
+        public short ReadInt16(int offset) { return BitConverter.ToInt16(ReadBytes(offset, 2), 0); }
+        public int ReadInt32(int offset) { return BitConverter.ToInt32(ReadBytes(offset, 4), 0); }
+        public long ReadInt64(int offset) { return BitConverter.ToInt64(ReadBytes(offset, 8), 0); }
+        public byte ReadUInt8(int offset) { return ReadBytes(offset, 1).First(); }
+        public ushort ReadUInt16(int offset) { return BitConverter.ToUInt16(ReadBytes(offset, 2), 0); }
+        public uint ReadUInt32(int offset) { return BitConverter.ToUInt32(ReadBytes(offset, 4), 0); }
+        public ulong ReadUInt64(int offset) { return BitConverter.ToUInt64(ReadBytes(offset, 8), 0); }
         public void WriteInt8(int offset, sbyte toWrite) { WriteBytes(offset, new[] { (byte)toWrite }); }
         public void WriteInt16(int offset, short toWrite) { WriteBytes(offset, BitConverter.GetBytes(toWrite)); }
         public void WriteInt32(int offset, int toWrite) { WriteBytes(offset, BitConverter.GetBytes(toWrite)); }
@@ -147,8 +147,8 @@ namespace Quickbeam.Low.ByteAccess
         #endregion
 
         #region float types
-        public float ReadFloat32(int offset) { return BitConverter.ToSingle(ReadBytesImpl(offset, 4), 0); }
-        public double ReadFloat64(int offset) { return BitConverter.ToDouble(ReadBytesImpl(offset, 8), 0); }
+        public float ReadFloat32(int offset) { return BitConverter.ToSingle(ReadBytes(offset, 4), 0); }
+        public double ReadFloat64(int offset) { return BitConverter.ToDouble(ReadBytes(offset, 8), 0); }
         public void WriteFloat32(int offset, float toWrite) { WriteBytes(offset, BitConverter.GetBytes(toWrite)); }
         public void WriteFloat64(int offset, double toWrite) { WriteBytes(offset, BitConverter.GetBytes(toWrite)); }
         #endregion
