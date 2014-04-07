@@ -102,6 +102,7 @@
     <Compile Include="Helpers\DpiDecorator.cs" />
     <Compile Include="Helpers\HaloWindow.cs" />
     <Compile Include="Helpers\Native\NativeMethods.cs" />
+    <Compile Include="Helpers\HaloMd.cs" />
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -134,6 +135,9 @@
     <Resource Include="Images\Vectored\unfreezeVector.png" />
     <Reference Include="AvalonDock">
       <HintPath>..\packages\AvalonDock.2.0.1746\lib\net40\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
