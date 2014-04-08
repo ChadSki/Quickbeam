@@ -13,8 +13,7 @@
               VerticalAlignment="Stretch">
             <Grid HorizontalAlignment="Left"
                   VerticalAlignment="Top">
-                <helpers:HaloWindow MaxWidth="800" MaxHeight="600"
-                                    Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
+                <helpers:HaloWindow Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
                                     Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
             </Grid>
         </Grid>

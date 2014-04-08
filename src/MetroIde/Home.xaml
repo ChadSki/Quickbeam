@@ -8,7 +8,6 @@
     x:Class="MetroIde.Home"
     xmlns:avalonDock="http://avalondock.codeplex.com"
     xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro"
-    xmlns:helpers="clr-namespace:MetroIde.Helpers"
     Title="Home Window - MetroIde"
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="False"
@@ -48,26 +47,22 @@
                                FontSize="15" Margin="45,12,141,0" FontFamily="{DynamicResource MetroFontLight}"
                                TextTrimming="CharacterEllipsis" />
 
-                <StackPanel x:Name="HomeHeaderActionButtons" Orientation="Horizontal" VerticalAlignment="Top"
-                                HorizontalAlignment="Right" Height="26" Margin="0,0,0,0">
-
-                    <Button x:Name="BtnActionMinimize" ToolTip="Minimize" Width="34" Height="26" Margin="0"
-                                Style="{StaticResource WindowActionButton}" VerticalAlignment="Top"
-                                d:LayoutOverrides="Height"
-                                Click="btnActionMinimize_Click">
+                <StackPanel x:Name="HomeHeaderActionButtons" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Button x:Name="BtnActionMinimize" ToolTip="Minimize" Width="34" Height="26"
+                                Style="{StaticResource WindowActionButton}" Click="btnActionMinimize_Click">
                         <vectors:MinimizeModule Width="34" Height="26" />
                     </Button>
 
-                    <Button x:Name="BtnActionRestore" ToolTip="Restore" Width="34" Height="26" Margin="0"
+                    <Button x:Name="BtnActionRestore" ToolTip="Restore" Width="34" Height="26"
                                 Style="{StaticResource WindowActionButton}" Click="btnActionRestore_Click">
                         <vectors:RestoreModule Width="34" Height="26" />
                     </Button>
-                    <Button x:Name="BtnActionMaximize" ToolTip="Maximize" Width="34" Height="26" Margin="0"
+                    <Button x:Name="BtnActionMaximize" ToolTip="Maximize" Width="34" Height="26"
                                 Style="{StaticResource WindowActionButton}" Click="btnActionMaximize_Click">
                         <vectors:MaximizeModule Width="34" Height="26" />
                     </Button>
 
-                    <Button x:Name="BtnActionClose" ToolTip="Close" Width="34" Height="26" Margin="0"
+                    <Button x:Name="BtnActionClose" ToolTip="Close" Width="34" Height="26"
                                 Style="{StaticResource WindowActionButton}" Click="btnActionClose_Click">
                         <vectors:CloseModule Width="34" Height="26" />
                     </Button>
@@ -87,7 +82,6 @@
                     <MenuItem Margin="5,0,0,0" Header="WINDOW" Foreground="White"
                                   FontFamily="{DynamicResource MetroFontLight}"
                                   BorderBrush="{x:Null}" FontSize="12">
-                        <MenuItem Header="Settings" x:Name="MenuOpenSettings" Click="menuOpenSettings_Click" />
                         <MenuItem Header="Start Page" x:Name="MenuViewStartPage" Click="menuViewStartPage_Click" />
                     </MenuItem>
                     <MenuItem Margin="5,0,0,0" Header="HELP" Foreground="White"
@@ -106,9 +100,9 @@
                 <avalonDock:LayoutRoot>
                     <avalonDock:LayoutPanel Orientation="Horizontal">
                         <avalonDock:LayoutDocumentPaneGroup>
-                            <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
+                            <avalonDock:LayoutDocumentPane x:Name="CenterDockManager"/>
                         </avalonDock:LayoutDocumentPaneGroup>
-                        <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
+                        <avalonDock:LayoutAnchorablePaneGroup x:Name="RightDock">
                             <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
                         </avalonDock:LayoutAnchorablePaneGroup>
                     </avalonDock:LayoutPanel>

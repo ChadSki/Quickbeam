@@ -21,13 +21,17 @@ namespace MetroIde.Helpers
         private bool _applicationUpdateOnStartup = true;
         private Home _homeWindow;
         private string _haloExePath = "";
+        private bool _autoDetectFullscreenResolution;
+        private int _haloFullWidth;
+        private int _haloFullHeight;
+        private int _haloDockedWidth;
+        private int _haloDockedHeight;
 
         #region Enums
 
         public enum Accents
         {
             Blue,
-            Purple,
             Orange,
             Green
         }
@@ -122,6 +126,12 @@ namespace MetroIde.Helpers
             set { SetField(ref _applicationUpdateOnStartup, value, "ApplicationUpdateOnStartup"); }
         }
 
+        public bool AutoDetectFullscreenResolution
+        {
+            get { return _autoDetectFullscreenResolution; }
+            set { SetField(ref _autoDetectFullscreenResolution, value, "AutoDetectFullscreenResolution"); }
+        }
+
         /// <summary>
         ///     A list of Assembly's recently opened files.
         /// </summary>
@@ -153,6 +163,30 @@ namespace MetroIde.Helpers
         {
             get { return _haloExePath; }
             set { SetField(ref _haloExePath, value, "HaloExePath"); }
+        }
+
+        public int HaloFullWidth
+        {
+            get { return _haloFullWidth; }
+            set { SetField(ref _haloFullWidth, value, "HaloFullWidth"); }
+        }
+
+        public int HaloFullHeight
+        {
+            get { return _haloFullHeight; }
+            set { SetField(ref _haloFullHeight, value, "HaloFullHeight"); }
+        }
+
+        public int HaloDockedWidth
+        {
+            get { return _haloDockedWidth; }
+            set { SetField(ref _haloDockedWidth, value, "HaloDockedWidth"); }
+        }
+
+        public int HaloDockedHeight
+        {
+            get { return _haloDockedHeight; }
+            set { SetField(ref _haloDockedHeight, value, "HaloDockedHeight"); }
         }
 
         [JsonIgnore]
