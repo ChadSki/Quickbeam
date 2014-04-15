@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms.VisualStyles;
+using System.Windows.Forms.VisualStyles;
 using AvalonDock.Layout;
 using MetroIde.Dialogs;
 using MetroIde.Helpers.Native;
@@ -6,22 +6,13 @@ using MetroIde.Pages;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Threading;
-using AvalonDock.Layout;
-using Microsoft.Win32;
-using MetroIde.Helpers;
-using MetroIde.Helpers.Native;
-using MetroIde.Helpers.Net;
-using MetroIde.Dialogs;
-using MetroIde.Pages;
 
 namespace MetroIde
 {
@@ -307,14 +298,7 @@ namespace MetroIde
         {
             var xAdjust = Width + e.HorizontalChange;
 
-            if (xAdjust > MinWidth)
-            {
-                Width = xAdjust;
-            }
-            else
-            {
-                Width = MinWidth;
-            }
+            Width = xAdjust > MinWidth ? xAdjust : MinWidth;
         }
 
         public void ResizeBottomThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -569,12 +553,8 @@ namespace MetroIde
 
         public void AddHaloViewport()
         {
-            // select existing, if available
-            foreach (var tabb in RightDockManager.Children.Where(tabb => tabb.Title == "Halo Viewport"))
-            {
-                RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tabb);
-                return;
-            }
+            // TODO select existing, if available
+
             var tab = new LayoutAnchorable { Title = "Halo Viewport", Content = new HaloPage() };
             RightDockManager.Children.Add(tab);
             RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tab);
