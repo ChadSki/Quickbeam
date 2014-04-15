@@ -16,6 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroIde", "MetroIde\MetroIde.csproj", "{CF8EA988-3789-48C4-8E2D-BD157A8B1CC4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA} = {9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam.Low", "ByteAccess\Quickbeam.Low.csproj", "{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}"
 EndProject
