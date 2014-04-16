@@ -21,11 +21,11 @@ namespace MetroIde.Helpers
         private bool _applicationUpdateOnStartup = true;
         private Home _homeWindow;
         private string _haloExePath = "";
-        private bool _autoDetectFullscreenResolution;
+        private bool _autoDetectFullscreenResolution = true;
         private int _haloFullWidth;
         private int _haloFullHeight;
-        private int _haloDockedWidth;
-        private int _haloDockedHeight;
+        private int _haloDockedWidth = 800;
+        private int _haloDockedHeight = 600;
 
         #region Enums
 
