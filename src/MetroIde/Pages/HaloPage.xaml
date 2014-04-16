@@ -11,11 +11,10 @@
         <Grid Name="HaloContainerGrid"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
-            <Grid HorizontalAlignment="Left"
-                  VerticalAlignment="Top">
-                <helpers:HaloWindow Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
-                                    Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"/>
-            </Grid>
+            <helpers:HaloWindow Width="{Binding ElementName=HaloContainerGrid,Path=ActualWidth}"
+                                Height="{Binding ElementName=HaloContainerGrid,Path=ActualHeight}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top" />
         </Grid>
     </helpers:DpiDecorator>
 </UserControl>
