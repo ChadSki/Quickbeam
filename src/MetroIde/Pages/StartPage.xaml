@@ -57,7 +57,69 @@
                     <StackPanel x:Name="PanelRecents" Margin="0,15,0,10" />
                 </ScrollViewer>
 
-                <Rectangle Fill="#FF363639" Height="1" Margin="0,25,0,0" d:LayoutOverrides="Height" />
+            <!-- Accents -->
+            <TextBlock Grid.Column="1" Grid.Row="3"
+                           Text="Accent Theme:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+
+            <ComboBox x:Name="ComboBoxAccents" Grid.Column="2" Grid.Row="3" Width="{Binding ElementName=FullResStackPanel, Path=ActualWidth}"
+                          SelectedItem="{Binding Path=ApplicationAccent, Mode=TwoWay}" HorizontalAlignment="Left" />
+
+            <!-- Header -->
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Margin="0,0,0,0"
+                           Text="halo viewPort" Foreground="{DynamicResource ExtryzeAccentBrush}" FontSize="30"
+                           FontFamily="{DynamicResource MetroFontSemiLight}" />
+
+            <!-- Halo Path -->
+            <TextBlock Grid.Column="1" Grid.Row="7"
+                           Text="halo.exe Path:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+
+            <TextBox Grid.Column="2" Grid.Row="7" Width="324" Text="{Binding HaloExePath, Mode=TwoWay}" />
+
+            <Button Grid.Column="3" Grid.Row="7" Margin="12,0,0,0" Width="75" HorizontalAlignment="Left"
+                    Click="BtnBrowseHaloExe_Click" Content="Browse..."/>
+
+            <Rectangle Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2"  Height="1" HorizontalAlignment="Stretch" Fill="#FF363639" />
+
+            <!-- Docked Resolution -->
+            <TextBlock Grid.Column="1" Grid.Row="9"
+                           Text="Docked Resolution:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                            Grid.Column="2" Grid.Row="9">
+                <TextBox Width="50" Text="{Binding HaloDockedWidth, Mode=TwoWay}" />
+                <TextBlock  Text="x" Foreground="White" Margin="6,4,6,0" FontFamily="{DynamicResource MetroFontRegular}" />
+                <TextBox Width="50" Text="{Binding HaloDockedHeight, Mode=TwoWay}" />
+            </StackPanel>
+
+            <!-- Fullscreen Resolution -->
+            <TextBlock Grid.Column="1" Grid.Row="11"
+                           Text="Fullscreen Resolution:" Foreground="White" Margin="0,4,0,0"
+                           FontFamily="{DynamicResource MetroFontRegular}" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" x:Name="FullResStackPanel"
+                        Grid.Column="2" Grid.Row="11">
+                <TextBox Width="50" Text="{Binding HaloFullWidth, Mode=TwoWay}" IsEnabled="{qc:Binding '!$P', P={Binding IsChecked, ElementName=ChkAutoDetect, Mode=OneWay}}"/>
+                <TextBlock  Text="x" Foreground="White" Margin="6,4,6,0" FontFamily="{DynamicResource MetroFontRegular}" />
+                <TextBox Width="50" Text="{Binding HaloFullHeight, Mode=TwoWay}" IsEnabled="{qc:Binding '!$P', P={Binding IsChecked, ElementName=ChkAutoDetect, Mode=OneWay}}"/>
+
+                <CheckBox x:Name="ChkAutoDetect" Margin="18,0,0,0" VerticalAlignment="Center" Content="Auto-detect"
+                              IsChecked="{Binding Path=AutoDetectFullscreenResolution, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="13" Orientation="Vertical" Margin="0,0,5,5"
+                        Grid.ColumnSpan="4" HorizontalAlignment="Right">
+                <TextBlock HorizontalAlignment="Right"
+                       Text="Where is my save button?"
+                       FontFamily="{DynamicResource MetroFontSemiBold}">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{DynamicResource ExtryzeAccentBrushColour}" />
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Right"
+                       Text="Just change your settings, they get saved as you edit them."
+                       FontFamily="{DynamicResource MetroFontRegular}" Foreground="White" />
             </StackPanel>
         </Grid>
     </Grid>

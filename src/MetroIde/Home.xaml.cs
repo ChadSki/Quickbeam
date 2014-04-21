@@ -1,4 +1,10 @@
-﻿using System;
+﻿using System.Windows.Forms.VisualStyles;
+using AvalonDock.Layout;
+using MetroIde.Dialogs;
+using MetroIde.Helpers.Native;
+using MetroIde.Pages;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -51,11 +57,6 @@ namespace MetroIde
                         menuHelpAbout_Click(null, null);
                         break;
 
-                    case "settings":
-                        // Show Settings
-                        menuOpenSettings_Click(null, null);
-                        break;
-
                     default:
                         return true;
                 }
@@ -72,6 +73,7 @@ namespace MetroIde
             UpdateStatusText("Ready");
 
             AddTabModule(TabGenre.StartPage);
+            AddTabModule(TabGenre.LobbyPage);
 
             // Do sidebar Loading stuff
             //SwitchXBDMSidebarLocation(App.AssemblyStorage.AssemblySettings.applicationXBDMSidebarLocation);
@@ -148,11 +150,6 @@ namespace MetroIde
         private void menuViewStartPage_Click(object sender, RoutedEventArgs e)
         {
             AddTabModule(TabGenre.StartPage);
-        }
-
-        private void menuOpenSettings_Click(object sender, EventArgs e)
-        {
-            AddTabModule(TabGenre.Settings);
         }
 
         // Help
@@ -519,15 +516,7 @@ namespace MetroIde
         public enum TabGenre
         {
             StartPage,
-            Settings,
-            NetworkPoking,
-            PluginGenerator,
-            Welcome,
-            PluginConverter,
-
-            MemoryManager,
-            VoxelConverter,
-            PostGenerator,
+            LobbyPage,
             HaloPage
         }
 
@@ -569,11 +558,9 @@ namespace MetroIde
                 case TabGenre.StartPage:
                     tab = new LayoutAnchorable { Title = "Start Page", Content = new StartPage() };
                     break;
-                case TabGenre.Welcome:
-                    tab = new LayoutAnchorable { Title = "Welcome", Content = new WelcomePage() };
-                    break;
-                case TabGenre.Settings:
-                    tab = new LayoutAnchorable { Title = "Settings", Content = new SettingsPage() };
+
+                case TabGenre.LobbyPage:
+                    tab = new LayoutAnchorable {Title = "HaloMD Lobby", Content = new LobbyPage()};
                     break;
                 default:
                     return;

@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using ICSharpCode.SharpZipLib.GZip;
 
-namespace MetroIde.Helpers
+namespace MetroIde.Helpers.Lobby
 {
     public static class HaloMd
     {
