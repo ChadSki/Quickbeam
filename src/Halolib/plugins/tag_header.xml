@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="tag_header" struct_size="32">
+    <ascii name="first_class" offset="0" length="4" reverse="true" />
+    <ascii name="second_class" offset="4" length="4" reverse="true" />
+    <ascii name="third_class" offset="8" length="4" reverse="true" />
+    <uint32 name="ident" offset="12" />
+    <uint32 name="name_offset_raw" offset="16" />
+    <uint32 name="meta_offset_raw" offset="20" />
+    <uint32 name="indexed" offset="24" />
+    <rawdata name="offset28" offset="28" length="4" />
+</plugin>

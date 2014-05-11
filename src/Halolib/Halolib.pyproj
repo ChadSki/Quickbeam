@@ -25,10 +25,30 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Halolib.py" />
+    <InterpreterReference Include="{80659ab7-4d53-4e0c-8588-a766116cbd46}\2.7" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="{80659ab7-4d53-4e0c-8588-a766116cbd46}\2.7" />
+    <Compile Include="asdf.py" />
+    <Compile Include="halolib.py" />
+    <Compile Include="halotag.py" />
+    <Compile Include="pathfix.py" />
+    <Compile Include="plugins.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="plugins\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="plugins\bipd.xml" />
+    <Content Include="plugins\effe.xml" />
+    <Content Include="plugins\index_entry.xml" />
+    <Content Include="plugins\index_header.xml" />
+    <Content Include="plugins\map_header.xml" />
+    <Content Include="plugins\object_table.xml" />
+    <Content Include="plugins\player_table.xml" />
+    <Content Include="plugins\proj.xml" />
+    <Content Include="plugins\unknown.xml" />
+    <Content Include="plugins\vehi.xml" />
+    <Content Include="plugins\weap.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

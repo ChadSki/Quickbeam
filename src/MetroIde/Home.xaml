@@ -91,13 +91,18 @@
                 <avalonDock:DockingManager.Theme>
                     <avalonDockThemes:MetroTheme />
                 </avalonDock:DockingManager.Theme>
-                <avalonDock:LayoutRoot>
+                <avalonDock:LayoutRoot x:Name="LayoutRoot">
                     <avalonDock:LayoutPanel Orientation="Horizontal">
                         <avalonDock:LayoutDocumentPaneGroup>
                             <avalonDock:LayoutDocumentPane x:Name="CenterDockManager"/>
                         </avalonDock:LayoutDocumentPaneGroup>
-                        <avalonDock:LayoutAnchorablePaneGroup x:Name="RightDock">
-                            <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
+                        <avalonDock:LayoutAnchorablePaneGroup x:Name="RightDock" DockMinWidth="100" Orientation="Vertical">
+                            <avalonDock:LayoutAnchorablePaneGroup x:Name="HaloDock">
+                                <avalonDock:LayoutAnchorablePane x:Name="HaloDockManager"/>
+                            </avalonDock:LayoutAnchorablePaneGroup>
+                            <avalonDock:LayoutAnchorablePaneGroup x:Name="LobbyDock">
+                                <avalonDock:LayoutAnchorablePane x:Name="LobbyDockManager"/>
+                            </avalonDock:LayoutAnchorablePaneGroup>
                         </avalonDock:LayoutAnchorablePaneGroup>
                     </avalonDock:LayoutPanel>
                 </avalonDock:LayoutRoot>

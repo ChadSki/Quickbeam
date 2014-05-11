@@ -284,7 +284,7 @@
     <!-- Metro Textbox -->
     <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Height" Value="22" />
+        <!--Setter Property="Height" Value="22" /-->
         <Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Background" Value="#414141" />

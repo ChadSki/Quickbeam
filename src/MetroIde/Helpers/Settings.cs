@@ -22,8 +22,8 @@ namespace MetroIde.Helpers
         private Home _homeWindow;
         private string _haloExePath = "";
         private bool _autoDetectFullscreenResolution = true;
-        private int _haloFullWidth;
-        private int _haloFullHeight;
+        private int _haloWindowedWidth = 800;
+        private int _haloWindowedHeight = 600;
         private int _haloDockedWidth = 800;
         private int _haloDockedHeight = 600;
 
@@ -36,25 +36,12 @@ namespace MetroIde.Helpers
             Green
         }
 
-        public enum MapInfoDockSide
-        {
-            Left,
-            Right
-        }
-
         public enum RecentFileType
         {
             Cache,
             MapInfo,
             Blf,
             Campaign
-        }
-
-        public enum TagSort
-        {
-            TagClass,
-            ObjectHierarchy,
-            PathHierarchy
         }
 
         #endregion
@@ -165,16 +152,16 @@ namespace MetroIde.Helpers
             set { SetField(ref _haloExePath, value, "HaloExePath"); }
         }
 
-        public int HaloFullWidth
+        public int HaloWindowedWidth
         {
-            get { return _haloFullWidth; }
-            set { SetField(ref _haloFullWidth, value, "HaloFullWidth"); }
+            get { return _haloWindowedWidth; }
+            set { SetField(ref _haloWindowedWidth, value, "HaloWindowedWidth"); }
         }
 
-        public int HaloFullHeight
+        public int HaloWindowedHeight
         {
-            get { return _haloFullHeight; }
-            set { SetField(ref _haloFullHeight, value, "HaloFullHeight"); }
+            get { return _haloWindowedHeight; }
+            set { SetField(ref _haloWindowedHeight, value, "HaloWindowedHeight"); }
         }
 
         public int HaloDockedWidth

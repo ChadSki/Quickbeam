@@ -1,4 +1,6 @@
+using System.Windows.Controls;
 using System.Windows.Forms.VisualStyles;
+using AvalonDock.Controls;
 using AvalonDock.Layout;
 using MetroIde.Dialogs;
 using MetroIde.Helpers.Native;
@@ -25,37 +27,6 @@ namespace MetroIde
 
         #region Startup
 
-        public bool ProcessCommandLineArgs(IList<string> args)
-        {
-            if (args != null && args.Count > 1)
-            {
-                string[] commandArgs = args.Skip(1).ToArray();
-                if (commandArgs[0].StartsWith("assembly://"))
-                    commandArgs[0] = commandArgs[0].Substring(11).Trim('/');
-
-                // Decide what to do
-                Activate();
-                switch (commandArgs[0].ToLower())
-                {
-                    case "open":
-                        // Determine type of file, and start it up, yo
-                        if (commandArgs.Length > 1)
-                            StartupDetermineType(commandArgs[1]);
-                        break;
-
-                    case "about":
-                        // Show About
-                        menuHelpAbout_Click(null, null);
-                        break;
-
-                    default:
-                        return true;
-                }
-            }
-
-            return true;
-        }
-
         public Home()
         {
             InitializeComponent();
@@ -64,11 +35,7 @@ namespace MetroIde
             UpdateStatusText("Ready");
 
             AddTabModule(TabGenre.StartPage);
-            AddTabModule(TabGenre.LobbyPage);
-
-            // Do sidebar Loading stuff
-            //SwitchXBDMSidebarLocation(App.AssemblyStorage.AssemblySettings.applicationXBDMSidebarLocation);
-            //XBDMSidebarTimerEvent();
+            //AddTabModule(TabGenre.LobbyPage);
 
             // Set width/height/state from last session
             if (!double.IsNaN(App.MetroIdeStorage.MetroIdeSettings.ApplicationSizeHeight) &&
@@ -95,66 +62,27 @@ namespace MetroIde
             HwndSource hwndSource = HwndSource.FromHwnd(handle);
             if (hwndSource != null)
                 hwndSource.AddHook(WindowProc);
-
-            ProcessCommandLineArgs(Environment.GetCommandLineArgs());
-        }
-
-        private void StartupDetermineType(string path)
-        {
-            try
-            {
-                if (File.Exists(path))
-                {/*
-                    // Magic Check
-                    string magic;
-                    using (var stream = new EndianReader(File.OpenRead(path), Endian.BigEndian))
-                        magic = stream.ReadAscii(0x04).ToLower();
-
-                    switch (magic)
-                    {
-                        case "head":
-                        case "daeh":
-                            // Map File
-                            AddCacheTabModule(path);
-                            return;
-                    }*/
-                }
-
-                MetroMessageBox.Show("Unable to find file", "The selected file could no longer be found");
-            }
-            catch (Exception ex)
-            {
-                MetroException.Show(ex);
-            }
         }
 
         #endregion
 
         #region MenuButtons
-        // File
         private void menuOpenCacheFile_Click(object sender, RoutedEventArgs e)
         {
             OpenContentFile(ContentTypes.Map);
         }
-
-        // View
         private void menuViewStartPage_Click(object sender, RoutedEventArgs e)
         {
             AddTabModule(TabGenre.StartPage);
         }
-
-        // Help
         private void menuHelpAbout_Click(object sender, RoutedEventArgs e)
         {
             MetroAbout.Show();
         }
-
-        // Goodbye Sweet Evelyn
         private void menuCloseApplication_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
         #endregion
 
         #region ChromeButtons
@@ -553,41 +481,41 @@ namespace MetroIde
 
         public void AddHaloViewport()
         {
-            // TODO select existing, if available
+            var haloTab = new LayoutAnchorable { Title = "Halo Viewport", Content = new HaloPage() };
+            HaloDockManager.Children.Add(haloTab);
 
-            var tab = new LayoutAnchorable { Title = "Halo Viewport", Content = new HaloPage() };
-            RightDockManager.Children.Add(tab);
-            RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tab);
+            HaloDockManager.SelectedContentIndex = HaloDockManager.IndexOfChild(haloTab);
+            RightDock.DockMinWidth = App.MetroIdeStorage.MetroIdeSettings.HaloDockedWidth;
+            HaloDock.DockMinHeight = App.MetroIdeStorage.MetroIdeSettings.HaloDockedHeight + 20;
+        }
 
-            RightDock.DockWidth = new GridLength(App.MetroIdeStorage.MetroIdeSettings.HaloDockedWidth);
+        public void AddEditTab()
+        {
+            var editTab = new LayoutAnchorable { Title = "Tag Editor", Content = new EditPage() };
+            LobbyDockManager.Children.Add(editTab);
         }
 
         private void dockManager_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (CenterDockManager.SelectedContentIndex != _lastDocumentIndex)
+            if (CenterDockManager.SelectedContentIndex == _lastDocumentIndex) return;
+
+            // Selection Changed, lets do dis
+            var tab = CenterDockManager.SelectedContent;
+            if (tab != null)
             {
-                // Selection Changed, lets do dis
-                LayoutContent tab = CenterDockManager.SelectedContent;
-
-                if (tab != null)
-                    UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", ""));
-
-                if (tab != null && tab.Title == "Start Page")
-                    ((StartPage)tab.Content).UpdateRecents();
-
-                if (tab == null)
-                {
-                    CenterDockManager.SelectedContentIndex = 0;
-                    UpdateTitleText("");
-                }
-
-                _lastDocumentIndex = CenterDockManager.SelectedContentIndex;
+                UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", "")); //TODO check this is necessary
             }
+            else
+            {
+                CenterDockManager.SelectedContentIndex = 0;
+                UpdateTitleText("");
+            }
+            _lastDocumentIndex = CenterDockManager.SelectedContentIndex;
         }
 
         #endregion
 
-        #region Public Access Modifiers
+        #region Public byteArray Modifiers
 
         private readonly DispatcherTimer _statusUpdateTimer = new DispatcherTimer();
 
