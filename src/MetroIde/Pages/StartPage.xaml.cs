@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Media.Animation;
 using MetroIde.Helpers;
 using MetroIde.Dialogs;
 using Button = System.Windows.Controls.Button;
@@ -16,6 +20,12 @@ namespace MetroIde.Pages
         public StartPage()
         {
             InitializeComponent();
+
+            // Set DataContext
+            DataContext = App.MetroIdeStorage.MetroIdeSettings;
+
+            // Setup Combo Boxes
+            ComboBoxAccents.ItemsSource = Enum.GetValues(typeof(Settings.Accents));
         }
 
         public void LoadRecentItem(object sender, RoutedEventArgs e)
@@ -85,7 +95,7 @@ namespace MetroIde.Pages
                 });
         }
 
-        private void LaunchHaloButton_OnClick(object sender, RoutedEventArgs e)
+        private void LaunchHaloDocked_OnClick(object sender, RoutedEventArgs e)
         {
             string haloExePath = App.MetroIdeStorage.MetroIdeSettings.HaloExePath;
             if (File.Exists(haloExePath))
@@ -98,6 +108,53 @@ namespace MetroIde.Pages
                 }
             }
             MetroMessageBox.Show("Cannot Launch Halo", "Check your halo.exe path in Settings.");
+        }
+
+        private void LaunchHaloFullscreen_OnClick(object sender, RoutedEventArgs e)
+        {
+            string haloExePath = App.MetroIdeStorage.MetroIdeSettings.HaloExePath;
+            if (File.Exists(haloExePath))
+            {
+                string haloDirectory = Path.GetDirectoryName(haloExePath);
+                if (haloDirectory != null && Directory.Exists(haloDirectory))
+                {
+                    int width, height;
+                    if (App.MetroIdeStorage.MetroIdeSettings.AutoDetectFullscreenResolution)
+                    {
+                        width = 800;
+                        height = 600;
+                    }
+                    else
+                    {
+                        width = App.MetroIdeStorage.MetroIdeSettings.HaloFullWidth;
+                        height = App.MetroIdeStorage.MetroIdeSettings.HaloFullHeight;
+                    }
+                    Process.Start(new ProcessStartInfo(haloExePath)
+                    {
+                        WorkingDirectory = haloDirectory,
+                        Arguments = string.Format(@"-console -vidmode {0},{1},{2}", width, height, 60),
+                    });
+                }
+            }
+        }
+
+        private void BtnBrowseHaloExe_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = @"Executable Files|*.exe|All Files|*.*",
+                FileName = App.MetroIdeStorage.MetroIdeSettings.HaloExePath,
+                Title = @"Open halo.exe"
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+                App.MetroIdeStorage.MetroIdeSettings.HaloExePath = dialog.FileName;
+        }
+
+        private void StartPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            // Apply Storyboard
+            var storyboardShow = (Storyboard)TryFindResource("RevealSettings");
+            if (storyboardShow != null) storyboardShow.Begin();
         }
     }
 }

@@ -14,13 +14,18 @@ namespace MetroIde.Helpers
     {
         private IntPtr _hwndHost;
         private Process _haloProcess;
-        private readonly int _hostHeight;
-        private readonly int _hostWidth;
+        private readonly int _haloWidth;
+        private readonly int _haloHeight;
+        private readonly int _refreshRate;
 
         public HaloWindow()
         {
-            _hostHeight = 800;
-            _hostWidth = 600;
+            _haloWidth = App.MetroIdeStorage.MetroIdeSettings.HaloDockedWidth;
+            _haloHeight = App.MetroIdeStorage.MetroIdeSettings.HaloDockedHeight;
+            _refreshRate = 60;
+
+            MaxWidth = _haloWidth;
+            MaxHeight = _haloHeight;
         }
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
@@ -31,7 +36,7 @@ namespace MetroIde.Helpers
                 0, "static", "",
                 NativeMethods.WsChild | NativeMethods.WsVisible | NativeMethods.WsClipChildren,
                 0, 0,
-                _hostWidth, _hostHeight,
+                _haloWidth, _haloHeight,
                 hwndParent.Handle,
                 IntPtr.Zero,
                 IntPtr.Zero,
@@ -49,7 +54,7 @@ namespace MetroIde.Helpers
                 _haloProcess = Process.Start(new ProcessStartInfo(haloExePath)
                 {
                     WorkingDirectory = haloDirectory,
-                    Arguments = string.Format(@"-console -window -vidmode {0},{1},60", 800, 600),
+                    Arguments = string.Format(@"-console -window -vidmode {0},{1},{2}", _haloWidth, _haloHeight, _refreshRate),
                     WindowStyle = ProcessWindowStyle.Minimized
                 });
 
@@ -66,7 +71,8 @@ namespace MetroIde.Helpers
                 NativeMethods.ShowWindow(_haloProcess.MainWindowHandle, NativeMethods.SwShow);
 
                 // resize
-                NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, 800, 600, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+                NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _haloWidth, _haloHeight,
+                    NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
 
                 // force video rendering
                 const int exeOffset = 0x400000;

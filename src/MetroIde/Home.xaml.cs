@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms.VisualStyles;
+using System.Windows.Forms.VisualStyles;
 using AvalonDock.Layout;
 using MetroIde.Dialogs;
 using MetroIde.Helpers.Native;
@@ -6,22 +6,13 @@ using MetroIde.Pages;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Threading;
-using AvalonDock.Layout;
-using Microsoft.Win32;
-using MetroIde.Helpers;
-using MetroIde.Helpers.Native;
-using MetroIde.Helpers.Net;
-using MetroIde.Dialogs;
-using MetroIde.Pages;
 
 namespace MetroIde
 {
@@ -307,28 +298,14 @@ namespace MetroIde
         {
             var xAdjust = Width + e.HorizontalChange;
 
-            if (xAdjust > MinWidth)
-            {
-                Width = xAdjust;
-            }
-            else
-            {
-                Width = MinWidth;
-            }
+            Width = xAdjust > MinWidth ? xAdjust : MinWidth;
         }
 
         public void ResizeBottomThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
             var yAdjust = Height + e.VerticalChange;
 
-            if (yAdjust > MinHeight)
-            {
-                Height = yAdjust;
-            }
-            else
-            {
-                Height = MinHeight;
-            }
+            Height = yAdjust > MinHeight ? yAdjust : MinHeight;
         }
 
         public void ResizeLeftThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -520,11 +497,6 @@ namespace MetroIde
             HaloPage
         }
 
-        public void ClearTabs()
-        {
-            DocumentManager.Children.Clear();
-        }
-
         /// <summary>
         ///     Add a new Blam Cache Editor Container
         /// </summary>
@@ -532,9 +504,9 @@ namespace MetroIde
         public void AddCacheTabModule(string cacheLocation)
         {
             // Check Map isn't already open
-            foreach (LayoutContent tab in DocumentManager.Children.Where(tab => tab.ContentId == cacheLocation))
+            foreach (LayoutContent tab in CenterDockManager.Children.Where(tab => tab.ContentId == cacheLocation))
             {
-                DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
+                CenterDockManager.SelectedContentIndex = CenterDockManager.IndexOfChild(tab);
                 return;
             }
 
@@ -546,8 +518,8 @@ namespace MetroIde
             };
             /*newCacheTab.Content = new HaloMap(cacheLocation, newCacheTab,
                 App.AssemblyStorage.AssemblySettings.HalomapTagSort);*/
-            DocumentManager.Children.Add(newCacheTab);
-            DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(newCacheTab);
+            CenterDockManager.Children.Add(newCacheTab);
+            CenterDockManager.SelectedContentIndex = CenterDockManager.IndexOfChild(newCacheTab);
         }
 
         public void AddTabModule(TabGenre tabG, bool singleInstance = true)
@@ -562,41 +534,40 @@ namespace MetroIde
                 case TabGenre.LobbyPage:
                     tab = new LayoutAnchorable {Title = "HaloMD Lobby", Content = new LobbyPage()};
                     break;
+
                 default:
                     return;
             }
 
             // Select the single tab rather than create a new one
             if (singleInstance)
-                foreach (LayoutContent tabb in DocumentManager.Children.Where(tabb => tabb.Title == tab.Title))
+                foreach (LayoutContent tabb in CenterDockManager.Children.Where(tabb => tabb.Title == tab.Title))
                 {
-                    DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tabb);
+                    CenterDockManager.SelectedContentIndex = CenterDockManager.IndexOfChild(tabb);
                     return;
                 }
 
-            DocumentManager.Children.Add(tab);
-            DocumentManager.SelectedContentIndex = DocumentManager.IndexOfChild(tab);
+            CenterDockManager.Children.Add(tab);
+            CenterDockManager.SelectedContentIndex = CenterDockManager.IndexOfChild(tab);
         }
 
         public void AddHaloViewport()
         {
-            // select existing, if available
-            foreach (var tabb in RightDockManager.Children.Where(tabb => tabb.Title == "Halo Viewport"))
-            {
-                RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tabb);
-                return;
-            }
+            // TODO select existing, if available
+
             var tab = new LayoutAnchorable { Title = "Halo Viewport", Content = new HaloPage() };
             RightDockManager.Children.Add(tab);
             RightDockManager.SelectedContentIndex = RightDockManager.IndexOfChild(tab);
+
+            RightDock.DockWidth = new GridLength(App.MetroIdeStorage.MetroIdeSettings.HaloDockedWidth);
         }
 
         private void dockManager_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (DocumentManager.SelectedContentIndex != _lastDocumentIndex)
+            if (CenterDockManager.SelectedContentIndex != _lastDocumentIndex)
             {
                 // Selection Changed, lets do dis
-                LayoutContent tab = DocumentManager.SelectedContent;
+                LayoutContent tab = CenterDockManager.SelectedContent;
 
                 if (tab != null)
                     UpdateTitleText(tab.Title.Replace("__", "_").Replace(".map", ""));
@@ -606,11 +577,11 @@ namespace MetroIde
 
                 if (tab == null)
                 {
-                    DocumentManager.SelectedContentIndex = 0;
+                    CenterDockManager.SelectedContentIndex = 0;
                     UpdateTitleText("");
                 }
 
-                _lastDocumentIndex = DocumentManager.SelectedContentIndex;
+                _lastDocumentIndex = CenterDockManager.SelectedContentIndex;
             }
         }
 
