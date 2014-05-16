@@ -8,8 +8,6 @@ namespace MetroIde.Helpers.Native
         [DllImport("user32")]
         internal static extern bool GetMonitorInfo(IntPtr hMonitor, MonitorInfo lpmi);
 
-        /// <summary>
-        /// </summary>
         [DllImport("User32")]
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
 
@@ -23,8 +21,6 @@ namespace MetroIde.Helpers.Native
             public Point ptMaxTrackSize;
         };
 
-        /// <summary>
-        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public class MonitorInfo
         {
@@ -34,67 +30,37 @@ namespace MetroIde.Helpers.Native
             }
 
             public uint cbSize;
-
-            /// <summary>
-            /// </summary>
             public Rect rcMonitor = new Rect();
-
-            /// <summary>
-            /// </summary>
             public Rect rcWork = new Rect();
-
             public uint dwFlags;
         }
 
-        /// <summary>
-        ///     Point aka POINTAPI
-        /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct Point
         {
-            /// <summary>
-            ///     x coordinate of point.
-            /// </summary>
             public int x;
-
-            /// <summary>
-            ///     y coordinate of point.
-            /// </summary>
             public int y;
         }
 
-        /// <summary> Win32 </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         public struct Rect
         {
-            /// <summary> Win32 </summary>
             public readonly int left;
-
-            /// <summary> Win32 </summary>
             public readonly int top;
-
-            /// <summary> Win32 </summary>
             public readonly int right;
-
-            /// <summary> Win32 </summary>
             public readonly int bottom;
-
-            /// <summary> Win32 </summary>
             public static readonly Rect Empty = new Rect();
 
-            /// <summary> Win32 </summary>
             public int Width
             {
                 get { return Math.Abs(right - left); } // Abs needed for BIDI OS
             }
 
-            /// <summary> Win32 </summary>
             public int Height
             {
                 get { return bottom - top; }
             }
 
-            /// <summary> Win32 </summary>
             public Rect(int left, int top, int right, int bottom)
             {
                 this.left = left;
@@ -103,7 +69,6 @@ namespace MetroIde.Helpers.Native
                 this.bottom = bottom;
             }
 
-            /// <summary> Win32 </summary>
             public Rect(Rect rcSrc)
             {
                 left = rcSrc.left;
@@ -112,12 +77,11 @@ namespace MetroIde.Helpers.Native
                 bottom = rcSrc.bottom;
             }
 
-            /// <summary> Win32 </summary>
             public bool IsEmpty
             {
                 get
                 {
-                    // BUGBUG : On Bidi OS (hebrew arabic) left > right
+                    // TODO Bug on Bidi OS (hebrew arabic) left > right
                     return left >= right || top >= bottom;
                 }
             }

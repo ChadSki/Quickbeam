@@ -101,13 +101,20 @@
     </BootstrapperPackage>
     <Compile Include="Helpers\DpiDecorator.cs" />
     <Compile Include="Helpers\HaloWindow.cs" />
+    <Compile Include="Helpers\Lobby\HaloServer.cs" />
+    <Compile Include="Helpers\Lobby\ServerListViewModel.cs" />
     <Compile Include="Helpers\Native\NativeMethods.cs" />
+    <Compile Include="Helpers\Lobby\HaloMd.cs" />
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HaloPage.xaml.cs">
       <DependentUpon>HaloPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LobbyPage.xaml.cs">
+      <DependentUpon>LobbyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StatusUpdater.cs" />
     <Resource Include="Images\app_icon_large.ico" />
     <Resource Include="Images\app_icon_large.png" />
@@ -134,6 +141,9 @@
     <Resource Include="Images\Vectored\unfreezeVector.png" />
     <Reference Include="AvalonDock">
       <HintPath>..\packages\AvalonDock.2.0.1746\lib\net40\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -297,7 +307,6 @@
     <Compile Include="Dialogs\MetroMessageBoxList.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
     <Compile Include="Helpers\JumpLists.cs" />
-    <Compile Include="Helpers\Native\ShellChanges.cs" />
     <Compile Include="Helpers\Net\HttpExtensions.cs" />
     <Compile Include="Helpers\Net\HttpRequests.cs" />
     <Compile Include="Helpers\Net\AssemblyServer.cs" />
@@ -584,6 +593,9 @@
     <Page Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    <Page Include="Pages\LobbyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\StartPage.xaml">
       <Generator>MSBuild:Compile</Generator>
