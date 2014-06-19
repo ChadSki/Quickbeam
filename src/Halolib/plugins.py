@@ -22,44 +22,45 @@
 
 from __future__ import print_function
 import clr
-import glob
+import fnmatch
+import os
 import xml.etree.ElementTree as et
 
-def make_observable_field(byteaccess, halomap, field_type, offset, length, reverse, maxlength, options, reflexive_class):
+def make_observable_field(bytearray, halomap, field_type, offset, length, reverse, maxlength, options, reflexive_class):
     """Return an object which reads/writes to a field of a plugin-defined struct.
     """
     # select and create the appropriate field type
     return {
-        'int8':      lambda: Int8Field(      byteaccess, offset),
-        'int16':     lambda: Int16Field(     byteaccess, offset),
-        'int32':     lambda: Int32Field(     byteaccess, offset),
-        'int64':     lambda: Int64Field(     byteaccess, offset),
-        'uint8':     lambda: UInt8Field(     byteaccess, offset),
-        'uint16':    lambda: UInt16Field(    byteaccess, offset),
-        'uint32':    lambda: UInt32Field(    byteaccess, offset),
-        'uint64':    lambda: UInt64Field(    byteaccess, offset),
-        'float32':   lambda: Float32Field(   byteaccess, offset),
-        'float64':   lambda: Float64Field(   byteaccess, offset),
+        'int8':      lambda: Int8Field(      bytearray, offset),
+        'int16':     lambda: Int16Field(     bytearray, offset),
+        'int32':     lambda: Int32Field(     bytearray, offset),
+        'int64':     lambda: Int64Field(     bytearray, offset),
+        'uint8':     lambda: UInt8Field(     bytearray, offset),
+        'uint16':    lambda: UInt16Field(    bytearray, offset),
+        'uint32':    lambda: UInt32Field(    bytearray, offset),
+        'uint64':    lambda: UInt64Field(    bytearray, offset),
+        'float32':   lambda: Float32Field(   bytearray, offset),
+        'float64':   lambda: Float64Field(   bytearray, offset),
 
-        'colorbyte': lambda: ColorByteField( byteaccess, offset),
-        'colorRGB':  lambda: ColorRgbField(  byteaccess, offset),
-        'colorARGB': lambda: ColorArgbField( byteaccess, offset),
+        'colorbyte': lambda: ColorByteField( bytearray, offset),
+        'colorRGB':  lambda: ColorRgbField(  bytearray, offset),
+        'colorARGB': lambda: ColorArgbField( bytearray, offset),
 
-        'enum8':     lambda: Enum8Field(     byteaccess, offset, options),
-        'enum16':    lambda: Enum16Field(    byteaccess, offset, options),
-        'enum32':    lambda: Enum32Field(    byteaccess, offset, options),
+        'enum8':     lambda: Enum8Field(     bytearray, offset, options),
+        'enum16':    lambda: Enum16Field(    bytearray, offset, options),
+        'enum32':    lambda: Enum32Field(    bytearray, offset, options),
 
-        'bitmask8':  lambda: Bitmask8Field(  byteaccess, offset, options),
-        'bitmask16': lambda: Bitmask16Field( byteaccess, offset, options),
-        'bitmask32': lambda: Bitmask32Field( byteaccess, offset, options),
+        'bitmask8':  lambda: Bitmask8Field(  bytearray, offset, options),
+        'bitmask16': lambda: Bitmask16Field( bytearray, offset, options),
+        'bitmask32': lambda: Bitmask32Field( bytearray, offset, options),
 
-        'rawdata':   lambda: RawDataField(   byteaccess, offset, length, reverse),
-        'ascii':     lambda: AsciiField(     byteaccess, offset, length, reverse),
-        'asciiz':    lambda: AsciizField(    byteaccess, offset, maxlength),
+        'rawdata':   lambda: RawDataField(   bytearray, offset, length, reverse),
+        'ascii':     lambda: AsciiField(     bytearray, offset, length, reverse),
+        'asciiz':    lambda: AsciizField(    bytearray, offset, maxlength),
 
-        'loneID':    lambda: ReferenceField( byteaccess, offset, halomap, False),
-        'reference': lambda: ReferenceField( byteaccess, offset, halomap, True),
-        'reflexive': lambda: ReflexiveField( byteaccess, offset, halomap, reflexive_class)
+        'loneID':    lambda: ReferenceField( bytearray, offset, halomap, False),
+        'reference': lambda: ReferenceField( bytearray, offset, halomap, True),
+        'reflexive': lambda: ReflexiveField( bytearray, offset, halomap, reflexive_class)
     }[field_type]()
 
 def class_from_xml(layout):
@@ -145,6 +146,9 @@ plugin_classes = {}
 def load_plugins():
     """Generates struct-wrapping classes based on xml plugins.
     """
-    for filepath in glob.glob('.\plugins\*.xml'):
-        root_struct = et.parse(filepath).getroot()  # load the xml definition
-        plugin_classes[root_struct.attrib['name']] = class_from_xml(root_struct)
+    src_dir = os.path.dirname(os.path.abspath(__file__))
+    plugins_dir = os.path.join(src_dir, 'plugins')
+    for dirpath, dirnames, files in os.walk(plugins_dir):
+        for filename in fnmatch.filter(files, '*.xml'):
+            root_struct = et.parse(filename).getroot()  # load the xml definition
+            plugin_classes[root_struct.attrib['name']] = class_from_xml(root_struct)

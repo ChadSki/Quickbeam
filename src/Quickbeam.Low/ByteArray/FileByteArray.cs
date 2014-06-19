@@ -20,6 +20,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 
@@ -37,7 +38,7 @@ namespace Quickbeam.Low.ByteArray
             _handle = MemoryMappedFile.CreateFromFile(filePath, FileMode.Open);
         }
 
-        public IByteArray Create(int offset, int size)
+        public IByteArray CreateByteArray(int offset, int size)
         {
             return new FileByteArray(offset, size, _handle.CreateViewAccessor(offset, size));
         }
@@ -62,8 +63,15 @@ namespace Quickbeam.Low.ByteArray
         override protected byte[] ReadBytesCore(int offset, int length)
         {
             var bytes = new byte[length];
-            _fileView.ReadArray(0, bytes, offset, length);
-            return bytes;
+            try
+            {
+                _fileView.ReadArray(offset, bytes, 0, length);
+                return bytes;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         override protected void WriteBytesCore(int offset, byte[] data)

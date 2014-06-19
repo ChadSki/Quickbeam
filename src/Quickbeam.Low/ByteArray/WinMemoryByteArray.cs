@@ -46,7 +46,7 @@ namespace Quickbeam.Low.ByteArray
             }
         }
 
-        public IByteArray Create(int offset, int size)
+        public IByteArray CreateByteArray(int offset, int size)
         {
             return new WinMemoryByteArray(offset, size, _processHandle);
         }

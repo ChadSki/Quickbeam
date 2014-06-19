@@ -27,7 +27,7 @@ namespace Quickbeam.Low.ByteArray
     /// </summary>
     public interface IByteArrayBuilder
     {
-        IByteArray Create(int offset, int size);
+        IByteArray CreateByteArray(int offset, int size);
     }
 
     /// <summary>

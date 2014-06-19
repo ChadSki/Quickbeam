@@ -34,7 +34,7 @@ class ObservableField(PyNotifyPropertyChanged):
         return str(self.Value)
 
 
-# floating-point
+#### floating-point types
 
 class Float32Field(ObservableField):
     @notify_property('Value')
@@ -52,7 +52,8 @@ class Float64Field(ObservableField):
     def Value(self, value):
         self.access.WriteFloat16(self.offset, value)
 
-# integer
+
+#### integer types
 
 class Int8Field(ObservableField):
     @notify_property('Value')
@@ -118,7 +119,8 @@ class UInt64Field(ObservableField):
     def Value(self, value):
         self.access.WriteUInt16(self.offset, value)
 
-# bitmask
+
+#### bitmask types
 
 def Bitmask8Field(ObservableField):
     @notify_property('Value')
@@ -144,7 +146,8 @@ def Bitmask32Field(ObservableField):
         toWrite = sum(1<<i for i, flag in enumerate(value) if flag)
         self.access.WriteUInt32(toWrite)
 
-# enum
+
+#### enum types
 
 def Enum8Field(UInt8Field):
     def __init__(self, byteaccess, offset, options):
@@ -164,7 +167,8 @@ def Enum32Field(UInt8Field):
         self.offset = offset
         self.options = options
 
-# reference
+
+#### other types
 
 def ReferenceField(ObservableField):
     def __init__(self, byteaccess, offset, halomap):
@@ -175,8 +179,6 @@ def ReferenceField(ObservableField):
     @notify_property('Value')
     def Value(self):
         return self.halomap.tags[self.access.ReadUInt32(self.offset)]
-
-# reflexive
 
 def ReflexiveField(ObservableField):
     def __init__(self, byteaccess, offset, halomap, reflexive_class):

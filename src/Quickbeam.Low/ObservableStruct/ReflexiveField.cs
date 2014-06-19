@@ -49,7 +49,7 @@ namespace Quickbeam.Low.ObservableStruct
                 for(uint ii = 0; ii < count; ii++ )
                 {
                     yield return ReflexiveClass(
-                                    ByteArrayBuilder.Create(
+                                    ByteArrayBuilder.CreateByteArray(
                                         startOffset + ReflexiveClass.struct_size*ii,
                                         ReflexiveClass.struct_size),
                                     HaloMap);

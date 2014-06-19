@@ -33,10 +33,10 @@ namespace MetroIde
             //    args.Handled = true;
             //};
 
-            // Create Assembly Storage
+            // CreateByteArray Assembly Storage
             MetroIdeStorage = new Storage();
 
-            // Create jumplist
+            // CreateByteArray jumplist
             JumpLists.UpdateJumplists();
 
             // Initialize Python env

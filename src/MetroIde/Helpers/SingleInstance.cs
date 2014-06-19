@@ -278,7 +278,7 @@ namespace Microsoft.Shell
 
             string channelName = String.Concat(applicationIdentifier, Delimiter, ChannelNameSuffix);
 
-            // Create mutex based on unique application Id to check if this is the first instance of the application. 
+            // CreateByteArray mutex based on unique application Id to check if this is the first instance of the application. 
             bool firstInstance;
             singleInstanceMutex = new Mutex(true, applicationIdentifier, out firstInstance);
             if (firstInstance)
@@ -377,7 +377,7 @@ namespace Microsoft.Shell
             props["portName"] = channelName;
             props["exclusiveAddressUse"] = "false";
 
-            // Create the IPC Server channel with the channel properties
+            // CreateByteArray the IPC Server channel with the channel properties
             channel = new IpcServerChannel(props, serverProvider);
 
             // Register the channel with the channel services
