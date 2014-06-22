@@ -20,10 +20,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from System.ComponentModel import INotifyPropertyChanged
+import pyevent
+from System.ComponentModel import INotifyPropertyChanged, PropertyChangedEventArgs
 
 class PyNotifyPropertyChanged(INotifyPropertyChanged):
-    PropertyChanged = None
+    PropertyChanged, _propertyChangedCaller  = pyevent.make_event()
 
     def __init__(self):
         self.PropertyChanged, self._propertyChangedCaller = pyevent.make_event()

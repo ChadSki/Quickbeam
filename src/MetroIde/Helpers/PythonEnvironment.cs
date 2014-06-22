@@ -1,27 +1,29 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using IronPython.Hosting;
+using IronPython.Modules;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
-using Quickbeam.Low.ObservableStruct;
+using Quickbeam.Low;
+using Quickbeam.Low.ByteArray;
 
 namespace MetroIde.Helpers
 {
     public class PythonEnvironment
     {
-        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\src\MetroIde\Lib";
-        protected static readonly string DllsLocation = @"C:\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\src\Sandbox Projects\ConsoleApplication\bin\Debug";
-        protected static readonly string HalolibLocation = @"C:\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\src\Halolib";
+        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\MetroIde\Lib";
+        protected static readonly string DllsLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug";
+        protected static readonly string HalolibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib";
 
         protected ScriptEngine Engine;
         protected ScriptScope Scope;
 
         private PythonEnvironment()
         {
-            // Only needed because of plugin pathing
-            Directory.SetCurrentDirectory(@"C:\Dropbox\Workbench\CodeProjects\Halo\Quickbeam\src\Halolib");
-
             Engine = Python.CreateEngine();
-            Engine.Runtime.LoadAssembly(typeof (ObservableStruct).Assembly);
+            var assembly = typeof (IByteArray).Assembly;
+            Engine.Runtime.LoadAssembly(assembly);
 
             Scope = Engine.CreateScope();
             Engine.CreateScriptSourceFromString("import sys\n" +
@@ -40,7 +42,7 @@ namespace MetroIde.Helpers
             get
             {
                 if (_rootStruct != null) return _rootStruct;
-                Engine.CreateScriptSourceFromString("curr_tag = halolib.load_map()",
+                var x = Engine.CreateScriptSourceFromString("curr_tag = halolib.load_map()",
                     SourceCodeKind.SingleStatement)
                     .Execute(Scope);
                 _rootStruct = Scope.GetVariable("curr_tag").__dict__;
@@ -50,7 +52,7 @@ namespace MetroIde.Helpers
 
         public void Execute(string code)
         {
-            Engine.Execute(code);
+            Engine.Execute(code, Scope);
         }
 
 

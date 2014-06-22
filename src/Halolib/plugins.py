@@ -117,7 +117,7 @@ def struct_class_from_xml(layout):
             answer = '{'
             for pair in self.__dict__:
                 answer += '\n    %s: ' % pair.Key
-                lines = str(pair.Value).split('\n')
+                lines = repr(pair.Value.Value).split('\n')
                 answer += lines.pop()
                 for line in lines:
                     answer += '\n    ' + line

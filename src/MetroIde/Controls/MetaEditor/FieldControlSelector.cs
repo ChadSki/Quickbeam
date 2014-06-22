@@ -32,9 +32,8 @@ namespace MetroIde.Controls.MetaEditor
         {
             if (o == null) return null;
             dynamic keyValuePair = o;
-            string fullName = keyValuePair.Value.GetType().ToString();
-            string typeName = fullName.Split('.').Last();
-            string key = typeName + "Template";
+            dynamic field = keyValuePair.Value;
+            string key = field.get_TemplateKey();
             return Application.Current.Resources[key] as DataTemplate;
         }
     }

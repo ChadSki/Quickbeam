@@ -22,5 +22,4 @@
 
 from __future__ import print_function
 import pyevent
-from notifyproperty import PyNotifyPropertyChanged, notify_property
 from fields import *
