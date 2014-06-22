@@ -55,7 +55,6 @@ namespace Quickbeam.Low.ByteArray
 
         void WriteBytes(int offset, byte[] data);
         void WriteAscii(int offset, string toWrite);
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Asciiz")]
         void WriteAsciiz(int offset, string toWrite);
         void WriteFloat32(int offset, float toWrite);
         void WriteFloat64(int offset, double toWrite);

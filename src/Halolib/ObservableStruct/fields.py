@@ -20,97 +20,172 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from notifyproperty import NotifyProperty
+from notifyproperty import notify_property, PyNotifyPropertyChanged
+
+class ObservableField(PyNotifyPropertyChanged):
+    """Subclasses are required to implement a notify_property named 'Value'.
+    """
+    def __init__(self, parent):
+        self.parent = parent
+
+    def __str__(self):
+        return repr(self.Value)
+
 
 ################################################################
 # floating point
 
-def float32(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_float32(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_float32(self.offset + offset, value))
+def Float32Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return float(self.parent.bytearray.ReadFloat32(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteFloat32(offset, value)
+    return Field
 
-def float64(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_float64(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_float64(self.offset + offset, value))
+def Float64Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return float(self.parent.bytearray.ReadFloat64(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteFloat64(offset, value)
+    return Field
 
 ################################################################
 # integer
 
-def int8(offset):
-    return lambda parent: NotifyProperty(
-        fget=lambda self: parent.bytearray.read_int8(parent.offset + offset),
-        fset=lambda self, value: parent.bytearray.write_int8(parent.offset + offset, value))
+def Int8Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadInt8(parent.offset + offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteInt8(parent.offset + offset, value)
+    return Field
 
-def int16(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_int16(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_int16(self.offset + offset, value))
+def Int16Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadInt16(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteInt16(offset, value)
+    return Field
 
-def int32(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_int32(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_int32(self.offset + offset, value))
+def Int32Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadInt32(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteInt32(offset, value)
+    return Field
 
-def int64(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_int64(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_int64(self.offset + offset, value))
+def Int64Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadInt64(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteInt64(offset, value)
+    return Field
 
-def uint8(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_uint8(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_uint8(self.offset + offset, value))
+def UInt8Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadUInt8(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteUInt8(offset, value)
+    return Field
 
-def uint16(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_uint16(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_uint16(self.offset + offset, value))
+def UInt16Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return self.parent.bytearray.ReadUInt16(offset)
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteUInt16(offset, value)
+    return Field
 
-def uint32(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_uint32(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_uint32(self.offset + offset, value))
+def UInt32Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadUInt32(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteUInt32(offset, value)
+    return Field
 
-def uint64(offset):
-    return NotifyProperty(
-        fget=lambda self: self.bytearray.read_uint64(self.offset + offset),
-        fset=lambda self, value: self.bytearray.write_uint64(self.offset + offset, value))
+def UInt64Field(offset):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadUInt64(offset))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteUInt64(offset, value)
+    return Field
 
 ################################################################
+# string
 
-def reference(offset, struct_class, loneid=False):
+def RawDataField(offset, length):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return int(self.parent.bytearray.ReadBytes(offset, length))
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteBytes(offset, value)
+    return Field
+
+def AsciiField(offset, length, reverse):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self):
+            answer = self.parent.bytearray.ReadAscii(offset, length)
+            if reverse: answer = answer[::-1]
+            return answer
+        @Value.setter
+        def Value(self, value):
+            if reverse: value = value[::-1]
+            self.parent.bytearray.WriteAscii(offset, value)
+    return Field
+
+def AsciizField(offset, maxlength):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self): return self.parent.bytearray.ReadAsciiz(offset, maxlength)
+        @Value.setter
+        def Value(self, value): self.parent.bytearray.WriteAsciiz(offset, value, maxlength)
+    return Field
+
+################################################################
+# other
+
+def ReferenceField(offset, loneid=False):
     if not loneid:
         offset += 12 # since we only care to read the ident, 12 bytes into a reference
 
-    @NotifyProperty
-    def field(self):
-        ident = self.bytearray.read_uint32(self.offset + offset)
-        if ident == 0 or ident == 0xFFFFFFFF:
-            return None
-        else:
-            return self.halomap.tags[ident] # return the referenced tag
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self):
+            ident = self.parent.bytearray.ReadUInt32(offset)
+            if ident == 0 or ident == 0xFFFFFFFF:
+                return None
+            else:
+                return self.parent.halomap.tags[ident] # return the referenced tag
 
-    @field.setter
-    def field(self, value):
-        # when value is None, write Halo's version of null (-1)
-        # otherwise, write the tag's ident, not the tag itself
-        self.bytearray.write_uint32(offset, 0xFFFFFFFF if value == None else value.ident)
+        @Value.setter
+        def Value(self, value):
+            # when value is None, write Halo's version of null (-1)
+            # otherwise, write the tag's ident, not the tag itself
+            self.parent.bytearray.WriteUInt32(offset, 0xFFFFFFFF if value == None else value.ident)
 
-    return field
+    return Field
 
 
-def reflexive(offset, struct_class):
-    @NotifyProperty
-    def field(self):
-        count = self.bytearray.read_uint32(self.offset + offset)
-        raw_offset = self.bytearray.read_uint32(self.offset + offset + 4)
-        start_offset = raw_offset - self.map_magic
+def ReflexiveField(offset, struct_class):
+    class Field(ObservableField):
+        @notify_property('Value')
+        def Value(self):
+            count = self.parent.bytearray.ReadUInt32(offset)
+            raw_offset = self.parent.bytearray.ReadUInt32(offset + 4)
+            start_offset = raw_offset - self.map_magic
 
-        return [struct_class(
-                    self.halomap.bytearraybuilder.new_bytearray(
-                        start_offset + i * struct_class.size,
-                        struct_class.size),
-                    self.halomap) for i in range(count)]
-    return field
+            return [struct_class(
+                        self.parent.halomap.bytearraybuilder.new_bytearray(
+                            start_offset + i * struct_class.size,
+                            struct_class.size),
+                        self.parent.halomap) for i in range(count)]
+    return Field

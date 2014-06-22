@@ -21,10 +21,21 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import print_function
-import pathfix
-import halolib
 
-halolib.load_plugins()
+import os
+import sys
+src_dir = os.path.dirname(__file__)
+stdlib_location = os.path.abspath(src_dir + r"..\MetroIde\Lib")
+dlls_location = os.path.abspath(src_dir + r"..\bin\Debug")
+halolib_location = os.path.abspath(src_dir)
+sys.path.append(stdlib_location)
+sys.path.append(r"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug")
+sys.path.append(halolib_location)
+
+import clr
+clr.AddReference("Quickbeam.Low.dll")
+
+import halolib
 
 curr_tag = halolib.load_map()
 print(repr(curr_tag))

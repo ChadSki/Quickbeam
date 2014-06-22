@@ -22,6 +22,8 @@
 
 from plugins import plugin_classes
 
+import clr
+clr.AddReference("Quickbeam.Low.dll")
 from Quickbeam.Low.ObservableStruct import AsciizField
 
 class HaloTag(object):

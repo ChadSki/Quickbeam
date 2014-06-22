@@ -60,7 +60,7 @@ def load_map(map_path=None):
     #           offset: location within the source medium
     #             size: number of bytes enclosed
     #
-    ByteArray = halomap.ba_builder.Create
+    ByteArray = halomap.ba_builder.CreateByteArray
 
     if location == 'mem':
         # Force Halo to render video even when window is deselected
