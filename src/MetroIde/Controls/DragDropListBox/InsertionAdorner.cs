@@ -11,7 +11,7 @@ namespace MetroIde.Controls.DragDropListBox
         private readonly AdornerLayer _adornerLayer;
         private readonly bool _isSeparatorHorizontal;
 
-        // Create the pen and triangle in a static constructor and freeze them to improve performance.
+        // CreateByteArray the pen and triangle in a static constructor and freeze them to improve performance.
         static InsertionAdorner()
         {
             Pen = new Pen {Brush = Brushes.White, Thickness = 2};

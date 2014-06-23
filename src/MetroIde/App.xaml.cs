@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
-using MetroIde.Dialogs;
-using Microsoft.Shell;
 using MetroIde.Helpers;
 
 namespace MetroIde
@@ -10,51 +7,38 @@ namespace MetroIde
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : ISingleInstanceApp
+    public partial class App
     {
-        #region ISingleInstanceApp Members
-
-        public bool SignalExternalCommandLineArgs(IList<string> args)
-        {
-            return MetroIdeStorage.MetroIdeSettings.HomeWindow == null ||
-                   MetroIdeStorage.MetroIdeSettings.HomeWindow.ProcessCommandLineArgs(args);
-        }
-
-        #endregion
-
         public static Storage MetroIdeStorage;
 
         [STAThread]
         public static void Main()
         {
-            if (!SingleInstance<App>.InitializeAsFirstInstance("RecivedCommand")) return;
-
             var application = new App();
 
             application.InitializeComponent();
             application.Run();
-
-            // Allow single instance code to perform cleanup operations
-            SingleInstance<App>.Cleanup();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // Snazzy exception dialog
-			Current.DispatcherUnhandledException += (o, args) =>
-			{
-				MetroException.Show(args.Exception);
+            //// Snazzy exception dialog
+            //Current.DispatcherUnhandledException += (o, args) =>
+            //{
+            //    MetroException.Show(args.Exception);
+            //    args.Handled = true;
+            //};
 
-				args.Handled = true;
-			};
-
-            // Create Assembly Storage
+            // CreateByteArray Assembly Storage
             MetroIdeStorage = new Storage();
 
-            // Create jumplist
+            // CreateByteArray jumplist
             JumpLists.UpdateJumplists();
+
+            // Initialize Python env
+            PythonEnvironment.Initialize();
 
             // Set closing method
             Current.Exit += (o, args) =>

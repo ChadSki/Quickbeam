@@ -5,8 +5,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Themes -->
                 <ResourceDictionary Source="Themes/Blue.xaml" />
                 <ResourceDictionary Source="Themes/Dark.xaml" />
+
+                <!-- Metro Controls -->
                 <ResourceDictionary Source="Controls/ActionButtons/CloseButton.xaml" />
                 <ResourceDictionary Source="Controls/MetroButtons.xaml" />
                 <ResourceDictionary Source="Controls/MetroCheckBox.xaml" />
@@ -32,6 +35,9 @@
                 <ResourceDictionary Source="Controls/MetroAutoCompleteBox.xaml" />
                 <ResourceDictionary Source="Controls/OtherMetroTabs.xaml" />
                 <ResourceDictionary Source="Controls/TabClosing/CloseStyleing.xaml" />
+
+                <!-- Meta Editor Controls -->
+                <ResourceDictionary Source="Controls/MetaEditor/FieldTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
