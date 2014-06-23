@@ -33,7 +33,9 @@ if len(plugin_classes) == 0:
     load_plugins()
 
 class HaloMap(object):
-    __slots__ = ['ba_builder', 'map_magic']
+    def __init__(self):
+        self.bytearraybuilder = None
+        self.magic = None
 
 def load_map(map_path=None):
     """Loads a map from Halo.exe's memory, or from disk if given a filepath. Loading a
@@ -44,11 +46,11 @@ def load_map(map_path=None):
 
     if map_path != None:
         location = 'file'
-        halomap.ba_builder = FileByteArrayBuilder(map_path)
+        halomap.bytearraybuilder = FileByteArrayBuilder(map_path)
 
     else:
         location='mem'
-        halomap.ba_builder = WinMemoryByteArrayBuilder('halo')
+        halomap.bytearraybuilder = WinMemoryByteArrayBuilder('halo')
 
     # class ByteArray:
     #  -- Denotes a region of bytes.
@@ -60,7 +62,7 @@ def load_map(map_path=None):
     #           offset: location within the source medium
     #             size: number of bytes enclosed
     #
-    ByteArray = halomap.ba_builder.CreateByteArray
+    ByteArray = halomap.bytearraybuilder.CreateByteArray
 
     if location == 'mem':
         # Force Halo to render video even when window is deselected
@@ -95,14 +97,14 @@ def load_map(map_path=None):
         # On disk, we need to use a magic value to convert raw pointers into file offsets.
         # This magic value is based on the tag index's location within the file, since the
         # tag index always appears at the same place in memory.
-        map_magic = index_header.primary_magic - index_offset
+        halomap.magic = index_header.primary_magic - index_offset
 
     elif location == 'mem':
         # Almost always 0x40440028, unless the map has been protected in a specific way.
         index_offset = index_header.primary_magic
 
         # In memory, offsets are just raw pointers and require no adjustment.
-        map_magic = 0
+        halomap.magic = 0
 
     # load all tag headers from the index
     tag_headers = [TagHeader(
@@ -137,17 +139,17 @@ def load_map(map_path=None):
     tags = [HaloTag(
                 tag_header,
                 ByteArray(
-                    offset=tag_header.name_offset_raw - map_magic,
+                    offset=tag_header.name_offset_raw - halomap.magic,
                     size=name_maxlen),
                 ByteArray(
-                    offset=tag_header.meta_offset_raw - map_magic,
+                    offset=tag_header.meta_offset_raw - halomap.magic,
                     size=meta_sizes[tag_header.meta_offset_raw]),
                 halomap) for tag_header in tag_headers]
 
     for entry in tag_headers:
-        if entry.ident == 3837199171:
+        if entry.ident == 3797811434:
             # ghost
-            Vehicle = plugin_classes['vehi']
-            return Vehicle(ByteArray(entry.meta_offset_raw, Vehicle.struct_size), halomap)
+            Weapon = plugin_classes['weap']
+            return Weapon(ByteArray(entry.meta_offset_raw, Weapon.struct_size), halomap)
 
     return index_header

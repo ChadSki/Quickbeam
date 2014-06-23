@@ -30,9 +30,6 @@ from observablefield import *
 from System import String, Object
 from Quickbeam.Low import ObservableDictionary
 
-class ObservableField(object):
-    pass
-
 def observable_field_class(field_type, offset, length, reverse, maxlength, options, reflexive_class):
     """Return an object which reads/writes to a field of a plugin-defined struct.
     """
@@ -97,6 +94,7 @@ def struct_class_from_xml(layout):
 
         def __init__(self, bytearray, halomap):
             object.__setattr__(self, 'bytearray', bytearray)
+            object.__setattr__(self, 'halomap', halomap)
 
             # instantiate backing dictionary
             object.__setattr__(self, 'ObservableDictionary', ObservableDictionary[String, Object]())
@@ -117,8 +115,8 @@ def struct_class_from_xml(layout):
             answer = '{'
             for pair in self.__dict__:
                 answer += '\n    %s: ' % pair.Key
-                lines = repr(pair.Value.Value).split('\n')
-                answer += lines.pop()
+                lines = str(pair.Value.Value).split('\n')
+                answer += lines.pop(0)
                 for line in lines:
                     answer += '\n    ' + line
                 answer += ','
@@ -135,6 +133,9 @@ def struct_class_from_xml(layout):
             """
             if name == 'bytearray':
                 return object.__getattribute__(self, 'bytearray')
+
+            elif name == 'halomap':
+                return object.__getattribute__(self, 'halomap')
 
             elif name == '__dict__':
                 # so C# can get the ObservableDictionary for databinding

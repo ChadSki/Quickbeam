@@ -40,7 +40,8 @@ class ObservableField(PyNotifyPropertyChanged):
 
 def Float32Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'Float32FieldTemplate'
+        @property
+        def TemplateKey(self): return 'Float32FieldTemplate'
         @notify_property('Value')
         def Value(self): return float(self.parent.bytearray.ReadFloat32(offset))
         @Value.setter
@@ -49,7 +50,8 @@ def Float32Field(offset):
 
 def Float64Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'Float64FieldTemplate'
+        @property
+        def TemplateKey(self): return 'Float64FieldTemplate'
         @notify_property('Value')
         def Value(self): return float(self.parent.bytearray.ReadFloat64(offset))
         @Value.setter
@@ -61,7 +63,8 @@ def Float64Field(offset):
 
 def Int8Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'Int8FieldTemplate'
+        @property
+        def TemplateKey(self): return 'Int8FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadInt8(parent.offset + offset))
         @Value.setter
@@ -70,7 +73,8 @@ def Int8Field(offset):
 
 def Int16Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'Int16FieldTemplate'
+        @property
+        def TemplateKey(self): return 'Int16FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadInt16(offset))
         @Value.setter
@@ -79,7 +83,8 @@ def Int16Field(offset):
 
 def Int32Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'Int32FieldTemplate'
+        @property
+        def TemplateKey(self): return 'Int32FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadInt32(offset))
         @Value.setter
@@ -88,7 +93,8 @@ def Int32Field(offset):
 
 def Int64Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'Int64FieldTemplate'
+        @property
+        def TemplateKey(self): return 'Int64FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadInt64(offset))
         @Value.setter
@@ -97,7 +103,8 @@ def Int64Field(offset):
 
 def UInt8Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'UInt8FieldTemplate'
+        @property
+        def TemplateKey(self): return 'UInt8FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadUInt8(offset))
         @Value.setter
@@ -106,7 +113,8 @@ def UInt8Field(offset):
 
 def UInt16Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'UInt16FieldTemplate'
+        @property
+        def TemplateKey(self): return 'UInt16FieldTemplate'
         @notify_property('Value')
         def Value(self): return self.parent.bytearray.ReadUInt16(offset)
         @Value.setter
@@ -115,7 +123,8 @@ def UInt16Field(offset):
 
 def UInt32Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'UInt32FieldTemplate'
+        @property
+        def TemplateKey(self): return 'UInt32FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadUInt32(offset))
         @Value.setter
@@ -124,7 +133,8 @@ def UInt32Field(offset):
 
 def UInt64Field(offset):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'UInt64FieldTemplate'
+        @property
+        def TemplateKey(self): return 'UInt64FieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadUInt64(offset))
         @Value.setter
@@ -136,7 +146,8 @@ def UInt64Field(offset):
 
 def RawDataField(offset, length):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'RawDataFieldTemplate'
+        @property
+        def TemplateKey(self): return 'RawDataFieldTemplate'
         @notify_property('Value')
         def Value(self): return int(self.parent.bytearray.ReadBytes(offset, length))
         @Value.setter
@@ -145,7 +156,8 @@ def RawDataField(offset, length):
 
 def AsciiField(offset, length, reverse):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'AsciiFieldTemplate'
+        @property
+        def TemplateKey(self): return 'AsciiFieldTemplate'
         @notify_property('Value')
         def Value(self):
             answer = self.parent.bytearray.ReadAscii(offset, length)
@@ -159,7 +171,8 @@ def AsciiField(offset, length, reverse):
 
 def AsciizField(offset, maxlength):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'AsciizFieldTemplate'
+        @property
+        def TemplateKey(self): return 'AsciizFieldTemplate'
         @notify_property('Value')
         def Value(self): return self.parent.bytearray.ReadAsciiz(offset, maxlength)
         @Value.setter
@@ -174,7 +187,8 @@ def ReferenceField(offset, loneid=False):
         offset += 12 # since we only care to read the ident, 12 bytes into a reference
 
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'ReferenceFieldTemplate'
+        @property
+        def TemplateKey(self): return 'ReferenceFieldTemplate'
         @notify_property('Value')
         def Value(self):
             ident = self.parent.bytearray.ReadUInt32(offset)
@@ -194,16 +208,16 @@ def ReferenceField(offset, loneid=False):
 
 def ReflexiveField(offset, struct_class):
     class Field(ObservableField):
-        def get_TemplateKey(self): return 'ReflexiveFieldTemplate'
+        @property
+        def TemplateKey(self): return 'ReflexiveFieldTemplate'
         @notify_property('Value')
         def Value(self):
             count = self.parent.bytearray.ReadUInt32(offset)
             raw_offset = self.parent.bytearray.ReadUInt32(offset + 4)
-            start_offset = raw_offset - self.map_magic
-
+            start_offset = raw_offset - self.parent.halomap.magic
             return [struct_class(
-                        self.parent.halomap.bytearraybuilder.new_bytearray(
-                            start_offset + i * struct_class.size,
-                            struct_class.size),
+                        self.parent.halomap.bytearraybuilder.CreateByteArray(
+                            start_offset + i * struct_class.struct_size,
+                            struct_class.struct_size),
                         self.parent.halomap) for i in range(count)]
     return Field

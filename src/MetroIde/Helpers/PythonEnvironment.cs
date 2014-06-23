@@ -30,14 +30,14 @@ namespace MetroIde.Helpers
                                                 .Execute(Scope);
         }
 
-        private dynamic _rootStruct = null;
+        private dynamic _rootStruct;
 
         public dynamic RootObservableStruct
         {
             get
             {
                 if (_rootStruct != null) return _rootStruct;
-                var x = Engine.CreateScriptSourceFromString("curr_tag = halolib.load_map()",
+                Engine.CreateScriptSourceFromString("curr_tag = halolib.load_map()",
                     SourceCodeKind.SingleStatement)
                     .Execute(Scope);
                 _rootStruct = Scope.GetVariable("curr_tag").__dict__;

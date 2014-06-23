@@ -20,7 +20,6 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,8 +31,7 @@ namespace MetroIde.Controls.MetaEditor
         {
             if (o == null) return null;
             dynamic keyValuePair = o;
-            dynamic field = keyValuePair.Value;
-            string key = field.get_TemplateKey();
+            string key = keyValuePair.Value.TemplateKey;
             return Application.Current.Resources[key] as DataTemplate;
         }
     }

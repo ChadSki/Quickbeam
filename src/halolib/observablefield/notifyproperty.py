@@ -49,13 +49,8 @@ def notify_property(name):
     """
     class NotifyProperty(property):
         def __init__(self, fget=None, fset=None, fdel=None, doc=None):
-            def newgetter(slf):
-                try:
-                    return fget(slf)
-                except AttributeError:
-                    return None
             super(NotifyProperty, self).__init__(
-                fget=newgetter, fset=fset, fdel=fdel, doc=doc)
+                fget=fget, fset=fset, fdel=fdel, doc=doc)
 
         def setter(self, fset):
             def newsetter(slf, newvalue):
