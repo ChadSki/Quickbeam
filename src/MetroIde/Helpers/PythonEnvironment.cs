@@ -1,18 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using IronPython.Hosting;
-using IronPython.Modules;
+﻿using IronPython.Hosting;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
-using Quickbeam.Low;
 using Quickbeam.Low.ByteArray;
 
 namespace MetroIde.Helpers
 {
     public class PythonEnvironment
     {
-        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\MetroIde\Lib";
+        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\vendor\PythonStdLib";
         protected static readonly string DllsLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug";
         protected static readonly string HalolibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib";
 

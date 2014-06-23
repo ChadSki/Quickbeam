@@ -63,15 +63,6 @@
     <Compile Include="ByteArray\IByteArray.cs" />
     <Compile Include="ByteArray\NativeMethods.cs" />
     <Compile Include="ByteArray\WinMemoryByteArray.cs" />
-    <Compile Include="ObservableStruct\BitmaskFields.cs" />
-    <Compile Include="ObservableStruct\ColorFields.cs" />
-    <Compile Include="ObservableStruct\EnumFields.cs" />
-    <Compile Include="ObservableStruct\NumericFields.cs" />
-    <Compile Include="ObservableStruct\ObservableField.cs" />
-    <Compile Include="ObservableStruct\ReferenceField.cs" />
-    <Compile Include="ObservableStruct\ReflexiveField.cs" />
-    <Compile Include="ObservableStruct\StringFields.cs" />
-    <Compile Include="ObservableStruct\ObservableStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

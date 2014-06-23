@@ -25,7 +25,7 @@ import fnmatch
 import os
 import xml.etree.ElementTree as et
 
-from observablestruct import *
+from observablefield import *
 
 from System import String, Object
 from Quickbeam.Low import ObservableDictionary

@@ -24,14 +24,14 @@ from plugins import plugin_classes
 
 import clr
 clr.AddReference("Quickbeam.Low.dll")
-from Quickbeam.Low.ObservableStruct import AsciizField
+from observablefield import AsciizField
 
 class HaloTag(object):
     """Encapsulates an index entry, tag name, and metadata."""
     def __init__(self, index_entry, name_access, meta_access, halomap):
         # these attributes are all protected from erroneous assignment
         object.__setattr__(self, 'index_entry', index_entry)
-        object.__setattr__(self, 'name_field', AsciizField.Create(name_access, 0, name_access.Size))
+        object.__setattr__(self, 'name_field', None) #AsciizField(halomap.CreateByteArray(name_access, 0, name_access.Size))
         object.__setattr__(self, 'meta_access', meta_access)
         object.__setattr__(self, 'halomap', halomap)
 
