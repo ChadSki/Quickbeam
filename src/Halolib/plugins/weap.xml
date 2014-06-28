@@ -14,8 +14,8 @@
     <reflexive name="triggers" offset="0x4FC" struct_size="276">
         <float32 name="initial_rounds_per_second" offset="0x4" />
         <float32 name="final_rounds_per_second" offset="0x8" />
-        <float32 name="rounds_per_second_acceleration" offset="0x8" />
-        <float32 name="rounds_per_second_deceleration" offset="0x8" />
+        <float32 name="firing_acceleration_time" offset="0xC" />
+        <float32 name="firing_deceleration_time" offset="0x10" />
         <uint16 name="projectiles_per_shot" offset="0x6E" />
         <reference name="projectile" offset="0x94"/>
         <reflexive name="firing_effects" offset="0x108" struct_size="132">

@@ -39,3 +39,5 @@ import halolib
 
 curr_tag = halolib.load_map()
 print(repr(curr_tag))
+
+curr_tag.triggers[0].projectiles_per_shot /= 2
