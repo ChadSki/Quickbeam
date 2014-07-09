@@ -1,13 +1,9 @@
 ﻿// Copyright (c) 2010 Joe Moorhouse
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
 using ICSharpCode.AvalonEdit;
-using System.Windows.Media;
 using PythonConsoleControl;
+using System.ComponentModel;
+using System.Windows.Media;
 
 namespace IronPythonConsole
 {

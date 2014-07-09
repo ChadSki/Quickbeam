@@ -1,9 +1,7 @@
 ﻿using ICSharpCode.AvalonEdit.Highlighting;
 using Microsoft.Scripting;
-using Microsoft.Scripting.Hosting;
 using Microsoft.Win32;
 using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,17 +14,16 @@ namespace IronPythonConsole
     /// </summary>
     public partial class ReplGrid : UserControl
     {
-        ConsoleOptions consoleOptionsProvider;
+        readonly ConsoleOptions _consoleOptionsProvider;
         
         public ReplGrid()
 		{
-            Initialized += new EventHandler(MainWindow_Initialized);
+            Initialized += MainWindow_Initialized;
             // Load our custom highlighting definition:
             IHighlightingDefinition pythonHighlighting;
-            using (Stream s = typeof(ReplGrid).Assembly.GetManifestResourceStream("IronPythonConsole.Resources.Python.xshd"))
+            using (var s = typeof(ReplGrid).Assembly.GetManifestResourceStream("IronPythonConsole.Resources.Python.xshd"))
             {
-                if (s == null)
-                    throw new InvalidOperationException("Could not find embedded resource");
+                if (s == null) throw new InvalidOperationException("Could not find embedded resource");
                 using (XmlReader reader = new XmlTextReader(s))
                 {
                     pythonHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
@@ -34,74 +31,63 @@ namespace IronPythonConsole
                 }
             }
             // and register it in the HighlightingManager
-            HighlightingManager.Instance.RegisterHighlighting("Python Highlighting", new string[] { ".cool" }, pythonHighlighting);
+            HighlightingManager.Instance.RegisterHighlighting("Python Highlighting", new[] { ".cool" }, pythonHighlighting);
             	
 			InitializeComponent();
-
             textEditor.SyntaxHighlighting = pythonHighlighting;
-
-            textEditor.PreviewKeyDown += new KeyEventHandler(textEditor_PreviewKeyDown);
-
-            consoleOptionsProvider = new ConsoleOptions(console.Pad);
-
+            textEditor.PreviewKeyDown += textEditor_PreviewKeyDown;
+            _consoleOptionsProvider = new ConsoleOptions(console.Pad);
             propertyGridComboBox.SelectedIndex = 0;
-
-            expander.Expanded += new RoutedEventHandler(expander_Expanded);
-
-            console.Pad.Host.ConsoleCreated +=new PythonConsoleControl.ConsoleCreatedEventHandler(Host_ConsoleCreated);
+            expander.Expanded += expander_Expanded;
+            console.Pad.Host.ConsoleCreated += Host_ConsoleCreated;
 		}
 
-		string currentFileName;
+		private string _currentFileName;
 
         void Host_ConsoleCreated(object sender, EventArgs e)
         {
-            console.Pad.Console.ConsoleInitialized += new PythonConsoleControl.ConsoleInitializedEventHandler(Console_ConsoleInitialized);
+            console.Pad.Console.ConsoleInitialized += Console_ConsoleInitialized;
         }
 
         void Console_ConsoleInitialized(object sender, EventArgs e)
         {
-            string startupScipt = "import IronPythonConsole";
-            ScriptSource scriptSource = console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(startupScipt, SourceCodeKind.Statements);
+            var scriptSource = console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
+                "import IronPythonConsole", SourceCodeKind.Statements);
             try
             {
                 scriptSource.Execute();
             }
-            catch {}
+            catch
+            {}
             //double[] test = new double[] { 1.2, 4.6 };
             //console.Pad.Console.ScriptScope.SetVariable("test", test);
         }
 
-        void MainWindow_Initialized(object sender, EventArgs e)
+        static void MainWindow_Initialized(object sender, EventArgs e)
         {
             //propertyGridComboBox.SelectedIndex = 1;
         }
 		
-		void openFileClick(object sender, RoutedEventArgs e)
+		void OpenFileClick(object sender, RoutedEventArgs e)
 		{   
-            OpenFileDialog dlg = new OpenFileDialog();
-			dlg.CheckFileExists = true;
-			if (dlg.ShowDialog() ?? false) {
-				currentFileName = dlg.FileName;
-				textEditor.Load(currentFileName);
-				//textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(currentFileName));
-			}
+            var dlg = new OpenFileDialog {CheckFileExists = true};
+		    if (!((bool) dlg.ShowDialog())) return;
+		    _currentFileName = dlg.FileName;
+		    textEditor.Load(_currentFileName);
+		    //textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(currentFileName));
 		}
 		
-		void saveFileClick(object sender, EventArgs e)
+		void SaveFileClick(object sender, EventArgs e)
 		{
-			if (currentFileName == null) {
-				SaveFileDialog dlg = new SaveFileDialog();
-				dlg.DefaultExt = ".txt";
-				if (dlg.ShowDialog() ?? false) {
-					currentFileName = dlg.FileName;
-				} else {
-					return;
-				}
+			if (_currentFileName == null) {
+				var dlg = new SaveFileDialog {DefaultExt = ".txt"};
+			    if (!((bool) dlg.ShowDialog())) return;
+				_currentFileName = dlg.FileName;
 			}
-			textEditor.Save(currentFileName);
+			textEditor.Save(_currentFileName);
 		}
 
-        void runClick(object sender, EventArgs e)
+        void RunClick(object sender, EventArgs e)
         {
             RunStatements();
         }
@@ -113,21 +99,19 @@ namespace IronPythonConsole
 
         void RunStatements()
         {
-            string statementsToRun = "";
-            if (textEditor.TextArea.Selection.Length > 0)
-                statementsToRun = textEditor.TextArea.Selection.GetText(textEditor.TextArea.Document);
-            else
-                statementsToRun = textEditor.TextArea.Document.Text;
+            var statementsToRun = textEditor.TextArea.Selection.Length > 0
+                ? textEditor.TextArea.Selection.GetText(textEditor.TextArea.Document)
+                : textEditor.TextArea.Document.Text;
             console.Pad.Console.RunStatements(statementsToRun);
         }
-		
-		void propertyGridComboBoxSelectionChanged(object sender, RoutedEventArgs e)
+
+        void PropertyGridComboBoxSelectionChanged(object sender, RoutedEventArgs e)
 		{
             if (propertyGrid == null)
 				return;
 			switch (propertyGridComboBox.SelectedIndex) {
 				case 0:
-                    propertyGrid.SelectedObject = consoleOptionsProvider; // not .Instance
+                    propertyGrid.SelectedObject = _consoleOptionsProvider; // not .Instance
 					break;
 				case 1:
 					//propertyGrid.SelectedObject = textEditor.Options; (for WPF native control)
@@ -138,7 +122,7 @@ namespace IronPythonConsole
 
         void expander_Expanded(object sender, RoutedEventArgs e)
         {
-            propertyGridComboBoxSelectionChanged(sender, e);
+            PropertyGridComboBoxSelectionChanged(sender, e);
         }
 		
     }

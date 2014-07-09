@@ -36,10 +36,10 @@
                         </Style.Triggers>
                     </Style>
                 </ToolBar.Resources>
-                <Button Click="openFileClick">
+                <Button Click="OpenFileClick">
                     <Image Source="Images/Open.png" Height="16"/>
                 </Button>
-                <Button Click="saveFileClick">
+                <Button Click="SaveFileClick">
                     <Image Source="Images/Save.png" Height="16"/>
                 </Button>
                 <Separator/>
@@ -73,7 +73,7 @@
                     <TextBlock Width="16" TextAlignment="Center">¶</TextBlock>
                 </CheckBox>
                 <Separator/>
-                <Button Click="runClick">
+                <Button Click="RunClick">
                     <Image Source="Images/Run.png" Height="16"/>
                 </Button>
             </ToolBar>
@@ -90,7 +90,7 @@
             <!--<DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="4 0 0 0">-->
             <DockPanel>
                 <ComboBox Name="propertyGridComboBox" DockPanel.Dock="Top"
-				        SelectedIndex="0" SelectionChanged="propertyGridComboBoxSelectionChanged">
+				        SelectedIndex="0" SelectionChanged="PropertyGridComboBoxSelectionChanged">
                     <ComboBoxItem>Console</ComboBoxItem>
                     <ComboBoxItem>Pad</ComboBoxItem>
                 </ComboBox>

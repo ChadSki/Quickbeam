@@ -1,28 +1,19 @@
 ﻿// Copyright (c) 2010 Joe Moorhouse
 
+using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Editing;
+using IronPython.Runtime;
+using Microsoft.Scripting;
+using Microsoft.Scripting.Hosting;
+using Microsoft.Scripting.Hosting.Shell;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using Microsoft.Scripting.Hosting.Shell;
-using System.Windows.Input;
-using Microsoft.Scripting;
-using IronPython.Hosting;
-using IronPython.Runtime;
-using Microsoft.Scripting.Hosting;
-using Microsoft.Scripting.Hosting.Providers;
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
-using System.Windows.Documents;
-using ICSharpCode.AvalonEdit.Editing;
-using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.Utils;
 using Style = Microsoft.Scripting.Hosting.Shell.Style;
 
 namespace PythonConsoleControl
@@ -35,86 +26,85 @@ namespace PythonConsoleControl
     /// </summary>
     public class PythonConsole : IConsole, IDisposable
     {
-        bool allowFullAutocompletion = true;
+        bool _allowFullAutocompletion = true;
         public bool AllowFullAutocompletion
         {
-            get { return allowFullAutocompletion; }
-            set { allowFullAutocompletion = value; }
+            get { return _allowFullAutocompletion; }
+            set { _allowFullAutocompletion = value; }
         }
 
-        bool disableAutocompletionForCallables = true;
+        bool _disableAutocompletionForCallables = true;
         public bool DisableAutocompletionForCallables
         {
-            get { return disableAutocompletionForCallables; }
+            get { return _disableAutocompletionForCallables; }
             set 
             {
-                if (textEditor.CompletionProvider != null) textEditor.CompletionProvider.ExcludeCallables = value;
-                disableAutocompletionForCallables = value; 
+                if (_textEditor.CompletionProvider != null) _textEditor.CompletionProvider.ExcludeCallables = value;
+                _disableAutocompletionForCallables = value; 
             }
         }
 
-        bool allowCtrlSpaceAutocompletion = false;
+        bool _allowCtrlSpaceAutocompletion;
         public bool AllowCtrlSpaceAutocompletion
         {
-            get { return allowCtrlSpaceAutocompletion; }
-            set { allowCtrlSpaceAutocompletion = value; }
+            get { return _allowCtrlSpaceAutocompletion; }
+            set { _allowCtrlSpaceAutocompletion = value; }
         }
-        
-        PythonTextEditor textEditor;
-        int lineReceivedEventIndex = 0; // The index into the waitHandles array where the lineReceivedEvent is stored.
-        ManualResetEvent lineReceivedEvent = new ManualResetEvent(false);
-        ManualResetEvent disposedEvent = new ManualResetEvent(false);
-        AutoResetEvent statementsExecutionRequestedEvent = new AutoResetEvent(false);
-        WaitHandle[] waitHandles;
-        int promptLength = 4;
-        List<string> previousLines = new List<string>();
-        CommandLine commandLine;
-        CommandLineHistory commandLineHistory = new CommandLineHistory();
 
-        volatile bool executing = false;
+        readonly PythonTextEditor _textEditor;
+        private const int LineReceivedEventIndex = 0; // The index into the waitHandles array where the lineReceivedEvent is stored.
+        readonly ManualResetEvent _lineReceivedEvent = new ManualResetEvent(false);
+        readonly ManualResetEvent _disposedEvent = new ManualResetEvent(false);
+        readonly WaitHandle[] _waitHandles;
+        int _promptLength = 4;
+        readonly List<string> _previousLines = new List<string>();
+        readonly CommandLine _commandLine;
+        readonly CommandLineHistory _commandLineHistory = new CommandLineHistory();
+
+        volatile bool _executing;
 
         // This is the thread upon which all commands execute unless the dipatcher is overridden.
-        Thread dispatcherThread;
-        Window dispatcherWindow;
-        Dispatcher dispatcher;
+        readonly Thread _dispatcherThread;
+        Window _dispatcherWindow;
+        Dispatcher _dispatcher;
 
-        string scriptText = String.Empty;
-        bool consoleInitialized = false;
-        string prompt;
+        string _scriptText = String.Empty;
+        bool _consoleInitialized;
+        readonly string _prompt;
       
         public event ConsoleInitializedEventHandler ConsoleInitialized;
 
         public ScriptScope ScriptScope
         {
-            get { return commandLine.ScriptScope; }
+            get { return _commandLine.ScriptScope; }
         }
 
         public PythonConsole(PythonTextEditor textEditor, CommandLine commandLine)
         {   
-            waitHandles = new WaitHandle[] { lineReceivedEvent, disposedEvent };
+            _waitHandles = new WaitHandle[] { _lineReceivedEvent, _disposedEvent };
 
-            this.commandLine = commandLine;
-            this.textEditor = textEditor;
-            textEditor.CompletionProvider = new PythonConsoleCompletionDataProvider(commandLine) { ExcludeCallables = disableAutocompletionForCallables };
+            _commandLine = commandLine;
+            _textEditor = textEditor;
+            textEditor.CompletionProvider = new PythonConsoleCompletionDataProvider(commandLine) { ExcludeCallables = _disableAutocompletionForCallables };
             textEditor.PreviewKeyDown += textEditor_PreviewKeyDown;
             textEditor.TextEntering += textEditor_TextEntering;
-            dispatcherThread = new Thread(new ThreadStart(DispatcherThreadStartingPoint));
-            dispatcherThread.SetApartmentState(ApartmentState.STA);
-            dispatcherThread.IsBackground = true;
-            dispatcherThread.Start();
+            _dispatcherThread = new Thread(DispatcherThreadStartingPoint);
+            _dispatcherThread.SetApartmentState(ApartmentState.STA);
+            _dispatcherThread.IsBackground = true;
+            _dispatcherThread.Start();
 
             // Only required when running outside REP loop.
-            prompt = ">>> ";
+            _prompt = ">>> ";
 
             // Set commands:
-            this.textEditor.textArea.Dispatcher.Invoke(new Action(delegate()
+            _textEditor.textArea.Dispatcher.Invoke(new Action(() =>
             {
                 CommandBinding pasteBinding = null;
                 CommandBinding copyBinding = null;
                 CommandBinding cutBinding = null;
                 CommandBinding undoBinding = null;
                 CommandBinding deleteBinding = null;
-                foreach (CommandBinding commandBinding in (this.textEditor.textArea.CommandBindings))
+                foreach (CommandBinding commandBinding in (_textEditor.textArea.CommandBindings))
                 {
                     if (commandBinding.Command == ApplicationCommands.Paste) pasteBinding = commandBinding;
                     if (commandBinding.Command == ApplicationCommands.Copy) copyBinding = commandBinding;
@@ -124,56 +114,56 @@ namespace PythonConsoleControl
                 }
                 // Remove current bindings completely from control. These are static so modifying them will cause other
                 // controls' behaviour to change too.
-                if (pasteBinding != null) this.textEditor.textArea.CommandBindings.Remove(pasteBinding);
-                if (copyBinding != null) this.textEditor.textArea.CommandBindings.Remove(copyBinding);
-                if (cutBinding != null) this.textEditor.textArea.CommandBindings.Remove(cutBinding);
-                if (undoBinding != null) this.textEditor.textArea.CommandBindings.Remove(undoBinding);
-                if (deleteBinding != null) this.textEditor.textArea.CommandBindings.Remove(deleteBinding);
-                this.textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPaste, CanPaste));
-                this.textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopy, PythonEditingCommandHandler.CanCutOrCopy));
-                this.textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut, PythonEditingCommandHandler.OnCut, CanCut));
-                this.textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, OnUndo, CanUndo));
-                this.textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Delete, PythonEditingCommandHandler.OnDelete(ApplicationCommands.NotACommand), CanDeleteCommand));
-			
+                if (pasteBinding != null) _textEditor.textArea.CommandBindings.Remove(pasteBinding);
+                if (copyBinding != null) _textEditor.textArea.CommandBindings.Remove(copyBinding);
+                if (cutBinding != null) _textEditor.textArea.CommandBindings.Remove(cutBinding);
+                if (undoBinding != null) _textEditor.textArea.CommandBindings.Remove(undoBinding);
+                if (deleteBinding != null) _textEditor.textArea.CommandBindings.Remove(deleteBinding);
+                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPaste, CanPaste));
+                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopy,
+                    PythonEditingCommandHandler.CanCutOrCopy));
+                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut,
+                    PythonEditingCommandHandler.OnCut, CanCut));
+                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, OnUndo, CanUndo));
+                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Delete,
+                    PythonEditingCommandHandler.OnDelete(ApplicationCommands.NotACommand), CanDeleteCommand));
             }));
-            CodeContext codeContext = DefaultContext.Default;
+            var codeContext = DefaultContext.Default;
             // Set dispatcher to run on a UI thread independent of both the Control UI thread and thread running the REPL.
             ClrModule.SetCommandDispatcher(codeContext, DispatchCommand);
         }
 
         protected void DispatchCommand(Delegate command)
         {
-            if (command != null)
+            if (command == null) return;
+            // Slightly involved form to enable keyboard interrupt to work.
+            _executing = true;
+            var operation = _dispatcher.BeginInvoke(DispatcherPriority.Normal, command);
+            while (_executing)
             {
-                // Slightly involved form to enable keyboard interrupt to work.
-                executing = true;
-                var operation = dispatcher.BeginInvoke(DispatcherPriority.Normal, command);
-                while (executing)
-                {
-                    if (operation.Status != DispatcherOperationStatus.Completed) 
-                        operation.Wait(TimeSpan.FromSeconds(1));
-                    if (operation.Status == DispatcherOperationStatus.Completed)
-                        executing = false;
-                }
+                if (operation.Status != DispatcherOperationStatus.Completed) 
+                    operation.Wait(TimeSpan.FromSeconds(1));
+                if (operation.Status == DispatcherOperationStatus.Completed)
+                    _executing = false;
             }
         }
 
         private void DispatcherThreadStartingPoint()
         {
-            dispatcherWindow = new Window();
-            dispatcher = dispatcherWindow.Dispatcher;
+            _dispatcherWindow = new Window();
+            _dispatcher = _dispatcherWindow.Dispatcher;
             while (true)
             {
                 try
                 {
-                    System.Windows.Threading.Dispatcher.Run();
+                    Dispatcher.Run();
                 }
                 catch (ThreadAbortException tae)
                 {
-                    if (tae.ExceptionState is Microsoft.Scripting.KeyboardInterruptException)
+                    if (tae.ExceptionState is KeyboardInterruptException)
                     {
                         Thread.ResetAbort();
-                        executing = false;
+                        _executing = false;
                     }
                 }
             }
@@ -181,14 +171,14 @@ namespace PythonConsoleControl
 
         public void SetDispatcher(Dispatcher dispatcher)
         {
-            this.dispatcher = dispatcher;
+            _dispatcher = dispatcher;
         }
 
         public void Dispose()
         {
-            disposedEvent.Set();
-            textEditor.PreviewKeyDown -= textEditor_PreviewKeyDown;
-            textEditor.TextEntering -= textEditor_TextEntering;
+            _disposedEvent.Set();
+            _textEditor.PreviewKeyDown -= textEditor_PreviewKeyDown;
+            _textEditor.TextEntering -= textEditor_TextEntering;
         }
 
         public TextWriter Output
@@ -206,12 +196,7 @@ namespace PythonConsoleControl
         #region CommandHandling
         protected void CanPaste(object target, CanExecuteRoutedEventArgs args)
         {
-            if (IsInReadOnlyRegion)
-            {
-                args.CanExecute = false;
-            }
-            else
-                args.CanExecute = true;
+            args.CanExecute = !IsInReadOnlyRegion;
         }
 
         protected void CanCut(object target, CanExecuteRoutedEventArgs args)
@@ -241,67 +226,63 @@ namespace PythonConsoleControl
 
         protected void OnPaste(object target, ExecutedRoutedEventArgs args)
         {
-            if (target != textEditor.textArea) return;
-            TextArea textArea = textEditor.textArea;
-            if (textArea != null && textArea.Document != null)
+            if (target != _textEditor.textArea) return;
+            var textArea = _textEditor.textArea;
+            if (textArea == null || textArea.Document == null) return;
+            Debug.WriteLine(Clipboard.GetText(TextDataFormat.Html));
+
+            // convert text back to correct newlines for this document
+            var newLine = TextUtilities.GetNewLineFromDocument(textArea.Document, textArea.Caret.Line);
+            var text = TextUtilities.NormalizeNewLines(Clipboard.GetText(), newLine);
+            var commands = text.Split(new[] {newLine}, StringSplitOptions.None);
+            var scriptText = "";
+            if (commands.Length > 1)
             {
-                Debug.WriteLine(Clipboard.GetText(TextDataFormat.Html));
-
-                // convert text back to correct newlines for this document
-                string newLine = TextUtilities.GetNewLineFromDocument(textArea.Document, textArea.Caret.Line);
-                string text = TextUtilities.NormalizeNewLines(Clipboard.GetText(), newLine);
-                string[] commands = text.Split(new String[] {newLine}, StringSplitOptions.None);
-                string scriptText = "";
-                if (commands.Length > 1)
+                text = newLine;
+                foreach (var command in commands)
                 {
-                    text = newLine;
-                    foreach (string command in commands)
-                    {
-                        text += "... " + command + newLine;
-                        scriptText += command.Replace("\t", "   ") + newLine;
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(text))
-                {
-                    bool fullLine = textArea.Options.CutCopyWholeLine && Clipboard.ContainsData(LineSelectedType);
-                    bool rectangular = Clipboard.ContainsData(RectangleSelection.RectangularSelectionDataType);
-                    if (fullLine)
-                    {
-                        DocumentLine currentLine = textArea.Document.GetLineByNumber(textArea.Caret.Line);
-                        if (textArea.ReadOnlySectionProvider.CanInsert(currentLine.Offset))
-                        {
-                            textArea.Document.Insert(currentLine.Offset, text);
-                        }
-                    }
-                    else if (rectangular && textArea.Selection.IsEmpty)
-                    {
-                        if (!RectangleSelection.PerformRectangularPaste(textArea, textArea.Caret.Offset, text, false))
-                            textEditor.Write(text, false);
-                    }
-                    else
-                    {
-                        textEditor.Write(text, false);
-                    }
-                }
-                textArea.Caret.BringCaretToView();
-                args.Handled = true;
-
-                if (commands.Length > 1)
-                {
-                    lock (this.scriptText)
-                    {
-                        this.scriptText = scriptText;
-                    }
-                    dispatcherWindow.Dispatcher.BeginInvoke(new Action(delegate() { ExecuteStatements(); }));
+                    text += "... " + command + newLine;
+                    scriptText += command.Replace("\t", "   ") + newLine;
                 }
             }
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                var fullLine = textArea.Options.CutCopyWholeLine && Clipboard.ContainsData(LineSelectedType);
+                var rectangular = Clipboard.ContainsData(RectangleSelection.RectangularSelectionDataType);
+                if (fullLine)
+                {
+                    var currentLine = textArea.Document.GetLineByNumber(textArea.Caret.Line);
+                    if (textArea.ReadOnlySectionProvider.CanInsert(currentLine.Offset))
+                    {
+                        textArea.Document.Insert(currentLine.Offset, text);
+                    }
+                }
+                else if (rectangular && textArea.Selection.IsEmpty)
+                {
+                    if (!RectangleSelection.PerformRectangularPaste(textArea, textArea.Caret.Offset, text, false))
+                        _textEditor.Write(text, false);
+                }
+                else
+                {
+                    _textEditor.Write(text, false);
+                }
+            }
+            textArea.Caret.BringCaretToView();
+            args.Handled = true;
+
+            if (commands.Length <= 1) return;
+            lock (_scriptText)
+            {
+                _scriptText = scriptText;
+            }
+            _dispatcherWindow.Dispatcher.BeginInvoke(new Action(ExecuteStatements));
         }
 
         protected void OnCopy(object target, ExecutedRoutedEventArgs args)
         {
-            if (target != textEditor.textArea) return;
-            if (textEditor.SelectionLength == 0 && executing)
+            if (target != _textEditor.textArea) return;
+            if (_textEditor.SelectionLength == 0 && _executing)
             {
                 // Send the 'Ctrl-C' abort 
                 //if (!IsInReadOnlyRegion)
@@ -310,7 +291,7 @@ namespace PythonConsoleControl
                     //textEditor.Column = GetLastTextEditorLine().Length + 1;
                     //textEditor.Write(Environment.NewLine);
                 //}
-                dispatcherThread.Abort(new Microsoft.Scripting.KeyboardInterruptException(""));
+                _dispatcherThread.Abort(new KeyboardInterruptException(""));
                 args.Handled = true;
             }
             else PythonEditingCommandHandler.OnCopy(target, args);
@@ -330,11 +311,11 @@ namespace PythonConsoleControl
         public void RunStatements(string statements)
         {
             MoveToHomePosition();
-            lock (this.scriptText)
+            lock (_scriptText)
             {
-                this.scriptText = statements;
+                _scriptText = statements;
             }
-            dispatcher.BeginInvoke(new Action(delegate() { ExecuteStatements(); }));
+            _dispatcher.BeginInvoke(new Action(ExecuteStatements));
         }
 
         /// <summary>
@@ -342,36 +323,34 @@ namespace PythonConsoleControl
         /// </summary>
         void ExecuteStatements()
         {
-            lock (scriptText)
+            lock (_scriptText)
             {
-                textEditor.Write("\r\n");
-                ScriptSource scriptSource = commandLine.ScriptScope.Engine.CreateScriptSourceFromString(scriptText, SourceCodeKind.Statements);
-                string error = "";
+                _textEditor.Write("\r\n");
+                var scriptSource = _commandLine.ScriptScope.Engine.CreateScriptSourceFromString(_scriptText, SourceCodeKind.Statements);
+                var error = "";
                 try
                 {
-                    executing = true;
-                    scriptSource.Execute(commandLine.ScriptScope);
+                    _executing = true;
+                    scriptSource.Execute(_commandLine.ScriptScope);
                 }
                 catch (ThreadAbortException tae)
                 {
-                    if (tae.ExceptionState is Microsoft.Scripting.KeyboardInterruptException) Thread.ResetAbort();
-                    error = "KeyboardInterrupt" + System.Environment.NewLine;
+                    if (tae.ExceptionState is KeyboardInterruptException) Thread.ResetAbort();
+                    error = "KeyboardInterrupt" + Environment.NewLine;
                 }
-                catch (Microsoft.Scripting.SyntaxErrorException exception)
+                catch (SyntaxErrorException exception)
                 {
-                    ExceptionOperations eo;
-                    eo = commandLine.ScriptScope.Engine.GetService<ExceptionOperations>();
+                    var eo = _commandLine.ScriptScope.Engine.GetService<ExceptionOperations>();
                     error = eo.FormatException(exception);
                 }
                 catch (Exception exception)
                 {
-                    ExceptionOperations eo;
-                    eo = commandLine.ScriptScope.Engine.GetService<ExceptionOperations>();
-                    error = eo.FormatException(exception) + System.Environment.NewLine;
+                    var eo = _commandLine.ScriptScope.Engine.GetService<ExceptionOperations>();
+                    error = eo.FormatException(exception) + Environment.NewLine;
                 }
-                executing = false;
-                if (error != "") textEditor.Write(error);
-                textEditor.Write(prompt);
+                _executing = false;
+                if (error != "") _textEditor.Write(error);
+                _textEditor.Write(_prompt);
             }
         }
 
@@ -381,14 +360,14 @@ namespace PythonConsoleControl
         /// </summary>
         public string ReadLine(int autoIndentSize)
         {
-            string indent = String.Empty;
+            var indent = String.Empty;
             if (autoIndentSize > 0)
             {
                 indent = String.Empty.PadLeft(autoIndentSize);
                 Write(indent, Style.Prompt);
             }
 
-            string line = ReadLineFromTextEditor();
+            var line = ReadLineFromTextEditor();
             if (line != null)
             {
                 return indent + line;
@@ -401,16 +380,12 @@ namespace PythonConsoleControl
         /// </summary>
         public void Write(string text, Style style)
         {
-            textEditor.Write(text);
-            if (style == Style.Prompt)
-            {
-                promptLength = text.Length;
-                if (!consoleInitialized)
-                {
-                    consoleInitialized = true;
-                    if (ConsoleInitialized != null) ConsoleInitialized(this, EventArgs.Empty);
-                }
-            }
+            _textEditor.Write(text);
+            if (style != Style.Prompt) return;
+            _promptLength = text.Length;
+            if (_consoleInitialized) return;
+            _consoleInitialized = true;
+            if (ConsoleInitialized != null) ConsoleInitialized(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -436,9 +411,9 @@ namespace PythonConsoleControl
         {
             get
             {
-                lock (previousLines)
+                lock (_previousLines)
                 {
-                    return previousLines.Count > 0;
+                    return _previousLines.Count > 0;
                 }
             }
         }
@@ -450,7 +425,7 @@ namespace PythonConsoleControl
         public string GetCurrentLine()
         {
             string fullLine = GetLastTextEditorLine();
-            return fullLine.Substring(promptLength);
+            return fullLine.Substring(_promptLength);
         }
 
         /// <summary>
@@ -459,26 +434,26 @@ namespace PythonConsoleControl
         /// </summary>
         public string[] GetUnreadLines()
         {
-            return previousLines.ToArray();
+            return _previousLines.ToArray();
         }
 
         string GetLastTextEditorLine()
         {
-            return textEditor.GetLine(textEditor.TotalLines - 1);
+            return _textEditor.GetLine(_textEditor.TotalLines - 1);
         }
 
         string ReadLineFromTextEditor()
         {
-            int result = WaitHandle.WaitAny(waitHandles);
-            if (result == lineReceivedEventIndex)
+            int result = WaitHandle.WaitAny(_waitHandles);
+            if (result == LineReceivedEventIndex)
             {
-                lock (previousLines)
+                lock (_previousLines)
                 {
-                    string line = previousLines[0];
-                    previousLines.RemoveAt(0);
-                    if (previousLines.Count == 0)
+                    string line = _previousLines[0];
+                    _previousLines.RemoveAt(0);
+                    if (_previousLines.Count == 0)
                     {
-                        lineReceivedEvent.Reset();
+                        _lineReceivedEvent.Reset();
                     }
                     return line;
                 }
@@ -528,7 +503,7 @@ namespace PythonConsoleControl
                 {
                     // Whenever a non-letter is typed while the completion window is open,
                     // insert the currently selected element.
-                    textEditor.RequestCompletioninsertion(e);
+                    _textEditor.RequestCompletioninsertion(e);
                 }
             }
 
@@ -543,15 +518,15 @@ namespace PythonConsoleControl
                     OnEnterKeyPressed();
                 }
 
-                if (e.Text[0] == '.' && allowFullAutocompletion)
+                if (e.Text[0] == '.' && _allowFullAutocompletion)
                 {
-                    textEditor.ShowCompletionWindow();
+                    _textEditor.ShowCompletionWindow();
                 }
 
                 if ((e.Text[0] == ' ') && (Keyboard.Modifiers == ModifierKeys.Control))
                 {
                     e.Handled = true;
-                    if (allowCtrlSpaceAutocompletion) textEditor.ShowCompletionWindow();
+                    if (_allowCtrlSpaceAutocompletion) _textEditor.ShowCompletionWindow();
                 }
             }
         }
@@ -561,19 +536,19 @@ namespace PythonConsoleControl
         /// </summary>
         void OnEnterKeyPressed()
         {
-            textEditor.StopCompletion();
-            if (textEditor.WriteInProgress) return;
-            lock (previousLines)
+            _textEditor.StopCompletion();
+            if (_textEditor.WriteInProgress) return;
+            lock (_previousLines)
             {
                 // Move cursor to the end of the line.
-                textEditor.Column = GetLastTextEditorLine().Length + 1;
+                _textEditor.Column = GetLastTextEditorLine().Length + 1;
 
                 // Append line.
                 string currentLine = GetCurrentLine();
-                previousLines.Add(currentLine);
-                commandLineHistory.Add(currentLine);
+                _previousLines.Add(currentLine);
+                _commandLineHistory.Add(currentLine);
 
-                lineReceivedEvent.Set();
+                _lineReceivedEvent.Set();
             }
         }
 
@@ -590,7 +565,7 @@ namespace PythonConsoleControl
         /// </summary>
         bool IsCurrentLineReadOnly
         {
-            get { return textEditor.Line < textEditor.TotalLines; }
+            get { return _textEditor.Line < _textEditor.TotalLines; }
         }
 
         /// <summary>
@@ -598,7 +573,7 @@ namespace PythonConsoleControl
         /// </summary>
         bool IsInPrompt
         {
-            get { return textEditor.Column - promptLength - 1 < 0; }
+            get { return _textEditor.Column - _promptLength - 1 < 0; }
         }
 
         /// <summary>
@@ -608,8 +583,8 @@ namespace PythonConsoleControl
         {
             get
             {
-                if (textEditor.SelectionLength > 0) return SelectionIsDeletable;
-                else return !IsInReadOnlyRegion;
+                if (_textEditor.SelectionLength > 0) return SelectionIsDeletable;
+                return !IsInReadOnlyRegion;
             }
         }
 
@@ -620,12 +595,9 @@ namespace PythonConsoleControl
         {
             get
             {
-                if (textEditor.SelectionLength > 0) return SelectionIsDeletable;
-                else
-                {
-                    int cursorIndex = textEditor.Column - promptLength - 1;
-                    return !IsCurrentLineReadOnly && (cursorIndex > 0 || (cursorIndex == 0 && textEditor.SelectionLength > 0));
-                }
+                if (_textEditor.SelectionLength > 0) return SelectionIsDeletable;
+                var cursorIndex = _textEditor.Column - _promptLength - 1;
+                return !IsCurrentLineReadOnly && (cursorIndex > 0 || (cursorIndex == 0 && _textEditor.SelectionLength > 0));
             }
         }
 
@@ -633,10 +605,10 @@ namespace PythonConsoleControl
         {
             get
             {
-                return (!textEditor.SelectionIsMultiline
+                return (!_textEditor.SelectionIsMultiline
                     && !IsCurrentLineReadOnly
-                    && (textEditor.SelectionStartColumn - promptLength - 1 >= 0)
-                    && (textEditor.SelectionEndColumn - promptLength - 1 >= 0));
+                    && (_textEditor.SelectionStartColumn - _promptLength - 1 >= 0)
+                    && (_textEditor.SelectionEndColumn - _promptLength - 1 >= 0));
             }
         }
 
@@ -645,8 +617,8 @@ namespace PythonConsoleControl
         /// </summary>
         void MoveToHomePosition()
         {
-            textEditor.Line = textEditor.TotalLines;
-            textEditor.Column = promptLength + 1;
+            _textEditor.Line = _textEditor.TotalLines;
+            _textEditor.Column = _promptLength + 1;
         }
 
         /// <summary>
@@ -654,9 +626,9 @@ namespace PythonConsoleControl
         /// </summary>
         void MoveToPreviousCommandLine()
         {
-            if (commandLineHistory.MovePrevious())
+            if (_commandLineHistory.MovePrevious())
             {
-                ReplaceCurrentLineTextAfterPrompt(commandLineHistory.Current);
+                ReplaceCurrentLineTextAfterPrompt(_commandLineHistory.Current);
             }
         }
 
@@ -665,10 +637,10 @@ namespace PythonConsoleControl
         /// </summary>
         void MoveToNextCommandLine()
         {
-            textEditor.Line = textEditor.TotalLines;
-            if (commandLineHistory.MoveNext())
+            _textEditor.Line = _textEditor.TotalLines;
+            if (_commandLineHistory.MoveNext())
             {
-                ReplaceCurrentLineTextAfterPrompt(commandLineHistory.Current);
+                ReplaceCurrentLineTextAfterPrompt(_commandLineHistory.Current);
             }
         }
 
@@ -678,10 +650,10 @@ namespace PythonConsoleControl
         void ReplaceCurrentLineTextAfterPrompt(string text)
         {
             string currentLine = GetCurrentLine();
-            textEditor.Replace(promptLength, currentLine.Length, text);
+            _textEditor.Replace(_promptLength, currentLine.Length, text);
 
             // Put cursor at end.
-            textEditor.Column = promptLength + text.Length + 1;
+            _textEditor.Column = _promptLength + text.Length + 1;
         }
     }
 }
