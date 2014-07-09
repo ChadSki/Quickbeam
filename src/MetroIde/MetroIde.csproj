@@ -715,6 +715,10 @@
     <Content Include="DLLs\WPFToolkit.Extended.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\vendor\IronPythonConsole\IronPythonConsole\IronPythonConsole.csproj">
+      <Project>{8a19eaa5-44c5-41ec-a908-7f41792cf18b}</Project>
+      <Name>IronPythonConsole</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Quickbeam.Low\Quickbeam.Low.csproj">
       <Project>{9a7f97f0-b55f-4fd4-b0b3-67da9d57b6ba}</Project>
       <Name>Quickbeam.Low</Name>

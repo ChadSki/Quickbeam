@@ -493,6 +493,9 @@ namespace MetroIde
         {
             var editTab = new LayoutAnchorable { Title = "Tag Editor", Content = new EditPage() };
             LobbyDockManager.Children.Add(editTab);
+
+            // Ensure this is wide enough
+            RightDock.DockMinWidth = Math.Max(600, RightDock.DockMinWidth);
         }
 
         private void dockManager_ActiveContentChanged(object sender, EventArgs e)
