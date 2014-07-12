@@ -25,12 +25,13 @@ from plugins import load_plugins, plugin_classes
 from halotag import HaloTag
 
 from System import Array, Byte
+from System.Threading.Tasks import Task
 from Quickbeam.Low.ByteArray import FileByteArrayBuilder
 from Quickbeam.Low.ByteArray import WinMemoryByteArrayBuilder
 
 # ensure plugins are loaded
 if len(plugin_classes) == 0:
-    load_plugins()
+    Task.Factory.StartNew(load_plugins)
 
 class HaloMap(object):
     def __init__(self):
@@ -38,8 +39,7 @@ class HaloMap(object):
         self.magic = None
 
 def load_map(map_path=None):
-    """Loads a map from Halo.exe's memory, or from disk if given a filepath. Loading a
-    map requires that plugins have already been loaded.
+    """Loads a map from disk, or from Halo's memory if no filepath is specified.
     """
     # end result, assembled piece-by-piece
     halomap = HaloMap()
@@ -147,9 +147,8 @@ def load_map(map_path=None):
                 halomap) for tag_header in tag_headers]
 
     for entry in tag_headers:
-        if entry.ident == 3797811434:
-            # ghost
-            Weapon = plugin_classes['weap']
-            return Weapon(ByteArray(entry.meta_offset_raw, Weapon.struct_size), halomap)
+        if entry.ident == 3837199171:
+            plugin = plugin_classes['vehi']
+            return plugin(ByteArray(entry.meta_offset_raw, plugin.struct_size), halomap)
 
     return index_header

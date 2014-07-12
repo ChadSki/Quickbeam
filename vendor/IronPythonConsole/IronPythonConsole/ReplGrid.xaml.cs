@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
+using Quickbeam.Low.ByteArray;
 
 namespace IronPythonConsole
 {
@@ -49,18 +50,16 @@ namespace IronPythonConsole
             console.Pad.Console.ConsoleInitialized += Console_ConsoleInitialized;
         }
 
+        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\vendor\PythonStdLib";
+        protected static readonly string DllsLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug";
+        protected static readonly string HalolibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib";
+
         void Console_ConsoleInitialized(object sender, EventArgs e)
         {
-            var scriptSource = console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
-                "import IronPythonConsole", SourceCodeKind.Statements);
-            try
-            {
-                scriptSource.Execute();
-            }
-            catch
-            {}
-            //double[] test = new double[] { 1.2, 4.6 };
-            //console.Pad.Console.ScriptScope.SetVariable("test", test);
+            console.Pad.Console.ScriptScope.Engine.Runtime.LoadAssembly(typeof(IByteArray).Assembly);
+            console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
+                "import IronPythonConsole", SourceCodeKind.Statements)
+                .Execute();
         }
 
         static void MainWindow_Initialized(object sender, EventArgs e)

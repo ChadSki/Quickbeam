@@ -142,6 +142,10 @@
     <Resource Include="Images\WordWrap.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Quickbeam.Low\Quickbeam.Low.csproj">
+      <Project>{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}</Project>
+      <Name>Quickbeam.Low</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PythonConsoleControl\PythonConsoleControl.csproj">
       <Project>{F1152D68-346B-4F48-8DB7-BE67B5CB1F49}</Project>
       <Name>PythonConsoleControl</Name>
@@ -149,11 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="python.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="IronPythonConsole.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

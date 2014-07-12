@@ -77,14 +77,10 @@
                     <Image Source="Images/Run.png" Height="16"/>
                 </Button>
             </ToolBar>
-            <Grid DockPanel.Dock="Bottom">
-                <avalonEdit:TextEditor
-			    Name="textEditor"
-			    FontFamily="Consolas"
-			    FontSize="10pt"
-                    ># IronPython Pad. Write code snippets here and F5 to run. If code is selected, only selection is run.
-                </avalonEdit:TextEditor>
-            </Grid>
+            <avalonEdit:TextEditor DockPanel.Dock="Bottom"
+			    Name="textEditor" Foreground="#c5c8c6" Background="#212121"
+			    FontFamily="Consolas" FontSize="9pt"
+                Text="# QuickPad: Write code snippets here and press F5 to run. If code is selected, only selection is run.&#10;" />
         </DockPanel>
         <Expander Name="expander" Grid.Column="1" Grid.RowSpan="3" Margin="0 0 0 0" HorizontalAlignment="Right" ExpandDirection="Left" MaxWidth="300">
             <!--<DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="4 0 0 0">-->

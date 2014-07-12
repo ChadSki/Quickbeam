@@ -121,6 +121,9 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StatusUpdater.cs" />
+    <Content Include="IronPythonConsole.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\app_icon_large.ico" />
     <Resource Include="Images\app_icon_large.png" />
     <Resource Include="Images\background_logo.png" />
