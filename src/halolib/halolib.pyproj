@@ -20,26 +20,33 @@
     <Compile Include="asdf.py" />
     <Compile Include="halolib.py" />
     <Compile Include="halotag.py" />
+    <Compile Include="observablefield\clrtype.py" />
+    <Compile Include="observablefield\fields.py" />
+    <Compile Include="observablefield\notifyproperty.py" />
+    <Compile Include="observablefield\pyevent.py" />
+    <Compile Include="observablefield\struct.py" />
+    <Compile Include="observablefield\__init__.py" />
     <Compile Include="plugins.py" />
-    <Compile Include="bytearray\asdf.py" />
-    <Compile Include="bytearray\bytearray.py" />
-    <Compile Include="bytearray\clrtype.py" />
-    <Compile Include="bytearray\filebytearray.py" />
-    <Compile Include="bytearray\nativemethods.py" />
-    <Compile Include="bytearray\winmembytearray.py" />
-    <Compile Include="bytearray\__init__.py" />
-    <Compile Include="observablestruct\fields.py" />
-    <Compile Include="observablestruct\notifyproperty.py" />
-    <Compile Include="observablestruct\pyevent.py" />
-    <Compile Include="observablestruct\struct.py" />
-    <Compile Include="observablestruct\__init__.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bytearray" />
-    <Folder Include="observablestruct" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{80659ab7-4d53-4e0c-8588-a766116cbd46}\2.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="observablefield\" />
+    <Folder Include="plugins\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="plugins\bipd.xml" />
+    <Content Include="plugins\effe.xml" />
+    <Content Include="plugins\index_header.xml" />
+    <Content Include="plugins\map_header.xml" />
+    <Content Include="plugins\object_table.xml" />
+    <Content Include="plugins\player_table.xml" />
+    <Content Include="plugins\proj.xml" />
+    <Content Include="plugins\tag_header.xml" />
+    <Content Include="plugins\unknown.xml" />
+    <Content Include="plugins\vehi.xml" />
+    <Content Include="plugins\weap.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

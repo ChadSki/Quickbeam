@@ -31,7 +31,8 @@ from Quickbeam.Low.ByteArray import WinMemoryByteArrayBuilder
 
 # ensure plugins are loaded
 if len(plugin_classes) == 0:
-    Task.Factory.StartNew(load_plugins)
+    load_plugins()
+    #Task.Factory.StartNew(load_plugins)
 
 class HaloMap(object):
     def __init__(self):
