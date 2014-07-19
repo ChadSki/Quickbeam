@@ -36,7 +36,6 @@ def access_over_file(mmap_f):
 def access_over_process(process_name):
     class HaloMemAccess(WinMemAccess):
         def __init__(self, *args, **kwargs):
-            # we always want to read Halo, so let's assume that parameter
             super().__init__(process_name=process_name, *args, **kwargs)
 
     return HaloMemAccess

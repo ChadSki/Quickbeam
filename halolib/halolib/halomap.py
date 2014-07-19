@@ -109,10 +109,10 @@ def load_map(map_path=None):
         PlayerTable = plugin_classes['player_table']
 
         object_table = ObjectTable(ByteAccess(0x400506B4, 64), 0, halomap)
-        print(object_table)
+        #print(object_table)
         
         player_table = ByteAccess(0x402AAF94, 64)
-        print(player_table.read_all_bytes())
+        #print(player_table.read_all_bytes())
 
     map_header_offset = {'file': 0, 'mem': 0x6A8154}[location]
     map_header = MapHeader(
@@ -121,6 +121,8 @@ def load_map(map_path=None):
                         MapHeader.struct_size),
                     0, # the map header never requires magic
                     halomap)
+
+    print('Game Version:', map_header.game_version)
 
     index_header_offset = {'file': map_header.index_offset, 'mem': 0x40440000}[location]
     index_header = IndexHeader(

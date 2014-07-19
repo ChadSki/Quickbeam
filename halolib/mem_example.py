@@ -1,8 +1,8 @@
 import halolib
 m = halolib.load_map()
 
-#print(repr(m))
-print(repr(m.get_tag('bipd')))
+for each in m.get_tags('vehi'):
+    print(each)
 
 # weaps
 rifle = m.get_tag('weap', 'assault rifle')

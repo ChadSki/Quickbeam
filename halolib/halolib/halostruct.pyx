@@ -109,9 +109,9 @@ def make_field_property(field_name, field_type, reflexive_class=None, **kwargs):
         @field.setter
         def field(self, value):
             if value:
-                ident = value.ident             # write back the tag's ident, not the tag itself
+                ident = value.ident # write back the tag's ident, not the tag itself
             else:
-                ident = 0xFFFFFFFF              # Halo's version of null
+                ident = 0xFFFFFFFF  # Halo's version of null
 
             buf = self.access.read_bytes(offset, 4)
             write_uint32(<int><char*>buf, ident)
