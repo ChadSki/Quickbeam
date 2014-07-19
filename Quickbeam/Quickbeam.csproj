@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="EmbeddedWindow.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HaloWindow.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -156,6 +157,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

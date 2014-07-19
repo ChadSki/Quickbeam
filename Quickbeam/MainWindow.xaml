@@ -82,7 +82,7 @@
                               Grid.Row="0" 
                               Width="{Binding ElementName=widthSlider, Path=Value}"
                               Height="{Binding ElementName=heightSlider, Path=Value}">
-                            <Rectangle Fill="#FF1e1e1e" Stroke="#AA000000" />
+                            <local:HaloWindow HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
