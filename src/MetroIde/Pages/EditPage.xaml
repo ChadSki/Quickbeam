@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:metaEditor="clr-namespace:MetroIde.Controls.MetaEditor"
-             xmlns:ironPythonConsole="clr-namespace:IronPythonConsole;assembly=IronPythonConsole"
+             xmlns:ironPythonConsole="clr-namespace:Quickbeam.IronPythonConsole;assembly=Quickbeam.IronPythonConsole"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800">
     <Grid>

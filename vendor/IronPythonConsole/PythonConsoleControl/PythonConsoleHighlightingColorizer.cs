@@ -14,7 +14,7 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Highlighting;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     /// <summary>
     /// Only colourize when text is input

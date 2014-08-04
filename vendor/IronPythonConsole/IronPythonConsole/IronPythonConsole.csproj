@@ -8,8 +8,8 @@
     <ProjectGuid>{8A19EAA5-44C5-41EC-A908-7F41792CF18B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IronPythonConsole</RootNamespace>
-    <AssemblyName>IronPythonConsole</AssemblyName>
+    <RootNamespace>Quickbeam.IronPythonConsole</RootNamespace>
+    <AssemblyName>Quickbeam.IronPythonConsole</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

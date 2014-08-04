@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Xml;
 
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     /// <summary>
     /// Interaction logic for PythonConsoleControl.xaml
@@ -23,7 +23,7 @@ namespace PythonConsoleControl
             Grid.Children.Add(_pad.Control);
             // Load our custom highlighting definition
             IHighlightingDefinition pythonHighlighting;
-            using (var s = typeof(IronPythonConsoleControl).Assembly.GetManifestResourceStream("PythonConsoleControl.Resources.Python.xshd"))
+            using (var s = typeof(IronPythonConsoleControl).Assembly.GetManifestResourceStream("Quickbeam.PythonConsoleControl.Resources.Python.xshd"))
             {
                 if (s == null)
                     throw new InvalidOperationException("Could not find embedded resource");

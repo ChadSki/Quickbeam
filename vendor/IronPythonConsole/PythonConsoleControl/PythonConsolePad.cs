@@ -3,7 +3,7 @@
 using ICSharpCode.AvalonEdit;
 using System.Windows.Media;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {   
     public class PythonConsolePad 
     {

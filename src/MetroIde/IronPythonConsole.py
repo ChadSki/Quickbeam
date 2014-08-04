@@ -1,8 +1,8 @@
 # Start up script for IronPythonConsole
 
-stdlib_dir = r"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\vendor\PythonStdLib"
-dlls_dir = r"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug"
-halolib_dir = r"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib"
+stdlib_dir = r"C:\Users\Chad\Source Code\Quickbeam\vendor\PythonStdLib"
+dlls_dir = r"C:\Users\Chad\Source Code\Quickbeam\src\bin\Debug"
+halolib_dir = r"C:\Users\Chad\Source Code\Quickbeam\src\halolib"
 
 import sys
 sys.path.append(stdlib_dir)

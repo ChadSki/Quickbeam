@@ -12,7 +12,7 @@ using Microsoft.Scripting.Hosting;
 using Microsoft.Scripting.Hosting.Providers;
 using Microsoft.Scripting.Hosting.Shell;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     public delegate void ConsoleCreatedEventHandler(object sender, EventArgs e);
 

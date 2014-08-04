@@ -18,7 +18,7 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 using System.Reflection;
 using System.ComponentModel;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     public delegate void DescriptionUpdateDelegate(string description);
     

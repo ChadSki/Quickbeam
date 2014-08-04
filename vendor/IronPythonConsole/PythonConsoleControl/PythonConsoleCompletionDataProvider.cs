@@ -14,7 +14,7 @@ using Microsoft.Scripting;
 using System.Threading;
 using System.Reflection;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     /// <summary>
     /// Provides code completion for the Python Console window.

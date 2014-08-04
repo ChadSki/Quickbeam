@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Xml;
 using Quickbeam.Low.ByteArray;
 
-namespace IronPythonConsole
+namespace Quickbeam.IronPythonConsole
 {
     /// <summary>
     /// Interaction logic for ReplGrid.xaml
@@ -22,7 +22,7 @@ namespace IronPythonConsole
             Initialized += MainWindow_Initialized;
             // Load our custom highlighting definition:
             IHighlightingDefinition pythonHighlighting;
-            using (var s = typeof(ReplGrid).Assembly.GetManifestResourceStream("IronPythonConsole.Resources.Python.xshd"))
+            using (var s = typeof(ReplGrid).Assembly.GetManifestResourceStream("Quickbeam.IronPythonConsole.Resources.Python.xshd"))
             {
                 if (s == null) throw new InvalidOperationException("Could not find embedded resource");
                 using (XmlReader reader = new XmlTextReader(s))
@@ -49,10 +49,6 @@ namespace IronPythonConsole
         {
             console.Pad.Console.ConsoleInitialized += Console_ConsoleInitialized;
         }
-
-        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\vendor\PythonStdLib";
-        protected static readonly string DllsLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug";
-        protected static readonly string HalolibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib";
 
         void Console_ConsoleInitialized(object sender, EventArgs e)
         {

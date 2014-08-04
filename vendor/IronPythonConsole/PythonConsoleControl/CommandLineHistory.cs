@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     /// <summary>
     /// Stores the command line history for the PythonConsole.

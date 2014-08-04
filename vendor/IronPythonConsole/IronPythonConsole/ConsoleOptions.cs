@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2010 Joe Moorhouse
 
 using ICSharpCode.AvalonEdit;
-using PythonConsoleControl;
+using Quickbeam.PythonConsoleControl;
 using System.ComponentModel;
 using System.Windows.Media;
 
-namespace IronPythonConsole
+namespace Quickbeam.IronPythonConsole
 {
     public class ConsoleOptions
     {

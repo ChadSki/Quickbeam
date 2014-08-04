@@ -10,7 +10,7 @@ using ICSharpCode.AvalonEdit.Editing;
 using Microsoft.Scripting.Hosting.Shell;
 using Microsoft.Scripting;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     /// <summary>
     /// Implements AvalonEdit ICompletionData interface to provide the entries in the completion drop down.

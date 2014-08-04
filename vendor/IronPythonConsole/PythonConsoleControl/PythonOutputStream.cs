@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     public class PythonOutputStream : Stream
     {

@@ -16,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Style = Microsoft.Scripting.Hosting.Shell.Style;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     public delegate void ConsoleInitializedEventHandler(object sender, EventArgs e);
     

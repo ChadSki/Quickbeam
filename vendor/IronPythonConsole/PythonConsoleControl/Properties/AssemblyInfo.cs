@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PythonConsoleControl")]
+[assembly: AssemblyTitle("Quickbeam.PythonConsoleControl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PythonConsoleControl")]
+[assembly: AssemblyProduct("Quickbeam.PythonConsoleControl")]
 [assembly: AssemblyCopyright("Copyright © Joe Moorhouse 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

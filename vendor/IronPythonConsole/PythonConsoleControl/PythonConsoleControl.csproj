@@ -8,8 +8,8 @@
     <ProjectGuid>{2A93606C-6E7B-4509-87BB-54CDF20DC64F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PythonConsoleControl</RootNamespace>
-    <AssemblyName>PythonConsoleControl</AssemblyName>
+    <RootNamespace>Quickbeam.PythonConsoleControl</RootNamespace>
+    <AssemblyName>Quickbeam.PythonConsoleControl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>

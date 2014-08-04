@@ -15,7 +15,7 @@ using System.Windows.Input;
 using System.Threading;
 using System.Diagnostics;
 
-namespace PythonConsoleControl
+namespace Quickbeam.PythonConsoleControl
 {
     /// <summary>
     /// Interface console to AvalonEdit and handle autocompletion.
