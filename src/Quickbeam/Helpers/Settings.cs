@@ -72,7 +72,7 @@ namespace Quickbeam.Helpers
 				{
 					Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
 					{
-						Source = new Uri("/Quickbeam;component/Metro/Accents/Blue.xaml", UriKind.Relative)
+						Source = new Uri("/Quickbeam;component/Metro/Accents/Orange.xaml", UriKind.Relative)
 					});
 				}
 			}

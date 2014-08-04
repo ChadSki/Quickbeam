@@ -28,7 +28,7 @@
 				<ResourceDictionary Source="Metro\Controls\MetroFonts.xaml" />
 
 				<!-- Colours -->
-				<ResourceDictionary Source="Metro\Accents\Blue.xaml" />
+				<ResourceDictionary Source="Metro\Accents\Orange.xaml" />
 				<ResourceDictionary Source="Metro\Themes\Dark.xaml" />
 
 				<!-- Controls -->
