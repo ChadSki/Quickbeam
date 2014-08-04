@@ -7,9 +7,9 @@ namespace MetroIde.Helpers
 {
     public class PythonEnvironment
     {
-        protected static readonly string StdlibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\vendor\PythonStdLib";
-        protected static readonly string DllsLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug";
-        protected static readonly string HalolibLocation = @"C:\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib";
+        protected static readonly string StdlibLocation = @"C:\Users\Chad\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\vendor\PythonStdLib";
+        protected static readonly string DllsLocation = @"C:\Users\Chad\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\bin\Debug";
+        protected static readonly string HalolibLocation = @"C:\Users\Chad\Dropbox\Workbench\CodeProjects\HaloFiles\Source Code\Quickbeam\src\halolib";
 
         protected ScriptEngine Engine;
         protected ScriptScope Scope;

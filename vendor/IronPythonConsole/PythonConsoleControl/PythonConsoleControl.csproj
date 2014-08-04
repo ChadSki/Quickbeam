@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F1152D68-346B-4F48-8DB7-BE67B5CB1F49}</ProjectGuid>
+    <ProjectGuid>{2A93606C-6E7B-4509-87BB-54CDF20DC64F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PythonConsoleControl</RootNamespace>

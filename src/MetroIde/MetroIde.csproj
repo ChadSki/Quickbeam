@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StatusUpdater.cs" />
+    <Content Include="DLLs\System.Windows.Controls.Input.Toolkit.dll" />
     <Content Include="IronPythonConsole.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -711,16 +712,16 @@
     </BlendEmbeddedFont>
     <Resource Include="Controls\AvalonDockMetro\Images\Locked.png" />
     <Resource Include="Controls\AvalonDockMetro\Images\PinRestore.png" />
-    <Content Include="DLLs\ICSharpCode.AvalonEdit.dll" />
-    <Resource Include="DLLs\ICSharpCode.AvalonEdit.xml" />
-    <Content Include="DLLs\System.Windows.Controls.Input.Toolkit.dll" />
     <Content Include="DLLs\WPFToolkit.dll" />
-    <Content Include="DLLs\WPFToolkit.Extended.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\vendor\IronPythonConsole\IronPythonConsole\IronPythonConsole.csproj">
       <Project>{8a19eaa5-44c5-41ec-a908-7f41792cf18b}</Project>
       <Name>IronPythonConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\vendor\IronPythonConsole\PythonConsoleControl\PythonConsoleControl.csproj">
+      <Project>{2a93606c-6e7b-4509-87bb-54cdf20dc64f}</Project>
+      <Name>PythonConsoleControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Quickbeam.Low\Quickbeam.Low.csproj">
       <Project>{9a7f97f0-b55f-4fd4-b0b3-67da9d57b6ba}</Project>
