@@ -32,9 +32,6 @@ namespace Atlas.Views
 			DataContext = ViewModel;
 			ViewModel.LoadCache(cacheLocation);
 
-			// Set Datacontext's
-			XdkIpAddressTextBox.DataContext = App.Storage.Settings;
-
 			// woo
 			AddHandler(MetroClosableTabItem.CloseTabEvent, new RoutedEventHandler(CloseTab));
 		}
@@ -115,51 +112,6 @@ namespace Atlas.Views
 			if (contextMenu == null) return null;
 
 			return contextMenu.DataContext as TagHierarchyNode;
-		}
-
-		#endregion
-
-		#region Tag Editor Toolbar Buttons
-
-		private void TagEditorSaveButton_OnClick(object sender, RoutedEventArgs e)
-		{
-			var editor = ViewModel.SelectedEditor as TagEditor;
-			if (editor == null) return;
-			editor.ViewModel.SaveTagData(TagDataWriter.SaveType.File);
-		}
-
-		private void TagEditorPokeModifiedMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			var editor = ViewModel.SelectedEditor as TagEditor;
-			if (editor == null) return;
-			editor.ViewModel.SaveTagData(TagDataWriter.SaveType.Memory);
-			TagEditorPokeDropDownButton.IsOpen = false;
-			editor.Focus();
-		}
-		private void TagEditorPokeAllMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			var editor = ViewModel.SelectedEditor as TagEditor;
-			if (editor == null) return;
-			editor.ViewModel.SaveTagData(TagDataWriter.SaveType.Memory, false);
-			TagEditorPokeDropDownButton.IsOpen = false;
-			editor.Focus();
-		}
-
-		private void TagEditorReloadLocalMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			var editor = ViewModel.SelectedEditor as TagEditor;
-			if (editor == null) return;
-			editor.ViewModel.LoadTagData(TagDataReader.LoadType.File, editor);
-			TagEditorReloadDropDownButton.IsOpen = false;
-			editor.Focus();
-		}
-		private void TagEditorReloadMemoryMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			var editor = ViewModel.SelectedEditor as TagEditor;
-			if (editor == null) return;
-			editor.ViewModel.LoadTagData(TagDataReader.LoadType.Memory, editor);
-			TagEditorReloadDropDownButton.IsOpen = false;
-			editor.Focus();
 		}
 
 		#endregion
