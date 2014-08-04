@@ -8,7 +8,7 @@
 		xmlns:viewModels="clr-namespace:Atlas.ViewModels"
 		mc:Ignorable="d"
 		UseLayoutRounding="False"
-        MinWidth="380" MinHeight="90"
+        MinWidth="380" MinHeight="84"
 		d:DesignHeight="425" d:DesignWidth="720" WindowStartupLocation="CenterScreen">
     <WindowChrome.WindowChrome>
         <WindowChrome
@@ -86,7 +86,8 @@
                 </Button>
             </StackPanel>
 
-            <Menu VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{x:Null}" Foreground="{x:Null}">
+            <Menu VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{x:Null}" Foreground="{x:Null}"
+                  Margin="0,0,0,6">
                 <MenuItem Header="FILE" Foreground="White" FontFamily="{DynamicResource MetroFontLight}">
                     <MenuItem Header="New" FontFamily="{DynamicResource MetroFontLight}">
                         <MenuItem Header="Map Info" FontFamily="{DynamicResource MetroFontLight}" />
