@@ -1,0 +1,246 @@
+﻿{
+	"EngineVersions": [
+		{
+			"Version": 1.0,
+			"VersionFriendly": "Halo 3 - 1.0 (No TU)",
+			"QuickOptions": [
+				{
+					"Name": "Toggle Debug Camera",
+					"Description": "Toggles the visibility of the Debug Camera Coordinates.",
+					"Address": 2182678487,
+					"IsToggle": true,
+					"IconResourceKey": "MemoryIconDebugCameraTemplate"
+				},
+				{
+					"Name": "Redraw Shaders",
+					"Description": "Redraws the cache's shaders, without reloading the map.",
+					"Address": 2190231314,
+					"IconResourceKey": "MemoryIconRedrawShadersTemplate"
+				},
+				{
+					"Name": "Create Checkpoint",
+					"Description": "Creates a gamestate checkpoint in the engine.",
+					"Address": 2190774210,
+					"IconResourceKey": "MemoryIconCreateCheckpointTemplate"
+				},
+				{
+					"Name": "Load Checkpoint",
+					"Description": "Loads the most recent gamestate checkpoint (if no checkpoint has been set in a multiplayer match, it will reload the scenario).",
+					"Address": 2190774209,
+					"IconResourceKey": "MemoryIconRevertCheckpointTemplate"
+				},
+				{
+					"Name": "Reload Cache",
+					"Description": "Reloads the current cache.",
+					"Address": 2190774207,
+					"IconResourceKey": "MemoryIconReloadCacheTemplate"
+				},
+				{
+					"Name": "End Game",
+					"Description": "Ends the current game, careful guys.",
+					"Address": 2190774211,
+					"CarefulMode": true,
+					"IconResourceKey": "MemoryIconEndGameTemplate"
+				}
+			],
+			"MemoryValues": [
+				{
+					"Name": "Toggle Debug Camera", 
+					"Description": "Toggles the visibility of the Debug Camera Coordinates. (0x01 = on, 0x00 = off)", 
+					"Address": 2182678487, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Redraw Shaders", 
+					"Description": "Redraws the cache's shaders, without reloading the map.", 
+					"Address": 2190231314, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Create Checkpoint", 
+					"Description": "Creates a gamestate checkpoint in the engine.", 
+					"Address": 2190774210, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Load Checkpoint", 
+					"Description": "Loads the most recent gamestate checkpoint (if no checkpoint has been set in a multiplayer match, it will reload the scenario).", 
+					"Address": 2190774209, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Reload Cache", 
+					"Description": "Reloads the current cache.", 
+					"Address": 2190774207, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "End Game", 
+					"Description": "Ends the current game, careful guys.", 
+					"Address": 2190774211, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Gravity", 
+					"Description": "Sets the global gravity. Takes effect on map reload.", 
+					"Address": 2181257364, 
+					"Type": "float", 
+					"Data": "4.1712594"
+				},
+				{
+					"Name": "Third Person", 
+					"Description": "Globally sets the player's perspective to third person.", 
+					"Address": 2182261172, 
+					"Type": "bytes", 
+					"Data": "60000000"
+				},
+				{
+					"Name": "Unlock Skulls", 
+					"Description": "Unlocks all the skulls in Player 1's GPD.", 
+					"Address": 3256156802, 
+					"Type": "bytes", 
+					"Data": "FFFFFFFFFFFFFFFF"
+				},
+				{
+					"Name": "Unlock Campaign", 
+					"Description": "Unlocks all campaign missions and insertion points.", 
+					"Address": 3256156812, 
+					"Type": "bytes", 
+					"Data": "FFFFFFFFFFFFFFFFFFFFFFFF"
+				}
+			]
+		},
+		{
+			"Version": 1.1,
+			"VersionFriendly": "Halo 3 - 1.1 (TU 1)",
+			"QuickOptions": [ ]
+		},
+		{
+			"Version": 1.11,
+			"VersionFriendly": "Halo 3 - 1.11 (TU 2)",
+			"QuickOptions": [ ]
+		},
+		{
+			"Version": 1.2,
+			"VersionFriendly": "Halo 3 - 1.2 (TU 3)",
+			"QuickOptions": [
+				{
+					"Name": "Toggle Debug Camera",
+					"Description": "Toggles the visibility of the Debug Camera Coordinates.",
+					"Address": 2182743223,
+					"IsToggle": true,
+					"IconResourceKey": "MemoryIconDebugCameraTemplate"
+				},
+				{
+					"Name": "Redraw Shaders",
+					"Description": "Redraws the cache's shaders, without reloading the map.",
+					"Address": 2190370670,
+					"IconResourceKey": "MemoryIconRedrawShadersTemplate"
+				},
+				{
+					"Name": "Create Checkpoint",
+					"Description": "Creates a gamestate checkpoint in the engine.",
+					"Address": 2190913570,
+					"IconResourceKey": "MemoryIconCreateCheckpointTemplate"
+				},
+				{
+					"Name": "Load Checkpoint",
+					"Description": "Loads the most recent gamestate checkpoint (if no checkpoint has been set in a multiplayer match, it will reload the scenario).",
+					"Address": 2190913569,
+					"IconResourceKey": "MemoryIconRevertCheckpointTemplate"
+				},
+				{
+					"Name": "Reload Cache",
+					"Description": "Reloads the current cache.",
+					"Address": 2190913567,
+					"IconResourceKey": "MemoryIconReloadCacheTemplate"
+				},
+				{
+					"Name": "End Game",
+					"Description": "Ends the current game, careful guys.",
+					"Address": 2190913571,
+					"CarefulMode": true,
+					"IconResourceKey": "MemoryIconEndGameTemplate"
+				}
+			],
+			"MemoryValues": [
+				{
+					"Name": "Toggle Debug Camera", 
+					"Description": "Toggles the visibility of the Debug Camera Coordinates. (0x01 = on, 0x00 = off)", 
+					"Address": 2182743223, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Redraw Shaders", 
+					"Description": "Redraws the cache's shaders, without reloading the map.", 
+					"Address": 2190370670, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Create Checkpoint", 
+					"Description": "Creates a gamestate checkpoint in the engine.", 
+					"Address": 2190913570, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Load Checkpoint", 
+					"Description": "Loads the most recent gamestate checkpoint (if no checkpoint has been set in a multiplayer match, it will reload the scenario).", 
+					"Address": 2190913569, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Reload Cache", 
+					"Description": "Reloads the current cache.", 
+					"Address": 2190913567, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "End Game", 
+					"Description": "Ends the current game, careful guys.", 
+					"Address": 2190913571, 
+					"Type": "byte", 
+					"Data": "01"
+				},
+				{
+					"Name": "Gravity", 
+					"Description": "Sets the global gravity. Takes effect on map reload.", 
+					"Address": 2181258896, 
+					"Type": "float", 
+					"Data": "4.1712594"
+				},
+				{
+					"Name": "Third Person", 
+					"Description": "Globally sets the player's perspective to third person.", 
+					"Address": 2182326564, 
+					"Type": "bytes", 
+					"Data": "60000000"
+				},
+				{
+					"Name": "Unlock Skulls", 
+					"Description": "Unlocks all the skulls in Player 1's GPD.", 
+					"Address": 3256405026, 
+					"Type": "bytes", 
+					"Data": "FFFFFFFFFFFFFFFF"
+				},
+				{
+					"Name": "Unlock Campaign", 
+					"Description": "Unlocks all campaign missions and insertion points.", 
+					"Address": 3256405036, 
+					"Type": "bytes", 
+					"Data": "FFFFFFFFFFFFFFFFFFFFFFFF"
+				}
+			]
+		}
+	]
+}

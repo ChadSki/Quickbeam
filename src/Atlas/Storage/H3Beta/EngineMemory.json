@@ -1,0 +1,46 @@
+﻿{
+	"EngineVersions": [
+		{
+			"Version": 1.0,
+			"VersionFriendly": "Halo 3 Beta NoTU",
+			"QuickOptions": [],
+			"MemoryValues": [
+				{
+					"Name": "Gravity", 
+					"Description": "Sets the global gravity. Takes effect on map reload.", 
+					"Address": 2181372652, 
+					"Type": "float", 
+					"Data": "4.1712594"
+				},
+				{
+					"Name": "Third Person", 
+					"Description": "Globally sets the player's perspective to third person.", 
+					"Address": 2184440076, 
+					"Type": "bytes", 
+					"Data": "60000000"
+				}
+			]
+		},
+		{
+			"Version": 1.1,
+			"VersionFriendly": "Halo 3 Beta TU2",
+			"QuickOptions": [],
+			"MemoryValues": [
+				{
+					"Name": "Gravity", 
+					"Description": "Sets the global gravity. Takes effect on map reload.", 
+					"Address": 2181372652, 
+					"Type": "float", 
+					"Data": "4.1712594"
+				},
+				{
+					"Name": "Third Person", 
+					"Description": "Globally sets the player's perspective to third person.", 
+					"Address": 2184440340, 
+					"Type": "bytes", 
+					"Data": "60000000"
+				}
+			]
+		}
+	]
+}

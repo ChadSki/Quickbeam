@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Blamite</RootNamespace>
+    <AssemblyName>Blamite</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EXPORT_GPPG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;EXPORT_GPPG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EXPORT_GPPG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;EXPORT_GPPG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EXPORT_GPPG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;EXPORT_GPPG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Blam\CacheFileLoader.cs" />
+    <Compile Include="Blam\EngineType.cs" />
+    <Compile Include="Blam\Resources\ResourcePageInjector.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundCodec.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundPermutation.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundPlayback.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundPlaybackParameter.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundRawChunk.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundResourceGestalt.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISoundScale.cs" />
+    <Compile Include="Blam\Resources\Sounds\SoundReader.cs" />
+    <Compile Include="Blam\Shaders\IShader.cs" />
+    <Compile Include="Blam\Shaders\IShaderStreamer.cs" />
+    <Compile Include="Blam\LanguagePack\DummyLanguagePackLoader.cs" />
+    <Compile Include="Blam\LanguagePack\GameLanguage.cs" />
+    <Compile Include="Blam\LanguagePack\ILanguagePack.cs" />
+    <Compile Include="Blam\LanguagePack\ILanguagePackLoader.cs" />
+    <Compile Include="Blam\LanguagePack\LocalizedString.cs" />
+    <Compile Include="Blam\LanguagePack\LocalizedStringList.cs" />
+    <Compile Include="Blam\Resources\BSP\IScenarioBSP.cs" />
+    <Compile Include="Blam\Resources\IZoneSet.cs" />
+    <Compile Include="Blam\Resources\Models\BoundingBoxCalculator.cs" />
+    <Compile Include="Blam\Resources\Models\IModel.cs" />
+    <Compile Include="Blam\Resources\Models\IndexBufferWriter.cs" />
+    <Compile Include="Blam\Resources\Models\VertexBufferWriter.cs" />
+    <Compile Include="Blam\Resources\Resource.cs" />
+    <Compile Include="Blam\Resources\IResourceMetaLoader.cs" />
+    <Compile Include="Blam\Resources\ResourcePage.cs" />
+    <Compile Include="Blam\Resources\IResourceManager.cs" />
+    <Compile Include="Blam\Resources\Models\BoundingBox.cs" />
+    <Compile Include="Blam\Resources\Models\IModelPermutation.cs" />
+    <Compile Include="Blam\Resources\Models\IModelProcessor.cs" />
+    <Compile Include="Blam\Resources\Models\IModelRegion.cs" />
+    <Compile Include="Blam\Resources\Models\IModelSection.cs" />
+    <Compile Include="Blam\Resources\Models\IModelSubmesh.cs" />
+    <Compile Include="Blam\Resources\Models\IModelVertexGroup.cs" />
+    <Compile Include="Blam\Resources\Models\IndexBufferReader.cs" />
+    <Compile Include="Blam\Resources\Models\IRenderModel.cs" />
+    <Compile Include="Blam\Resources\Models\IVertexProcessor.cs" />
+    <Compile Include="Blam\Resources\Models\ModelReader.cs" />
+    <Compile Include="Blam\Resources\Models\VertexBufferReader.cs" />
+    <Compile Include="Blam\Resources\ResourcePageExtractor.cs" />
+    <Compile Include="Blam\Resources\ResourcePointer.cs" />
+    <Compile Include="Blam\Resources\ResourceTable.cs" />
+    <Compile Include="Blam\Resources\IZoneSetTable.cs" />
+    <Compile Include="Blam\Scripting\Analysis\ConstantNode.cs" />
+    <Compile Include="Blam\Scripting\Analysis\FunctionCallNode.cs" />
+    <Compile Include="Blam\Scripting\Analysis\IScriptNode.cs" />
+    <Compile Include="Blam\Scripting\Analysis\IScriptNodeVisitor.cs" />
+    <Compile Include="Blam\Scripting\Analysis\ScriptDefinitionNode.cs" />
+    <Compile Include="Blam\Scripting\Analysis\ScriptDefinitionParam.cs" />
+    <Compile Include="Blam\Scripting\Analysis\GlobalDefinitionNode.cs" />
+    <Compile Include="Blam\Scripting\Analysis\ShiftReduceParserCode.cs" />
+    <Compile Include="Blam\Scripting\Analysis\VariableReferenceNode.cs" />
+    <Compile Include="Blam\Scripting\Compiler\ScriptContext.cs" />
+    <Compile Include="Blam\Scripting\Compiler\ScriptObject.cs" />
+    <Compile Include="Blam\Scripting\Compiler\ScriptObjectReflexive.cs" />
+    <Compile Include="Blam\Scripting\IScriptFile.cs" />
+    <Compile Include="Blam\Scripting\ScriptFunctionInfo.cs" />
+    <Compile Include="Blam\Scripting\ScriptTable.cs" />
+    <Compile Include="Blam\SecondGen\MetaOffsetConverter.cs" />
+    <Compile Include="Blam\SecondGen\SecondGenResourceMetaLoader.cs" />
+    <Compile Include="Blam\Shaders\ShaderType.cs" />
+    <Compile Include="Blam\TagTable.cs" />
+    <Compile Include="Blam\ThirdGen\BasedPointerConverter.cs" />
+    <Compile Include="Blam\ThirdGen\BLF\Campaign.cs" />
+    <Compile Include="Blam\ThirdGen\LanguagePack\ThirdGenLanguagePack.cs" />
+    <Compile Include="Blam\ThirdGen\LanguagePack\ThirdGenLanguagePackLoader.cs" />
+    <Compile Include="Blam\ThirdGen\MetaAddressConverter.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\BSP\ThirdGenScenarioBSP.cs" />
+    <Compile Include="Blam\Resources\Sounds\ISound.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSound.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundPlaybackParameter.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundPermutation.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundPlatformCodec.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundPlayback.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundRawChunk.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundResourceGestalt.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Sounds\ThirdGenSoundScale.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\ThirdGenResourceManager.cs" />
+    <Compile Include="Blam\ThirdGen\Shaders\ThirdGenShader.cs" />
+    <Compile Include="Blam\ThirdGen\Shaders\ThirdGenShaderStreamer.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenInteropSection.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenZoneSetTable.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenResourceLayoutTable.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Models\ThirdGenModelPermutation.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Models\ThirdGenModelRegion.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Models\ThirdGenModelSection.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Models\ThirdGenModelSubmesh.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Models\ThirdGenModelVertexGroup.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\Models\ThirdGenRenderModel.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenCacheFileReference.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenResourceGestalt.cs" />
+    <Compile Include="Blam\ThirdGen\Resources\ThirdGenResourceMetaLoader.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenScenarioScriptFile.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenZoneSet.cs" />
+    <Compile Include="Blam\Util\MetaAllocator.cs" />
+    <Compile Include="Blam\Util\ReflexiveCache.cs" />
+    <Compile Include="Blam\Util\ReflexiveReader.cs" />
+    <Compile Include="Blam\Util\ReflexiveWriter.cs" />
+    <Compile Include="Flexibility\Settings\XMLLocaleSymbolLoader.cs" />
+    <Compile Include="Flexibility\EngineDatabase.cs" />
+    <Compile Include="Flexibility\EngineDescription.cs" />
+    <Compile Include="Flexibility\Settings\IComplexSettingLoader.cs" />
+    <Compile Include="Flexibility\Settings\SettingsGroup.cs" />
+    <Compile Include="Flexibility\Settings\XMLEngineDatabaseLoader.cs" />
+    <Compile Include="Flexibility\Settings\XMLSettingsGroupLoader.cs" />
+    <Compile Include="Flexibility\StringIDLayout.cs" />
+    <Compile Include="Flexibility\VertexLayout.cs" />
+    <Compile Include="Flexibility\VertexElementLayout.cs" />
+    <Compile Include="Flexibility\VertexLayoutCollection.cs" />
+    <Compile Include="Injection\DataBlock.cs" />
+    <Compile Include="Injection\DataBlockBuilder.cs" />
+    <Compile Include="Injection\ExtractedPage.cs" />
+    <Compile Include="Injection\ExtractedResourceInfo.cs" />
+    <Compile Include="Injection\ExtractedTag.cs" />
+    <Compile Include="Injection\TagContainer.cs" />
+    <Compile Include="Injection\TagContainerReader.cs" />
+    <Compile Include="Injection\TagContainerWriter.cs" />
+    <Compile Include="Injection\TagContainerInjector.cs" />
+    <Compile Include="Flexibility\Settings\XMLVertexLayoutLoader.cs" />
+    <Compile Include="IO\FileSegment.cs" />
+    <Compile Include="IO\FileSegmenter.cs" />
+    <Compile Include="Blam\IStringIDResolver.cs" />
+    <Compile Include="Blam\Scripting\BlamScriptGenerator.cs" />
+    <Compile Include="Blam\Scripting\ScriptExpressionType.cs" />
+    <Compile Include="Blam\Scripting\ScriptExpression.cs" />
+    <Compile Include="Blam\Scripting\ScriptGlobal.cs" />
+    <Compile Include="Blam\Scripting\OpcodeLookup.cs" />
+    <Compile Include="Blam\Scripting\Script.cs" />
+    <Compile Include="Blam\Scripting\ScriptParameter.cs" />
+    <Compile Include="Blam\Scripting\ScriptExpressionTable.cs" />
+    <Compile Include="Blam\Scripting\ScriptValueType.cs" />
+    <Compile Include="Blam\SecondGen\SecondGenCacheFile.cs" />
+    <Compile Include="Blam\LengthBasedStringIDResolver.cs" />
+    <Compile Include="Blam\SecondGen\Structures\SecondGenHeader.cs" />
+    <Compile Include="Blam\SecondGen\Structures\SecondGenTag.cs" />
+    <Compile Include="Blam\SecondGen\Structures\SecondGenTagClass.cs" />
+    <Compile Include="Blam\SecondGen\Structures\SecondGenTagTable.cs" />
+    <Compile Include="Blam\StringID.cs" />
+    <Compile Include="Blam\Scripting\CachedStringTable.cs" />
+    <Compile Include="Blam\Scripting\StringTableReader.cs" />
+    <Compile Include="Blam\ThirdGen\LanguagePack\ThirdGenMultilingualStringList.cs" />
+    <Compile Include="Blam\IndexedStringIDSource.cs" />
+    <Compile Include="Blam\IndexedStringTable.cs" />
+    <Compile Include="Blam\CacheFileVersionInfo.cs" />
+    <Compile Include="Blam\Util\AESKey.cs" />
+    <Compile Include="Flexibility\LocaleSymbolCollection.cs" />
+    <Compile Include="Blam\StringIDSetResolver.cs" />
+    <Compile Include="Flexibility\Settings\XMLStringIDSetLoader.cs" />
+    <Compile Include="Flexibility\StructureLayoutCollection.cs" />
+    <Compile Include="Flexibility\Settings\XMLOpcodeLookup.cs" />
+    <Compile Include="IO\FileSegmenterExtensions.cs" />
+    <Compile Include="IO\FileSegmentGroup.cs" />
+    <Compile Include="IO\FileStreamManager.cs" />
+    <Compile Include="IO\IPointerConverter.cs" />
+    <Compile Include="IO\IBaseStream.cs" />
+    <Compile Include="IO\IStream.cs" />
+    <Compile Include="IO\IStreamManager.cs" />
+    <Compile Include="IO\IWritable.cs" />
+    <Compile Include="Blam\ThirdGen\BLF\MapInfo.cs" />
+    <Compile Include="Blam\ICacheFile.cs" />
+    <Compile Include="Blam\FileNameSource.cs" />
+    <Compile Include="Blam\StringIDSource.cs" />
+    <Compile Include="Blam\ThirdGen\BLF\PureBLF.cs" />
+    <Compile Include="Blam\DatumIndex.cs" />
+    <Compile Include="Blam\CacheFileType.cs" />
+    <Compile Include="Blam\Partition.cs" />
+    <Compile Include="Blam\ITagClass.cs" />
+    <Compile Include="Blam\ITag.cs" />
+    <Compile Include="Blam\ThirdGen\ThirdGenCacheFile.cs" />
+    <Compile Include="IO\Endian.cs" />
+    <Compile Include="IO\EndianReader.cs" />
+    <Compile Include="IO\EndianStream.cs" />
+    <Compile Include="IO\EndianWriter.cs" />
+    <Compile Include="IO\OffsetStream.cs" />
+    <Compile Include="IO\SegmentPointer.cs" />
+    <Compile Include="IO\TableSystem.cs" />
+    <Compile Include="IO\IReader.cs" />
+    <Compile Include="IO\IWriter.cs" />
+    <Compile Include="IO\StreamUtil.cs" />
+    <Compile Include="Patching\OldPatchLoader.cs" />
+    <Compile Include="Patching\AssemblyPatchLoader.cs" />
+    <Compile Include="Patching\AssemblyPatchWriter.cs" />
+    <Compile Include="Patching\BlfContent.cs" />
+    <Compile Include="Patching\DataPatcher.cs" />
+    <Compile Include="Patching\LanguageChange.cs" />
+    <Compile Include="Patching\LocaleChange.cs" />
+    <Compile Include="Patching\LocalePatcher.cs" />
+    <Compile Include="Patching\DataComparer.cs" />
+    <Compile Include="Patching\MetaPatcher.cs" />
+    <Compile Include="Patching\Patch.cs" />
+    <Compile Include="Patching\PatchApplier.cs" />
+    <Compile Include="Patching\PatchBuilder.cs" />
+    <Compile Include="Patching\SegmentChange.cs" />
+    <Compile Include="Patching\DataChange.cs" />
+    <Compile Include="Patching\SegmentComparer.cs" />
+    <Compile Include="Patching\SegmentPatcher.cs" />
+    <Compile Include="Patching\TargetGame.cs" />
+    <Compile Include="Plugins\AscensionPluginWriter.cs" />
+    <Compile Include="Plugins\AssemblyPluginLoader.cs" />
+    <Compile Include="Plugins\AssemblyPluginWriter.cs" />
+    <Compile Include="Plugins\Generation\MetaAnalyzer.cs" />
+    <Compile Include="Plugins\Generation\MetaMap.cs" />
+    <Compile Include="Plugins\Generation\MetaValueGuess.cs" />
+    <Compile Include="Plugins\Generation\MetaValueType.cs" />
+    <Compile Include="Plugins\IPluginVisitor.cs" />
+    <Compile Include="Plugins\PluginRevision.cs" />
+    <Compile Include="Plugins\TestPluginVisitor.cs" />
+    <Compile Include="Plugins\UniversalPluginLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RTE\H2Vista\H2VistaMapPointerReader.cs" />
+    <Compile Include="RTE\H2Vista\H2VistaRTEProvider.cs" />
+    <Compile Include="Native\ProcessMemoryStream.cs" />
+    <Compile Include="RTE\IRTEProvider.cs" />
+    <Compile Include="RTE\RTEStreamManager.cs" />
+    <Compile Include="Util\AES.cs" />
+    <Compile Include="Util\CharConstant.cs" />
+    <Compile Include="Util\FileSystem.cs" />
+    <Compile Include="Util\FunctionHelpers.cs" />
+    <Compile Include="Util\Half\Half.cs" />
+    <Compile Include="Util\Half\HalfHelper.cs" />
+    <Compile Include="Flexibility\IStructureLayoutVisitor.cs" />
+    <Compile Include="Flexibility\StructureLayout.cs" />
+    <Compile Include="Flexibility\StructureReader.cs" />
+    <Compile Include="Flexibility\StructureValueCollection.cs" />
+    <Compile Include="Flexibility\StructureValueType.cs" />
+    <Compile Include="Flexibility\StructureWriter.cs" />
+    <Compile Include="Flexibility\Settings\XMLLayoutLoader.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenHeader.cs" />
+    <Compile Include="Blam\IndexedFileNameSource.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenTagTable.cs" />
+    <Compile Include="Blam\ThirdGen\LanguagePack\ThirdGenLanguage.cs" />
+    <Compile Include="Blam\ThirdGen\LanguagePack\ThirdGenLanguageGlobals.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenTagClass.cs" />
+    <Compile Include="Blam\ThirdGen\Structures\ThirdGenTag.cs" />
+    <Compile Include="Util\ListSearching.cs" />
+    <Compile Include="Util\MemoryMap.cs" />
+    <Compile Include="Util\SHA1.cs" />
+    <Compile Include="Util\Trie.cs" />
+    <Compile Include="Util\TypeUtil.cs" />
+    <Compile Include="Util\XMLUtil.cs" />
+    <Compile Include="IO\ContainerWriter.cs" />
+    <Compile Include="IO\ContainerReader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Lexer Include="Blam\Scripting\Analysis\LispScriptScanner.lex" />
+    <Compile Include="Blam\Scripting\Analysis\LispScriptScanner.cs">
+      <DependentUpon>LispScriptScanner.lex</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Parser Include="Blam\Scripting\Analysis\LispScriptParser.y" />
+    <Compile Include="Blam\Scripting\Analysis\LispScriptParser.cs">
+      <DependentUpon>LispScriptParser.y</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Blam\Scripting\Analysis\Executables\gplex.exe" />
+    <Content Include="Blam\Scripting\Analysis\Executables\gppg.exe" />
+    <Content Include="Formats\Engines.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo2Vista\Layouts\H2V_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3Beta\H3B_LocaleSymbols.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3Beta\H3B_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3Beta\Layouts\H3B_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\H3_LocaleSymbols.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\H3_Scripting.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\H3_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\Layouts\H3_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\Layouts\H3_Layouts_Resources.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\Layouts\H3_Layouts_Scenario.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\Layouts\H3_Layouts_Shaders.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo3\Layouts\H3_Layouts_Sounds.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo4\H4_LocaleSymbols.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo4\H4_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo4\H4_VertexBuffer.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo4\Layouts\H4_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo4\Layouts\H4_Layouts_Resources.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Halo4\Layouts\H4_Layouts_Shaders.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\Layouts\ODST_Layouts_Shaders.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\Layouts\ODST_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\Layouts\ODST_Layouts_Resources.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\Layouts\ODST_Layouts_Scenario.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\ODST_LocaleSymbols.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\ODST_Scripting.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ODST\ODST_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ReachBeta\Layouts\ReachBeta_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ReachBeta\Layouts\ReachBeta_Layouts_Resources.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ReachBeta\ReachBeta_LocaleSymbols.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ReachBeta\ReachBeta_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\ReachBeta\Layouts\ReachBeta_Layouts_Shaders.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Layouts\Reach_Layouts_Shaders.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Layouts\Reach_Layouts_Core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Layouts\Reach_Layouts_Models.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Layouts\Reach_Layouts_Resources.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Layouts\Reach_Layouts_Scenario.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\ReachDemo_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Reach_LocaleSymbols.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Reach_Scripting.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Reach_StringIDs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Formats\Reach\Reach_VertexBuffer.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="TeamCitySetup">
+  </Target>
+  <PropertyGroup>
+    <CompileDependsOn>GenerateLexers;$(CompileDependsOn)</CompileDependsOn>
+    <CompileDependsOn>GenerateParsers;$(CompileDependsOn)</CompileDependsOn>
+  </PropertyGroup>
+  <Target Name="GenerateLexers" Inputs="@(Lexer)" Outputs="@(Lexer -> '%(RelativeDir)%(Filename).cs')">
+    <Exec Command="Blam\Scripting\Analysis\Executables\gplex.exe /out:@(Lexer -> '%(RelativeDir)%(Filename).cs') %(Lexer.Identity)" />
+    <CreateItem Include="%(Lexer.Filename).cs">
+      <Output TaskParameter="Include" ItemName="FileWrites" />
+    </CreateItem>
+  </Target>
+  <Target Name="GenerateParsers" Inputs="@(Parser)" Outputs="@(Parser -> '%(RelativeDir)%(Filename).cs')">
+    <Exec Command="Blam\Scripting\Analysis\Executables\gppg.exe /gplex /out:@(Parser -> '%(RelativeDir)%(Filename).cs') %(Parser.Identity)" />
+    <CreateItem Include="%(Parser.Filename).cs">
+      <Output TaskParameter="Include" ItemName="FileWrites" />
+    </CreateItem>
+  </Target>
+</Project>
