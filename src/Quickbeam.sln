@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repl", "Repl", "{A93D2691-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blamite", "Blamite\Blamite.csproj", "{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas", "Atlas\Atlas.csproj", "{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam", "Quickbeam\Quickbeam.csproj", "{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

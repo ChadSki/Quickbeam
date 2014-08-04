@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="Quickbeam.Views.CachePage"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
+			xmlns:dataBind="clr-namespace:Quickbeam.Helpers.Tags"
+			xmlns:models="clr-namespace:Quickbeam.Models"
+			xmlns:converters="clr-namespace:Quickbeam.Converters"
+			xmlns:local="clr-namespace:Quickbeam.Views.Cache.TagEditorComponents"
+			mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="1000">
+	<UserControl.Resources>
+		<ContextMenu x:Key="TagHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
+			<MenuItem Header="Open" Uid="opentagcontext" Click="OpenTagContextMenu_OnClick" />
+			<MenuItem Header="Rename" Uid="renametagcontext" Click="RenameNodeContextMenu_OnClick" />
+			<Separator />
+			<MenuItem Header="Extract" Uid="extracttagcontext" Click="ExtractTagContextMenu_OnClick" />
+		</ContextMenu>
+		<ContextMenu x:Key="FolderHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
+			<MenuItem Header="Rename" Uid="renametagcontext" Click="RenameNodeContextMenu_OnClick" />
+		</ContextMenu>
+		<converters:TagHierarchyContextMenuConverter x:Key="IValueConverterTagHierarchyContextMenu" TagContextMenu="{StaticResource TagHierarchyContextMenu}" FolderContextMenu="{StaticResource FolderHierarchyContextMenu}" />
+	</UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{x:Static local:TagValue.JumpToCommand}"
+		                Executed="JumpToTagCommand_OnExecuted" />
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="GridLeftColumnDefinition" Width="*" MinWidth="30" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition x:Name="GridRightColumnDefinition" Width="350" MinWidth="30" />
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="MainContentGrid" Grid.Column="0">
+            <custom:MetroClosableTabControl x:Name="EditorTabControl" Background="{x:Null}" BorderBrush="{DynamicResource AssemblyAccentBrush}"
+												Foreground="White" BorderThickness="0,2,0,0" Margin="3,-4,-3,4" Padding="2" SelectedItem="{Binding Path=SelectedEditor, Mode=TwoWay}"
+												ItemsSource="{Binding Path=Editors}">
+                <custom:MetroClosableTabControl.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource {x:Type custom:MetroClosableTabItem}}" TargetType="{x:Type custom:MetroClosableTabItem}">
+                        <Setter Property="Header" Value="{Binding EditorTitle}"/>
+                        <Setter Property="Content" Value="{Binding}"/>
+                    </Style>
+                </custom:MetroClosableTabControl.ItemContainerStyle>
+            </custom:MetroClosableTabControl>
+        </Grid>
+
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="#2d2d30" ResizeDirection="Columns" />
+
+        <custom:MetroContainer x:Name="TagExplorerMetroContainer" Grid.Column="2"
+                                   Title="{Binding Path=CacheFile.InternalName, FallbackValue='Tag Explorer (internal)', StringFormat='Tag Explorer ({0})'}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <custom:MetroToolBar ToolBarTray.IsLocked="True" DropDownVisibility="Visible">
+                    <Button>
+                        <Grid>
+                            <Ellipse Fill="#7ac1ff" Width="14" Height="14" />
+                            <Path Fill="#313135" Data="M 0,2 L 3,0 4,0 3,2 7,2 7,4 3,4 4,6 3,6 0,4" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Ellipse Fill="#7ac1ff" Width="14" Height="14" />
+                            <Path Fill="#313135" Data="M 0,2 L 3,0 4,0 3,2 7,2 7,4 3,4 4,6 3,6 0,4" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Button>
+                    <Separator />
+                </custom:MetroToolBar>
+                <custom:MetroWatermarkTextbox x:Name="TagExplorerSearchTextbox" Grid.Row="1" Watermark="{Binding Path=CacheFile.InternalName, FallbackValue='Search Tag Explorer - internal (Ctrl+;)', StringFormat='Search Tag Explorer - {0} (Ctrl+;)'}" />
+                <TreeView x:Name="TagTreeView" Grid.Row="2" ItemsSource="{Binding Nodes}" 
+						  Background="{x:Null}" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,10,0,0" 
+						  VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard" MouseDoubleClick="TagTreeView_MouseDoubleClick">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type dataBind:TagHierarchyNode}" ItemsSource="{Binding Babies}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20" 
+															ContextMenu="{Binding Converter={StaticResource IValueConverterTagHierarchyContextMenu}}">
+                                <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />
+                                <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0" 
+															   VerticalAlignment="Center">
+														<Run Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+														<Run Text="{Binding Suffix, Mode=OneWay}" Foreground="#e5e5e5" />
+                                </TextBlock>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type models:CacheEditorNode}" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20">
+                                <ContentControl Template="{Binding Converter={StaticResource IValueConverterCacheEditorNodeToIcon}}" />
+                                <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0" 
+															   VerticalAlignment="Center">
+														<Run Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+														<Run Text=" - Specialized Editor" Foreground="#e5e5e5" />
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </Grid>
+        </custom:MetroContainer>
+    </Grid>
+</UserControl>
