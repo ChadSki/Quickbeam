@@ -37,23 +37,21 @@ namespace Quickbeam.IronPythonConsole
 			InitializeComponent();
             textEditor.SyntaxHighlighting = pythonHighlighting;
             textEditor.PreviewKeyDown += textEditor_PreviewKeyDown;
-            _consoleOptionsProvider = new ConsoleOptions(console.Pad);
-            propertyGridComboBox.SelectedIndex = 0;
-            expander.Expanded += expander_Expanded;
-            console.Pad.Host.ConsoleCreated += Host_ConsoleCreated;
+            _consoleOptionsProvider = new ConsoleOptions(Console.Pad);
+            Console.Pad.Host.ConsoleCreated += Host_ConsoleCreated;
 		}
 
 		private string _currentFileName;
 
         void Host_ConsoleCreated(object sender, EventArgs e)
         {
-            console.Pad.Console.ConsoleInitialized += Console_ConsoleInitialized;
+            Console.Pad.Console.ConsoleInitialized += Console_ConsoleInitialized;
         }
 
         void Console_ConsoleInitialized(object sender, EventArgs e)
         {
-            console.Pad.Console.ScriptScope.Engine.Runtime.LoadAssembly(typeof(IByteArray).Assembly);
-            console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
+            Console.Pad.Console.ScriptScope.Engine.Runtime.LoadAssembly(typeof(IByteArray).Assembly);
+            Console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
                 "import IronPythonConsole", SourceCodeKind.Statements)
                 .Execute();
         }
@@ -97,28 +95,7 @@ namespace Quickbeam.IronPythonConsole
             var statementsToRun = textEditor.TextArea.Selection.Length > 0
                 ? textEditor.TextArea.Selection.GetText(textEditor.TextArea.Document)
                 : textEditor.TextArea.Document.Text;
-            console.Pad.Console.RunStatements(statementsToRun);
+            Console.Pad.Console.RunStatements(statementsToRun);
         }
-
-        void PropertyGridComboBoxSelectionChanged(object sender, RoutedEventArgs e)
-		{
-            if (propertyGrid == null)
-				return;
-			switch (propertyGridComboBox.SelectedIndex) {
-				case 0:
-                    propertyGrid.SelectedObject = _consoleOptionsProvider; // not .Instance
-					break;
-				case 1:
-					//propertyGrid.SelectedObject = textEditor.Options; (for WPF native control)
-                    propertyGrid.SelectedObject = textEditor.Options;
-					break;
-			}
-		}
-
-        void expander_Expanded(object sender, RoutedEventArgs e)
-        {
-            PropertyGridComboBoxSelectionChanged(sender, e);
-        }
-		
     }
 }

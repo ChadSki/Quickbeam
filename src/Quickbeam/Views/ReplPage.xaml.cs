@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using Quickbeam.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using Quickbeam.Dialogs;
-using Quickbeam.Models;
-using Quickbeam.ViewModels;
+using System.Windows.Forms;
 
 namespace Quickbeam.Views
 {
@@ -26,5 +22,22 @@ namespace Quickbeam.Views
 		{
 			return true;
 		}
+
+	    private void BtnBrowseHaloExe_Click(object sender, RoutedEventArgs e)
+	    {
+            var dialog = new OpenFileDialog
+            {
+                Filter = @"Executable Files|*.exe|All Files|*.*",
+                FileName = ViewModel.HaloExePath,
+                Title = @"Open halo.exe"
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+                ViewModel.HaloExePath = dialog.FileName;
+	    }
+
+	    private void BtnLaunchHalo_Click(object sender, RoutedEventArgs e)
+	    {
+	        throw new System.NotImplementedException();
+	    }
 	}
 }

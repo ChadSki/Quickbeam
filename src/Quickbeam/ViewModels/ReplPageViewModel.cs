@@ -9,7 +9,13 @@ namespace Quickbeam.ViewModels
 			App.Storage.HomeWindowViewModel.UpdateStatus("Welcome");
 		}
 
-		public void OpenFile(HomeViewModel.Type type)
+	    public string HaloExePath
+	    {
+	        get { return App.Storage.Settings.HaloExePath; }
+            set { App.Storage.Settings.HaloExePath = value; }
+	    }
+
+	    public void OpenFile(HomeViewModel.Type type)
 		{
 			switch (type)
 			{

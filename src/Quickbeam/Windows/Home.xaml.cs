@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
-using Quickbeam.Dialogs;
-using Quickbeam.Native;
 using Quickbeam.Views;
 using Quickbeam.ViewModels;
 
@@ -26,10 +22,6 @@ namespace Quickbeam.Windows
 			ViewModel.AssemblyPage = new ReplPage();
 
 			Closing += OnClosing;
-
-#if !DEBUG
-			DebugMenuItems.Visibility = Visibility.Collapsed;
-#endif
 		}
 
 		private static void OnClosing(object sender, CancelEventArgs cancelEventArgs)
@@ -49,48 +41,5 @@ namespace Quickbeam.Windows
 
 			base.OnSourceInitialized(e);
 		}
-
-		private void OpenCacheMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ValidateFile(ViewModel.FindFile(HomeViewModel.Type.BlamCache));
-		}
-
-		private void OpenMapImageMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ValidateFile(ViewModel.FindFile(HomeViewModel.Type.MapImage));
-		}
-
-		private void OpenMapInfoMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ValidateFile(ViewModel.FindFile(HomeViewModel.Type.MapInfo));
-		}
-
-		private void OpenCampaignMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ValidateFile(ViewModel.FindFile(HomeViewModel.Type.Campaign));
-		}
-
-		#region Debug Menu
-
-		private void MessageBoxDialogTextMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			MetroMessageBox.Show("Message Box Title",
-				"Haxx0r ipsum L0phtCrack January 1, 1970 spoof epoch continue suitably small values tunnel in. Worm fail packet sniffer for ascii giga nak double flood linux boolean int gcc. Cd I'm compiling overflow fopen endif default system break James T. Kirk bar vi hexadecimal unix rsa ack. ");
-		}
-		private void MessageBoxOptionMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			var answer = MetroMessageBox.Show("Message Box Title", "wots ur answer?", 
-				new List<MetroMessageBox.MessageBoxButton> { MetroMessageBox.MessageBoxButton.Aite, MetroMessageBox.MessageBoxButton.Okay, MetroMessageBox.MessageBoxButton.Cancel });
-
-			MetroMessageBox.Show("answer", answer.ToString());
-		}
-
-		private void MessageBoxListMenuItem_OnClick(object sender, RoutedEventArgs e)
-		{
-			var answer = MetroMessageBoxList.Show("Message Box Title", "le lists", new List<string> { "item1", "item2", "item3", "gerrit" });
-			MetroMessageBox.Show("answer", answer.ToString());
-		}
-
-		#endregion
 	}
 }

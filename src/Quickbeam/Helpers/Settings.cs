@@ -23,7 +23,9 @@ namespace Quickbeam.Helpers
 
 		// Misc
 		private EngineDatabase _defaultDatabase = XMLEngineDatabaseLoader.LoadDatabase("Formats/Engines.xml");
-		private ObservableCollection<RecentFile> _recentFiles = new ObservableCollection<RecentFile>(); 
+		private ObservableCollection<RecentFile> _recentFiles = new ObservableCollection<RecentFile>();
+
+	    private string _haloExePath;
 
 		// UI
 		private Accent _assemblyAccent = Accent.Orange;
@@ -37,9 +39,6 @@ namespace Quickbeam.Helpers
 		private string _xsdPath = "";
 		private GridLength _tagEditorGridLength = new GridLength(0.7, GridUnitType.Star);
 		private GridLength _tagEditorPluginGridLength = new GridLength(0.3, GridUnitType.Star);
-
-		// Xbox 360 XDK
-		private string _xdkIpAddress = "192.168.1.86";
 
 		[JsonIgnore]
 		public bool Loaded { get; set; }
@@ -155,16 +154,11 @@ namespace Quickbeam.Helpers
 
 		#endregion
 
-		#region XDK
-
-		public string XdkIpAddress
-		{
-			get { return _xdkIpAddress; }
-			set { SetField(ref _xdkIpAddress, value); }
-		}
-
-		#endregion
-
+		public string HaloExePath
+	    {
+	        get { return _haloExePath; }
+            set { SetField(ref _haloExePath, value); }
+	    }
 
 		#region Enums
 

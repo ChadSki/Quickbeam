@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        xmlns:pg="http://schemas.denisvuyka.wordpress.com/wpfpropertygrid"
         xmlns:console="clr-namespace:Quickbeam.PythonConsoleControl;assembly=Quickbeam.PythonConsoleControl"
         mc:Ignorable="d" 
         d:DesignHeight="500" d:DesignWidth="800">
@@ -17,16 +16,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0">
-            <console:IronPythonConsoleControl Name="console"></console:IronPythonConsoleControl>
+        <Grid Grid.Row="0">
+            <console:IronPythonConsoleControl Name="Console" />
         </Grid>
         <GridSplitter Grid.Row="1" Height="10" VerticalAlignment="Center" HorizontalAlignment="Stretch"></GridSplitter>
-        <DockPanel Grid.Row="2" Grid.Column="0">
-            <ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
+        <DockPanel Grid.Row="2">
+            <ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True" Background="#444444">
                 <ToolBar.Resources>
                     <Style TargetType="{x:Type Image}">
                         <Style.Triggers>
@@ -36,66 +31,38 @@
                         </Style.Triggers>
                     </Style>
                 </ToolBar.Resources>
-                <Button Click="OpenFileClick">
+                <Button Click="OpenFileClick" ToolTip="Open">
                     <Image Source="Images/Open.png" Height="16"/>
                 </Button>
-                <Button Click="SaveFileClick">
+                <Button Click="SaveFileClick" ToolTip="Save">
                     <Image Source="Images/Save.png" Height="16"/>
                 </Button>
                 <Separator/>
-                <Button Command="Cut">
-                    <Image Source="Images/Cut.png" Height="16"/>
-                </Button>
-                <Button Command="Copy">
-                    <Image Source="Images/Copy.png" Height="16"/>
-                </Button>
-                <Button Command="Paste">
-                    <Image Source="Images/Paste.png" Height="16"/>
-                </Button>
-                <Button Command="Delete">
-                    <Image Source="Images/Delete.png" Height="16"/>
-                </Button>
-                <Separator/>
-                <Button Command="Undo">
+                <Button Command="Undo" ToolTip="Undo">
                     <Image Source="Images/Undo.png" Height="16"/>
                 </Button>
-                <Button Command="Redo">
+                <Button Command="Redo" ToolTip="Redo">
                     <Image Source="Images/Redo.png" Height="16"/>
                 </Button>
                 <Separator/>
-                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}">
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
                     <Image Source="Images/WordWrap.png" Height="16"/>
                 </CheckBox>
-                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}">
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}" ToolTip="Show Line Numbers">
                     <TextBlock Width="16" TextAlignment="Center">#</TextBlock>
                 </CheckBox>
-                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}">
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}" ToolTip="Show Newlines">
                     <TextBlock Width="16" TextAlignment="Center">¶</TextBlock>
                 </CheckBox>
                 <Separator/>
-                <Button Click="RunClick">
+                <Button Click="RunClick" ToolTip="Run">
                     <Image Source="Images/Run.png" Height="16"/>
                 </Button>
             </ToolBar>
             <avalonEdit:TextEditor DockPanel.Dock="Bottom"
 			    Name="textEditor" Foreground="#c5c8c6" Background="#212121"
 			    FontFamily="Consolas" FontSize="9pt"
-                Text="# QuickPad: Write code snippets here and press F5 to run. If code is selected, only selection is run.&#10;" />
+                Text="# QuickPad:&#x0a;# - Write code or paste snippets, then press F5 to run.&#x0a;# - If code is selected, only the selection is run.&#x0a;" />
         </DockPanel>
-        <Expander Name="expander" Grid.Column="1" Grid.RowSpan="3" Margin="0 0 0 0" HorizontalAlignment="Right" ExpandDirection="Left" MaxWidth="300">
-            <!--<DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="4 0 0 0">-->
-            <DockPanel>
-                <ComboBox Name="propertyGridComboBox" DockPanel.Dock="Top"
-				        SelectedIndex="0" SelectionChanged="PropertyGridComboBoxSelectionChanged">
-                    <ComboBoxItem>Console</ComboBoxItem>
-                    <ComboBoxItem>Pad</ComboBoxItem>
-                </ComboBox>
-                <pg:PropertyGrid Name="propertyGrid">
-                </pg:PropertyGrid>
-                <!--
-                <wpg:PropertyGrid x:Name="propertyGrid" /> 
-                -->
-            </DockPanel>
-        </Expander>
     </Grid>
 </UserControl>
