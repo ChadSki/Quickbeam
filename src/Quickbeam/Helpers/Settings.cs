@@ -26,7 +26,7 @@ namespace Quickbeam.Helpers
 		private ObservableCollection<RecentFile> _recentFiles = new ObservableCollection<RecentFile>(); 
 
 		// UI
-		private Accent _assemblyAccent = Accent.Blue;
+		private Accent _assemblyAccent = Accent.Orange;
 
 		// Cache Editor
 		private TagSort _cacheEditorTagSortMethod = TagSort.PathHierarchy;

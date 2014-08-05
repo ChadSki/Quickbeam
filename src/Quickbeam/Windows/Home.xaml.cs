@@ -23,7 +23,7 @@ namespace Quickbeam.Windows
 
 			ViewModel = new HomeViewModel();
 			DataContext = App.Storage.HomeWindowViewModel = ViewModel;
-			ViewModel.AssemblyPage = new StartPage();
+			ViewModel.AssemblyPage = new ReplPage();
 
 			Closing += OnClosing;
 

@@ -2,9 +2,9 @@
 
 namespace Quickbeam.ViewModels
 {
-	public class StartViewModel : Base
+	public class ReplPageViewModel : Base
 	{
-		public StartViewModel()
+		public ReplPageViewModel()
 		{
 			App.Storage.HomeWindowViewModel.UpdateStatus("Welcome");
 		}
