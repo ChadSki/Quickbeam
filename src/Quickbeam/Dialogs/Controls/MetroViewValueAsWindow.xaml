@@ -13,9 +13,8 @@
 		SizeToContent="Manual">
 	<custom:MetroDialogWindow.Style>
 		<Style TargetType="{x:Type custom:MetroDialogWindow}" BasedOn="{StaticResource MetroDialogWindowStyle}">
-			<Setter Property="WindowStyle" Value="None" />
-			<Setter Property="AllowsTransparency" Value="True" />
-			<Setter Property="ResizeMode" Value="NoResize" />
+            <Setter Property="WindowStyle" Value="None" />
+            <Setter Property="ResizeMode" Value="NoResize" />
 			<Setter Property="ShowInTaskbar" Value="True" />
 			<Setter Property="Template">
 				<Setter.Value>
@@ -132,10 +131,8 @@
 		</ScrollViewer>
 
 		<Grid x:Name="ResizingGrid" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Stretch" Margin="-1,-1,-1,0" Visibility="{Binding Path=ResizingVisibility, FallbackValue=Visible}">
-			<vectors:ResizeModule VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-														  Margin="0,0,5,5" />
-
-			<Thumb x:Name="ResizeCornerThumb" Opacity="0" Background="{x:Null}" 
+            <vectors:ResizeModule VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" />
+            <Thumb x:Name="ResizeCornerThumb" Opacity="0" Background="{x:Null}" 
 										   Foreground="{x:Null}" Width="11" Height="11" Margin="0,0,1,1"
 										   HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE">
 				<Thumb.Style>
