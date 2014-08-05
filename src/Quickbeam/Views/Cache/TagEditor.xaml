@@ -3,9 +3,6 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
-			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-			 xmlns:behavior="clr-namespace:Quickbeam.Metro.Controls.Behavior"
 			 xmlns:local="clr-namespace:Quickbeam.Views.Cache"
 			 mc:Ignorable="d" 
 			 Background="#252526"
@@ -559,26 +556,6 @@
 				<RowDefinition />
 				<RowDefinition Height="17px" />
 			</Grid.RowDefinitions>
-
-			<avalonedit:TextEditor x:Name="PluginTextEditor" Height="Auto" Margin="0" SyntaxHighlighting="{Binding SyntaxHighlightingDefinition}"
-									FontFamily="Consolas" FontSize="10pt" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-									Background="#252526" BorderBrush="#FF595959" Foreground="White"
-									ShowLineNumbers="True" LineNumbersForeground="#FF237CAD">
-				<i:Interaction.Behaviors>
-					<behavior:AvalonEditBehavior GiveMeTheText="{Binding Path=PluginContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				</i:Interaction.Behaviors>
-				<avalonedit:TextEditor.LayoutTransform>
-					<ScaleTransform ScaleX="{Binding Path=SelectedItem.Tag, Converter={StaticResource IValueConverterPercentileToDecimal}, ElementName=PluginEditorZoomSelectorComboBox}" 
-							ScaleY="{Binding Path=SelectedItem.Tag, Converter={StaticResource IValueConverterPercentileToDecimal}, ElementName=PluginEditorZoomSelectorComboBox}" />
-				</avalonedit:TextEditor.LayoutTransform>
-				<avalonedit:TextEditor.ContextMenu>
-					<ContextMenu FontSize="12">
-						<MenuItem Command="Cut"/>
-						<MenuItem Command="Copy"/>
-						<MenuItem Command="Paste"/>
-					</ContextMenu>
-				</avalonedit:TextEditor.ContextMenu>
-			</avalonedit:TextEditor>
 
 			<Grid Grid.Row="1">
 				<Grid.ColumnDefinitions>

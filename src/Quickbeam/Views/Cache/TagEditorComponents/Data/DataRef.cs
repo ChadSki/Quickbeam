@@ -22,7 +22,7 @@
 
 		public override TagDataField CloneValue()
 		{
-			var result = new DataRef(Name, Offset, Format, FieldAddress, DataAddress, Value, Length, PluginLine);
+			var result = new DataRef(Name, Offset, Format, FieldAddress, DataAddress, "", Length, PluginLine);
 			return result;
 		}
 	}

@@ -169,18 +169,11 @@ namespace Quickbeam.Views.Cache
 			var field = GetWrappedField(e.Source);
 			if (field == null) return;
 
-			var line = (int) field.PluginLine;
-			var selectedLineDetails = PluginTextEditor.Document.GetLineByNumber(line);
-
 			if (App.Storage.Settings.TagEditorPluginGridLength.Value <= 1.0)
 			{
 				App.Storage.Settings.TagEditorGridLength = new GridLength(0.7, GridUnitType.Star);
 				App.Storage.Settings.TagEditorPluginGridLength = new GridLength(0.3, GridUnitType.Star);
 			}
-
-			PluginTextEditor.ScrollToLine(line);
-			PluginTextEditor.Select(selectedLineDetails.Offset, selectedLineDetails.Length);
-			PluginTextEditor.Focus();
 		}
 
 		private void ViewValueAsCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

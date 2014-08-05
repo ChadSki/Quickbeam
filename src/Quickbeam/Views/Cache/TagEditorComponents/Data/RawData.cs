@@ -1,4 +1,4 @@
-﻿using ICSharpCode.AvalonEdit.Document;
+﻿
 
 namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 {
@@ -8,33 +8,20 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 	public class RawData : ValueField
 	{
 		private uint _dataAddress;
-		private TextDocument _document;
 		private string _format;
 		private int _length;
 
 		public RawData(string name, uint offset, uint address, string value, int length, uint pluginLine)
 			: base(name, offset, address, pluginLine)
 		{
-			_document = new TextDocument(new StringTextSource(value));
 			_length = length;
 		}
 
 		public RawData(string name, uint offset, string format, uint address, string value, int length, uint pluginLine)
 			: base(name, offset, address, pluginLine)
 		{
-			_document = new TextDocument(new StringTextSource(value));
 			_length = length;
 			_format = format;
-		}
-
-		public TextDocument Document
-		{
-			get { return _document; }
-			set
-			{
-				_document = value;
-				OnPropertyChanged("Document");
-			}
 		}
 
 		public string Kind
@@ -49,17 +36,6 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 			{
 				_format = value;
 				OnPropertyChanged("Format");
-			}
-		}
-
-		public string Value
-		{
-			get { return _document.Text; }
-			set
-			{
-				_document.Text = value;
-				OnPropertyChanged("Value");
-				OnPropertyChanged("Document");
 			}
 		}
 
@@ -102,7 +78,7 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 
 		public override TagDataField CloneValue()
 		{
-			return new RawData(Name, Offset, FieldAddress, _document.Text, _length, PluginLine);
+			return new RawData(Name, Offset, FieldAddress, "", _length, PluginLine);
 		}
 	}
 }

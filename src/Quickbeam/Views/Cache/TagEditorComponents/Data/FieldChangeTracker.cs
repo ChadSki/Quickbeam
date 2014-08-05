@@ -66,18 +66,6 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 		public void AttachTo(TagDataField field)
 		{
 			field.PropertyChanged += field_PropertyChanged;
-
-			// If the field is a raw data field (raw or dataref),
-			// then subscribe to the TextChanged event on its document
-			var rawField = field as RawData;
-			if (rawField != null)
-			{
-				rawField.Document.TextChanged += delegate
-				{
-					if (Enabled)
-						MarkChanged(rawField);
-				};
-			}
 		}
 
 		/// <summary>

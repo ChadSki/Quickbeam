@@ -8,7 +8,6 @@ using System.Xml;
 using Quickbeam.Dialogs;
 using Quickbeam.Helpers;
 using Quickbeam.Helpers.Plugins;
-using Quickbeam.Helpers.SyntaxHighlighting;
 using Quickbeam.Helpers.Tags;
 using Quickbeam.Models;
 using Quickbeam.Models.Cache;
@@ -18,7 +17,6 @@ using Blamite.IO;
 using Blamite.Plugins;
 using Blamite.RTE;
 using Blamite.Util;
-using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Quickbeam.ViewModels.Cache
 {
@@ -41,14 +39,6 @@ namespace Quickbeam.ViewModels.Cache
 		}
 
 		#region Properties
-
-		public IHighlightingDefinition SyntaxHighlightingDefinition
-		{
-			get
-			{
-				return HighlightLoader.LoadEmbeddedDefinition("XmlBlue.xshd");
-			}
-		}
 
 		public CachePageViewModel CachePageViewModel
 		{

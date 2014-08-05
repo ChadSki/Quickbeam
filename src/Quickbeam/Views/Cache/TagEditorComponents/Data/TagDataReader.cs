@@ -191,7 +191,6 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 		{
 			SeekToOffset(field.Offset);
 			field.DataAddress = field.FieldAddress;
-			field.Value = FunctionHelpers.BytesToHexLines(_reader.ReadBlock(field.Length), 27);
 		}
 
 		public void VisitDataRef(DataRef field)
@@ -213,25 +212,11 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 				else
 					_reader.SeekTo(_cache.MetaArea.PointerToOffset(pointer));
 
-				switch (field.Format)
-				{
-					default:
-						byte[] data = _reader.ReadBlock(field.Length);
-						field.Value = FunctionHelpers.BytesToHexLines(data, 27);
-						break;
-					case "unicode":
-						field.Value = _reader.ReadUTF16(field.Length);
-						break;
-					case "asciiz":
-						field.Value = _reader.ReadAscii(field.Length);
-						break;
-				}
 			}
 			else
 			{
 				field.DataAddress = 0;
 				field.Length = 0;
-				field.Value = "";
 			}
 		}
 

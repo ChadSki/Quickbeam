@@ -247,7 +247,6 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 		public void VisitRawData(RawData field)
 		{
 			SeekToOffset(field.Offset);
-			_writer.WriteBlock(FunctionHelpers.HexStringToBytes(field.Value), 0, field.Length);
 		}
 
 		public void VisitDataRef(DataRef field)
@@ -266,20 +265,6 @@ namespace Quickbeam.Views.Cache.TagEditorComponents.Data
 			if (_type == SaveType.File)
 				offset = (uint) _cache.MetaArea.PointerToOffset(offset);
 			_writer.SeekTo(offset);
-
-			// Write its data
-			switch (field.Format)
-			{
-				default:
-					_writer.WriteBlock(FunctionHelpers.HexStringToBytes(field.Value), 0, field.Length);
-					break;
-				case "unicode":
-					_writer.WriteUTF16(field.Value);
-					break;
-				case "asciiz":
-					_writer.WriteAscii(field.Value);
-					break;
-			}
 		}
 
 		public void VisitTagRef(TagRefData field)

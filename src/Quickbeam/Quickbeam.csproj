@@ -78,9 +78,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.AvalonEdit">
-      <HintPath>..\DLLs\ICSharpCode.AvalonEdit.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -193,13 +190,11 @@
     <Compile Include="Helpers\Plugins\ThirdGenPluginVisitor.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
-    <Compile Include="Helpers\SyntaxHighlighting\HighlightLoader.cs" />
     <Compile Include="Helpers\Tags\ClassTagHierarchy.cs" />
     <Compile Include="Helpers\Tags\PathTagHierarchy.cs" />
     <Compile Include="Helpers\Tags\TagHierarchy.cs" />
     <Compile Include="Helpers\Tags\TagHierarchyNode.cs" />
     <Compile Include="Helpers\VariousFunctions.cs" />
-    <Compile Include="Metro\Controls\Behavior\AvalonEditBehavior.cs" />
     <Compile Include="Metro\Controls\Converters\ScrollbarOnFarLeftConverter.cs" />
     <Compile Include="Metro\Controls\Converters\ScrollbarOnFarRightConverter.cs" />
     <Compile Include="Metro\Controls\Custom\MetroClosableTabControl.cs" />
@@ -385,6 +380,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="Metro\Controls\Custom\MetroDialogWindow.cs" />
+    <Content Include="IronPythonConsole.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Storage\Halo3\EngineMemory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -779,6 +777,10 @@
     <Resource Include="Metro\Images\container-title-loop.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\vendor\IronPythonConsole\IronPythonConsole\IronPythonConsole.csproj">
+      <Project>{8A19EAA5-44C5-41EC-A908-7F41792CF18B}</Project>
+      <Name>IronPythonConsole</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Blamite\Blamite.csproj">
       <Project>{6b105ab9-84a0-4774-b319-75e9cab3db4b}</Project>
       <Name>Blamite</Name>

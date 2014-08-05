@@ -12,22 +12,8 @@
 		<TextBlock x:Name="lblValueName" Text="{Binding Name}" ToolTip="{Binding Name}"
 		            VerticalAlignment="Top" HorizontalAlignment="Left"
 		           Margin="0,5,0,0" Width="180" TextTrimming="CharacterEllipsis" />
-		<Border BorderBrush="#595959" BorderThickness="1" Margin="200,3,10,0" VerticalAlignment="Top" Height="135">
-			<avalonEdit:TextEditor x:Name="txtValue" Document="{Binding Document}" Padding="4,2,0,2"
-			                       HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch"
-			                       FontFamily="Consolas" FontSize="12" Background="#414141" Foreground="White"
-			                       MouseRightButtonDown="txtValue_MouseRightButtonDown_1" HorizontalScrollBarVisibility="Auto">
-				<avalonEdit:TextEditor.ContextMenu>
-					<ContextMenu>
-						<MenuItem Name="cutItem" Command="Cut"/>
-						<MenuItem Name="copyItem" Command="Copy"/>
-						<MenuItem Name="pasteItem" Command="Paste"/>
-						<Separator/>
-						<MenuItem Name="selectItem" Command="SelectAll"/>
-					</ContextMenu>
-				</avalonEdit:TextEditor.ContextMenu>
-			</avalonEdit:TextEditor>
-		</Border>
+        <Border BorderBrush="#595959" BorderThickness="1" Margin="200,3,10,0" VerticalAlignment="Top" Height="135">
+        </Border>
 
 		<Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="385" Margin="0,0,10,3">
 			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
