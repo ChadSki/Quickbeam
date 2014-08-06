@@ -25,7 +25,8 @@ namespace Quickbeam.Helpers
 		private EngineDatabase _defaultDatabase = XMLEngineDatabaseLoader.LoadDatabase("Formats/Engines.xml");
 		private ObservableCollection<RecentFile> _recentFiles = new ObservableCollection<RecentFile>();
 
-	    private string _haloExePath;
+        // Halo
+        private string _haloExePath;
 
 		// UI
 		private Accent _assemblyAccent = Accent.Orange;
@@ -78,6 +79,12 @@ namespace Quickbeam.Helpers
 		}
 
 		#endregion
+
+        public string HaloExePath
+        {
+            get { return _haloExePath; }
+            set { SetField(ref _haloExePath, value); }
+        }
 
 		#region Misc
 
@@ -153,12 +160,6 @@ namespace Quickbeam.Helpers
 		}
 
 		#endregion
-
-		public string HaloExePath
-	    {
-	        get { return _haloExePath; }
-            set { SetField(ref _haloExePath, value); }
-	    }
 
 		#region Enums
 

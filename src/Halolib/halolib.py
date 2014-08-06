@@ -25,14 +25,12 @@ from plugins import load_plugins, plugin_classes
 from halotag import HaloTag
 
 from System import Array, Byte
-from System.Threading.Tasks import Task
 from Quickbeam.Low.ByteArray import FileByteArrayBuilder
 from Quickbeam.Low.ByteArray import WinMemoryByteArrayBuilder
 
 # ensure plugins are loaded
 if len(plugin_classes) == 0:
     load_plugins()
-    #Task.Factory.StartNew(load_plugins)
 
 class HaloMap(object):
     def __init__(self):

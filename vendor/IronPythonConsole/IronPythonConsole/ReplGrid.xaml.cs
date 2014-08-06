@@ -52,7 +52,8 @@ namespace Quickbeam.IronPythonConsole
         {
             Console.Pad.Console.ScriptScope.Engine.Runtime.LoadAssembly(typeof(IByteArray).Assembly);
             Console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
-                "import IronPythonConsole", SourceCodeKind.Statements)
+                "import IronPythonConsole\n" +
+                "import halolib", SourceCodeKind.Statements)
                 .Execute();
         }
 

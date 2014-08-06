@@ -107,6 +107,6 @@
             </StackPanel>
         </Grid>
 
-        <ContentPresenter Grid.Row="1" Content="{Binding Path=AssemblyPage}" />
+        <ContentPresenter Name="ContentPresenter" Grid.Row="1" Content="{Binding Path=AssemblyPage}" />
     </Grid>
 </custom:MetroWindow>

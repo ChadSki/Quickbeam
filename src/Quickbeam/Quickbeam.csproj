@@ -185,8 +185,10 @@
     <Compile Include="Dialogs\MetroPluginRevisionViewer.cs" />
     <Compile Include="Dialogs\MetroMessageBox.cs" />
     <Compile Include="Dialogs\MetroMessageBoxList.cs" />
-    <Compile Include="Extensions\FileInfoExtension.cs" />
+    <Compile Include="Helpers\DpiDecorator.cs" />
     <Compile Include="Helpers\GithubApi.cs" />
+    <Compile Include="Helpers\HaloWindow.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Helpers\Plugins\ThirdGenPluginVisitor.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
@@ -337,6 +339,9 @@
     </Compile>
     <Compile Include="Views\BLF\MapInfoPage.xaml.cs">
       <DependentUpon>MapInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HaloPage.xaml.cs">
+      <DependentUpon>HaloPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IAssemblyPage.cs" />
     <Compile Include="Views\ReplPage.xaml.cs">
@@ -689,6 +694,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\HaloPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ReplPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -784,6 +793,10 @@
     <ProjectReference Include="..\Blamite\Blamite.csproj">
       <Project>{6b105ab9-84a0-4774-b319-75e9cab3db4b}</Project>
       <Name>Blamite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quickbeam.Low\Quickbeam.Low.csproj">
+      <Project>{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}</Project>
+      <Name>Quickbeam.Low</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

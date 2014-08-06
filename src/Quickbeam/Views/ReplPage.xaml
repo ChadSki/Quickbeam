@@ -1,19 +1,19 @@
 ﻿<UserControl x:Class="Quickbeam.Views.ReplPage"
-			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-			xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			xmlns:ironPythonConsole="clr-namespace:Quickbeam.IronPythonConsole;assembly=Quickbeam.IronPythonConsole"
-			mc:Ignorable="d"
-			Background="#2d2d30"
-			d:DesignWidth="1130" d:DesignHeight="600">
-    <Grid>
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ironPythonConsole="clr-namespace:Quickbeam.IronPythonConsole;assembly=Quickbeam.IronPythonConsole"
+             mc:Ignorable="d"
+             Background="#2d2d30"
+             d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData ReplPageViewModel}">
+    <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="640" MinWidth="30" Name="LeftColumn" />
+            <ColumnDefinition Width="{Binding HaloGridWidth, Mode=TwoWay}" MinWidth="30" Name="LeftColumn" />
             <ColumnDefinition Width="*" MinWidth="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="480" Name="TopRow" />
+            <RowDefinition Height="{Binding HaloGridHeight, Mode=TwoWay}" Name="TopRow" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
@@ -57,11 +57,11 @@
                        Margin="-2,0,0,0" Foreground="White"
                        Text="Quickbeam"
                        FontFamily="{DynamicResource MetroFontLight}"
-                       FontSize="32"/>
+                       FontSize="32" />
 
             <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,0,0"
-                           Text="Halo Settings" Foreground="{DynamicResource AssemblyAccentBrush}" FontSize="18"
-                           FontFamily="{DynamicResource MetroFontSemiLight}" />
+                       Text="Halo Settings" Foreground="{DynamicResource AssemblyAccentBrush}" FontSize="18"
+                       FontFamily="{DynamicResource MetroFontSemiLight}" />
 
             <TextBlock Grid.Column="1" Grid.Row="5" Margin="0,4,0,0"
                        Text="halo.exe Path:" Foreground="White"
@@ -69,40 +69,44 @@
             <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5"
                      HorizontalAlignment="Stretch" Text="{Binding HaloExePath, Mode=TwoWay}" />
             <Button Grid.Column="4" Grid.Row="5" Margin="12,0,0,0" Width="75" HorizontalAlignment="Left"
-                    Click="BtnBrowseHaloExe_Click" Content="Browse..."/>
+                    Click="BtnBrowseHaloExe_Click" Content="Browse..." />
 
             <TextBlock Grid.Column="1" Grid.Row="7"
                        Text="Docked Resolution:" Foreground="White" Margin="0,4,0,0"
                        FontFamily="{DynamicResource MetroFontRegular}" />
             <TextBox Grid.Column="2" Grid.Row="7"
-                     Width="50" Text="{Binding ElementName=LeftColumn, Path=Width, Mode=TwoWay}"
-                     HorizontalAlignment="Left"/>
+                     Width="50" Text="{Binding HaloWidth, Mode=TwoWay}"
+                     HorizontalAlignment="Left" />
             <TextBlock Grid.Column="2" Grid.Row="7"
                        Text="x" Foreground="White" FontFamily="{DynamicResource MetroFontRegular}"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center" />
             <TextBox Grid.Column="2" Grid.Row="7"
-                     Width="50" Text="{Binding ElementName=TopRow, Path=Height, Mode=TwoWay}"
-                     HorizontalAlignment="Right"/>
+                     Width="50" Text="{Binding HaloHeight, Mode=TwoWay}"
+                     HorizontalAlignment="Right" />
 
             <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9"
                     Height="30" HorizontalAlignment="Stretch"
-                    Click="BtnLaunchHalo_Click" Content="Launch Halo"/>
+                    Click="BtnLaunchHalo_Click" Content="Launch Halo" />
         </Grid>
 
-        <GridSplitter ResizeDirection="Columns" Width="2"
+        <Grid Grid.Column="0" Grid.Row="0" Name="HaloGrid"
+              Width="{Binding VisibleWidth, Mode=OneWay}"
+              Height="{Binding VisibleHeight, Mode=OneWay}"/>
+
+        <GridSplitter ResizeDirection="Columns" Width="2" Name="HorizontalGridSplitter"
                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                       HorizontalAlignment="Right"
                       VerticalAlignment="Stretch"
                       Background="#FF545456" Foreground="{x:Null}"
                       IsEnabled="True" />
-        
-        <GridSplitter ResizeDirection="Rows" Height="2"
+
+        <GridSplitter ResizeDirection="Rows" Height="2" Name="VerticalGridSplitter"
                       Grid.Row="0" Grid.Column="0"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Bottom"
                       Background="#FF545456" Foreground="{x:Null}"
-                      IsEnabled="True"/>
-        
+                      IsEnabled="True" />
+
         <ironPythonConsole:ReplGrid Grid.Column="1"
                                     Grid.Row="0" Grid.RowSpan="2" />
     </Grid>
