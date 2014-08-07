@@ -12,9 +12,9 @@
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
             <helpers:HaloWindow Width="{Binding ElementName=OuterHaloGrid,Path=ActualWidth}"
-                                    Height="{Binding ElementName=OuterHaloGrid,Path=ActualHeight}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"/>
+                                Height="{Binding ElementName=OuterHaloGrid,Path=ActualHeight}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"/>
         </Grid>
     </helpers:DpiDecorator>
 </UserControl>
