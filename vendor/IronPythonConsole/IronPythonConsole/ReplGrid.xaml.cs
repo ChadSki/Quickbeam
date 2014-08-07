@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using Microsoft.Scripting;
 using Microsoft.Win32;
 using System;
@@ -19,20 +20,16 @@ namespace Quickbeam.IronPythonConsole
         
         public ReplGrid()
 		{
-            Initialized += MainWindow_Initialized;
             // Load our custom highlighting definition:
             IHighlightingDefinition pythonHighlighting;
             using (var s = typeof(ReplGrid).Assembly.GetManifestResourceStream("Quickbeam.IronPythonConsole.Resources.Python.xshd"))
             {
                 if (s == null) throw new InvalidOperationException("Could not find embedded resource");
                 using (XmlReader reader = new XmlTextReader(s))
-                {
-                    pythonHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
-                        HighlightingLoader.Load(reader, HighlightingManager.Instance);
-                }
+                    pythonHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
             }
             // and register it in the HighlightingManager
-            HighlightingManager.Instance.RegisterHighlighting("Python Highlighting", new[] { ".cool" }, pythonHighlighting);
+            HighlightingManager.Instance.RegisterHighlighting("Python Highlighting", new[] { ".py" }, pythonHighlighting);
             	
 			InitializeComponent();
             textEditor.SyntaxHighlighting = pythonHighlighting;
@@ -55,11 +52,6 @@ namespace Quickbeam.IronPythonConsole
                 "import IronPythonConsole\n" +
                 "import halolib", SourceCodeKind.Statements)
                 .Execute();
-        }
-
-        static void MainWindow_Initialized(object sender, EventArgs e)
-        {
-            //propertyGridComboBox.SelectedIndex = 1;
         }
 		
 		void OpenFileClick(object sender, RoutedEventArgs e)

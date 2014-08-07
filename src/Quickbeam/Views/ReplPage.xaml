@@ -18,27 +18,28 @@
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="24" />
                 <ColumnDefinition Width="126" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="18" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="12" />
-                <RowDefinition Height="36" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="24" />
+                
+                <RowDefinition Height="18" />
+                <RowDefinition Height="Auto" />
 
                 <RowDefinition Height="18" />
                 <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="12" />
+                <RowDefinition Height="18" />
                 <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="12" />
-                <RowDefinition Height="Auto" />
-
-                <RowDefinition Height="24" />
+                <RowDefinition Height="18" />
                 <RowDefinition Height="Auto" />
 
                 <RowDefinition Height="*" />
@@ -47,9 +48,9 @@
             <Polygon Fill="#FF4A4A4C" Margin="1,0,0,0"
                      Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
                 <Polygon.Points>
-                    <Point X="0" Y="0" />
-                    <Point X="0" Y="50" />
-                    <Point X="20" Y="25" />
+                    <Point X="0" Y="8" />
+                    <Point X="0" Y="40" />
+                    <Point X="18" Y="24" />
                 </Polygon.Points>
             </Polygon>
             <TextBlock Grid.Row="1" Grid.RowSpan="2"
@@ -59,32 +60,32 @@
                        FontFamily="{DynamicResource MetroFontLight}"
                        FontSize="32" />
 
-            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,0,0"
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,0,0,0"
                        Text="Halo Settings" Foreground="{DynamicResource AssemblyAccentBrush}" FontSize="18"
                        FontFamily="{DynamicResource MetroFontSemiLight}" />
 
-            <TextBlock Grid.Column="1" Grid.Row="5" Margin="0,4,0,0"
+            <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,4,0,0"
                        Text="halo.exe Path:" Foreground="White"
                        FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5"
+            <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="6"
                      HorizontalAlignment="Stretch" Text="{Binding HaloExePath, Mode=TwoWay}" />
-            <Button Grid.Column="4" Grid.Row="5" Margin="12,0,0,0" Width="75" HorizontalAlignment="Left"
+            <Button Grid.Column="4" Grid.Row="6" Margin="12,0,0,0" Width="75" HorizontalAlignment="Left"
                     Click="BtnBrowseHaloExe_Click" Content="Browse..." />
 
-            <TextBlock Grid.Column="1" Grid.Row="7"
+            <TextBlock Grid.Column="1" Grid.Row="8"
                        Text="Docked Resolution:" Foreground="White" Margin="0,4,0,0"
                        FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBox Grid.Column="2" Grid.Row="7"
-                     Width="50" Text="{Binding HaloWidth, Mode=TwoWay}"
+            <TextBox Grid.Column="2" Grid.Row="8"
+                     Width="54" Text="{Binding HaloWidth, Mode=TwoWay}"
                      HorizontalAlignment="Left" />
-            <TextBlock Grid.Column="2" Grid.Row="7"
+            <TextBlock Grid.Column="2" Grid.Row="8"
                        Text="x" Foreground="White" FontFamily="{DynamicResource MetroFontRegular}"
                        HorizontalAlignment="Center" />
-            <TextBox Grid.Column="2" Grid.Row="7"
-                     Width="50" Text="{Binding HaloHeight, Mode=TwoWay}"
+            <TextBox Grid.Column="2" Grid.Row="8"
+                     Width="54" Text="{Binding HaloHeight, Mode=TwoWay}"
                      HorizontalAlignment="Right" />
 
-            <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9"
+            <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="10"
                     Height="30" HorizontalAlignment="Stretch"
                     Click="BtnLaunchHalo_Click" Content="Launch Halo" />
         </Grid>

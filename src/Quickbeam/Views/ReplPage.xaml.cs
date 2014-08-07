@@ -60,6 +60,8 @@ namespace Quickbeam.Views
             var haloPages = HaloGrid.Children.OfType<HaloPage>().ToList();
             foreach (var child in haloPages)
                 HaloGrid.Children.Remove(child);
+            HorizontalGridSplitter.IsEnabled = true;
+            VerticalGridSplitter.IsEnabled = true;
 	    }
 	}
 }
