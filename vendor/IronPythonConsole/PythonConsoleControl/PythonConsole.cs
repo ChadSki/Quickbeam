@@ -97,14 +97,14 @@ namespace Quickbeam.PythonConsoleControl
             _prompt = ">>> ";
 
             // Set commands:
-            _textEditor.textArea.Dispatcher.Invoke(new Action(() =>
+            _textEditor.TextArea.Dispatcher.Invoke(new Action(() =>
             {
                 CommandBinding pasteBinding = null;
                 CommandBinding copyBinding = null;
                 CommandBinding cutBinding = null;
                 CommandBinding undoBinding = null;
                 CommandBinding deleteBinding = null;
-                foreach (CommandBinding commandBinding in (_textEditor.textArea.CommandBindings))
+                foreach (CommandBinding commandBinding in (_textEditor.TextArea.CommandBindings))
                 {
                     if (commandBinding.Command == ApplicationCommands.Paste) pasteBinding = commandBinding;
                     if (commandBinding.Command == ApplicationCommands.Copy) copyBinding = commandBinding;
@@ -114,18 +114,18 @@ namespace Quickbeam.PythonConsoleControl
                 }
                 // Remove current bindings completely from control. These are static so modifying them will cause other
                 // controls' behaviour to change too.
-                if (pasteBinding != null) _textEditor.textArea.CommandBindings.Remove(pasteBinding);
-                if (copyBinding != null) _textEditor.textArea.CommandBindings.Remove(copyBinding);
-                if (cutBinding != null) _textEditor.textArea.CommandBindings.Remove(cutBinding);
-                if (undoBinding != null) _textEditor.textArea.CommandBindings.Remove(undoBinding);
-                if (deleteBinding != null) _textEditor.textArea.CommandBindings.Remove(deleteBinding);
-                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPaste, CanPaste));
-                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopy,
+                if (pasteBinding != null) _textEditor.TextArea.CommandBindings.Remove(pasteBinding);
+                if (copyBinding != null) _textEditor.TextArea.CommandBindings.Remove(copyBinding);
+                if (cutBinding != null) _textEditor.TextArea.CommandBindings.Remove(cutBinding);
+                if (undoBinding != null) _textEditor.TextArea.CommandBindings.Remove(undoBinding);
+                if (deleteBinding != null) _textEditor.TextArea.CommandBindings.Remove(deleteBinding);
+                _textEditor.TextArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPaste, CanPaste));
+                _textEditor.TextArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopy,
                     PythonEditingCommandHandler.CanCutOrCopy));
-                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut,
+                _textEditor.TextArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut,
                     PythonEditingCommandHandler.OnCut, CanCut));
-                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, OnUndo, CanUndo));
-                _textEditor.textArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Delete,
+                _textEditor.TextArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, OnUndo, CanUndo));
+                _textEditor.TextArea.CommandBindings.Add(new CommandBinding(ApplicationCommands.Delete,
                     PythonEditingCommandHandler.OnDelete(ApplicationCommands.NotACommand), CanDeleteCommand));
             }));
             var codeContext = DefaultContext.Default;
@@ -226,8 +226,8 @@ namespace Quickbeam.PythonConsoleControl
 
         protected void OnPaste(object target, ExecutedRoutedEventArgs args)
         {
-            if (target != _textEditor.textArea) return;
-            var textArea = _textEditor.textArea;
+            if (target != _textEditor.TextArea) return;
+            var textArea = _textEditor.TextArea;
             if (textArea == null || textArea.Document == null) return;
             Debug.WriteLine(Clipboard.GetText(TextDataFormat.Html));
 
@@ -281,7 +281,7 @@ namespace Quickbeam.PythonConsoleControl
 
         protected void OnCopy(object target, ExecutedRoutedEventArgs args)
         {
-            if (target != _textEditor.textArea) return;
+            if (target != _textEditor.TextArea) return;
             if (_textEditor.SelectionLength == 0 && _executing)
             {
                 // Send the 'Ctrl-C' abort 

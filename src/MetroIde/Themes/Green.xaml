@@ -1,9 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <SolidColorBrush x:Key="ExtryzeAccentBrush" Color="#63a621" />
-    <SolidColorBrush x:Key="ExtryzeAccentBrushSecondary" Color="#85d019" />
-
-    <Color x:Key="AccentBrushColour" A="#FF" R="#77" G="#bb" B="#44" />
-    <Color x:Key="AccentBrushColourSecondary" A="#FF" R="#98" G="#e0" B="#62" />
-</ResourceDictionary>

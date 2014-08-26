@@ -122,7 +122,7 @@ namespace Quickbeam.PythonConsoleControl
             string stub = "";
             string item = "";
             bool isInstance = false;
-            textEditor.textEditor.Dispatcher.Invoke(new Action(delegate()
+            textEditor.TextEditor.Dispatcher.Invoke(new Action(delegate()
             {
                 PythonCompletionData data = (completionList.SelectedItem as PythonCompletionData);
                 if (data == null || toolTip == null)
@@ -137,7 +137,7 @@ namespace Quickbeam.PythonConsoleControl
 
         void completionList_WriteDescription(string description)
         {
-            textEditor.textEditor.Dispatcher.Invoke(new Action(delegate() {
+            textEditor.TextEditor.Dispatcher.Invoke(new Action(delegate() {
                 if (toolTip != null)
                 {
                     if (description != null)

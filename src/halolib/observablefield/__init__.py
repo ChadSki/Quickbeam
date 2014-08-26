@@ -20,8 +20,6 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import clr
-import clrtype
 from notifyproperty import notify_property, PyNotifyPropertyChanged
 
 class ObservableField(PyNotifyPropertyChanged):
@@ -193,6 +191,7 @@ def ReferenceField(offset, loneid=False):
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'ReferenceFieldTemplate'
+
         @notify_property('Value')
         def Value(self):
             ident = self.parent.bytearray.ReadUInt32(offset)

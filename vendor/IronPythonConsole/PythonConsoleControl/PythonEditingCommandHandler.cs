@@ -32,7 +32,7 @@ namespace Quickbeam.PythonConsoleControl
         public PythonEditingCommandHandler(PythonTextEditor textEditor)
         {
             this.textEditor = textEditor;
-            this.textArea = textEditor.textArea;
+            this.textArea = textEditor.TextArea;
         }
 
         internal static void CanCutOrCopy(object target, CanExecuteRoutedEventArgs args)

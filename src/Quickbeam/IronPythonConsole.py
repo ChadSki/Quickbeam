@@ -1,8 +1,9 @@
 ## Startup script for IronPython engine
 
-stdlib_dir = r"C:\Users\Chad\Source Code\Quickbeam\vendor\PythonStdLib"
-dlls_dir = r"C:\Users\Chad\Source Code\Quickbeam\src\bin\Debug"
-userlib_dir = r"C:\Users\Chad\Source Code\Quickbeam\src"
+quickbeam_dir = r"C:\Users\chzawist\Src\Quickbeam"
+stdlib_dir = quickbeam_dir + r"\vendor\PythonStdLib"
+dlls_dir = quickbeam_dir + r"\src\bin\Debug"
+userlib_dir = quickbeam_dir + r"\src"
 
 import sys
 sys.path.append(stdlib_dir)
