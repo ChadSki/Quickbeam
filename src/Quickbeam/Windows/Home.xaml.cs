@@ -1,7 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+﻿using Quickbeam.ViewModels;
 using Quickbeam.Views;
-using Quickbeam.ViewModels;
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace Quickbeam.Windows
 {
@@ -11,6 +15,7 @@ namespace Quickbeam.Windows
 	public partial class Home
 	{
 		public HomeViewModel ViewModel { get; private set; }
+        private WindowInteropHelper Helper { get; set; }
 
 		public Home()
 		{
@@ -20,6 +25,7 @@ namespace Quickbeam.Windows
 			ViewModel = new HomeViewModel();
 			DataContext = App.Storage.HomeWindowViewModel = ViewModel;
 			ViewModel.AssemblyPage = new ReplPage();
+            Helper = new WindowInteropHelper(this);
 
 			Closing += OnClosing;
 		}
@@ -41,5 +47,5 @@ namespace Quickbeam.Windows
 
 			base.OnSourceInitialized(e);
 		}
-	}
+    }
 }

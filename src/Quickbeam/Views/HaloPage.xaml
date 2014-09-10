@@ -6,7 +6,7 @@
     xmlns:helpers="clr-namespace:Quickbeam.Helpers"
     mc:Ignorable="d"
     Background="#28282b"
-    d:DesignWidth="850" d:DesignHeight="650">
+    d:DesignWidth="640" d:DesignHeight="480">
     <helpers:DpiDecorator>
         <Grid Name="OuterHaloGrid"
               HorizontalAlignment="Stretch"

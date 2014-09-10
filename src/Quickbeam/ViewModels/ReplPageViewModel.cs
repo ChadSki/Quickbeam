@@ -51,8 +51,8 @@ namespace Quickbeam.ViewModels
             }
         }
 
-        private const int DefaultWidth = 800;
-        private const int DefaultHeight = 600;
+        private const int DefaultWidth = 640;
+        private const int DefaultHeight = 480;
 	    private const int PixelsBorder = 4;
 
 	    public int HaloWidth

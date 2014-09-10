@@ -137,13 +137,13 @@ namespace Quickbeam.ViewModels
             switch ((WindowState) sender)
             {
                 case WindowState.Normal:
-                    ApplicationBorderThickness = new Thickness(1, 1, 1, 25);
+                    ApplicationBorderThickness = new Thickness(1, 1, 1, 24);
                     ActionRestoreVisibility = Visibility.Collapsed;
                     ActionMaximizeVisibility =
                         ResizingVisibility = Visibility.Visible;
                     break;
                 case WindowState.Maximized:
-                    ApplicationBorderThickness = new Thickness(7, 7, 7, 32);
+                    ApplicationBorderThickness = new Thickness(0, 0, 0, 24);
                     ActionRestoreVisibility = Visibility.Visible;
                     ActionMaximizeVisibility =
                         ResizingVisibility = Visibility.Collapsed;
