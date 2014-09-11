@@ -87,9 +87,6 @@ namespace Quickbeam.ViewModels.BLF
 
 				Application.Current.Dispatcher.Invoke(delegate
 				{
-					App.Storage.HomeWindowViewModel.UpdateStatus(
-					   String.Format("{0} ({1})", CampaignFile.HaloCampaign.MapNames[0], fileInfo.Name));
-
 					dialog.ViewModel.CanClose = true;
 					dialog.Close();
 					App.Storage.HomeWindowViewModel.HideDialog();

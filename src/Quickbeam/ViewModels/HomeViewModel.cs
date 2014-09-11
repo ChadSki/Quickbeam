@@ -54,12 +54,6 @@ namespace Quickbeam.ViewModels
             }
         }
 
-        public string ApplicationTitle
-        {
-            get { return _applicationTitle; }
-            set { SetField(ref _applicationTitle, value); }
-        }
-
         public Thickness ApplicationBorderThickness
         {
             get { return _applicationBorderThickness; }
@@ -137,13 +131,13 @@ namespace Quickbeam.ViewModels
             switch ((WindowState) sender)
             {
                 case WindowState.Normal:
-                    ApplicationBorderThickness = new Thickness(1, 1, 1, 24);
+                    ApplicationBorderThickness = new Thickness(1, 1, 1, 23);
                     ActionRestoreVisibility = Visibility.Collapsed;
                     ActionMaximizeVisibility =
                         ResizingVisibility = Visibility.Visible;
                     break;
                 case WindowState.Maximized:
-                    ApplicationBorderThickness = new Thickness(0, 0, 0, 24);
+                    ApplicationBorderThickness = new Thickness(0, 0, 0, 23);
                     ActionRestoreVisibility = Visibility.Visible;
                     ActionMaximizeVisibility =
                         ResizingVisibility = Visibility.Collapsed;
@@ -190,11 +184,6 @@ namespace Quickbeam.ViewModels
             Patch,
 
             Other
-        }
-
-        public void UpdateStatus(string status)
-        {
-            ApplicationTitle = App.Storage.HomeWindow.Title = String.Format("{0} - Quickbeam", status);
         }
 
         /// <summary>

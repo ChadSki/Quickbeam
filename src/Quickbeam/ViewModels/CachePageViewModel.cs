@@ -176,9 +176,6 @@ namespace Quickbeam.ViewModels
 
 					Application.Current.Dispatcher.Invoke(delegate
 					{
-						App.Storage.HomeWindowViewModel.UpdateStatus(
-						   String.Format("{0} ({1})", CacheFile.InternalName, fileInfo.Name));
-
 						dialog.ViewModel.CanClose = true;
 						dialog.Close();
 						App.Storage.HomeWindowViewModel.HideDialog();

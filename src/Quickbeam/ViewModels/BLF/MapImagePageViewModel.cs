@@ -166,9 +166,6 @@ namespace Quickbeam.ViewModels.BLF
 							break;
 					}
 
-					App.Storage.HomeWindowViewModel.UpdateStatus(
-						String.Format("{0}", fileInfo.Name));
-
 					dialog.ViewModel.CanClose = true;
 					dialog.Close();
 					App.Storage.HomeWindowViewModel.HideDialog();

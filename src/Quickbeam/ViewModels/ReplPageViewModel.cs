@@ -9,7 +9,6 @@ namespace Quickbeam.ViewModels
 	{
 		public ReplPageViewModel()
 		{
-			App.Storage.HomeWindowViewModel.UpdateStatus("Welcome");
 		}
 
         public string HaloExePath
