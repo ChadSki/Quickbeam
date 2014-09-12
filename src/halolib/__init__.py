@@ -36,13 +36,38 @@ class HaloMap(object):
     def __init__(self):
         self.bytearraybuilder = None
         self.magic = None
-        self.tags = None
+        self.tags = {}
+
+    def get_tags(self, first_class='', *name_fragments):
+        """Searches for tags by class and name fragments.
+
+        Arguments:
+        first_class -- All or part of the primary class name ('weap', 'bipd', ...)
+                       Use the empty string to include all classes in your search.
+                       Regular expressions are supported.
+
+        *name_fragments -- All remaining arguments are independently searched for in tag
+                           names, e.g. 'assault', 'rifle'. Only tags which contain all
+                           fragments will be returned. Regular expressions are supported.
+        """
+        for tag in self.tags.values():
+            if first_class == '' or re.search(first_class, tag.first_class):
+                if all((regex == '' or re.search(regex, tag.name)) for regex in name_fragments):
+                    yield tag
+
+    def get_tag(self, first_class='', *name_fragments):
+        """Searches for tags by class and name fragments.
+
+        See `get_tags`. Works the same, but only returns the first tag it finds.
+        """
+        try:
+            return next(self.get_tags(first_class, *name_fragments))
+        except StopIteration:
+            return None
 
 def load_map(map_path=None):
-    """Loads a map from disk, or from Halo's memory if no filepath is specified.
-    """
-    # end result, assembled piece-by-piece
-    halomap = HaloMap()
+    """Loads a map from disk, or from Halo's memory if no filepath is specified."""
+    halomap = HaloMap() # end result, assembled piece-by-piece
 
     if map_path != None:
         location = 'file'
@@ -52,16 +77,6 @@ def load_map(map_path=None):
         location='mem'
         halomap.bytearraybuilder = WinMemoryByteArrayBuilder('halo')
 
-    # class ByteArray:
-    #  -- Denotes a region of bytes.
-    #  -- Provides methods for reading and writing datatypes such as byte[], int, float, and string.
-    #  -- Uses relative internal offsets, so two ByteArrays which wrap the same data at different
-    #     locations will always appear identical.
-    #
-    #  Call `CreateByteArray(offset, size)` to create new instances:
-    #                 offset: location within the source medium
-    #                   size: number of bytes enclosed
-    #
     ByteArray = halomap.bytearraybuilder.CreateByteArray
 
     if location == 'mem':
