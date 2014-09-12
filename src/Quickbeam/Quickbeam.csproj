@@ -178,20 +178,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Converters\IntegerToCharConstantConverter.cs" />
     <Compile Include="Converters\PercentileToDecimalConverter.cs" />
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />
     <Compile Include="Converters\StringToResourceConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\CacheEditorNodeToIconConverter.cs">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
     <Compile Include="Converters\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Converters\LowercaseConverter.cs" />
-    <Compile Include="Converters\QueenifyStringConverter.cs" />
-    <Compile Include="Converters\ScriptEditorToolbarVisibilityConverter.cs" />
-    <Compile Include="Converters\TagEditorToolbarVisibilityConverter.cs" />
-    <Compile Include="Converters\TagHierarchyContextMenuConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Dialogs\Controls\MetroBusyAlertBoxWindow.xaml.cs">
       <DependentUpon>MetroBusyAlertBoxWindow.xaml</DependentUpon>
@@ -199,31 +191,18 @@
     <Compile Include="Dialogs\Controls\MetroMessageBoxListWindow.xaml.cs">
       <DependentUpon>MetroMessageBoxListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Controls\MetroPluginRevisionViewerWindow.xaml.cs">
-      <DependentUpon>MetroPluginRevisionViewerWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\Controls\MetroMessageBoxWindow.xaml.cs">
       <DependentUpon>MetroMessageBoxWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Controls\MetroViewValueAsWindow.xaml.cs">
-      <DependentUpon>MetroViewValueAsWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\MetroBusyAlertBox.cs" />
-    <Compile Include="Dialogs\MetroViewValueAs.cs" />
-    <Compile Include="Dialogs\MetroPluginRevisionViewer.cs" />
     <Compile Include="Dialogs\MetroMessageBox.cs" />
     <Compile Include="Dialogs\MetroMessageBoxList.cs" />
     <Compile Include="Helpers\DpiDecorator.cs" />
     <Compile Include="Helpers\GithubApi.cs" />
     <Compile Include="Helpers\HaloWindow.cs" />
     <Compile Include="Native\NativeMethods.cs" />
-    <Compile Include="Helpers\Plugins\ThirdGenPluginVisitor.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
-    <Compile Include="Helpers\Tags\ClassTagHierarchy.cs" />
-    <Compile Include="Helpers\Tags\PathTagHierarchy.cs" />
-    <Compile Include="Helpers\Tags\TagHierarchy.cs" />
-    <Compile Include="Helpers\Tags\TagHierarchyNode.cs" />
     <Compile Include="Helpers\VariousFunctions.cs" />
     <Compile Include="Metro\Controls\Converters\ScrollbarOnFarLeftConverter.cs" />
     <Compile Include="Metro\Controls\Converters\ScrollbarOnFarRightConverter.cs" />
@@ -238,9 +217,6 @@
     <Compile Include="Metro\Controls\Custom\MetroWindow.cs" />
     <Compile Include="Metro\Controls\Helpers\TreeViewItemExtensions.cs" />
     <Compile Include="Metro\Controls\Helpers\InputBindingsManager.cs" />
-    <Compile Include="Metro\Controls\StringIDInput.xaml.cs">
-      <DependentUpon>StringIDInput.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Metro\Vectors\CloseModule.xaml.cs">
       <DependentUpon>CloseModule.xaml</DependentUpon>
     </Compile>
@@ -257,117 +233,16 @@
       <DependentUpon>RestoreModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Base.cs" />
-    <Compile Include="Models\BLF\CampaignBLF.cs" />
-    <Compile Include="Models\BLF\MapImageBLF.cs" />
-    <Compile Include="Models\BLF\MapInfoBLF.cs" />
     <Compile Include="Models\CacheEditorNode.cs" />
-    <Compile Include="Models\Cache\ExtractingResourceEntry.cs" />
-    <Compile Include="Models\Cache\ExtractingTagEntry.cs" />
-    <Compile Include="Models\Cache\TagDataSearchResult.cs" />
-    <Compile Include="Models\CacheHeaderInformation.cs" />
-    <Compile Include="Models\EngineMemory.cs" />
     <Compile Include="Models\Github\GitHubRequest.cs" />
     <Compile Include="Models\Github\PluginRevisionHistory.cs" />
-    <Compile Include="Models\Cache\RecentEditor.cs" />
-    <Compile Include="Models\RecentFile.cs" />
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\MonitorWorkarea.cs" />
     <Compile Include="Native\ShellChanges.cs" />
     <Compile Include="Native\WindowMovement.cs" />
-    <Compile Include="ViewModels\Cache\TagEditorViewModel.cs" />
-    <Compile Include="Views\BLF\MapImagePage.xaml.cs">
-      <DependentUpon>MapImagePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\BLF\CampaignPage.xaml.cs">
-      <DependentUpon>CampaignPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\Dialogs\Controls\TagExtractorWindow.xaml.cs">
-      <DependentUpon>TagExtractorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\Dialogs\MetroTagExtractor.cs" />
-    <Compile Include="Views\Cache\ICacheEditor.cs" />
-    <Compile Include="Views\Cache\NetworkSessionEditor.xaml.cs">
-      <DependentUpon>NetworkSessionEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\ScriptEditor.xaml.cs">
-      <DependentUpon>ScriptEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditor.xaml.cs">
-      <DependentUpon>TagEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\AsciiValue.xaml.cs">
-      <DependentUpon>AsciiValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\Bitfield.xaml.cs">
-      <DependentUpon>Bitfield.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\ColourValue.xaml.cs">
-      <DependentUpon>ColourValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\Comment.xaml.cs">
-      <DependentUpon>Comment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\DegreeValue.xaml.cs">
-      <DependentUpon>DegreeValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\Enumeration.xaml.cs">
-      <DependentUpon>Enumeration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\IntValue.xaml.cs">
-      <DependentUpon>IntValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\TagBlock.xaml.cs">
-      <DependentUpon>TagBlock.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\RangeValue.xaml.cs">
-      <DependentUpon>RangeValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\RawBlock.xaml.cs">
-      <DependentUpon>RawBlock.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\Shader.xaml.cs">
-      <DependentUpon>Shader.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\StringIDValue.xaml.cs">
-      <DependentUpon>StringIDValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\TagValue.xaml.cs">
-      <DependentUpon>TagValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\VectorValue.xaml.cs">
-      <DependentUpon>VectorValue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Cache\TagEditorComponents\Data\BitfieldData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\ColourData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\CommentData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\DataRef.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\DegreeData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\EnumData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\FieldChangeSet.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\FieldChangeTracker.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\ITagDataFieldVisitor.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagDataField.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagDataFilterer.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagDataReader.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagDataWriter.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\NumberData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\RawData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagBlock.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagBlockFlattener.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\ShaderRef.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\StringData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\StringIDData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\TagRefData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\ValueField.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\VectorData.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\WidthCalculator.cs" />
-    <Compile Include="Views\Cache\TagEditorComponents\Data\WrappedTagBlockEntry.cs" />
-    <Compile Include="Views\CachePage.xaml.cs">
-      <DependentUpon>CachePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\BLF\MapInfoPage.xaml.cs">
-      <DependentUpon>MapInfoPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\Dialog\BusyAlertBoxViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\MessageBoxListViewModel.cs" />
+    <Compile Include="ViewModels\Dialog\MessageBoxViewModel.cs" />
     <Compile Include="Views\HaloPage.xaml.cs">
       <DependentUpon>HaloPage.xaml</DependentUpon>
     </Compile>
@@ -375,19 +250,6 @@
     <Compile Include="Views\ReplPage.xaml.cs">
       <DependentUpon>ReplPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Selectors\XbdmQuickOptionsButtonTypeSelector.cs" />
-    <Compile Include="ViewModels\BLF\CampaignPageViewModel.cs" />
-    <Compile Include="ViewModels\BLF\MapInfoPageViewModel.cs" />
-    <Compile Include="ViewModels\Cache\Dialog\TagExtractorViewModel.cs" />
-    <Compile Include="ViewModels\Cache\NetworkSessionEditorViewModel.cs" />
-    <Compile Include="ViewModels\Cache\ScriptEditorViewModel.cs" />
-    <Compile Include="ViewModels\BLF\MapImagePageViewModel.cs" />
-    <Compile Include="ViewModels\CachePageViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\BusyAlertBoxViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\MessageBoxListViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\PluginRevisionViewerViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\MessageBoxViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\ViewValueAsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ReplPageViewModel.cs" />
     <Compile Include="Windows\Home.xaml.cs">
@@ -416,52 +278,17 @@
     <Content Include="IronPythonConsole.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Storage\Halo3\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="Helpers\SyntaxHighlighting\XmlBlue.xshd" />
-    <None Include="Helpers\SyntaxHighlighting\LispBlue.xshd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Content Include="Storage\Reach\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\Halo4\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\ReachDemo\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\ReachPreBeta\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\ReachBeta\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\ODST\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\H3Review\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\H3Beta\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Storage\H3Epsilon\EngineMemory.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\HierarchyNodeToIconConverter.cs">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
     <Page Include="Dialogs\Controls\MetroBusyAlertBoxWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -470,15 +297,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\Controls\MetroPluginRevisionViewerWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Dialogs\Controls\MetroMessageBoxWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\Controls\MetroViewValueAsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -574,10 +393,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Metro\Controls\StringIDInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Metro\Controls\MetroListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -629,98 +444,6 @@
     <Page Include="Metro\Vectors\RestoreModule.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\BLF\MapImagePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\BLF\CampaignPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\Dialogs\Controls\TagExtractorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Cache\NetworkSessionEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Cache\ScriptEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Cache\TagEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\AsciiValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\Bitfield.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\ColourValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\Comment.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\ComponentDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\DegreeValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\Enumeration.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\IntValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\TagBlock.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\RangeValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\RawBlock.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\Shader.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\StringIDValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\TagValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Cache\TagEditorComponents\VectorValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CachePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\BLF\MapInfoPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HaloPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -818,247 +541,10 @@
       <Project>{8A19EAA5-44C5-41EC-A908-7F41792CF18B}</Project>
       <Name>IronPythonConsole</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Blamite\Blamite.csproj">
-      <Project>{6b105ab9-84a0-4774-b319-75e9cab3db4b}</Project>
-      <Name>Blamite</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Quickbeam.Low\Quickbeam.Low.csproj">
       <Project>{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}</Project>
       <Name>Quickbeam.Low</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Plugins\Halo2\adlg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\ant!.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\bipd.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\bitm.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\bloc.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\bsdt.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\char.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\clwd.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\coll.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\colo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\cont.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\crea.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\ctrl.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\deca.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\DECR.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\effe.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\egor.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\eqip.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\foot.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\fpch.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\garb.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\gldf.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\goof.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\head.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\hlmt.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\hudg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\itmc.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\jmad.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\jpt!.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\lens.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\ligh.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\lsnd.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\ltmp.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\mach.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\matg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\mdlg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\MGS2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\mode.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\mulg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\nhdt.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\phmo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\phys.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\pmov.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\pphy.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\proj.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\prt3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\PRTM.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\sbsp.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\scen.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\scnr.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\sfx+.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\shad.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\sily.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\skin.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\sncl.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\snd!.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\snde.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\snmx.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\spas.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\spk!.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\ssce.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\stem.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\styl.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\tdtl.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\trak.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\udlg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\ugh!.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\unic.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\vehc.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\vehi.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\vrtx.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\weap.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\weat.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\wgit.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\wgtz.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\wigl.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Plugins\Halo2\_fx_.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />

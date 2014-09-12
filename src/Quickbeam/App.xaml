@@ -8,20 +8,12 @@
 			<!-- Converters -->
 			<converters:BooleanToVisibilityConverter x:Key="IValueConverterBooleanToVisibility" IsInverted="False" />
 			<converters:BooleanToVisibilityConverter x:Key="IValueConverterBooleanToVisibilityInverted" IsInverted="True" />
-			<converters:LeftMarginMultiplierConverter x:Key="IValueConverterTreeViewItemLength" Length="19" />
-			<converters:QueenifyStringConverter x:Key="IValueConverterQueenifyString" />
-			<converters:WindowTitleConverter x:Key="IValueConverterWindowTitle" />
-			<converters:HierarchyNodeToIconConverter x:Key="IValueConverterHierarchyNodeToIcon" />
-			<converters:CacheEditorNodeToIconConverter x:Key="IValueConverterCacheEditorNodeToIcon" />
+            <converters:LeftMarginMultiplierConverter x:Key="IValueConverterTreeViewItemLength" Length="19" />
+            <converters:WindowTitleConverter x:Key="IValueConverterWindowTitle" />
 			<converters:LowercaseConverter x:Key="IValueConverterStringToLowercase" />
 			<converters:StringToResourceConverter x:Key="IValueConverterStringToResource" />
 			<converters:IntegerToBooleanConverter x:Key="IValueConverterIntegerToBoolean" />
 			<converters:PercentileToDecimalConverter x:Key="IValueConverterPercentileToDecimal" />
-			<converters:IntegerToCharConstantConverter x:Key="IValueConverterIntegerToCharConstant" />
-			
-			<!-- Editor Detection Converters -->
-			<converters:TagEditorToolbarVisibilityConverter x:Key="IValueConverterTagEditorToolbarVisibility" />
-			<converters:ScriptEditorToolbarVisibilityConverter x:Key="IValueConverterScriptEditorToolbarVisibility" />
 
 			<ResourceDictionary.MergedDictionaries>
 				<!-- Fonts -->

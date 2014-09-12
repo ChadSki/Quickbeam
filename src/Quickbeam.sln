@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4978C9AF-EEF8-4B55-AA22-9C43764792C3}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,8 +15,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonConsoleControl", "..\vendor\IronPythonConsole\PythonConsoleControl\PythonConsoleControl.csproj", "{2A93606C-6E7B-4509-87BB-54CDF20DC64F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repl", "Repl", "{A93D2691-A18E-4EA6-8AA5-F3BC3562C3EA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blamite", "Blamite\Blamite.csproj", "{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam", "Quickbeam\Quickbeam.csproj", "{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}"
 EndProject
@@ -68,22 +66,6 @@ Global
 		{2A93606C-6E7B-4509-87BB-54CDF20DC64F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2A93606C-6E7B-4509-87BB-54CDF20DC64F}.Release|x64.ActiveCfg = Release|Any CPU
 		{2A93606C-6E7B-4509-87BB-54CDF20DC64F}.Release|x86.ActiveCfg = Release|Any CPU
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|x64.ActiveCfg = Debug|x64
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|x64.Build.0 = Debug|x64
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|x86.ActiveCfg = Debug|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Debug|x86.Build.0 = Debug|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|x64.ActiveCfg = Release|x64
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|x64.Build.0 = Release|x64
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|x86.ActiveCfg = Release|x86
-		{6B105AB9-84A0-4774-B319-75E9CAB3DB4B}.Release|x86.Build.0 = Release|x86
 		{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
