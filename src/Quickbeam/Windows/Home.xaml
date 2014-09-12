@@ -54,8 +54,9 @@
 
                 <!-- Title -->
                 <TextBlock Text="Quickbeam" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushSecondary}"
-                           FontSize="15" FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis"
-                           Margin="45,9.6,0,0"/>
+                           FontSize="17" FontFamily="{DynamicResource MetroFontLight}" TextTrimming="CharacterEllipsis"
+                           VerticalAlignment="Top" HorizontalAlignment="Left"
+                           Margin="48,6.5,0,0"/>
 
                 <!-- Window Buttons -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="26"
