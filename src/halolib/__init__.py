@@ -36,6 +36,7 @@ class HaloMap(object):
     def __init__(self):
         self.bytearraybuilder = None
         self.magic = None
+        self.tags = None
 
 def load_map(map_path=None):
     """Loads a map from disk, or from Halo's memory if no filepath is specified.
@@ -54,12 +55,12 @@ def load_map(map_path=None):
     # class ByteArray:
     #  -- Denotes a region of bytes.
     #  -- Provides methods for reading and writing datatypes such as byte[], int, float, and string.
-    #  -- Uses relative internal offsets, so two ByteArrayes which wrap the same data at different
+    #  -- Uses relative internal offsets, so two ByteArrays which wrap the same data at different
     #     locations will always appear identical.
     #
-    #  Call `ByteArray(offset, size)` to create new instances:
-    #           offset: location within the source medium
-    #             size: number of bytes enclosed
+    #  Call `CreateByteArray(offset, size)` to create new instances:
+    #                 offset: location within the source medium
+    #                   size: number of bytes enclosed
     #
     ByteArray = halomap.bytearraybuilder.CreateByteArray
 
@@ -132,10 +133,13 @@ def load_map(map_path=None):
     # just give BSP's meta a size of zero for now
     meta_sizes.update({bsp_offset: 0})
 
-    name_maxlen = 256 # not sure what the actual limit is; just picking some value
+    # not sure what the actual limit is; just picking some value
+    name_maxlen = 256
 
-    # HaloTags can load their own name and metadata, so just give them the starting ByteArrayes
-    tags = [HaloTag(
+    # build associative tag list
+    halomap.tags =
+        {tag_header.ident:
+            HaloTag(
                 tag_header,
                 ByteArray(
                     offset=tag_header.name_offset_raw - halomap.magic,
@@ -143,11 +147,6 @@ def load_map(map_path=None):
                 ByteArray(
                     offset=tag_header.meta_offset_raw - halomap.magic,
                     size=meta_sizes[tag_header.meta_offset_raw]),
-                halomap) for tag_header in tag_headers]
+                halomap) for tag_header in tag_headers}
 
-    for entry in tag_headers:
-        if entry.ident == 3837199171:
-            plugin = plugin_classes['vehi']
-            return plugin(ByteArray(entry.meta_offset_raw, plugin.struct_size), halomap)
-
-    return index_header
+    return halomap
