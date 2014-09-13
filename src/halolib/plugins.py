@@ -61,6 +61,7 @@ def observable_field_class(field_type, offset, length, reverse, maxlength, optio
         'rawdata':   lambda: RawDataField(   offset, length),
         'ascii':     lambda: AsciiField(     offset, length, reverse),
         'asciiz':    lambda: AsciizField(    offset, maxlength),
+        'stringptr': lambda: None
 
         'loneID':    lambda: ReferenceField( offset, False),
         'reference': lambda: ReferenceField( offset, True),
