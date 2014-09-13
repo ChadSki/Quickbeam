@@ -64,7 +64,7 @@ namespace Quickbeam.Low.ByteArray
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this); // why?
         }
     }
 

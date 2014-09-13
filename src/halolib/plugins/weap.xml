@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="weap" struct_size="0x504">
+    <reference name="model" offset="0x28" />
+    <reference name="animation" offset="0x38" />
+    <reference name="collision" offset="0x70" />
+    <reference name="physics" offset="0x80" />
+
+    <reflexive name="magazines" offset="0x4F0" struct_size='112'>
+        <uint16 name="rounds_recharged" offset="0x4" />
+        <uint16 name="rounds_total_initial" offset="0x6" />
+        <uint16 name="rounds_total_maximum" offset="0x8" />
+        <uint16 name="rounds_loaded_maximum" offset="0xA" />
+    </reflexive>
+    <reflexive name="triggers" offset="0x4FC" struct_size="276">
+        <float32 name="initial_rounds_per_second" offset="0x4" />
+        <float32 name="final_rounds_per_second" offset="0x8" />
+        <float32 name="firing_acceleration_time" offset="0xC" />
+        <float32 name="firing_deceleration_time" offset="0x10" />
+        <uint16 name="projectiles_per_shot" offset="0x6E" />
+        <reference name="projectile" offset="0x94"/>
+        <reflexive name="firing_effects" offset="0x108" struct_size="132">
+            <reference name="fire_effect" offset="0x24" />
+            <reference name="misfire_effect" offset="0x34" />
+            <reference name="no_ammo_effect" offset="0x44" />
+            
+            <reference name="fire_damage" offset="0x54" />
+            <reference name="misfire_damage" offset="0x64" />
+            <reference name="no_ammo_damage" offset="0x74" />
+        </reflexive>
+    </reflexive>
+</plugin>
