@@ -56,9 +56,17 @@ class HaloMap(object):
                     yield tag
 
     def get_tag(self, first_class='', *name_fragments):
-        """Searches for tags by class and name fragments.
+        """Searches for a tag by class and name fragments. In the case of multiple matches,
+        returns the first tag found.
 
-        See `get_tags`. Works the same, but only returns the first tag it finds.
+        Arguments:
+        first_class -- All or part of the primary class name ('weap', 'bipd', ...)
+                       Use the empty string to include all classes in your search.
+                       Regular expressions are supported.
+
+        *name_fragments -- All remaining arguments are independently searched for in tag
+                           names, e.g. 'assault', 'rifle'. Only tags which contain all
+                           fragments will be returned. Regular expressions are supported.
         """
         try:
             return next(self.get_tags(first_class, *name_fragments))
@@ -66,7 +74,11 @@ class HaloMap(object):
             return None
 
 def load_map(map_path=None):
-    """Loads a map from disk, or from Halo's memory if no filepath is specified."""
+    """Loads a map from disk, or from Halo's memory if no filepath is specified.
+
+    Arguments:
+    map_path -- Location of the map on disk.
+    """
     halomap = HaloMap() # end result, assembled piece-by-piece
 
     if map_path != None:
