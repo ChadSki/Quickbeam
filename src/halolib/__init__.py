@@ -152,16 +152,15 @@ def load_map(map_path=None):
     name_maxlen = 256
 
     # build associative tag list
-    halomap.tags =
-        {tag_header.ident:
-            HaloTag(
-                tag_header,
-                ByteArray(
-                    offset=tag_header.name_offset_raw - halomap.magic,
-                    size=name_maxlen),
-                ByteArray(
-                    offset=tag_header.meta_offset_raw - halomap.magic,
-                    size=meta_sizes[tag_header.meta_offset_raw]),
-                halomap) for tag_header in tag_headers}
+    halomap.tags = { tag_header.ident: HaloTag(
+                                            tag_header,
+                                            ByteArray(
+                                                offset=tag_header.name_offset_raw - halomap.magic,
+                                                size=name_maxlen),
+                                            ByteArray(
+                                                offset=tag_header.meta_offset_raw - halomap.magic,
+                                                size=meta_sizes[tag_header.meta_offset_raw]),
+                                            halomap)
+                    for tag_header in tag_headers}
 
     return halomap
