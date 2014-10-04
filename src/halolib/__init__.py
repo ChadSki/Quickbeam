@@ -23,6 +23,7 @@
 from __future__ import print_function
 from plugins import load_plugins, plugin_classes
 from halotag import HaloTag
+import re
 
 from System import Array, Byte
 from Quickbeam.Low.ByteArray import FileByteArrayBuilder
@@ -32,14 +33,18 @@ from Quickbeam.Low.ByteArray import WinMemoryByteArrayBuilder
 if len(plugin_classes) == 0:
     load_plugins()
 
+
 class HaloMap(object):
+
+    """TODO."""
+
     def __init__(self):
         self.bytearraybuilder = None
         self.magic = None
         self.tags = {}
 
     def get_tags(self, first_class='', *name_fragments):
-        """Searches for tags by class and name fragments.
+        """Search for tags by class and name fragments.
 
         Arguments:
         first_class -- All or part of the primary class name ('weap', 'bipd', ...)
@@ -52,12 +57,14 @@ class HaloMap(object):
         """
         for tag in self.tags.values():
             if first_class == '' or re.search(first_class, tag.first_class):
-                if all((regex == '' or re.search(regex, tag.name)) for regex in name_fragments):
+                if all(regex == '' or re.search(regex, tag.name)
+                       for regex in name_fragments):
                     yield tag
 
     def get_tag(self, first_class='', *name_fragments):
-        """Searches for a tag by class and name fragments. In the case of multiple matches,
-        returns the first tag found.
+        """Search for a tag by class and name fragments.
+
+        In the case of multiple matches, returns the first tag found.
 
         Arguments:
         first_class -- All or part of the primary class name ('weap', 'bipd', ...)
@@ -73,20 +80,21 @@ class HaloMap(object):
         except StopIteration:
             return None
 
+
 def load_map(map_path=None):
-    """Loads a map from disk, or from Halo's memory if no filepath is specified.
+    """Load a map from disk, or from Halo's memory if no filepath is specified.
 
     Arguments:
     map_path -- Location of the map on disk.
     """
-    halomap = HaloMap() # end result, assembled piece-by-piece
+    halomap = HaloMap()  # end result, assembled piece-by-piece
 
-    if map_path != None:
+    if map_path is not None:
         location = 'file'
         halomap.bytearraybuilder = FileByteArrayBuilder(map_path)
 
     else:
-        location='mem'
+        location = 'mem'
         halomap.bytearraybuilder = WinMemoryByteArrayBuilder('halo')
 
     ByteArray = halomap.bytearraybuilder.CreateByteArray
@@ -104,26 +112,24 @@ def load_map(map_path=None):
 
     # load the map header
     map_header = MapHeader(
-                        ByteArray(
-                            offset={'file': 0, 'mem': 0x6A8154}[location],
-                            size=MapHeader.struct_size),
-                        halomap)
+        ByteArray(offset={'file': 0, 'mem': 0x6A8154}[location],
+                  size=MapHeader.struct_size),
+        halomap)
 
     # load the index header
     index_header = IndexHeader(
-                        ByteArray(
-                            offset={'file': map_header.index_offset, 'mem': 0x40440000}[location],
-                            size=IndexHeader.struct_size),
-                        halomap)
+        ByteArray(offset={'file': map_header.index_offset, 'mem': 0x40440000}[location],
+                  size=IndexHeader.struct_size),
+        halomap)
 
     if location == 'file':
-        # Usually the tag index directly follows the index header. However, some forms of
-        # map protection move the tag index to other locations.
+        # Usually the tag index directly follows the index header. However, some forms
+        # of map protection move the tag index to other locations.
         index_offset = map_header.index_offset + index_header.primary_magic - 0x40440000
 
-        # On disk, we need to use a magic value to convert raw pointers into file offsets.
-        # This magic value is based on the tag index's location within the file, since the
-        # tag index always appears at the same place in memory.
+        # On disk, we need to use a magic value to convert raw pointers into file
+        # offsets. This magic value is based on the tag index's location within the
+        # file, since the tag index always appears at the same place in memory.
         halomap.magic = index_header.primary_magic - index_offset
 
     elif location == 'mem':
@@ -134,22 +140,21 @@ def load_map(map_path=None):
         halomap.magic = 0
 
     # load all tag headers from the index
-    tag_headers = [TagHeader(
-                        ByteArray(
-                            offset=TagHeader.struct_size * i + index_offset,
-                            size=TagHeader.struct_size),
-                        halomap) for i in range(index_header.tag_count)]
+    tag_headers = [TagHeader(ByteArray(offset=TagHeader.struct_size * i + index_offset,
+                                       size=TagHeader.struct_size),
+                             halomap) for i in range(index_header.tag_count)]
 
     # tag metadata can recurse to unknown places, but at least we know where they start
     meta_offsets = sorted(tag_header.meta_offset_raw for tag_header in tag_headers)
 
-    if location == 'file': # the BSP's meta has an offset of 0, skip it
+    if location == 'file':  # the BSP's meta has an offset of 0, skip it
         bsp_offset = meta_offsets.pop(0)
 
-    elif location == 'mem': # the BSP's meta has a very large, distant offset, skip it
+    elif location == 'mem':  # the BSP's meta has a very large, distant offset, skip it
         bsp_offset = meta_offsets.pop()
 
-    # to calculate sizes, we need the offset to the end (does not point to a tag)
+    # to calculate sizes, we need the offset to the end of the metadata region (does
+    # not point to a tag)
     meta_offsets.append(meta_offsets[0] + map_header.metadata_size)
 
     #  [0, 10, 40, 60] from location offsets...
@@ -164,15 +169,14 @@ def load_map(map_path=None):
     name_maxlen = 256
 
     # build associative tag list
-    halomap.tags = { tag_header.ident: HaloTag(
-                                            tag_header,
-                                            ByteArray(
-                                                offset=tag_header.name_offset_raw - halomap.magic,
-                                                size=name_maxlen),
-                                            ByteArray(
-                                                offset=tag_header.meta_offset_raw - halomap.magic,
-                                                size=meta_sizes[tag_header.meta_offset_raw]),
-                                            halomap)
-                    for tag_header in tag_headers}
+    halomap.tags = {
+        tag_header.ident:
+            HaloTag(tag_header,
+                    ByteArray(offset=tag_header.name_offset_raw - halomap.magic,
+                              size=name_maxlen),
+                    ByteArray(offset=tag_header.meta_offset_raw - halomap.magic,
+                              size=meta_sizes[tag_header.meta_offset_raw]),
+                    halomap)
+        for tag_header in tag_headers}
 
     return halomap
