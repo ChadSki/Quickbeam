@@ -35,37 +35,37 @@ def observable_field_class(field_type, offset, length, reverse, maxlength, optio
     """
     # select and create the appropriate field type
     return {
-        'int8':      lambda: Int8Field(      offset),
-        'int16':     lambda: Int16Field(     offset),
-        'int32':     lambda: Int32Field(     offset),
-        'int64':     lambda: Int64Field(     offset),
-        'uint8':     lambda: UInt8Field(     offset),
-        'uint16':    lambda: UInt16Field(    offset),
-        'uint32':    lambda: UInt32Field(    offset),
-        'uint64':    lambda: UInt64Field(    offset),
-        'float32':   lambda: Float32Field(   offset),
-        'float64':   lambda: Float64Field(   offset),
+        'int8': lambda: Int8Field(offset),
+        'int16': lambda: Int16Field(offset),
+        'int32': lambda: Int32Field(offset),
+        'int64': lambda: Int64Field(offset),
+        'uint8': lambda: UInt8Field(offset),
+        'uint16': lambda: UInt16Field(offset),
+        'uint32': lambda: UInt32Field(offset),
+        'uint64': lambda: UInt64Field(offset),
+        'float32': lambda: Float32Field(offset),
+        'float64': lambda: Float64Field(offset),
 
-        'colorbyte': lambda: ColorByteField( offset),
-        'colorRGB':  lambda: ColorRgbField(  offset),
-        'colorARGB': lambda: ColorArgbField( offset),
+        'colorbyte': lambda: ColorByteField(offset),
+        'colorRGB': lambda: ColorRgbField(offset),
+        'colorARGB': lambda: ColorArgbField(offset),
 
-        'enum8':     lambda: Enum8Field(     offset, options),
-        'enum16':    lambda: Enum16Field(    offset, options),
-        'enum32':    lambda: Enum32Field(    offset, options),
+        'enum8': lambda: Enum8Field(offset, options),
+        'enum16': lambda: Enum16Field(offset, options),
+        'enum32': lambda: Enum32Field(offset, options),
 
-        'bitmask8':  lambda: Bitmask8Field(  offset, options),
-        'bitmask16': lambda: Bitmask16Field( offset, options),
-        'bitmask32': lambda: Bitmask32Field( offset, options),
+        'bitmask8': lambda: Bitmask8Field(offset, options),
+        'bitmask16': lambda: Bitmask16Field(offset, options),
+        'bitmask32': lambda: Bitmask32Field(offset, options),
 
-        'rawdata':   lambda: RawDataField(   offset, length),
-        'ascii':     lambda: AsciiField(     offset, length, reverse),
-        'asciiz':    lambda: AsciizField(    offset, maxlength),
+        'rawdata': lambda: RawDataField(offset, length),
+        'ascii': lambda: AsciiField(offset, length, reverse),
+        'asciiz': lambda: AsciizField(offset, maxlength),
         'stringptr': lambda: None,
 
-        'loneID':    lambda: ReferenceField( offset, False),
-        'reference': lambda: ReferenceField( offset, True),
-        'reflexive': lambda: ReflexiveField( offset, reflexive_class)
+        'loneID': lambda: ReferenceField(offset, False),
+        'reference': lambda: ReferenceField(offset, True),
+        'struct_array': lambda: StructArrayField(offset, struct_class)
     }[field_type]()
 
 def struct_class_from_xml(layout):
@@ -73,17 +73,17 @@ def struct_class_from_xml(layout):
     """
     # Parse xml once ahead of time, rather than in the constructor
     field_classes = {
-        node.attrib['name']: observable_field_class(
-            field_type = node.tag,
-            offset = int(node.attrib.get('offset'), 0),
-            length = int(node.attrib.get('length', '0'), 0),
-            reverse = node.attrib.get('reverse', 'false') == 'true',
-            maxlength = int(node.attrib.get('maxlength', '0'), 0),
+        field.attrib['name']: observable_field_class(
+            field_type = field.tag,
+            offset = int(field.attrib.get('offset'), 0),
+            length = int(field.attrib.get('length', '0'), 0),
+            reverse = field.attrib.get('reverse', 'false') == 'true',
+            maxlength = int(field.attrib.get('maxlength', '0'), 0),
             options = {
-                opt.attrib['value']: opt.attrib['name'] for opt in node.iter('option')
+                opt.attrib['value']: opt.attrib['name'] for opt in field.iter('option')
             },
-            reflexive_class = struct_class_from_xml(node) if node.tag == 'reflexive' else None,
-        ) for node in layout
+            reflexive_class = struct_class_from_xml(field) if field.tag == 'reflexive' else None,
+        ) for field in layout
     }
 
     class HaloStruct(object):

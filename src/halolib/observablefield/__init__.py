@@ -1,36 +1,30 @@
 # Copyright (c) 2013, Chad Zawistowski
 # All rights reserved.
 #
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above copyright
-#       notice, this list of conditions and the following disclaimer in the
-#       documentation and/or other materials provided with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
-# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# This software is free and open source, released under the 2-clause BSD
+# license as detailed in the LICENSE file.
 
+import abc
 from notifyproperty import notify_property, PyNotifyPropertyChanged
 
-class ObservableField(PyNotifyPropertyChanged):
-    """Subclasses are required to implement the notify_property 'Value'.
+
+class ObservableField(PyNotifyPropertyChanged, metaclass=abc.ABCMeta):
+
     """
+    """
+
     def __init__(self, parent):
         self.parent = parent
 
-    def get_Value(self): return self.Value
-    def set_Value(self, value): self.Value = value
+    @property
+    @abc.abstractmethod
+    def Value(self):
+        pass
 
+    @Value.setter
+    @abc.abstractmethod
+    def Value(self, new_value):
+        pass
 
 
 ################################################################
@@ -60,6 +54,7 @@ def Float64Field(offset):
 # integer
 
 def Int8Field(offset):
+    """8-bit (2-byte) signed integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'Int8FieldTemplate'
@@ -70,6 +65,7 @@ def Int8Field(offset):
     return Field
 
 def Int16Field(offset):
+    """16-bit (4-byte) signed integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'Int16FieldTemplate'
@@ -80,6 +76,7 @@ def Int16Field(offset):
     return Field
 
 def Int32Field(offset):
+    """32-bit (8-byte) signed integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'Int32FieldTemplate'
@@ -90,6 +87,7 @@ def Int32Field(offset):
     return Field
 
 def Int64Field(offset):
+    """64-bit (16-byte) signed integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'Int64FieldTemplate'
@@ -100,6 +98,7 @@ def Int64Field(offset):
     return Field
 
 def UInt8Field(offset):
+    """8-bit (2-byte) unsigned integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'UInt8FieldTemplate'
@@ -110,6 +109,7 @@ def UInt8Field(offset):
     return Field
 
 def UInt16Field(offset):
+    """16-bit (4-byte) unsigned integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'UInt16FieldTemplate'
@@ -120,6 +120,7 @@ def UInt16Field(offset):
     return Field
 
 def UInt32Field(offset):
+    """32-bit (8-byte) unsigned integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'UInt32FieldTemplate'
@@ -130,6 +131,7 @@ def UInt32Field(offset):
     return Field
 
 def UInt64Field(offset):
+    """64-bit (16-byte) unsigned integer."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'UInt64FieldTemplate'
@@ -143,6 +145,7 @@ def UInt64Field(offset):
 # string
 
 def RawDataField(offset, length):
+
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'RawDataFieldTemplate'
@@ -153,6 +156,7 @@ def RawDataField(offset, length):
     return Field
 
 def AsciiField(offset, length, reverse):
+    """Fixed-length ascii .string"""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'AsciiFieldTemplate'
@@ -168,6 +172,7 @@ def AsciiField(offset, length, reverse):
     return Field
 
 def AsciizField(offset, maxlength):
+    """Null-terminated ascii string."""
     class Field(ObservableField):
         @property
         def TemplateKey(self): return 'AsciizFieldTemplate'
