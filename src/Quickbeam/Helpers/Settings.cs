@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using Quickbeam.Models;
-using Newtonsoft.Json;
 
 namespace Quickbeam.Helpers
 {
@@ -16,9 +15,6 @@ namespace Quickbeam.Helpers
 		public Settings()
 		{
 		}
-
-        // Halo
-        private string _haloExePath;
 
 		// UI
 		private Accent _assemblyAccent = Accent.Orange;
@@ -63,8 +59,22 @@ namespace Quickbeam.Helpers
 
         public string HaloExePath
         {
-            get { return _haloExePath; }
-            set { SetField(ref _haloExePath, value); }
+            get
+            {
+                return Registry.GetValue(
+                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo",
+                    @"EXE Path", @"").ToString() + @"\halo.exe";
+            }
+        }
+
+        public string HaloVersion
+        {
+            get
+            {
+                return Registry.GetValue(
+                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo",
+                    @"Version", @"").ToString();
+            }
         }
 
 		public enum Accent

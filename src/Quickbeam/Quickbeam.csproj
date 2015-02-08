@@ -542,7 +542,7 @@
       <Name>IronPythonConsole</Name>
     </ProjectReference>
     <ProjectReference Include="..\Quickbeam.Low\Quickbeam.Low.csproj">
-      <Project>{9A7F97F0-B55F-4FD4-B0B3-67DA9D57B6BA}</Project>
+      <Project>{9a7f97f0-b55f-4fd4-b0b3-67da9d57b6ba}</Project>
       <Name>Quickbeam.Low</Name>
     </ProjectReference>
   </ItemGroup>

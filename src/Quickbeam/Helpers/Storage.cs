@@ -9,8 +9,8 @@ namespace Quickbeam.Helpers
 {
 	public class Storage : Base
 	{
-		public const string StoragePath = @"Storage\";
-		public const string SettingsPath = @"Storage\Settings.json"; 
+		public const string StoragePath = @".\";
+		public const string SettingsPath = @"Settings.json";
 
 		public Storage()
 		{

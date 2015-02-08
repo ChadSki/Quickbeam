@@ -47,11 +47,10 @@ namespace Quickbeam.IronPythonConsole
 
         void Console_ConsoleInitialized(object sender, EventArgs e)
         {
-            Console.Pad.Console.ScriptScope.Engine.Runtime.LoadAssembly(typeof(IByteArray).Assembly);
-            Console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
-                "import IronPythonConsole\n" +
-                "import halolib", SourceCodeKind.Statements)
-                .Execute();
+            //Console.Pad.Console.ScriptScope.Engine.CreateScriptSourceFromString(
+            //    "import IronPythonConsole\n" +
+            //    "import halolib", SourceCodeKind.Statements)
+            //    .Execute();
         }
 		
 		void OpenFileClick(object sender, RoutedEventArgs e)

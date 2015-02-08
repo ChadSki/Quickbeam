@@ -14,7 +14,11 @@ namespace Quickbeam.ViewModels
         public string HaloExePath
         {
             get { return App.Storage.Settings.HaloExePath; }
-            set { App.Storage.Settings.HaloExePath = value; }
+        }
+
+        public string HaloVersion
+        {
+            get { return App.Storage.Settings.HaloVersion; }
         }
 
         private GridLength _haloWidth = new GridLength(0, GridUnitType.Auto);

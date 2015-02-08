@@ -20,15 +20,12 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import clr
 import fnmatch
 import os
 import xml.etree.ElementTree as et
-
 from observablefield import *
-
-from System import String, Object
 from Quickbeam.Low import ObservableDictionary
+
 
 def observable_field_class(field_type, offset, length, reverse, maxlength, options, reflexive_class):
     """Return an object which reads/writes to a field of a plugin-defined struct.
@@ -68,27 +65,27 @@ def observable_field_class(field_type, offset, length, reverse, maxlength, optio
         'struct_array': lambda: StructArrayField(offset, struct_class)
     }[field_type]()
 
+
 def struct_class_from_xml(layout):
-    """Define a new class based on the given struct layout.
-    """
+    """Define a new class based on the given struct layout."""
     # Parse xml once ahead of time, rather than in the constructor
     field_classes = {
         field.attrib['name']: observable_field_class(
-            field_type = field.tag,
-            offset = int(field.attrib.get('offset'), 0),
-            length = int(field.attrib.get('length', '0'), 0),
-            reverse = field.attrib.get('reverse', 'false') == 'true',
-            maxlength = int(field.attrib.get('maxlength', '0'), 0),
-            options = {
+            field_type=field.tag,
+            offset=int(field.attrib.get('offset'), 0),
+            length=int(field.attrib.get('length', '0'), 0),
+            reverse=field.attrib.get('reverse', 'false') == 'true',
+            maxlength=int(field.attrib.get('maxlength', '0'), 0),
+            options={
                 opt.attrib['value']: opt.attrib['name'] for opt in field.iter('option')
             },
-            reflexive_class = struct_class_from_xml(field) if field.tag == 'reflexive' else None,
+            reflexive_class=struct_class_from_xml(field) if field.tag == 'reflexive' else None,
         ) for field in layout
     }
 
     class HaloStruct(object):
-        """Wraps an ObservableDictionary, presenting its fields as native Python properties.
-        """
+
+        """Wraps an ObservableDictionary, presenting its fields as native Python properties."""
 
         # static variable, so ByteAccess objects know how large to be
         struct_size = int(layout.attrib['struct_size'], 0)
@@ -106,13 +103,11 @@ def struct_class_from_xml(layout):
                 object.__getattribute__(self, 'ObservableDictionary')[name] = field
 
         def OnChanged(self, name):
-            """Returns the dictionary's OnChanged event.
-            """
+            """Return the dictionary's OnChanged event."""
             return object.__getattribute__(self, 'ObservableDictionary')[name].OnChanged
 
         def __repr__(self):
-            """Pseudo-JSON format.
-            """
+            """Pseudo-JSON format."""
             answer = '{'
             for pair in self.__dict__:
                 answer += '\n    %s: ' % pair.Key
@@ -125,13 +120,11 @@ def struct_class_from_xml(layout):
             return answer
 
         def __dir__(self):
-            """Returns names of the ObservableDictionary's fields.
-            """
+            """Return names of the ObservableDictionary's fields."""
             return object.__getattribute__(self, 'ObservableDictionary').Keys
 
         def __getattribute__(self, name):
-            """Redirects lookup to the ObservableDictionary's fields.
-            """
+            """Redirect lookup to the ObservableDictionary's fields."""
             if name == 'bytearray':
                 return object.__getattribute__(self, 'bytearray')
 
@@ -150,17 +143,16 @@ def struct_class_from_xml(layout):
                 return object.__getattribute__(self, 'ObservableDictionary')[name].Value
 
         def __setattr__(self, name, value):
-            """Redirects lookup to the ObservableDictionary's fields.
-            """
+            """Redirect lookup to the ObservableDictionary's fields."""
             object.__getattribute__(self, 'ObservableDictionary')[name].Value = value
 
     return HaloStruct
 
 plugin_classes = {}
 
+
 def load_plugins():
-    """Generates struct-wrapping classes based on xml plugins.
-    """
+    """Generate struct-wrapping classes based on xml plugins."""
     src_dir = os.path.dirname(os.path.abspath(__file__))
     plugins_dir = os.path.join(src_dir, 'plugins')
     for dirpath, dirnames, files in os.walk(plugins_dir):

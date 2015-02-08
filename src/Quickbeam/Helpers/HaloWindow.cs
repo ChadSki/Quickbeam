@@ -29,8 +29,8 @@ namespace Quickbeam.Helpers
             MaxHeight = _haloHeight;
 
             _hwndHost = NativeMethods.CreateWindowEx(
-                0, "static", "",
-                NativeMethods.WsChild | NativeMethods.WsVisible | NativeMethods.WsClipChildren,
+                0, "static", null,
+                NativeMethods.WsChild | NativeMethods.WsClipChildren,
                 0, 0,
                 _haloWidth, _haloHeight,
                 hwndParent.Handle,

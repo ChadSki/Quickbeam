@@ -22,7 +22,6 @@
                 <ColumnDefinition Width="126" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="18" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -30,6 +29,9 @@
                 <RowDefinition Height="24" />
                 <RowDefinition Height="24" />
                 
+                <RowDefinition Height="18" />
+                <RowDefinition Height="Auto" />
+
                 <RowDefinition Height="18" />
                 <RowDefinition Height="Auto" />
 
@@ -65,27 +67,31 @@
                        FontFamily="{DynamicResource MetroFontSemiLight}" />
 
             <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,4,0,0"
-                       Text="halo.exe Path:" Foreground="White"
+                       Text="Halo PC Path:" Foreground="White"
                        FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="6"
-                     HorizontalAlignment="Stretch" Text="{Binding HaloExePath, Mode=TwoWay}" />
-            <Button Grid.Column="4" Grid.Row="6" Margin="12,0,0,0" Width="75" HorizontalAlignment="Left"
-                    Click="BtnBrowseHaloExe_Click" Content="Browse..." />
+            <TextBlock Grid.Column="2" Grid.Row="6" Margin="0,4,0,0" Grid.ColumnSpan="2" 
+                       HorizontalAlignment="Stretch" Text="{Binding HaloExePath, Mode=OneTime}" />
 
-            <TextBlock Grid.Column="1" Grid.Row="8"
+            <TextBlock Grid.Column="1" Grid.Row="8" Margin="0,4,0,0"
+                       Text="Halo PC Version" Foreground="White"
+                       FontFamily="{DynamicResource MetroFontRegular}" />
+            <TextBlock Grid.Column="2" Grid.Row="8"  Margin="0,4,0,0" Grid.ColumnSpan="2" 
+                       HorizontalAlignment="Stretch" Text="{Binding HaloVersion, Mode=OneTime}" />
+
+            <TextBlock Grid.Column="1" Grid.Row="10"
                        Text="Docked Resolution:" Foreground="White" Margin="0,4,0,0"
                        FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBox Grid.Column="2" Grid.Row="8"
+            <TextBox Grid.Column="2" Grid.Row="10"
                      Width="54" Text="{Binding HaloWidth, Mode=TwoWay}"
                      HorizontalAlignment="Left" />
-            <TextBlock Grid.Column="2" Grid.Row="8"
+            <TextBlock Grid.Column="2" Grid.Row="10"
                        Text="x" Foreground="White" FontFamily="{DynamicResource MetroFontRegular}"
                        HorizontalAlignment="Center" />
-            <TextBox Grid.Column="2" Grid.Row="8"
+            <TextBox Grid.Column="2" Grid.Row="10"
                      Width="54" Text="{Binding HaloHeight, Mode=TwoWay}"
                      HorizontalAlignment="Right" />
 
-            <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="10"
+            <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="12"
                     Height="30" HorizontalAlignment="Stretch"
                     Click="BtnLaunchHalo_Click" Content="Launch Halo" />
         </Grid>
