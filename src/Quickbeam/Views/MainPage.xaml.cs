@@ -46,11 +46,18 @@ namespace Quickbeam.Views
 
 	    public void RemoveHaloPage()
 	    {
-            var haloPages = HaloGrid.Children.OfType<HaloView>().ToList();
-            foreach (var child in haloPages)
+            var haloViews = HaloGrid.Children.OfType<HaloView>().ToList();
+            foreach (var child in haloViews)
                 HaloGrid.Children.Remove(child);
             HorizontalGridSplitter.IsEnabled = true;
             VerticalGridSplitter.IsEnabled = true;
 	    }
+
+        public void RemoveSublPage()
+        {
+            var sublViews = SublGrid.Children.OfType<SublView>().ToList();
+            foreach (var child in sublViews)
+                SublGrid.Children.Remove(child);
+        }
 	}
 }

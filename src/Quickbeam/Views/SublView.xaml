@@ -11,10 +11,8 @@
         <Grid Name="OuterHaloGrid"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
-            <helpers:SublWindow Width="{Binding ElementName=OuterHaloGrid,Path=ActualWidth}"
-                                Height="{Binding ElementName=OuterHaloGrid,Path=ActualHeight}"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"/>
+            <helpers:SublWindow HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
         </Grid>
     </helpers:DpiDecorator>
 </UserControl>

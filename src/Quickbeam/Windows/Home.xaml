@@ -81,7 +81,7 @@
                 <Rectangle Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                            Fill="{DynamicResource AssemblyAccentBrush}" Height="1.3" SnapsToDevicePixels="True"/>
 
-                <ContentPresenter Grid.Row="1" Name="ContentPresenter" Content="{Binding Path=AssemblyPage}" />
+                <ContentPresenter Grid.Row="1" Name="ContentPresenter" Content="{Binding Path=MainPage}" />
             </Grid>
         </Border>
 

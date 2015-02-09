@@ -24,7 +24,7 @@ namespace Quickbeam.Windows
 
 			ViewModel = new HomeViewModel();
 			DataContext = App.Storage.HomeWindowViewModel = ViewModel;
-			ViewModel.AssemblyPage = new MainPage();
+			ViewModel.MainPage = new MainPage();
             Helper = new WindowInteropHelper(this);
 
 			Closing += OnClosing;
@@ -32,7 +32,7 @@ namespace Quickbeam.Windows
 
 		private static void OnClosing(object sender, CancelEventArgs cancelEventArgs)
 		{
-			cancelEventArgs.Cancel = !App.Storage.HomeWindowViewModel.AssemblyPage.Close();
+			cancelEventArgs.Cancel = !App.Storage.HomeWindowViewModel.MainPage.Close();
 		}
 
 		protected override void OnStateChanged(EventArgs e)

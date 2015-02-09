@@ -18,8 +18,42 @@ namespace Quickbeam.Native
             WsThickframe = 0x00040000,
             WsVisible = 0x10000000;
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        #region Structs
+
+        public struct WndClassEx
+        {
+
+            [MarshalAs(UnmanagedType.U4)]
+            public int cbSize;
+            [MarshalAs(UnmanagedType.U4)]
+            public int style;
+            public IntPtr lpfnWndProc; // not WndProc
+            public int cbClsExtra;
+            public int cbWndExtra;
+            public IntPtr hInstance;
+            public IntPtr hIcon;
+            public IntPtr hCursor;
+            public IntPtr hbrBackground;
+            public string lpszMenuName;
+            public string lpszClassName;
+            public IntPtr hIconSm;
+
+            // Use this function to make a new one with cbSize already filled in.
+            //For example:
+            //var WndClss = WndClassEx.Build()
+            public static WndClassEx Build()
+            {
+                var nw = new WndClassEx();
+                nw.cbSize = Marshal.SizeOf(typeof(WndClassEx));
+                return nw;
+            }
+
+        }
+
+        #endregion Structs
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateSolidBrush(uint crColor);
 
         [DllImport("user32.dll", EntryPoint = "CreateWindowEx", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CreateWindowEx(int dwExStyle, string lpszClassName, string lpszWindowName, int style,
@@ -27,8 +61,18 @@ namespace Quickbeam.Native
                                                      IntPtr hwndParent, IntPtr hMenu, IntPtr hInst,
                                                      [MarshalAs(UnmanagedType.AsAny)] object pvParam);
 
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern Boolean GetClassInfoEx(IntPtr hInstance, String lpClassName, ref WndClassEx lpWndClass);
+
         [DllImport("user32.dll", SetLastError = true)]
         public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.U2)]
+        public static extern short RegisterClassEx([In] ref WndClassEx lpwcx);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Interop;
 using Quickbeam.Native;
 using Quickbeam.Views;
@@ -14,18 +15,12 @@ namespace Quickbeam.Helpers
     {
         private IntPtr _hwndHost;
         private Process _sublProcess;
-        private int _sublWidth;
-        private int _sublHeight;
+
+        private int _sublWidth = 200;
+        private int _sublHeight = 200;
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as MainPage;
-            if (replPage == null) throw new Exception("Unable to locate ReplPage");
-            _sublWidth = replPage.ViewModel.HaloWidth;
-            _sublHeight = replPage.ViewModel.HaloHeight;
-            MaxWidth = _sublWidth;
-            MaxHeight = _sublHeight;
-
             _hwndHost = NativeMethods.CreateWindowEx(
                 0, "static", null,
                 NativeMethods.WsChild | NativeMethods.WsClipChildren,
@@ -63,11 +58,27 @@ namespace Quickbeam.Helpers
             return new HandleRef(this, _hwndHost);
         }
 
+        protected override void OnWindowPositionChanged(Rect r)
+        {
+            _sublWidth = (int)r.Width;
+            _sublHeight = (int)r.Height;
+
+            NativeMethods.SetWindowPos(_hwndHost, IntPtr.Zero, 0, 0, _sublWidth, _sublHeight,
+                NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+
+            // this might still be under construction
+            if (_sublProcess != null && _sublProcess.MainWindowHandle != null)
+            {
+                NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _sublWidth, _sublHeight,
+                    NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+            }
+        }
+
         private void _sublProcess_Exited(object sender, EventArgs e)
         {
-            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as MainPage;
-            if (replPage == null) return;
-            replPage.Dispatcher.Invoke(replPage.RemoveHaloPage);
+            var mainPage = App.Storage.HomeWindowViewModel.MainPage as MainPage;
+            if (mainPage == null) return;
+            mainPage.Dispatcher.Invoke(mainPage.RemoveSublPage);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)

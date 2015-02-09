@@ -87,7 +87,7 @@ namespace Quickbeam.ViewModels
 
         private IView _assemblyPage;
 
-        public IView AssemblyPage
+        public IView MainPage
         {
             get { return _assemblyPage; }
             set

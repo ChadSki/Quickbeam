@@ -20,10 +20,10 @@ namespace Quickbeam.Helpers
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as MainPage;
-            if (replPage == null) throw new Exception("Unable to locate ReplPage");
-            _haloWidth = replPage.ViewModel.HaloWidth;
-            _haloHeight = replPage.ViewModel.HaloHeight;
+            var mainPage = App.Storage.HomeWindowViewModel.MainPage as MainPage;
+            if (mainPage == null) throw new Exception("Unable to locate ReplPage");
+            _haloWidth = mainPage.ViewModel.HaloWidth;
+            _haloHeight = mainPage.ViewModel.HaloHeight;
             MaxWidth = _haloWidth;
             MaxHeight = _haloHeight;
 
@@ -77,7 +77,7 @@ namespace Quickbeam.Helpers
 
         private void _haloProcess_Exited(object sender, EventArgs e)
         {
-            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as MainPage;
+            var replPage = App.Storage.HomeWindowViewModel.MainPage as MainPage;
             if (replPage == null) return;
             replPage.Dispatcher.Invoke(replPage.RemoveHaloPage);
         }
