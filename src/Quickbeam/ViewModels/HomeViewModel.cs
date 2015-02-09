@@ -85,9 +85,9 @@ namespace Quickbeam.ViewModels
 
         #region Content
 
-        private IAssemblyPage _assemblyPage;
+        private IView _assemblyPage;
 
-        public IAssemblyPage AssemblyPage
+        public IView AssemblyPage
         {
             get { return _assemblyPage; }
             set

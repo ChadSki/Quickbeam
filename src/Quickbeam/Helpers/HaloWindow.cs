@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Interop;
-using Quickbeam.Low.ByteArray;
 using Quickbeam.Native;
 using Quickbeam.Views;
 
@@ -21,7 +20,7 @@ namespace Quickbeam.Helpers
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as ReplPage;
+            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as MainPage;
             if (replPage == null) throw new Exception("Unable to locate ReplPage");
             _haloWidth = replPage.ViewModel.HaloWidth;
             _haloHeight = replPage.ViewModel.HaloHeight;
@@ -71,12 +70,6 @@ namespace Quickbeam.Helpers
                 // resize
                 NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _haloWidth, _haloHeight,
                     NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
-
-                // force video rendering
-                const int exeOffset = 0x400000;
-                const int wmkillHandlerOffset = exeOffset + 0x142538;
-                var wmkillHandler = new WinMemoryByteArrayBuilder(@"halo").CreateByteArray(wmkillHandlerOffset, 4);
-                wmkillHandler.WriteBytes(0, new byte[] { 0xe9, 0x91, 0x00, 0x00 });
             });
 
             return new HandleRef(this, _hwndHost);
@@ -84,7 +77,7 @@ namespace Quickbeam.Helpers
 
         private void _haloProcess_Exited(object sender, EventArgs e)
         {
-            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as ReplPage;
+            var replPage = App.Storage.HomeWindowViewModel.AssemblyPage as MainPage;
             if (replPage == null) return;
             replPage.Dispatcher.Invoke(replPage.RemoveHaloPage);
         }

@@ -10,11 +10,11 @@ namespace Quickbeam.Views
 	/// <summary>
 	/// Interaction logic for StartPage.xaml
 	/// </summary>
-	public partial class ReplPage : IAssemblyPage
+	public partial class MainPage : IView
 	{
 		public ReplPageViewModel ViewModel { get; private set; }
 
-		public ReplPage()
+		public MainPage()
 		{
 			InitializeComponent();
 
@@ -36,16 +36,17 @@ namespace Quickbeam.Views
                 {
                     HorizontalGridSplitter.IsEnabled = false;
                     VerticalGridSplitter.IsEnabled = false;
-                    HaloGrid.Children.Add(new HaloPage());
+                    HaloGrid.Children.Add(new HaloView());
+                    SublGrid.Children.Add(new SublView());
                     return;
                 }
             }
-            MetroMessageBox.Show("Cannot Launch Halo", "Check your halo.exe path in Settings.");
+            MetroMessageBox.Show("Cannot Launch Halo", "Halo.exe path does not point to a file.");
 	    }
 
 	    public void RemoveHaloPage()
 	    {
-            var haloPages = HaloGrid.Children.OfType<HaloPage>().ToList();
+            var haloPages = HaloGrid.Children.OfType<HaloView>().ToList();
             foreach (var child in haloPages)
                 HaloGrid.Children.Remove(child);
             HorizontalGridSplitter.IsEnabled = true;

@@ -24,7 +24,7 @@ namespace Quickbeam.Windows
 
 			ViewModel = new HomeViewModel();
 			DataContext = App.Storage.HomeWindowViewModel = ViewModel;
-			ViewModel.AssemblyPage = new ReplPage();
+			ViewModel.AssemblyPage = new MainPage();
             Helper = new WindowInteropHelper(this);
 
 			Closing += OnClosing;
@@ -66,10 +66,11 @@ namespace Quickbeam.Windows
         }
 
         private const int WM_SYSCOMMAND = 0x112;
+        private const int SC_SIZE = 61440;
 
         private void ResizeWindow(ResizeDirection direction)
         {
-            SendMessage(Helper.Handle, WM_SYSCOMMAND, (IntPtr)(61440 + direction), IntPtr.Zero);
+            SendMessage(Helper.Handle, WM_SYSCOMMAND, (IntPtr)(SC_SIZE + direction), IntPtr.Zero);
         }
 
         private void ResizeTop(object sender, MouseButtonEventArgs e) { ResizeWindow(ResizeDirection.Top); }

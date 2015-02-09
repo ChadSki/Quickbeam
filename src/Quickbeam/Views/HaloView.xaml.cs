@@ -3,11 +3,17 @@
     /// <summary>
     /// Interaction logic for HaloPage.xaml
     /// </summary>
-    public partial class HaloPage
+    public partial class HaloView : IView
     {
-        public HaloPage()
+        public HaloView()
         {
             InitializeComponent();
+        }
+
+        public bool Close()
+        {
+            //TODO
+            return true;
         }
     }
 }
