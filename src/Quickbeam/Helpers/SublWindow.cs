@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Interop;
 using Quickbeam.Native;
 using Quickbeam.Views;
+using System.Reflection;
 
 namespace Quickbeam.Helpers
 {
@@ -34,7 +35,17 @@ namespace Quickbeam.Helpers
             // This code uses Thread.Sleep, so finish on a background thread
             Task.Factory.StartNew(() =>
             {
-                _sublProcess = Process.Start(new ProcessStartInfo(@"C:\Users\Chad\Desktop\Sublime Text Build 3065 x64\sublime_text.exe"));
+                // Execute Sublime Text with our included version of Python
+                var psi = new ProcessStartInfo(@"SublimeText3\sublime_text.exe")
+                    {
+                        UseShellExecute = false,
+                    };
+                var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var pythonDir = Path.Combine(quickbeamDir, "Python34");
+                psi.EnvironmentVariables["PATH"] = string.Format(@"{0}\;{0}\DLLs;{0}\Scripts;{1}",
+                    pythonDir, psi.EnvironmentVariables["PATH"]);
+
+                _sublProcess = Process.Start(psi);
                 _sublProcess.EnableRaisingEvents = true;
                 _sublProcess.Exited += _sublProcess_Exited;
 
@@ -51,8 +62,8 @@ namespace Quickbeam.Helpers
                 NativeMethods.ShowWindow(_sublProcess.MainWindowHandle, NativeMethods.SwShow);
 
                 // resize
-                NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _sublWidth, _sublHeight,
-                    NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+                NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
+                    _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
             });
 
             return new HandleRef(this, _hwndHost);
