@@ -1,14 +1,14 @@
-using System.IO;
+using Quickbeam.Native;
+using Quickbeam.Views;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
-using Quickbeam.Native;
-using Quickbeam.Views;
-using System.Reflection;
 
 namespace Quickbeam.Helpers
 {
@@ -50,7 +50,7 @@ namespace Quickbeam.Helpers
                 _sublProcess.Exited += _sublProcess_Exited;
 
                 _sublProcess.WaitForInputIdle();
-                Thread.Sleep(1800);
+                Thread.Sleep(800);
 
                 // remove control box
                 int style = NativeMethods.GetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle);

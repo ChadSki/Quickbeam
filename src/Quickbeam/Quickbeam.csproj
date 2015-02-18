@@ -77,6 +77,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -164,7 +168,6 @@
     <Compile Include="Dialogs\MetroMessageBox.cs" />
     <Compile Include="Dialogs\MetroMessageBoxList.cs" />
     <Compile Include="Helpers\DpiDecorator.cs" />
-    <Compile Include="Helpers\GithubApi.cs" />
     <Compile Include="Helpers\HaloWindow.cs" />
     <Compile Include="Helpers\SublWindow.cs" />
     <Compile Include="Native\NativeMethods.cs" />
@@ -200,9 +203,6 @@
       <DependentUpon>RestoreModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Base.cs" />
-    <Compile Include="Models\CacheEditorNode.cs" />
-    <Compile Include="Models\Github\GitHubRequest.cs" />
-    <Compile Include="Models\Github\PluginRevisionHistory.cs" />
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\MonitorWorkarea.cs" />
     <Compile Include="Native\ShellChanges.cs" />
@@ -240,14 +240,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="quickbeam.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="Metro\Controls\Custom\MetroDialogWindow.cs" />
-    <Content Include="IronPythonConsole.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -514,7 +512,9 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>("$(SolutionDir)..\tools\robocopy.exe" "$(SolutionDir)..\vendor" "$(TargetDir)."  /MIR /Z) ^&amp; IF %25ERRORLEVEL%25 LEQ 1 exit 0</PreBuildEvent>
+    <PreBuildEvent>echo Copying vendor files to output dir...
+("$(SolutionDir)..\tools\robocopy.exe" "$(SolutionDir)..\vendor" "$(TargetDir)."  /MIR /Z) ^&amp; IF %25ERRORLEVEL%25 LEQ 1 exit 0
+echo Copy complete</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

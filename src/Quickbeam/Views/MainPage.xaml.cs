@@ -19,6 +19,7 @@ namespace Quickbeam.Views
 			InitializeComponent();
 
             DataContext = ViewModel = new ReplPageViewModel();
+            AddSublPage();
 		}
 
 		public bool Close()
@@ -37,12 +38,16 @@ namespace Quickbeam.Views
                     HorizontalGridSplitter.IsEnabled = false;
                     VerticalGridSplitter.IsEnabled = false;
                     HaloGrid.Children.Add(new HaloView());
-                    SublGrid.Children.Add(new SublView());
                     return;
                 }
             }
             MetroMessageBox.Show("Cannot Launch Halo", "Halo.exe path does not point to a file.");
 	    }
+
+        public void AddSublPage()
+        {
+            SublGrid.Children.Add(new SublView());
+        }
 
 	    public void RemoveHaloPage()
 	    {

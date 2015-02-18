@@ -61,9 +61,12 @@ namespace Quickbeam.Helpers
         {
             get
             {
-                return Registry.GetValue(
+                var x = Registry.GetValue(
                     @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo",
-                    @"EXE Path", @"").ToString() + @"\halo.exe";
+                    @"EXE Path", @"");
+
+                if (x == null) return @"Halo is not installed";
+                else return x.ToString() + @"\halo.exe";
             }
         }
 
@@ -71,9 +74,12 @@ namespace Quickbeam.Helpers
         {
             get
             {
-                return Registry.GetValue(
+                var x = Registry.GetValue(
                     @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo",
-                    @"Version", @"").ToString();
+                    @"Version", @"");
+
+                if (x == null) return @"Halo is not installed";
+                else return x.ToString();
             }
         }
 
