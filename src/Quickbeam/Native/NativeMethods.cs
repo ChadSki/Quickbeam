@@ -7,6 +7,7 @@ namespace Quickbeam.Native
     {
         public const int
             GwlStyle = -16,
+            SwHide = 0,
             SwShow = 5,
             SwpNoActivate = 0x0010,
             SwpNoZOrder = 0x0004,

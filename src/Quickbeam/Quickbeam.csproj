@@ -78,8 +78,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>quickbeam.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Drawing" />
@@ -512,9 +511,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>echo Copying vendor files to output dir...
-("$(SolutionDir)..\tools\robocopy.exe" "$(SolutionDir)..\vendor" "$(TargetDir)."  /MIR /Z) ^&amp; IF %25ERRORLEVEL%25 LEQ 1 exit 0
-echo Copy complete</PreBuildEvent>
+    <PreBuildEvent>(robocopy.exe "$(SolutionDir)..\vendor" "$(TargetDir)."  /MIR /Z) ^&amp; IF %25ERRORLEVEL%25 LEQ 1 exit 0</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

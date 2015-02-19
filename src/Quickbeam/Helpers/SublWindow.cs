@@ -9,19 +9,55 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using System.Linq;
 
 namespace Quickbeam.Helpers
 {
     public class SublWindow : HwndHost
     {
+        private string SublimeTextPath = Path.GetFullPath(@"SublimeText3\sublime_text.exe");
         private IntPtr _hwndHost;
         private Process _sublProcess;
-
         private int _sublWidth = 200;
         private int _sublHeight = 200;
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
+            // iterate processes named sublime_text.exe and kill those based out of our path
+            foreach (var subl_exe in Process.GetProcessesByName("sublime_text"))
+            {
+                if (subl_exe.MainModule.FileName == Path.GetFullPath(SublimeTextPath))
+                {
+                    subl_exe.Kill();
+                }
+            }
+
+            // Execute bundled Sublime Text with bundled Python on the path
+            var psi = new ProcessStartInfo(SublimeTextPath)
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                };
+            var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var pythonDir = Path.Combine(quickbeamDir, "Python34");
+            psi.EnvironmentVariables["PATH"] = string.Format(@"{0}\;{0}\DLLs;{0}\Scripts;{1}",
+                pythonDir, psi.EnvironmentVariables["PATH"]);
+
+            _sublProcess = Process.Start(psi);
+            _sublProcess.EnableRaisingEvents = true;
+            _sublProcess.Exited += _sublProcess_Exited;
+
+            // hide window as soon as possible
+            while (_sublProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }  // TODO - bad practice to do this on the GUI thread?
+            NativeMethods.ShowWindow(_sublProcess.MainWindowHandle, NativeMethods.SwHide);
+
+            // remove control box
+            int style = NativeMethods.GetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle)
+                        & ~NativeMethods.WsCaption & ~NativeMethods.WsThickframe;
+            NativeMethods.SetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle, style);
+
+            // create host window
             _hwndHost = NativeMethods.CreateWindowEx(
                 0, "static", null,
                 NativeMethods.WsChild | NativeMethods.WsClipChildren,
@@ -32,39 +68,13 @@ namespace Quickbeam.Helpers
                 IntPtr.Zero,
                 0);
 
-            // This code uses Thread.Sleep, so finish on a background thread
-            Task.Factory.StartNew(() =>
-            {
-                // Execute Sublime Text with our included version of Python
-                var psi = new ProcessStartInfo(@"SublimeText3\sublime_text.exe")
-                    {
-                        UseShellExecute = false,
-                    };
-                var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var pythonDir = Path.Combine(quickbeamDir, "Python34");
-                psi.EnvironmentVariables["PATH"] = string.Format(@"{0}\;{0}\DLLs;{0}\Scripts;{1}",
-                    pythonDir, psi.EnvironmentVariables["PATH"]);
+            // reveal and relocate into host window
+            NativeMethods.SetParent(_sublProcess.MainWindowHandle, _hwndHost);
+            NativeMethods.ShowWindow(_sublProcess.MainWindowHandle, NativeMethods.SwShow);
 
-                _sublProcess = Process.Start(psi);
-                _sublProcess.EnableRaisingEvents = true;
-                _sublProcess.Exited += _sublProcess_Exited;
-
-                _sublProcess.WaitForInputIdle();
-                Thread.Sleep(800);
-
-                // remove control box
-                int style = NativeMethods.GetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle);
-                style = style & ~NativeMethods.WsCaption & ~NativeMethods.WsThickframe;
-                NativeMethods.SetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle, style);
-
-                // reveal and relocate into our window
-                NativeMethods.SetParent(_sublProcess.MainWindowHandle, _hwndHost);
-                NativeMethods.ShowWindow(_sublProcess.MainWindowHandle, NativeMethods.SwShow);
-
-                // resize
-                NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
-                    _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
-            });
+            // resize
+            NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
+                _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
 
             return new HandleRef(this, _hwndHost);
         }
