@@ -75,15 +75,11 @@ namespace Quickbeam.Helpers
             _sublWidth = (int)r.Width;
             _sublHeight = (int)r.Height;
 
-            NativeMethods.SetWindowPos(_hwndHost, IntPtr.Zero, 0, 0, _sublWidth, _sublHeight,
-                NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+            NativeMethods.SetWindowPos(_hwndHost,
+                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
 
-            // this might still be under construction
-            if (_sublProcess != null && _sublProcess.MainWindowHandle != null)
-            {
-                NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _sublWidth, _sublHeight,
-                    NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
-            }
+            NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle,
+                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
         }
 
         private void _sublProcess_Exited(object sender, EventArgs e)

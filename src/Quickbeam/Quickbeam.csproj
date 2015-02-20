@@ -460,52 +460,6 @@
       <All>True</All>
       <AutoFill>True</AutoFill>
     </BlendEmbeddedFont>
-    <Resource Include="Metro\Images\app_icon_large.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\app_icon_large.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\background_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\DockPaneImageTile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\logo_small.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Placeholder\c_m20.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Placeholder\c_sc110.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Placeholder\m_riverworld.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Placeholder\wargames_z11_valhalla.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\settings_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\super_patcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Vectored\freezeVector.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Vectored\rebootVector.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Vectored\screenshotVector.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\Vectored\unfreezeVector.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Metro\Images\container-title-loop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
