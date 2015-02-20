@@ -15,9 +15,9 @@ namespace Quickbeam.Helpers
 {
     public class SublWindow : HwndHost
     {
-        private string SublimeTextPath = Path.GetFullPath(@"SublimeText3\sublime_text.exe");
         private IntPtr _hwndHost;
         private Process _sublProcess;
+        private string _sublPath = Path.GetFullPath(@"SublimeText3\sublime_text.exe");
         private int _sublWidth = 200;
         private int _sublHeight = 200;
 
@@ -26,22 +26,18 @@ namespace Quickbeam.Helpers
             // iterate processes named sublime_text.exe and kill those based out of our path
             foreach (var subl_exe in Process.GetProcessesByName("sublime_text"))
             {
-                if (subl_exe.MainModule.FileName == Path.GetFullPath(SublimeTextPath))
+                if (subl_exe.MainModule.FileName == Path.GetFullPath(_sublPath))
                 {
                     subl_exe.Kill();
                 }
             }
 
-            // Execute bundled Sublime Text with bundled Python on the path
-            var psi = new ProcessStartInfo(SublimeTextPath)
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                };
+            var psi = new ProcessStartInfo(_sublPath) { UseShellExecute = false };
+
+            // prepend bundled Python to path
             var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var pythonDir = Path.Combine(quickbeamDir, "Python34");
-            psi.EnvironmentVariables["PATH"] = string.Format(@"{0}\;{0}\DLLs;{0}\Scripts;{1}",
+            psi.EnvironmentVariables["PATH"] = string.Format(@"{0};{0}\DLLs;{0}\Scripts;{1}",
                 pythonDir, psi.EnvironmentVariables["PATH"]);
 
             _sublProcess = Process.Start(psi);
@@ -59,14 +55,9 @@ namespace Quickbeam.Helpers
 
             // create host window
             _hwndHost = NativeMethods.CreateWindowEx(
-                0, "static", null,
-                NativeMethods.WsChild | NativeMethods.WsClipChildren,
-                0, 0,
-                _sublWidth, _sublHeight,
-                hwndParent.Handle,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                0);
+                0, "static", null, NativeMethods.WsChild | NativeMethods.WsClipChildren,
+                0, 0, _sublWidth, _sublHeight, hwndParent.Handle,
+                IntPtr.Zero, IntPtr.Zero, 0);
 
             // reveal and relocate into host window
             NativeMethods.SetParent(_sublProcess.MainWindowHandle, _hwndHost);
