@@ -56,6 +56,8 @@ namespace Quickbeam.Helpers
                 _haloProcess.Exited += _haloProcess_Exited;
 
                 // wait for window
+                _haloProcess.WaitForInputIdle();
+                // we still might not have it yet...
                 while (_haloProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }
 
                 // remove control box
