@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using Quickbeam.Dialogs.Controls;
-using Quickbeam.ViewModels.Dialog;
+using Quickbeam.ViewModels;
 
 namespace Quickbeam.Dialogs
 {

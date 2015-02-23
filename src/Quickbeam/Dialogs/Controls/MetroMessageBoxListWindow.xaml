@@ -7,7 +7,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:native="clr-namespace:Quickbeam.Native"
 		xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
-		xmlns:dialog="clr-namespace:Quickbeam.ViewModels.Dialog"
+                          xmlns:viewModels="clr-namespace:Quickbeam.ViewModels"
 		mc:Ignorable="d" native:WindowMovement.IsDraggable="True"
 		MaxWidth="455" MinWidth="455"
 		Style="{StaticResource MetroDialogWindowStyle}">
@@ -28,7 +28,7 @@
 
 		<ScrollViewer Grid.Row="1" Margin="0,20" VerticalScrollBarVisibility="Auto">
 			<StackPanel>
-				<TextBlock Margin="15,5" Text="{Binding Path=(dialog:MessageBoxListViewModel.Message), Mode=OneWay, FallbackValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor auctor arcu sit amet adipiscing. Vestibulum nec aliquet massa, at pellentesque leo. Curabitur non fermentum diam, ut faucibus nulla. Nulla placerat orci elit, eu bibendum justo dignissim id. Quisque vel. '}" 
+				<TextBlock Margin="15,5" Text="{Binding Path=(viewModels:MessageBoxListViewModel.Message), Mode=OneWay, FallbackValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor auctor arcu sit amet adipiscing. Vestibulum nec aliquet massa, at pellentesque leo. Curabitur non fermentum diam, ut faucibus nulla. Nulla placerat orci elit, eu bibendum justo dignissim id. Quisque vel. '}" 
 						   TextWrapping="Wrap" />
 
 				<ListBox x:Name="ListBox" Margin="20,12,20,0" Background="Transparent" />

@@ -1,4 +1,4 @@
-﻿namespace Quickbeam.ViewModels.Dialog
+﻿namespace Quickbeam.ViewModels
 {
 	public class BusyAlertBoxViewModel : Base
 	{

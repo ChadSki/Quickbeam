@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Quickbeam.Dialogs;
 
-namespace Quickbeam.ViewModels.Dialog
+namespace Quickbeam.ViewModels
 {
 	public class MessageBoxViewModel : Base
 	{

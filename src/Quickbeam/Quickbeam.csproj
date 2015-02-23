@@ -165,9 +165,9 @@
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\MonitorWorkarea.cs" />
     <Compile Include="Native\WindowMovement.cs" />
-    <Compile Include="ViewModels\Dialog\BusyAlertBoxViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\MessageBoxListViewModel.cs" />
-    <Compile Include="ViewModels\Dialog\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModels\BusyAlertBoxViewModel.cs" />
+    <Compile Include="ViewModels\MessageBoxListViewModel.cs" />
+    <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
     </Compile>

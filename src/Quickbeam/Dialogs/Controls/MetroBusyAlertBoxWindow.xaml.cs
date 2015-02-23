@@ -1,4 +1,4 @@
-﻿using Quickbeam.ViewModels.Dialog;
+﻿using Quickbeam.ViewModels;
 
 namespace Quickbeam.Dialogs.Controls
 {

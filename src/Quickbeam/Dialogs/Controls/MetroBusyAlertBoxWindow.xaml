@@ -6,8 +6,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:native="clr-namespace:Quickbeam.Native"
-		xmlns:dialog="clr-namespace:Quickbeam.ViewModels.Dialog"
-		mc:Ignorable="d" native:WindowMovement.IsDraggable="True"
+                          mc:Ignorable="d" native:WindowMovement.IsDraggable="True"
 		MaxWidth="455" MinWidth="455"
 		Style="{StaticResource MetroDialogWindowStyle}">
 	<Grid>
