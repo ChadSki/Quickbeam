@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Quickbeam.Models
+namespace Quickbeam.ViewModels
 {
 	/// <summary>
 	/// A class that utalizes <see cref="INotifyPropertyChanged"/>, allowing for easy addition of databinding to any addition model.

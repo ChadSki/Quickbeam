@@ -1,6 +1,5 @@
 ﻿using System.CodeDom;
 using System.Windows;
-using Quickbeam.Models;
 using Quickbeam.Native;
 
 namespace Quickbeam.ViewModels

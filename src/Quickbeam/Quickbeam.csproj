@@ -133,8 +133,8 @@
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
-    <Compile Include="Metro\Controls\Converters\ScrollbarOnFarLeftConverter.cs" />
-    <Compile Include="Metro\Controls\Converters\ScrollbarOnFarRightConverter.cs" />
+    <Compile Include="Converters\ScrollbarOnFarLeftConverter.cs" />
+    <Compile Include="Converters\ScrollbarOnFarRightConverter.cs" />
     <Compile Include="Metro\Controls\Custom\MetroClosableTabControl.cs" />
     <Compile Include="Metro\Controls\Custom\MetroClosableTabItem.cs" />
     <Compile Include="Metro\Controls\Custom\MetroContainer.cs" />
@@ -161,7 +161,7 @@
     <Compile Include="Metro\Vectors\RestoreModule.xaml.cs">
       <DependentUpon>RestoreModule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Base.cs" />
+    <Compile Include="ViewModels\Base.cs" />
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\MonitorWorkarea.cs" />
     <Compile Include="Native\WindowMovement.cs" />

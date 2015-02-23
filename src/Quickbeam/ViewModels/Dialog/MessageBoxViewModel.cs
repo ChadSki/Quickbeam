@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Quickbeam.Dialogs;
-using Quickbeam.Models;
 
 namespace Quickbeam.ViewModels.Dialog
 {

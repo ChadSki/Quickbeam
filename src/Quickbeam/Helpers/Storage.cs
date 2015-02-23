@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using Quickbeam.Models;
 using Quickbeam.ViewModels;
 using Quickbeam.Windows;
 using Newtonsoft.Json;

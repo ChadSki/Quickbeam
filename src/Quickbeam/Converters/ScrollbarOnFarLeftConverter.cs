@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Quickbeam.Metro.Controls.Converters
+namespace Quickbeam.Converters
 {
 	public class ScrollbarOnFarLeftConverter : IValueConverter
 	{

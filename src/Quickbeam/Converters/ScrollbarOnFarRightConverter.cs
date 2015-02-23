@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace Quickbeam.Metro.Controls.Converters
+namespace Quickbeam.Converters
 {
 	public class ScrollbarOnFarRightConverter : IMultiValueConverter
 	{
