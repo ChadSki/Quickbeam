@@ -164,7 +164,6 @@
     <Compile Include="Models\Base.cs" />
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\MonitorWorkarea.cs" />
-    <Compile Include="Native\ShellChanges.cs" />
     <Compile Include="Native\WindowMovement.cs" />
     <Compile Include="ViewModels\Dialog\BusyAlertBoxViewModel.cs" />
     <Compile Include="ViewModels\Dialog\MessageBoxListViewModel.cs" />

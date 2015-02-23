@@ -69,16 +69,16 @@ namespace Quickbeam.Native
         public struct Rect
         {
             /// <summary> Win32 </summary>
-            public int left;
+            public readonly int left;
 
             /// <summary> Win32 </summary>
-            public int top;
+            public readonly int top;
 
             /// <summary> Win32 </summary>
-            public int right;
+            public readonly int right;
 
             /// <summary> Win32 </summary>
-            public int bottom;
+            public readonly int bottom;
 
             /// <summary> Win32 </summary>
             public static readonly Rect Empty = new Rect();
@@ -131,18 +131,21 @@ namespace Quickbeam.Native
                 {
                     return "RECT {Empty}";
                 }
-                return "RECT { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom +
-                       " }";
+                return "RECT { left : " + left + " / top : " + top +
+                    " / right : " + right + " / bottom : " + bottom + " }";
             }
 
             /// <summary> Determine if 2 RECT are equal (deep compare) </summary>
             public override bool Equals(object obj)
             {
-                if (!(obj is System.Windows.Rect))
+                try
+                {
+                    return this == (Rect)obj;
+                }
+                catch (InvalidCastException)
                 {
                     return false;
                 }
-                return (this == (Rect) obj);
             }
 
             /// <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>
