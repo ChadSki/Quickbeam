@@ -133,7 +133,6 @@
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
-    <Compile Include="Helpers\VariousFunctions.cs" />
     <Compile Include="Metro\Controls\Converters\ScrollbarOnFarLeftConverter.cs" />
     <Compile Include="Metro\Controls\Converters\ScrollbarOnFarRightConverter.cs" />
     <Compile Include="Metro\Controls\Custom\MetroClosableTabControl.cs" />
