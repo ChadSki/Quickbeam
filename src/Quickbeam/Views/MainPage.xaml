@@ -19,7 +19,7 @@
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="126" />
+                <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="18" />
@@ -63,23 +63,23 @@
                        FontSize="32" />
 
             <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,0,0,0"
-                       Text="Halo Settings" Foreground="{DynamicResource AssemblyAccentBrush}" FontSize="18"
+                       Text="Halo PC Settings" Foreground="{DynamicResource AssemblyAccentBrush}" FontSize="18"
                        FontFamily="{DynamicResource MetroFontSemiLight}" />
 
             <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,4,0,0"
-                       Text="Halo PC Path:" Foreground="White"
+                       Text="Path:" Foreground="White"
                        FontFamily="{DynamicResource MetroFontRegular}" />
             <TextBlock Grid.Column="2" Grid.Row="6" Margin="0,4,0,0" Grid.ColumnSpan="2" 
                        HorizontalAlignment="Stretch" Text="{Binding HaloExePath, Mode=OneTime}" />
 
             <TextBlock Grid.Column="1" Grid.Row="8" Margin="0,4,0,0"
-                       Text="Halo PC Version" Foreground="White"
+                       Text="Version" Foreground="White"
                        FontFamily="{DynamicResource MetroFontRegular}" />
             <TextBlock Grid.Column="2" Grid.Row="8"  Margin="0,4,0,0" Grid.ColumnSpan="2" 
                        HorizontalAlignment="Stretch" Text="{Binding HaloVersion, Mode=OneTime}" />
 
             <TextBlock Grid.Column="1" Grid.Row="10"
-                       Text="Docked Resolution:" Foreground="White" Margin="0,4,0,0"
+                       Text="Resolution:" Foreground="White" Margin="0,4,0,0"
                        FontFamily="{DynamicResource MetroFontRegular}" />
             <TextBox Grid.Column="2" Grid.Row="10"
                      Width="54" Text="{Binding HaloWidth, Mode=TwoWay}"

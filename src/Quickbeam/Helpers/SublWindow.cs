@@ -1,3 +1,4 @@
+using System.Linq;
 using Quickbeam.Native;
 using Quickbeam.Views;
 using System;
@@ -5,11 +6,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
-using System.Linq;
 
 namespace Quickbeam.Helpers
 {
@@ -17,28 +15,28 @@ namespace Quickbeam.Helpers
     {
         private IntPtr _hwndHost;
         private Process _sublProcess;
-        private string _sublPath = Path.GetFullPath(@"SublimeText3\sublime_text.exe");
+        private readonly string _sublPath = Path.GetFullPath(@"SublimeText3\sublime_text.exe");
         private int _sublWidth = 200;
         private int _sublHeight = 200;
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
             // iterate processes named sublime_text.exe and kill those based out of our path
-            foreach (var subl_exe in Process.GetProcessesByName("sublime_text"))
+            foreach (var sublExe in Process.GetProcessesByName("sublime_text")
+                .Where(sublExe => sublExe.MainModule.FileName == Path.GetFullPath(_sublPath)))
             {
-                if (subl_exe.MainModule.FileName == Path.GetFullPath(_sublPath))
-                {
-                    subl_exe.Kill();
-                }
+                sublExe.Kill();
             }
 
             var psi = new ProcessStartInfo(_sublPath) { UseShellExecute = false };
 
             // prepend bundled Python to path
             var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (quickbeamDir == null) throw new FileNotFoundException("Can't find the Quickbeam directory?");
+            psi.EnvironmentVariables["QUICKBEAMDIR"] = quickbeamDir;
             var pythonDir = Path.Combine(quickbeamDir, "Python34");
-            psi.EnvironmentVariables["PATH"] = string.Format(@"{0};{0}\DLLs;{0}\Scripts;{1}",
-                pythonDir, psi.EnvironmentVariables["PATH"]);
+            psi.EnvironmentVariables["PATH"] =
+                string.Format(@"{0};{0}\DLLs;{0}\Scripts;{1}", pythonDir, psi.EnvironmentVariables["PATH"]);
 
             _sublProcess = Process.Start(psi);
             _sublProcess.EnableRaisingEvents = true;
