@@ -1,14 +1,12 @@
-﻿using System.IO;
+﻿using Quickbeam.Native;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Interop;
-using Quickbeam.Native;
-using Quickbeam.Views;
 
-namespace Quickbeam.Embedded
+namespace Quickbeam.Views
 {
     public class HaloWindow : HwndHost
     {
@@ -20,7 +18,7 @@ namespace Quickbeam.Embedded
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            var mainPage = App.Storage.HomeWindowViewModel.MainPage as MainPage;
+            var mainPage = App.Storage.MainPage as MainPage;
             if (mainPage == null) throw new Exception("Unable to locate ReplPage");
             _haloWidth = mainPage.ViewModel.HaloWidth;
             _haloHeight = mainPage.ViewModel.HaloHeight;
@@ -79,7 +77,7 @@ namespace Quickbeam.Embedded
 
         private void _haloProcess_Exited(object sender, EventArgs e)
         {
-            var replPage = App.Storage.HomeWindowViewModel.MainPage as MainPage;
+            var replPage = App.Storage.MainPage as MainPage;
             if (replPage == null) return;
             replPage.Dispatcher.Invoke(replPage.RemoveHaloPage);
         }

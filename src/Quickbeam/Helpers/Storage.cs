@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Quickbeam.Interfaces;
 using Quickbeam.ViewModels;
 using Quickbeam.Windows;
 using System.Diagnostics;
@@ -68,8 +69,6 @@ namespace Quickbeam.Helpers
             }
         }
 
-        /// <summary>
-        /// </summary>
         public Settings Settings
         {
             get { return _settings; }
@@ -87,14 +86,6 @@ namespace Quickbeam.Helpers
         }
         private Settings _settings = new Settings();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Home HomeWindow { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public HomeViewModel HomeWindowViewModel { get; set; }
+        public IView MainPage { get; set; }
     }
 }

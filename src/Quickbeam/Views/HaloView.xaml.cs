@@ -1,4 +1,6 @@
-﻿namespace Quickbeam.Views
+﻿using Quickbeam.Interfaces;
+
+namespace Quickbeam.Views
 {
     /// <summary>
     /// Interaction logic for HaloPage.xaml

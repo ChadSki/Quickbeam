@@ -20,11 +20,8 @@ namespace Quickbeam.Windows
 		public Home()
 		{
 			InitializeComponent();
-			App.Storage.HomeWindow = this;
-
-			ViewModel = new HomeViewModel();
-			DataContext = App.Storage.HomeWindowViewModel = ViewModel;
-			ViewModel.MainPage = new MainPage();
+            DataContext = ViewModel = new HomeViewModel();
+            App.Storage.MainPage = ViewModel.MainPage = new MainPage();
             Helper = new WindowInteropHelper(this);
 
 			Closing += OnClosing;
@@ -32,7 +29,7 @@ namespace Quickbeam.Windows
 
 		private static void OnClosing(object sender, CancelEventArgs cancelEventArgs)
 		{
-			cancelEventArgs.Cancel = !App.Storage.HomeWindowViewModel.MainPage.Close();
+			cancelEventArgs.Cancel = !App.Storage.MainPage.Close();
 		}
 
 		protected override void OnStateChanged(EventArgs e)

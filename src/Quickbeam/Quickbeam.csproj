@@ -145,9 +145,8 @@
     <Compile Include="Converters\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Converters\LowercaseConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
-    <Compile Include="Embedded\DpiDecorator.cs" />
-    <Compile Include="Embedded\HaloWindow.cs" />
-    <Compile Include="Embedded\SublWindow.cs" />
+    <Compile Include="Interfaces\Base.cs" />
+    <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Native\NativeApi.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
@@ -179,13 +178,13 @@
     <Compile Include="Metro\Vectors\RestoreModule.xaml.cs">
       <DependentUpon>RestoreModule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Base.cs" />
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\WindowMovement.cs" />
+    <Compile Include="Views\DpiDecorator.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IView.cs" />
+    <Compile Include="Views\HaloWindow.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -194,6 +193,7 @@
     <Compile Include="Views\SublView.xaml.cs">
       <DependentUpon>SublView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SublWindow.cs" />
     <Compile Include="Windows\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

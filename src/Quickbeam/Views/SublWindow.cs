@@ -1,15 +1,14 @@
-using System.Linq;
 using Quickbeam.Native;
-using Quickbeam.Views;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace Quickbeam.Embedded
+namespace Quickbeam.Views
 {
     public class SublWindow : HwndHost
     {
@@ -82,7 +81,7 @@ namespace Quickbeam.Embedded
 
         private void _sublProcess_Exited(object sender, EventArgs e)
         {
-            var mainPage = App.Storage.HomeWindowViewModel.MainPage as MainPage;
+            var mainPage = App.Storage.MainPage as MainPage;
             if (mainPage == null) return;
             mainPage.Dispatcher.Invoke(mainPage.RemoveSublPage);
         }

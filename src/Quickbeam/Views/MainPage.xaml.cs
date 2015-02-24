@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Linq;
+﻿using Quickbeam.Interfaces;
 using Quickbeam.ViewModels;
+using System.IO;
+using System.Linq;
 using System.Windows;
-using System.Windows.Forms;
 
 namespace Quickbeam.Views
 {

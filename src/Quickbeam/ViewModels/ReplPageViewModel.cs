@@ -1,6 +1,6 @@
-﻿using System.CodeDom;
-using System.Windows;
+﻿using Quickbeam.Interfaces;
 using Quickbeam.Native;
+using System.Windows;
 
 namespace Quickbeam.ViewModels
 {

@@ -1,4 +1,4 @@
-﻿using Quickbeam.Views;
+﻿using Quickbeam.Interfaces;
 using System;
 using System.Windows;
 using System.Windows.Threading;
