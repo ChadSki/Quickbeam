@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Quickbeam.Helpers
+namespace Quickbeam.Embedded
 {
     public class DpiDecorator : Decorator
     {

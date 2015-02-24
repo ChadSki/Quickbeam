@@ -10,52 +10,52 @@ using System.Windows;
 
 namespace Quickbeam.Helpers
 {
-	public class Settings : INotifyPropertyChanged
-	{
-		public Settings()
-		{
-		}
+    public class Settings : INotifyPropertyChanged
+    {
+        public Settings()
+        {
+        }
 
-		// UI
-		private Accent _assemblyAccent = Accent.Orange;
-		[JsonIgnore]
-		public bool Loaded { get; set; }
+        // UI
+        private Accent _assemblyAccent = Accent.Orange;
+        [JsonIgnore]
+        public bool Loaded { get; set; }
 
-		[JsonIgnore]
-		public bool Changed { get; set; }
+        [JsonIgnore]
+        public bool Changed { get; set; }
 
 
-		#region User Interface
+        #region User Interface
 
-		public Accent AssemblyAccent
-		{
-			get { return _assemblyAccent; }
-			set
-			{
-				SetField(ref _assemblyAccent, value);
+        public Accent AssemblyAccent
+        {
+            get { return _assemblyAccent; }
+            set
+            {
+                SetField(ref _assemblyAccent, value);
 
-				// set accent
-				var accent =
-					CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Enum.Parse(typeof (Accent), _assemblyAccent.ToString()).ToString());
+                // set accent
+                var accent =
+                    CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Enum.Parse(typeof (Accent), _assemblyAccent.ToString()).ToString());
 
-				try
-				{
-					Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
-					{
-						Source = new Uri("/Quickbeam;component/Metro/Accents/" + accent + ".xaml", UriKind.Relative)
-					});
-				}
-				catch
-				{
-					Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
-					{
-						Source = new Uri("/Quickbeam;component/Metro/Accents/Orange.xaml", UriKind.Relative)
-					});
-				}
-			}
-		}
+                try
+                {
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
+                    {
+                        Source = new Uri("/Quickbeam;component/Metro/Accents/" + accent + ".xaml", UriKind.Relative)
+                    });
+                }
+                catch
+                {
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
+                    {
+                        Source = new Uri("/Quickbeam;component/Metro/Accents/Orange.xaml", UriKind.Relative)
+                    });
+                }
+            }
+        }
 
-		#endregion
+        #endregion
 
         public string HaloExePath
         {
@@ -83,50 +83,50 @@ namespace Quickbeam.Helpers
             }
         }
 
-		public enum Accent
-		{
-			Blue,
-			Green,
-			Orange,
-			Purple
-		}
+        public enum Accent
+        {
+            Blue,
+            Green,
+            Orange,
+            Purple
+        }
 
-		#region Inpc
+        #region Inpc
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-		public bool SetField<T>(ref T field, T value,
-			[CallerMemberName] string propertyName = "", bool overrideChecks = false)
-		{
-			return SetFieldExplicit(ref field, value, propertyName, overrideChecks);
-		}
+        public bool SetField<T>(ref T field, T value,
+            [CallerMemberName] string propertyName = "", bool overrideChecks = false)
+        {
+            return SetFieldExplicit(ref field, value, propertyName, overrideChecks);
+        }
 
-		public bool SetFieldExplicit<T>(ref T field, T value, 
-			string propertyName, bool overrideChecks)
-		{
-			if (!overrideChecks)
-				if (EqualityComparer<T>.Default.Equals(field, value))
-					return false;
+        public bool SetFieldExplicit<T>(ref T field, T value, 
+            string propertyName, bool overrideChecks)
+        {
+            if (!overrideChecks)
+                if (EqualityComparer<T>.Default.Equals(field, value))
+                    return false;
 
-			Changed = true;
-			field = value;
-			OnPropertyChanged(propertyName);
+            Changed = true;
+            field = value;
+            OnPropertyChanged(propertyName);
 
-			if (!Loaded)
-				return true;
+            if (!Loaded)
+                return true;
 
-			// Write Changes
-			var jsonData = JsonConvert.SerializeObject(this);
-			File.WriteAllText(Storage.SettingsPath, jsonData);
+            // Write Changes
+            var jsonData = JsonConvert.SerializeObject(this);
+            File.WriteAllText(Storage.SettingsPath, jsonData);
 
-			return true;
-		}
+            return true;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

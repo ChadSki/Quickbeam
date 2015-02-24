@@ -145,21 +145,9 @@
     <Compile Include="Converters\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Converters\LowercaseConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
-    <Compile Include="Dialogs\Controls\MetroBusyAlertBoxWindow.xaml.cs">
-      <DependentUpon>MetroBusyAlertBoxWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Controls\MetroMessageBoxListWindow.xaml.cs">
-      <DependentUpon>MetroMessageBoxListWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Controls\MetroMessageBoxWindow.xaml.cs">
-      <DependentUpon>MetroMessageBoxWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\MetroBusyAlertBox.cs" />
-    <Compile Include="Dialogs\MetroMessageBox.cs" />
-    <Compile Include="Dialogs\MetroMessageBoxList.cs" />
-    <Compile Include="Helpers\DpiDecorator.cs" />
-    <Compile Include="Helpers\HaloWindow.cs" />
-    <Compile Include="Helpers\SublWindow.cs" />
+    <Compile Include="Embedded\DpiDecorator.cs" />
+    <Compile Include="Embedded\HaloWindow.cs" />
+    <Compile Include="Embedded\SublWindow.cs" />
     <Compile Include="Native\NativeApi.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
@@ -194,9 +182,6 @@
     <Compile Include="ViewModels\Base.cs" />
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\WindowMovement.cs" />
-    <Compile Include="ViewModels\BusyAlertBoxViewModel.cs" />
-    <Compile Include="ViewModels\MessageBoxListViewModel.cs" />
-    <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
     </Compile>
@@ -244,18 +229,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Dialogs\Controls\MetroBusyAlertBoxWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\Controls\MetroMessageBoxListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\Controls\MetroMessageBoxWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Metro\Accents\Blue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

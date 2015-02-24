@@ -1,34 +1,33 @@
 ﻿using System.IO;
 using System.Linq;
-using Quickbeam.Dialogs;
 using Quickbeam.ViewModels;
 using System.Windows;
 using System.Windows.Forms;
 
 namespace Quickbeam.Views
 {
-	/// <summary>
-	/// Interaction logic for StartPage.xaml
-	/// </summary>
-	public partial class MainPage : IView
-	{
-		public ReplPageViewModel ViewModel { get; private set; }
+    /// <summary>
+    /// Interaction logic for StartPage.xaml
+    /// </summary>
+    public partial class MainPage : IView
+    {
+        public ReplPageViewModel ViewModel { get; private set; }
 
-		public MainPage()
-		{
-			InitializeComponent();
+        public MainPage()
+        {
+            InitializeComponent();
 
             DataContext = ViewModel = new ReplPageViewModel();
             AddSublPage();
-		}
+        }
 
-		public bool Close()
-		{
-			return true;
-		}
+        public bool Close()
+        {
+            return true;
+        }
 
-	    private void BtnLaunchHalo_Click(object sender, RoutedEventArgs e)
-	    {
+        private void BtnLaunchHalo_Click(object sender, RoutedEventArgs e)
+        {
             var haloExePath = App.Storage.Settings.HaloExePath;
             if (File.Exists(haloExePath))
             {
@@ -41,22 +40,21 @@ namespace Quickbeam.Views
                     return;
                 }
             }
-            MetroMessageBox.Show("Cannot Launch Halo", "Halo.exe path does not point to a file.");
-	    }
+        }
 
         public void AddSublPage()
         {
             SublGrid.Children.Add(new SublView());
         }
 
-	    public void RemoveHaloPage()
-	    {
+        public void RemoveHaloPage()
+        {
             var haloViews = HaloGrid.Children.OfType<HaloView>().ToList();
             foreach (var child in haloViews)
                 HaloGrid.Children.Remove(child);
             HorizontalGridSplitter.IsEnabled = true;
             VerticalGridSplitter.IsEnabled = true;
-	    }
+        }
 
         public void RemoveSublPage()
         {
@@ -64,5 +62,5 @@ namespace Quickbeam.Views
             foreach (var child in sublViews)
                 SublGrid.Children.Remove(child);
         }
-	}
+    }
 }

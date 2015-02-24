@@ -8,7 +8,7 @@ using System.Windows.Interop;
 using Quickbeam.Native;
 using Quickbeam.Views;
 
-namespace Quickbeam.Helpers
+namespace Quickbeam.Embedded
 {
     public class HaloWindow : HwndHost
     {

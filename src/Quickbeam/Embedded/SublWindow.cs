@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace Quickbeam.Helpers
+namespace Quickbeam.Embedded
 {
     public class SublWindow : HwndHost
     {

@@ -135,7 +135,7 @@ namespace Quickbeam.ViewModels
 
         private int _maskCount;
 
-        public void ShowDialog(bool showMask = true)
+        public void ShowDialogMask(bool showMask = true)
         {
             if (showMask)
                 _maskCount++;
@@ -144,7 +144,7 @@ namespace Quickbeam.ViewModels
                 MaskVisibility = Visibility.Visible;
         }
 
-        public void HideDialog(bool maskShown = true)
+        public void HideDialogMask(bool maskShown = true)
         {
             if (maskShown)
                 _maskCount--;
