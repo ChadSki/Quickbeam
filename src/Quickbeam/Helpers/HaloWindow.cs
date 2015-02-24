@@ -27,9 +27,9 @@ namespace Quickbeam.Helpers
             MaxWidth = _haloWidth;
             MaxHeight = _haloHeight;
 
-            _hwndHost = NativeMethods.CreateWindowEx(
+            _hwndHost = NativeApi.CreateWindowEx(
                 0, "static", null,
-                NativeMethods.WsChild | NativeMethods.WsClipChildren,
+                NativeApi.WsChild | NativeApi.WsClipChildren,
                 0, 0,
                 _haloWidth, _haloHeight,
                 hwndParent.Handle,
@@ -61,17 +61,17 @@ namespace Quickbeam.Helpers
                 while (_haloProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }
 
                 // remove control box
-                int style = NativeMethods.GetWindowLong(_haloProcess.MainWindowHandle, NativeMethods.GwlStyle);
-                style = style & ~NativeMethods.WsCaption & ~NativeMethods.WsThickframe;
-                NativeMethods.SetWindowLong(_haloProcess.MainWindowHandle, NativeMethods.GwlStyle, style);
+                int style = NativeApi.GetWindowLong(_haloProcess.MainWindowHandle, NativeApi.GwlStyle);
+                style = style & ~NativeApi.WsCaption & ~NativeApi.WsThickframe;
+                NativeApi.SetWindowLong(_haloProcess.MainWindowHandle, NativeApi.GwlStyle, style);
 
                 // reveal and relocate into our window
-                NativeMethods.SetParent(_haloProcess.MainWindowHandle, _hwndHost);
-                NativeMethods.ShowWindow(_haloProcess.MainWindowHandle, NativeMethods.SwShow);
+                NativeApi.SetParent(_haloProcess.MainWindowHandle, _hwndHost);
+                NativeApi.ShowWindow(_haloProcess.MainWindowHandle, NativeApi.SwShow);
 
                 // resize
-                NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _haloWidth, _haloHeight,
-                    NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+                NativeApi.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _haloWidth, _haloHeight,
+                    NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
             });
 
             return new HandleRef(this, _hwndHost);

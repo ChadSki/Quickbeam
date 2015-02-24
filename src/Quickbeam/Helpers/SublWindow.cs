@@ -44,26 +44,26 @@ namespace Quickbeam.Helpers
 
             // hide window as soon as possible
             while (_sublProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }  // TODO - bad practice to do this on the GUI thread?
-            NativeMethods.ShowWindow(_sublProcess.MainWindowHandle, NativeMethods.SwHide);
+            NativeApi.ShowWindow(_sublProcess.MainWindowHandle, NativeApi.SwHide);
 
             // remove control box
-            int style = NativeMethods.GetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle)
-                        & ~NativeMethods.WsCaption & ~NativeMethods.WsThickframe;
-            NativeMethods.SetWindowLong(_sublProcess.MainWindowHandle, NativeMethods.GwlStyle, style);
+            int style = NativeApi.GetWindowLong(_sublProcess.MainWindowHandle, NativeApi.GwlStyle)
+                        & ~NativeApi.WsCaption & ~NativeApi.WsThickframe;
+            NativeApi.SetWindowLong(_sublProcess.MainWindowHandle, NativeApi.GwlStyle, style);
 
             // create host window
-            _hwndHost = NativeMethods.CreateWindowEx(
-                0, "static", null, NativeMethods.WsChild | NativeMethods.WsClipChildren,
+            _hwndHost = NativeApi.CreateWindowEx(
+                0, "static", null, NativeApi.WsChild | NativeApi.WsClipChildren,
                 0, 0, _sublWidth, _sublHeight, hwndParent.Handle,
                 IntPtr.Zero, IntPtr.Zero, 0);
 
             // reveal and relocate into host window
-            NativeMethods.SetParent(_sublProcess.MainWindowHandle, _hwndHost);
-            NativeMethods.ShowWindow(_sublProcess.MainWindowHandle, NativeMethods.SwShow);
+            NativeApi.SetParent(_sublProcess.MainWindowHandle, _hwndHost);
+            NativeApi.ShowWindow(_sublProcess.MainWindowHandle, NativeApi.SwShow);
 
             // resize
-            NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
-                _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+            NativeApi.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
+                _sublWidth, _sublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
 
             return new HandleRef(this, _hwndHost);
         }
@@ -73,11 +73,11 @@ namespace Quickbeam.Helpers
             _sublWidth = (int)r.Width;
             _sublHeight = (int)r.Height;
 
-            NativeMethods.SetWindowPos(_hwndHost,
-                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+            NativeApi.SetWindowPos(_hwndHost,
+                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
 
-            NativeMethods.SetWindowPos(_sublProcess.MainWindowHandle,
-                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
+            NativeApi.SetWindowPos(_sublProcess.MainWindowHandle,
+                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
         }
 
         private void _sublProcess_Exited(object sender, EventArgs e)

@@ -41,12 +41,12 @@ namespace Quickbeam.Metro.Controls.Custom
 
             // Adjust the maximized size and position to fit the work area of the correct monitor
             const int monitorDefaultToNearest = 0x00000002;
-            var monitor = NativeMethods.MonitorFromWindow(hwnd, monitorDefaultToNearest);
+            var monitor = NativeApi.MonitorFromWindow(hwnd, monitorDefaultToNearest);
 
             if (monitor != IntPtr.Zero)
             {
                 var monitorInfo = new MonitorInfo();
-                NativeMethods.GetMonitorInfo(monitor, monitorInfo);
+                NativeApi.GetMonitorInfo(monitor, monitorInfo);
                 var rcWorkArea = monitorInfo.rcWork;
                 var rcMonitorArea = monitorInfo.rcMonitor;
                 mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
