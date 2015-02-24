@@ -37,16 +37,16 @@ namespace Quickbeam.Metro.Controls.Custom
 
         private void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
         {
-            var mmi = (MonitorWorkarea.MinMaxInfo) Marshal.PtrToStructure(lParam, typeof (MonitorWorkarea.MinMaxInfo));
+            var mmi = (MinMaxInfo) Marshal.PtrToStructure(lParam, typeof (MinMaxInfo));
 
             // Adjust the maximized size and position to fit the work area of the correct monitor
-            const int monitorDefaulttonearest = 0x00000002;
-            var monitor = MonitorWorkarea.MonitorFromWindow(hwnd, monitorDefaulttonearest);
+            const int monitorDefaultToNearest = 0x00000002;
+            var monitor = NativeMethods.MonitorFromWindow(hwnd, monitorDefaultToNearest);
 
             if (monitor != IntPtr.Zero)
             {
-                var monitorInfo = new MonitorWorkarea.MonitorInfo();
-                MonitorWorkarea.GetMonitorInfo(monitor, monitorInfo);
+                var monitorInfo = new MonitorInfo();
+                NativeMethods.GetMonitorInfo(monitor, monitorInfo);
                 var rcWorkArea = monitorInfo.rcWork;
                 var rcMonitorArea = monitorInfo.rcMonitor;
                 mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
