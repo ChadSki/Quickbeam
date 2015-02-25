@@ -190,7 +190,7 @@
       <DependentUpon>SublView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SublWindow.cs" />
-    <Compile Include="Windows\Home.xaml.cs">
+    <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -381,7 +381,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Home.xaml">
+    <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

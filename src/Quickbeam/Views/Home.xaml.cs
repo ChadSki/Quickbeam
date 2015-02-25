@@ -1,16 +1,12 @@
 ﻿using Quickbeam.ViewModels;
-using Quickbeam.Views;
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace Quickbeam.Windows
+namespace Quickbeam.Views
 {
-    /// <summary>
-    /// Interaction logic for Home.xaml
-    /// </summary>
     public partial class Home
     {
         private HomeViewModel ViewModel { get; set; }
