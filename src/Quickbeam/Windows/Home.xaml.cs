@@ -1,10 +1,8 @@
-﻿using Quickbeam.Helpers;
-using Quickbeam.ViewModels;
+﻿using Quickbeam.ViewModels;
 using Quickbeam.Views;
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 
@@ -15,21 +13,21 @@ namespace Quickbeam.Windows
     /// </summary>
     public partial class Home
     {
-        public HomeViewModel ViewModel { get; private set; }
+        private HomeViewModel ViewModel { get; set; }
         private WindowInteropHelper Helper { get; set; }
 
         public Home()
         {
             InitializeComponent();
             DataContext = ViewModel = new HomeViewModel();
-            ViewModel.MainPage = Storage.MainPage = new MainPage();
+            ViewModel.MainPage = new MainPage();
             Helper = new WindowInteropHelper(this);
             Closing += OnClosing;
         }
 
-        private static void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
         {
-            cancelEventArgs.Cancel = !Storage.MainPage.Close();
+            cancelEventArgs.Cancel = !ViewModel.MainPage.Close();
         }
 
         protected override void OnStateChanged(EventArgs e)
@@ -48,7 +46,7 @@ namespace Quickbeam.Windows
         #region Resizing
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         private enum ResizeDirection
         {
@@ -62,12 +60,12 @@ namespace Quickbeam.Windows
             BottomRight = 8,
         }
 
-        private const int WM_SYSCOMMAND = 0x112;
-        private const int SC_SIZE = 61440;
+        private const int WmSyscommand = 0x112;
+        private const int ScSize = 61440;
 
         private void ResizeWindow(ResizeDirection direction)
         {
-            SendMessage(Helper.Handle, WM_SYSCOMMAND, (IntPtr)(SC_SIZE + direction), IntPtr.Zero);
+            SendMessage(Helper.Handle, WmSyscommand, (IntPtr)(ScSize + direction), IntPtr.Zero);
         }
 
         private void ResizeTop(object sender, MouseButtonEventArgs e) { ResizeWindow(ResizeDirection.Top); }

@@ -144,7 +144,6 @@
     <Compile Include="Interfaces\Base.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Native\NativeApi.cs" />
-    <Compile Include="Helpers\Storage.cs" />
     <Compile Include="Converters\ScrollbarOnFarLeftConverter.cs" />
     <Compile Include="Converters\ScrollbarOnFarRightConverter.cs" />
     <Compile Include="Metro\Controls\Custom\MetroClosableTabControl.cs" />

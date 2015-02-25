@@ -9,19 +9,17 @@ namespace Quickbeam.ViewModels
     {
         public HomeViewModel()
         {
-            _statusResetTimer.Tick += (sender, args) => { Status = "Ready..."; };
+            StatusResetTimer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 5) };
+            StatusResetTimer.Tick += (sender, args) => { Status = "Ready..."; };
         }
 
         #region Properties
 
         #region Application Stuff
 
-        private readonly DispatcherTimer _statusResetTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 5)};
-        private Thickness _applicationBorderThickness;
+        private DispatcherTimer StatusResetTimer { get; set; }
 
-        private string _applicationTitle = "Welcome";
         private string _status = "Ready...";
-
         public string Status
         {
             get { return _status; }
@@ -30,12 +28,13 @@ namespace Quickbeam.ViewModels
                 if (!value.EndsWith("..."))
                     value += "...";
 
-                _statusResetTimer.Stop();
+                StatusResetTimer.Stop();
                 SetField(ref _status, value);
-                _statusResetTimer.Start();
+                StatusResetTimer.Start();
             }
         }
 
+        private Thickness _applicationBorderThickness;
         public Thickness ApplicationBorderThickness
         {
             get { return _applicationBorderThickness; }

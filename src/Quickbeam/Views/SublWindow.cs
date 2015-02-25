@@ -1,4 +1,3 @@
-using Quickbeam.Helpers;
 using Quickbeam.Native;
 using System;
 using System.Diagnostics;
@@ -13,22 +12,23 @@ namespace Quickbeam.Views
 {
     public class SublWindow : HwndHost
     {
-        private IntPtr _hwndHost;
-        private Process _sublProcess;
-        private readonly string _sublPath = Path.GetFullPath(@"SublimeText3\sublime_text.exe");
-        private int _sublWidth = 200;
-        private int _sublHeight = 200;
+        private IntPtr HwndHost { get; set; }
+        private Process SublProcess { get; set; }
+        private static string SublPath { get { return Path.GetFullPath(@"SublimeText3\sublime_text.exe"); } }
+
+        private int SublWidth { get; set; }
+        private int SublHeight { get; set; }
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
             // iterate processes named sublime_text.exe and kill those based out of our path
             foreach (var sublExe in Process.GetProcessesByName("sublime_text")
-                .Where(sublExe => sublExe.MainModule.FileName == Path.GetFullPath(_sublPath)))
+                .Where(sublExe => sublExe.MainModule.FileName == Path.GetFullPath(SublPath)))
             {
                 sublExe.Kill();
             }
 
-            var psi = new ProcessStartInfo(_sublPath) { UseShellExecute = false };
+            var psi = new ProcessStartInfo(SublPath) { UseShellExecute = false };
 
             // prepend bundled Python to path
             var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -38,64 +38,59 @@ namespace Quickbeam.Views
             psi.EnvironmentVariables["PATH"] =
                 string.Format(@"{0};{0}\DLLs;{0}\Scripts;{1}", pythonDir, psi.EnvironmentVariables["PATH"]);
 
-            _sublProcess = Process.Start(psi);
-            _sublProcess.EnableRaisingEvents = true;
-            _sublProcess.Exited += _sublProcess_Exited;
+            SublProcess = Process.Start(psi);
+            SublProcess.EnableRaisingEvents = true;
+            SublProcess.Exited += delegate { Application.Current.Dispatcher.Invoke(MainPage.RemoveSublPage); };
 
             // hide window as soon as possible
-            while (_sublProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }  // TODO - bad practice to do this on the GUI thread?
-            NativeApi.ShowWindow(_sublProcess.MainWindowHandle, NativeApi.SwHide);
+            while (SublProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }  // TODO - bad practice to do this on the GUI thread?
+            NativeApi.ShowWindow(SublProcess.MainWindowHandle, NativeApi.SwHide);
 
             // remove control box
-            int style = NativeApi.GetWindowLong(_sublProcess.MainWindowHandle, NativeApi.GwlStyle)
+            int style = NativeApi.GetWindowLong(SublProcess.MainWindowHandle, NativeApi.GwlStyle)
                         & ~NativeApi.WsCaption & ~NativeApi.WsThickframe;
-            NativeApi.SetWindowLong(_sublProcess.MainWindowHandle, NativeApi.GwlStyle, style);
+            NativeApi.SetWindowLong(SublProcess.MainWindowHandle, NativeApi.GwlStyle, style);
 
             // create host window
-            _hwndHost = NativeApi.CreateWindowEx(
+            HwndHost = NativeApi.CreateWindowEx(
                 0, "static", null, NativeApi.WsChild | NativeApi.WsClipChildren,
-                0, 0, _sublWidth, _sublHeight, hwndParent.Handle,
+                0, 0, SublWidth, SublHeight, hwndParent.Handle,
                 IntPtr.Zero, IntPtr.Zero, 0);
 
             // reveal and relocate into host window
-            NativeApi.SetParent(_sublProcess.MainWindowHandle, _hwndHost);
-            NativeApi.ShowWindow(_sublProcess.MainWindowHandle, NativeApi.SwShow);
+            NativeApi.SetParent(SublProcess.MainWindowHandle, HwndHost);
+            NativeApi.ShowWindow(SublProcess.MainWindowHandle, NativeApi.SwShow);
 
             // resize
-            NativeApi.SetWindowPos(_sublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
-                _sublWidth, _sublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
+            NativeApi.SetWindowPos(SublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
+                SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
 
-            return new HandleRef(this, _hwndHost);
+            return new HandleRef(this, HwndHost);
         }
 
         protected override void OnWindowPositionChanged(Rect r)
         {
-            _sublWidth = (int)r.Width;
-            _sublHeight = (int)r.Height;
+            SublWidth = (int)r.Width;
+            SublHeight = (int)r.Height;
 
-            NativeApi.SetWindowPos(_hwndHost,
-                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
+            NativeApi.SetWindowPos(HwndHost,
+                IntPtr.Zero, 0, 0, SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
 
-            NativeApi.SetWindowPos(_sublProcess.MainWindowHandle,
-                IntPtr.Zero, 0, 0, _sublWidth, _sublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
-        }
-
-        private void _sublProcess_Exited(object sender, EventArgs e)
-        {
-            Storage.MainPage.Dispatcher.Invoke(Storage.MainPage.RemoveSublPage);
+            NativeApi.SetWindowPos(SublProcess.MainWindowHandle,
+                IntPtr.Zero, 0, 0, SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)
         {
-            if (_sublProcess == null) return;
-            _sublProcess.Close();
+            if (SublProcess == null) return;
+            SublProcess.Close();
         }
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            if (_sublProcess == null) return;
-            _sublProcess.Close();
+            if (SublProcess == null) return;
+            SublProcess.Close();
         }
     }
 }

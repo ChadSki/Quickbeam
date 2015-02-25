@@ -1,4 +1,4 @@
-﻿using Quickbeam.Helpers;
+﻿using System.Windows;
 using Quickbeam.Native;
 using System;
 using System.Diagnostics;
@@ -12,22 +12,22 @@ namespace Quickbeam.Views
     {
         private IntPtr _hwndHost;
         private Process _haloProcess;
-        private int _haloWidth;
-        private int _haloHeight;
+        private int HaloWidth { get; set; }
+        private int HaloHeight { get; set; }
         private const int RefreshRate = 60;
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            _haloWidth = Storage.MainPage.ViewModel.HaloWidth;
-            _haloHeight = Storage.MainPage.ViewModel.HaloHeight;
-            MaxWidth = _haloWidth;
-            MaxHeight = _haloHeight;
+            HaloWidth = MainPage.Instance.ViewModel.HaloWidth;
+            HaloHeight = MainPage.Instance.ViewModel.HaloHeight;
+            MaxWidth = HaloWidth;
+            MaxHeight = HaloHeight;
 
             _hwndHost = NativeApi.CreateWindowEx(
                 0, "static", null,
                 NativeApi.WsChild | NativeApi.WsClipChildren,
                 0, 0,
-                _haloWidth, _haloHeight,
+                HaloWidth, HaloHeight,
                 hwndParent.Handle,
                 IntPtr.Zero,
                 IntPtr.Zero,
@@ -39,11 +39,11 @@ namespace Quickbeam.Views
                 _haloProcess = Process.Start(new ProcessStartInfo(HaloSettings.HaloExePath)
                 {
                     WorkingDirectory = HaloSettings.HaloExeDir,
-                    Arguments = string.Format(@"-console -window -vidmode {0},{1},{2}", _haloWidth, _haloHeight, RefreshRate),
+                    Arguments = string.Format(@"-console -window -vidmode {0},{1},{2}", HaloWidth, HaloHeight, RefreshRate),
                     WindowStyle = ProcessWindowStyle.Minimized
                 });
                 _haloProcess.EnableRaisingEvents = true;
-                _haloProcess.Exited += _haloProcess_Exited;
+                _haloProcess.Exited += delegate { Application.Current.Dispatcher.Invoke(MainPage.RemoveHaloPage); };
 
                 // wait for window
                 _haloProcess.WaitForInputIdle();
@@ -60,16 +60,11 @@ namespace Quickbeam.Views
                 NativeApi.ShowWindow(_haloProcess.MainWindowHandle, NativeApi.SwShow);
 
                 // resize
-                NativeApi.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, _haloWidth, _haloHeight,
+                NativeApi.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, HaloWidth, HaloHeight,
                     NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
             });
 
             return new HandleRef(this, _hwndHost);
-        }
-
-        private void _haloProcess_Exited(object sender, EventArgs e)
-        {
-            Storage.MainPage.Dispatcher.Invoke(Storage.MainPage.RemoveHaloPage);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)

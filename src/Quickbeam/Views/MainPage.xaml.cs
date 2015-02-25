@@ -9,12 +9,13 @@ namespace Quickbeam.Views
 {
     public partial class MainPage : IView
     {
+        public static MainPage Instance { get; private set; }
         public MainPageViewModel ViewModel { get; private set; }
 
         public MainPage()
         {
             InitializeComponent();
-
+            Instance = this;
             DataContext = ViewModel = new MainPageViewModel();
             AddSublPage();
         }
@@ -40,20 +41,20 @@ namespace Quickbeam.Views
             SublGrid.Children.Add(new SublView());
         }
 
-        public void RemoveHaloPage()
+        public static void RemoveHaloPage()
         {
-            var haloViews = HaloGrid.Children.OfType<HaloView>().ToList();
+            var haloViews = Instance.HaloGrid.Children.OfType<HaloView>().ToList();
             foreach (var child in haloViews)
-                HaloGrid.Children.Remove(child);
-            HorizontalGridSplitter.IsEnabled = true;
-            VerticalGridSplitter.IsEnabled = true;
+                Instance.HaloGrid.Children.Remove(child);
+            Instance.HorizontalGridSplitter.IsEnabled = true;
+            Instance.VerticalGridSplitter.IsEnabled = true;
         }
 
-        public void RemoveSublPage()
+        public static void RemoveSublPage()
         {
-            var sublViews = SublGrid.Children.OfType<SublView>().ToList();
+            var sublViews = Instance.SublGrid.Children.OfType<SublView>().ToList();
             foreach (var child in sublViews)
-                SublGrid.Children.Remove(child);
+                Instance.SublGrid.Children.Remove(child);
         }
     }
 }
