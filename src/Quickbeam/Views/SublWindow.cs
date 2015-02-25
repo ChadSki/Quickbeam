@@ -1,3 +1,4 @@
+using Quickbeam.Helpers;
 using Quickbeam.Native;
 using System;
 using System.Diagnostics;
@@ -81,9 +82,7 @@ namespace Quickbeam.Views
 
         private void _sublProcess_Exited(object sender, EventArgs e)
         {
-            var mainPage = App.Storage.MainPage as MainPage;
-            if (mainPage == null) return;
-            mainPage.Dispatcher.Invoke(mainPage.RemoveSublPage);
+            Storage.MainPage.Dispatcher.Invoke(Storage.MainPage.RemoveSublPage);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)

@@ -1,4 +1,5 @@
-﻿using Quickbeam.ViewModels;
+﻿using Quickbeam.Helpers;
+using Quickbeam.ViewModels;
 using Quickbeam.Views;
 using System;
 using System.ComponentModel;
@@ -9,41 +10,40 @@ using System.Windows.Interop;
 
 namespace Quickbeam.Windows
 {
-	/// <summary>
-	/// Interaction logic for Home.xaml
-	/// </summary>
-	public partial class Home
-	{
-		public HomeViewModel ViewModel { get; private set; }
+    /// <summary>
+    /// Interaction logic for Home.xaml
+    /// </summary>
+    public partial class Home
+    {
+        public HomeViewModel ViewModel { get; private set; }
         private WindowInteropHelper Helper { get; set; }
 
-		public Home()
-		{
-			InitializeComponent();
+        public Home()
+        {
+            InitializeComponent();
             DataContext = ViewModel = new HomeViewModel();
-            App.Storage.MainPage = ViewModel.MainPage = new MainPage();
+            ViewModel.MainPage = Storage.MainPage = new MainPage();
             Helper = new WindowInteropHelper(this);
+            Closing += OnClosing;
+        }
 
-			Closing += OnClosing;
-		}
+        private static void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            cancelEventArgs.Cancel = !Storage.MainPage.Close();
+        }
 
-		private static void OnClosing(object sender, CancelEventArgs cancelEventArgs)
-		{
-			cancelEventArgs.Cancel = !App.Storage.MainPage.Close();
-		}
+        protected override void OnStateChanged(EventArgs e)
+        {
+            ViewModel.OnStateChanged(WindowState, e);
+            base.OnStateChanged(e);
+        }
 
-		protected override void OnStateChanged(EventArgs e)
-		{
-			ViewModel.OnStateChanged(WindowState, e);
-			base.OnStateChanged(e);
-		}
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            OnStateChanged(null);
 
-		protected override void OnSourceInitialized(EventArgs e)
-		{
-			OnStateChanged(null);
-
-			base.OnSourceInitialized(e);
-		}
+            base.OnSourceInitialized(e);
+        }
 
         #region Resizing
 

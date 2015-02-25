@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:Quickbeam.Views"
              mc:Ignorable="d"
              Background="#2d2d30"
-             d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData ReplPageViewModel}">
+             d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData MainPageViewModel}">
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding HaloGridWidth, Mode=TwoWay}" MinWidth="30" Name="LeftColumn" />

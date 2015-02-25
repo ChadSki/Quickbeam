@@ -1,7 +1,7 @@
-﻿using Quickbeam.Native;
+﻿using Quickbeam.Helpers;
+using Quickbeam.Native;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Interop;
@@ -18,10 +18,8 @@ namespace Quickbeam.Views
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            var mainPage = App.Storage.MainPage as MainPage;
-            if (mainPage == null) throw new Exception("Unable to locate ReplPage");
-            _haloWidth = mainPage.ViewModel.HaloWidth;
-            _haloHeight = mainPage.ViewModel.HaloHeight;
+            _haloWidth = Storage.MainPage.ViewModel.HaloWidth;
+            _haloHeight = Storage.MainPage.ViewModel.HaloHeight;
             MaxWidth = _haloWidth;
             MaxHeight = _haloHeight;
 
@@ -38,15 +36,9 @@ namespace Quickbeam.Views
             // This code takes a while (spin-wait), so finish on a background thread
             Task.Factory.StartNew(() =>
             {
-                var haloExePath = App.Storage.Settings.HaloExePath;
-                if (!File.Exists(haloExePath)) return;
-
-                var haloDirectory = Path.GetDirectoryName(haloExePath);
-                if (haloDirectory == null || !Directory.Exists(haloDirectory)) return;
-
-                _haloProcess = Process.Start(new ProcessStartInfo(haloExePath)
+                _haloProcess = Process.Start(new ProcessStartInfo(HaloSettings.HaloExePath)
                 {
-                    WorkingDirectory = haloDirectory,
+                    WorkingDirectory = HaloSettings.HaloExeDir,
                     Arguments = string.Format(@"-console -window -vidmode {0},{1},{2}", _haloWidth, _haloHeight, RefreshRate),
                     WindowStyle = ProcessWindowStyle.Minimized
                 });
@@ -77,9 +69,7 @@ namespace Quickbeam.Views
 
         private void _haloProcess_Exited(object sender, EventArgs e)
         {
-            var replPage = App.Storage.MainPage as MainPage;
-            if (replPage == null) return;
-            replPage.Dispatcher.Invoke(replPage.RemoveHaloPage);
+            Storage.MainPage.Dispatcher.Invoke(Storage.MainPage.RemoveHaloPage);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)

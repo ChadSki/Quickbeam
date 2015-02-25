@@ -4,22 +4,8 @@ using System.Windows;
 
 namespace Quickbeam.ViewModels
 {
-	public class ReplPageViewModel : Base
-	{
-		public ReplPageViewModel()
-		{
-		}
-
-        public string HaloExePath
-        {
-            get { return App.Storage.Settings.HaloExePath; }
-        }
-
-        public string HaloVersion
-        {
-            get { return App.Storage.Settings.HaloVersion; }
-        }
-
+    public class MainPageViewModel : Base
+    {
         private GridLength _haloWidth = new GridLength(0, GridUnitType.Auto);
         private GridLength _haloHeight = new GridLength(0, GridUnitType.Auto);
 
@@ -55,10 +41,10 @@ namespace Quickbeam.ViewModels
 
         private const int DefaultWidth = 640;
         private const int DefaultHeight = 480;
-	    private const int PixelsBorder = 4;
+        private const int PixelsBorder = 4;
 
-	    public int HaloWidth
-	    {
+        public int HaloWidth
+        {
             get { return DpiConversion.PointsToPixels(_haloWidth.Value, DpiConversion.Direction.Horizontal) - PixelsBorder; }
             set
             {
@@ -66,7 +52,7 @@ namespace Quickbeam.ViewModels
                     new GridLength(DpiConversion.PixelsToPoints(value + PixelsBorder, DpiConversion.Direction.Horizontal), GridUnitType.Pixel));
                 OnPropertyChanged("HaloGridWidth");
             }
-	    }
+        }
 
         public int HaloHeight
         {
@@ -78,5 +64,5 @@ namespace Quickbeam.ViewModels
                 OnPropertyChanged("HaloGridHeight");
             }
         }
-	}
+    }
 }

@@ -134,10 +134,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Converters\PercentileToDecimalConverter.cs" />
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />
     <Compile Include="Converters\StringToResourceConverter.cs" />
@@ -148,7 +144,6 @@
     <Compile Include="Interfaces\Base.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Native\NativeApi.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Storage.cs" />
     <Compile Include="Converters\ScrollbarOnFarLeftConverter.cs" />
     <Compile Include="Converters\ScrollbarOnFarRightConverter.cs" />
@@ -179,7 +174,9 @@
       <DependentUpon>RestoreModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Native\DpiConversion.cs" />
+    <Compile Include="Native\HaloSettings.cs" />
     <Compile Include="Native\WindowMovement.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Views\DpiDecorator.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
@@ -189,7 +186,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\ReplPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\SublView.xaml.cs">
       <DependentUpon>SublView.xaml</DependentUpon>
     </Compile>
