@@ -9,6 +9,9 @@ namespace Quickbeam.ViewModels
         private GridLength _haloWidth = new GridLength(0, GridUnitType.Auto);
         private GridLength _haloHeight = new GridLength(0, GridUnitType.Auto);
 
+        public static string HaloExePath { get { return HaloSettings.HaloExePath; } }
+        public static string HaloVersion { get { return HaloSettings.HaloVersion; } }
+
         public GridLength HaloGridWidth
         {
             get

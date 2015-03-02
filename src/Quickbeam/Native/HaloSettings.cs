@@ -4,13 +4,13 @@ namespace Quickbeam.Native
 {
     public static class HaloSettings
     {
+        public const string HaloRegistryKey = @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo";
+
         public static string HaloExeDir
         {
             get
             {
-                return (Registry.GetValue(
-                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo",
-                    "EXE Path", "") ?? ".").ToString();
+                return (Registry.GetValue(HaloRegistryKey, "EXE Path", ".") ?? ".").ToString();
             }
         }
 
@@ -23,9 +23,7 @@ namespace Quickbeam.Native
         {
             get
             {
-                return (Registry.GetValue(
-                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft Games\Halo",
-                    @"Version", @"") ?? "").ToString();
+                return (Registry.GetValue(HaloRegistryKey, "Version", "0") ?? "0").ToString();
             }
         }
     }
