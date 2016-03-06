@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam", "Quickbeam\Quic
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonBinding", "PythonBinding\PythonBinding.vcxproj", "{6735C990-59FD-4C22-B92C-9F907E73D9D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{16936A26-D633-4286-9AD6-CB2865ECB063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,22 @@ Global
 		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Release|x64.Build.0 = Release|x64
 		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Release|x86.ActiveCfg = Release|Win32
 		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Release|x86.Build.0 = Release|Win32
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|x64.Build.0 = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|x86.Build.0 = Debug|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|x64.ActiveCfg = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|x64.Build.0 = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|x86.ActiveCfg = Release|Any CPU
+		{16936A26-D633-4286-9AD6-CB2865ECB063}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
