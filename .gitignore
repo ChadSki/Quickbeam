@@ -46,6 +46,7 @@ pip-log.txt
 **.suo
 **.user
 **.sln.docstates
+**.opendb
 
 # Build results
 Debug/
