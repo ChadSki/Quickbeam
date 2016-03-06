@@ -3,6 +3,7 @@ using Quickbeam.Native;
 using Quickbeam.ViewModels;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 
 namespace Quickbeam.Views
@@ -55,6 +56,12 @@ namespace Quickbeam.Views
             var sublViews = Instance.SublGrid.Children.OfType<SublView>().ToList();
             foreach (var child in sublViews)
                 Instance.SublGrid.Children.Remove(child);
+        }
+
+        private void BtnRestartRepl_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveSublPage();
+            AddSublPage();
         }
     }
 }

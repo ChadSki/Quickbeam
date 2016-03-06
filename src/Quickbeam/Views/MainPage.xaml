@@ -112,10 +112,13 @@
                       VerticalAlignment="Bottom"
                       Background="#FF545456" Foreground="{x:Null}"
                       IsEnabled="True" />
-
-        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Name="SublGrid"
-              Width="{Binding VisibleWidth, Mode=OneWay}"
-              Height="{Binding VisibleHeight, Mode=OneWay}"/>
+        <DockPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button DockPanel.Dock="Top" Content="Restart Repl" Click="BtnRestartRepl_Click"/>
+            <Grid Name="SublGrid"
+                  Width="{Binding VisibleWidth, Mode=OneWay}"
+                  Height="{Binding VisibleHeight, Mode=OneWay}"/>
+        </DockPanel>
 
     </Grid>
 </UserControl>

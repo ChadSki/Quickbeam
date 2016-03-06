@@ -14,7 +14,7 @@ namespace Quickbeam.Views
     {
         private IntPtr HwndHost { get; set; }
         private Process SublProcess { get; set; }
-        private static string SublPath { get { return Path.GetFullPath(@"SublimeText3\sublime_text.exe"); } }
+        private static string SublPath { get { return Path.GetFullPath(@".\SublimeText3\sublime_text.exe"); } }
 
         private int SublWidth { get; set; }
         private int SublHeight { get; set; }
@@ -28,22 +28,24 @@ namespace Quickbeam.Views
                 sublExe.Kill();
             }
 
-            var psi = new ProcessStartInfo(SublPath) { UseShellExecute = false };
+            var quickbeamWorkingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var sublStartInfo = new ProcessStartInfo(SublPath)
+            {
+                UseShellExecute = false,
+                WorkingDirectory = quickbeamWorkingDir
+            };
+            // prepend bundled Python to path so SublimeREPL can find and launch it.
+            sublStartInfo.EnvironmentVariables["PATH"] =
+                string.Format(@"{0};{0}\DLLs;{0}\Scripts;{1}",
+                              Path.Combine(quickbeamWorkingDir, "Python34"),
+                              sublStartInfo.EnvironmentVariables["PATH"]);
 
-            // prepend bundled Python to path
-            var quickbeamDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (quickbeamDir == null) throw new FileNotFoundException("Can't find the Quickbeam directory?");
-            psi.EnvironmentVariables["QUICKBEAMDIR"] = quickbeamDir;
-            var pythonDir = Path.Combine(quickbeamDir, "Python34");
-            psi.EnvironmentVariables["PATH"] =
-                string.Format(@"{0};{0}\DLLs;{0}\Scripts;{1}", pythonDir, psi.EnvironmentVariables["PATH"]);
-
-            SublProcess = Process.Start(psi);
+            SublProcess = Process.Start(sublStartInfo);
             SublProcess.EnableRaisingEvents = true;
-            SublProcess.Exited += delegate { Application.Current.Dispatcher.Invoke(MainPage.RemoveSublPage); };
+            SublProcess.Exited += On_Exited;
 
-            // hide window as soon as possible
-            while (SublProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }  // TODO - bad practice to do this on the GUI thread?
+            // hide window as soon as possible (bad practice, but sublime text launches quickly)
+            while (SublProcess.MainWindowHandle == IntPtr.Zero) { /* spin */ }
             NativeApi.ShowWindow(SublProcess.MainWindowHandle, NativeApi.SwHide);
 
             // remove control box
@@ -53,9 +55,8 @@ namespace Quickbeam.Views
 
             // create host window
             HwndHost = NativeApi.CreateWindowEx(
-                0, "static", null, NativeApi.WsChild | NativeApi.WsClipChildren,
-                0, 0, SublWidth, SublHeight, hwndParent.Handle,
-                IntPtr.Zero, IntPtr.Zero, 0);
+                0, "static", null, NativeApi.WsChild | NativeApi.WsClipChildren, 0, 0,
+                SublWidth, SublHeight, hwndParent.Handle, IntPtr.Zero, IntPtr.Zero, 0);
 
             // reveal and relocate into host window
             NativeApi.SetParent(SublProcess.MainWindowHandle, HwndHost);
@@ -68,29 +69,42 @@ namespace Quickbeam.Views
             return new HandleRef(this, HwndHost);
         }
 
+        private void On_Exited(object sender, EventArgs e)
+        {
+            // avoid strange loops
+            SublProcess.Exited -= On_Exited;
+
+            // gui updates must happen on the main thread
+            Application.Current.Dispatcher.Invoke(Dispose);
+        }
+
         protected override void OnWindowPositionChanged(Rect r)
         {
             SublWidth = (int)r.Width;
             SublHeight = (int)r.Height;
 
-            NativeApi.SetWindowPos(HwndHost,
-                IntPtr.Zero, 0, 0, SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
+            NativeApi.SetWindowPos(HwndHost, IntPtr.Zero, 0, 0,
+                SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
 
-            NativeApi.SetWindowPos(SublProcess.MainWindowHandle,
-                IntPtr.Zero, 0, 0, SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
+            NativeApi.SetWindowPos(SublProcess.MainWindowHandle, IntPtr.Zero, 0, 0,
+                SublWidth, SublHeight, NativeApi.SwpNoZOrder | NativeApi.SwpNoActivate);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)
         {
-            if (SublProcess == null) return;
-            SublProcess.Close();
+            Dispose();
         }
 
         protected override void Dispose(bool disposing)
         {
+            try
+            {
+                if (!SublProcess.HasExited)
+                    SublProcess.Kill();
+                SublProcess.Close();
+            }
+            catch (InvalidOperationException) { /* shhh */ }
             base.Dispose(disposing);
-            if (SublProcess == null) return;
-            SublProcess.Close();
         }
     }
 }

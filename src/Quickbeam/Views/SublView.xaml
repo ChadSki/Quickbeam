@@ -11,7 +11,8 @@
         <Grid Name="OuterHaloGrid"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
-            <views:SublWindow HorizontalAlignment="Stretch"
+            <views:SublWindow x:Name="SublWindow"
+                              HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"/>
         </Grid>
     </views:DpiDecorator>
