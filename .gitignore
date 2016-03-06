@@ -1,7 +1,8 @@
 ############
-## Halo
+## Project-specific
 ############
 *.map
+/vendor
 
 #############
 ## Python

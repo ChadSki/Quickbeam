@@ -31,16 +31,16 @@ class HaloTag(object):
     def __init__(self, index_entry, name_access, meta_access, halomap):
         # these attributes are all protected from erroneous assignment
         object.__setattr__(self, 'index_entry', index_entry)
-        object.__setattr__(self, 'name_field', None) #AsciizField(halomap.CreateByteArray(name_access, 0, name_access.Size))
+        object.__setattr__(self, 'name_field', AsciizField(name_access, name_access.Size))
         object.__setattr__(self, 'meta_access', meta_access)
         object.__setattr__(self, 'halomap', halomap)
 
     @property
     def name(self):
-        return name_field.Value
+        return self.name_field.Value
     @name.setter
     def name(self, value):
-        name_field.Value = value
+        self.name_field.Value = value
 
     @property
     def meta(self):
@@ -62,7 +62,7 @@ class HaloTag(object):
         return str(self) + str(self.meta)
 
     def __getattr__(self, name):
-        """HaloTag (using magic) sort of merges the attributes of self.index_entry and self.meta alongside its own.
+        """HaloTag (using magic) merges the attributes of self.index_entry and self.meta alongside its own.
 
         Getting an attribute resolves in the following order:
             1. First self's attributes are checked
@@ -76,7 +76,7 @@ class HaloTag(object):
             return getattr(self.meta, name)
 
     def __setattr__(self, name, value):
-        """HaloTag (using magic) sort of merges the attributes of self.index_entry and self.meta alongside its own.
+        """HaloTag (using magic) merges the attributes of self.index_entry and self.meta alongside its own.
 
         Setting an attribute resolves in the following order:
             1. [list of attributes] are exempt from being replaced

@@ -1,5 +1,4 @@
-﻿using Quickbeam.Models;
-using Quickbeam.Views;
+﻿using Quickbeam.Interfaces;
 using System;
 using System.Windows;
 using System.Windows.Threading;
@@ -10,19 +9,17 @@ namespace Quickbeam.ViewModels
     {
         public HomeViewModel()
         {
-            _statusResetTimer.Tick += (sender, args) => { Status = "Ready..."; };
+            StatusResetTimer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 5) };
+            StatusResetTimer.Tick += (sender, args) => { Status = "Ready..."; };
         }
 
         #region Properties
 
         #region Application Stuff
 
-        private readonly DispatcherTimer _statusResetTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 5)};
-        private Thickness _applicationBorderThickness;
+        private DispatcherTimer StatusResetTimer { get; set; }
 
-        private string _applicationTitle = "Welcome";
         private string _status = "Ready...";
-
         public string Status
         {
             get { return _status; }
@@ -31,12 +28,13 @@ namespace Quickbeam.ViewModels
                 if (!value.EndsWith("..."))
                     value += "...";
 
-                _statusResetTimer.Stop();
+                StatusResetTimer.Stop();
                 SetField(ref _status, value);
-                _statusResetTimer.Start();
+                StatusResetTimer.Start();
             }
         }
 
+        private Thickness _applicationBorderThickness;
         public Thickness ApplicationBorderThickness
         {
             get { return _applicationBorderThickness; }
@@ -85,9 +83,9 @@ namespace Quickbeam.ViewModels
 
         #region Content
 
-        private IAssemblyPage _assemblyPage;
+        private IView _assemblyPage;
 
-        public IAssemblyPage AssemblyPage
+        public IView MainPage
         {
             get { return _assemblyPage; }
             set
@@ -136,7 +134,7 @@ namespace Quickbeam.ViewModels
 
         private int _maskCount;
 
-        public void ShowDialog(bool showMask = true)
+        public void ShowDialogMask(bool showMask = true)
         {
             if (showMask)
                 _maskCount++;
@@ -145,7 +143,7 @@ namespace Quickbeam.ViewModels
                 MaskVisibility = Visibility.Visible;
         }
 
-        public void HideDialog(bool maskShown = true)
+        public void HideDialogMask(bool maskShown = true)
         {
             if (maskShown)
                 _maskCount--;

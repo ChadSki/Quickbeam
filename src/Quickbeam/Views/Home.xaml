@@ -1,0 +1,187 @@
+﻿<custom:MetroWindow x:Class="Quickbeam.Views.Home"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
+                    xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
+                    WindowStartupLocation="CenterScreen"
+                    Width="1130" Height="640"
+                    MinWidth="380" MinHeight="64"
+                    AllowsTransparency="False"
+                    WindowStyle="None"
+                    SnapsToDevicePixels="True"
+                    UseLayoutRounding="False">
+    <Window.Resources>
+        <sys:Double x:Key="CaptionHeight">40</sys:Double>
+        <sys:Double x:Key="StatusHeight">23</sys:Double>
+        <Thickness x:Key="FallbackBorderThickness"
+                   Top="1" Left="1" Right="1" Bottom="{StaticResource StatusHeight}" />
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <!-- Provides Aero Snap and draggable titlebar functionality.
+        Use WindowChrome.IsHitTestVisibleInChrome="True" to allow elements in the titlebar to be clickable.
+        Do not set ResizeMode="None", this takes care of removing the resize border. -->
+        <WindowChrome CaptionHeight="{StaticResource CaptionHeight}"
+                      CornerRadius="0"
+                      GlassFrameThickness="0"
+                      ResizeBorderThickness="0" />
+    </WindowChrome.WindowChrome>
+
+    <Grid x:Name="BorderGrid" Background="{DynamicResource MainBackgroundBrush}">
+        <Border BorderThickness="{Binding Path=ApplicationBorderThickness, FallbackValue={StaticResource FallbackBorderThickness}}"
+                BorderBrush="{DynamicResource AssemblyAccentBrush}">
+            <Grid x:Name="MainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding Source={StaticResource CaptionHeight}}" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Stretch">
+                    <!-- Logo -->
+                    <Path IsHitTestVisible="False" Fill="{DynamicResource AssemblyAccentBrush}" Stretch="Fill" RenderTransformOrigin="0.5,0.5"
+                          Margin="7,5.5,0,0" Width="24.25" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left"
+                          Data="M1020,2191.001C896.001,2120,702.998,2008.999,590,1942.998l-205-118.999l-2.998-491.997
+		                        c-1.001-295,0.996-492.002,6.997-492.002c5,0,113.999,60,243.003,134.004L865,1107.002l5,185.996L875,1480l170-97.998l170-98.003
+		                        l7.998-129.995c7.002-119.004,3.003-281.006-6.997-291.006C1212.998,860,1138.999,900,1050,950
+		                        c-145,84.004-163.999,92.002-186.001,80.996C832.002,1017.002,437.998,790,427.002,780c-4.004-4.004-2.002-12.002,5-17.002
+		                        C447.002,750,1278.999,270,1285,270c2.998,0,180.996,102.002,397.002,227.002c215.996,125,410,235.996,430,247.002
+		                        c20.996,11.992,37.998,23.994,37.998,27.998c0,7.002-367.998,222.998-430.996,252.998l-37.002,17.998l-160-92.002
+		                        C1434.004,900.996,1360,860,1355.996,860c-2.998,0-5,95-3.994,210.996l2.998,212.002l170,98.003
+		                        c92.998,55,170.996,96.001,172.998,91.001c1.006-4.004,2.998-88.003,5-186.001l2.002-178.999l234.004-134.004
+		                        C2067.998,900,2177.001,840,2182.001,840c3.994,0,7.002,220.996,5.996,492.002L2185,1823.999l-75,43.999
+		                        c-95,56.001-737.002,425-767.002,441.001L1320,2321.001v-278.003l0.996-277.998l152.002-86.001
+		                        c82.998-47.998,152.998-91.001,155-96.997c2.998-9.004-197.002-131.001-297.002-182.002l-45-22.002L1241.001,1400
+		                        C1165,1437.002,940,1571.001,940,1580c0,5,70,47.998,155,97.002L1248.999,1765l1.001,277.998
+		                        c0,152.002-1.001,277.002-2.998,277.002C1246.001,2320,1142.998,2262.002,1020,2191.001z
+                                M2020,635.996c-80-45-237.002-135.996-350-200.996s-222.002-127.998-242.002-139.004
+		                        c-20.996-11.992-37.998-23.994-37.998-27.998c0-5,177.998-7.998,395-7.998h395v230c0,127.002-2.998,230-7.002,229.004
+		                        C2167.998,719.004,2100,682.002,2020,635.996z">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1" />
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+
+                    <!-- Title -->
+                    <TextBlock Text="Quickbeam" IsHitTestVisible="False" Foreground="{DynamicResource TextBrushSecondary}"
+                               FontSize="17" FontFamily="{DynamicResource MetroFontSemiLight}" TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="6,-1.8,0,0"/>
+                </StackPanel>
+
+                <!-- Window Buttons -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="26"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button x:Name="WindowMinimizeButton" ToolTip="Minimize" Style="{DynamicResource WindowActionButton}"
+                            Click="WindowMinimizeButton_OnClick">
+                        <vectors:MinimizeModule />
+                    </Button>
+                    <Button x:Name="WindowRestoreButton" ToolTip="Restore" Style="{DynamicResource WindowActionButton}"
+                            Visibility="{Binding Path=ActionRestoreVisibility, FallbackValue=Visible}"
+                            Click="WindowRestoreButton_OnClick">
+                        <vectors:RestoreModule />
+                    </Button>
+                    <Button x:Name="WindowMaximizeButton" ToolTip="Maximize" Style="{DynamicResource WindowActionButton}"
+                            Visibility="{Binding Path=ActionMaximizeVisibility, FallbackValue=Visible}"
+                            Click="WindowMaximizeButton_OnClick">
+                        <vectors:MaximizeModule />
+                    </Button>
+                    <Button x:Name="WindowCloseButton" ToolTip="Close" Style="{DynamicResource WindowActionButton}"
+                            Click="WindowCloseButton_OnClick">
+                        <vectors:CloseModule />
+                    </Button>
+                </StackPanel>
+
+                <Rectangle Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                           Fill="{DynamicResource AssemblyAccentBrush}" Height="1.3" SnapsToDevicePixels="True"/>
+
+                <ContentPresenter Grid.Row="1" Name="ContentPresenter" Content="{Binding Path=MainPage}" />
+            </Grid>
+        </Border>
+
+        <TextBlock Grid.Row="2" x:Name="StatusTextBlock" Foreground="White" 
+                   Text="{Binding Path=Status, FallbackValue=Ready...}" 
+                   VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="4,0,0,4"/>
+
+        <Grid x:Name="ResizingGrid" Visibility="{Binding Path=ResizingVisibility, FallbackValue=Visible}">
+            <Grid.Resources>
+                <sys:Double x:Key="NormalThumbSize">6</sys:Double>
+                <sys:Double x:Key="CornerThumbSize">12</sys:Double>
+                <!-- use key "StatusHeight" for bottom edge -->
+                <Thickness x:Key="TopThumbMargin" Top="0" Bottom="0"
+                           Left="{StaticResource CornerThumbSize}"
+                           Right="{StaticResource CornerThumbSize}" />
+                <Thickness x:Key="BottomThumbMargin" Top="0" Bottom="0"
+                           Left="{StaticResource StatusHeight}"
+                           Right="{StaticResource StatusHeight}" />
+                <Thickness x:Key="LeftThumbMargin" Left="0" Right="0"
+                           Top="{StaticResource CornerThumbSize}"
+                           Bottom="{StaticResource StatusHeight}" />
+                <Thickness x:Key="RightThumbMargin" Left="0" Right="0"
+                           Top="{StaticResource CornerThumbSize}"
+                           Bottom="{StaticResource StatusHeight}" />
+            </Grid.Resources>
+
+            <vectors:ResizeModule VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" />
+
+            <Thumb x:Name="ResizeTopThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Height="{StaticResource NormalThumbSize}" Margin="{StaticResource TopThumbMargin}"
+                   VerticalAlignment="Top" HorizontalAlignment="Stretch" Cursor="SizeNS"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeTop"/>
+
+            <Thumb x:Name="ResizeBottomThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Height="{StaticResource CornerThumbSize}" Margin="{StaticResource BottomThumbMargin}"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Cursor="SizeNS"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeBottom"/>
+
+            <Thumb x:Name="ResizeLeftThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource NormalThumbSize}" Margin="{StaticResource LeftThumbMargin}"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" Cursor="SizeWE"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeLeft"/>
+
+            <Thumb x:Name="ResizeRightThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource NormalThumbSize}" Margin="{StaticResource RightThumbMargin}"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Right" Cursor="SizeWE"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeRight"/>
+
+            <Thumb x:Name="ResizeTopLeftThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource CornerThumbSize}" Height="{StaticResource CornerThumbSize}"
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Cursor="SizeNWSE"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeTopLeft"/>
+
+            <Thumb x:Name="ResizeTopRightThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource CornerThumbSize}" Height="{StaticResource NormalThumbSize}"
+                   VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="SizeNESW"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeTopRight"/>
+
+            <Thumb x:Name="ResizeTopRightThumb2" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource NormalThumbSize}" Height="{StaticResource CornerThumbSize}"
+                   VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="SizeNESW"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeTopRight"/>
+
+            <Thumb x:Name="ResizeBottomLeftThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource StatusHeight}" Height="{StaticResource StatusHeight}"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Left" Cursor="SizeNESW"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeBottomLeft"/>
+
+            <Thumb x:Name="ResizeBottomRightThumb" Opacity="0" Background="{x:Null}" Foreground="{x:Null}"
+                   Width="{StaticResource StatusHeight}" Height="{StaticResource StatusHeight}"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right" Cursor="SizeNWSE"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
+                   PreviewMouseLeftButtonDown="ResizeBottomRight"/>
+        </Grid>
+
+        <Rectangle Opacity="0.65" Fill="{DynamicResource HomeOpacityBrush}" Grid.RowSpan="3"
+                   Visibility="{Binding Path=MaskVisibility, FallbackValue=Collapsed}" />
+    </Grid>
+</custom:MetroWindow>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -109,7 +108,7 @@ namespace Quickbeam.Native
 
 		#endregion
 
-		private static readonly Dictionary<Window, CaptionHitTester> _registeredWindows =
+		private static readonly Dictionary<Window, CaptionHitTester> RegisteredWindows =
 			new Dictionary<Window, CaptionHitTester>();
 
 		/// <summary>
@@ -138,11 +137,11 @@ namespace Quickbeam.Native
 				return false;
 
 			CaptionHitTester tester;
-			if (!_registeredWindows.TryGetValue(window, out tester))
+			if (!RegisteredWindows.TryGetValue(window, out tester))
 			{
 				// Register a CaptionHitTester for the window
 				tester = new CaptionHitTester(window);
-				_registeredWindows[window] = tester;
+				RegisteredWindows[window] = tester;
 				window.Closed += window_Closed; // Unregisters the window when it's closed
 			}
 
@@ -154,7 +153,7 @@ namespace Quickbeam.Native
 		private static void window_Closed(object sender, EventArgs e)
 		{
 			// Unregister the window so the dictionary doesn't eat up memory
-			_registeredWindows.Remove((Window)sender);
+			RegisteredWindows.Remove((Window)sender);
 		}
 
 		/// <summary>
@@ -168,7 +167,7 @@ namespace Quickbeam.Native
 				return;
 
 			CaptionHitTester tester;
-			if (_registeredWindows.TryGetValue(window, out tester))
+			if (RegisteredWindows.TryGetValue(window, out tester))
 				tester.Unhook(source);
 		}
 
@@ -206,40 +205,38 @@ namespace Quickbeam.Native
 
 			private IntPtr HitTestHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
 			{
-				if (msg == WM_NCHITTEST)
-				{
-					// Set handled to true because we need to do the default test anyway
-					// and can just return defaultTest (below)
-					handled = true;
+			    if (msg != NativeApi.WmncHitTest) return IntPtr.Zero;
 
-					// Don't check if the mouse isn't over the client area
-					IntPtr defaultTest = DefWindowProc(hwnd, msg, wParam, lParam);
-					if ((int) defaultTest != HTCLIENT)
-						return defaultTest;
+                // Set handled to true because we need to do the default test anyway
+			    // and can just return defaultTest (below)
+			    handled = true;
 
-					// Get the cursor position on the screen from lParam
-					int screenPos = lParam.ToInt32();
-					int x = (short) (screenPos & 0xFFFF); // Low word
-					int y = (short) (screenPos >> 16); // High word
+			    // Don't check if the mouse isn't over the client area
+			    var defaultTest = NativeApi.DefWindowProc(hwnd, msg, wParam, lParam);
+			    if ((int) defaultTest != NativeApi.HtClient)
+			        return defaultTest;
 
-					// Get the position relative to the window
-					Point clientPos = _window.PointFromScreen(new Point(x, y));
+			    // Get the cursor position on the screen from lParam
+			    int screenPos = lParam.ToInt32();
+			    int x = (short) (screenPos & 0xFFFF); // Low word
+			    int y = (short) (screenPos >> 16); // High word
 
-					// Check if the mouse is over the titlebar
-					// (HitTestResult stores the result to _testResult)
-					_testResult = null;
-					VisualTreeHelper.HitTest(_window, HitTestFilter, HitTestResult, new PointHitTestParameters(clientPos));
+			    // Get the position relative to the window
+			    Point clientPos = _window.PointFromScreen(new Point(x, y));
 
-					if (_testResult != null && _testResult.VisualHit != null)
-					{
-						// Only accept objects which have the WindowMovement.DragsWindow attached property set to true
-						if (HasDragsWindowEnabled(_testResult.VisualHit))
-							return (IntPtr) HTCAPTION; // Return HTCAPTION to make the WM think the titlebar was clicked
-					}
+			    // Check if the mouse is over the titlebar
+			    // (HitTestResult stores the result to _testResult)
+			    _testResult = null;
+			    VisualTreeHelper.HitTest(_window, HitTestFilter, HitTestResult, new PointHitTestParameters(clientPos));
 
-					return defaultTest;
-				}
-				return IntPtr.Zero;
+			    if (_testResult != null && _testResult.VisualHit != null)
+			    {
+			        // Only accept objects which have the WindowMovement.DragsWindow attached property set to true
+			        if (HasDragsWindowEnabled(_testResult.VisualHit))
+			            return (IntPtr) NativeApi.HtCaption; // Return HTCAPTION to make the WM think the titlebar was clicked
+			    }
+
+			    return defaultTest;
 			}
 
 			private HitTestFilterBehavior HitTestFilter(DependencyObject o)
@@ -258,18 +255,6 @@ namespace Quickbeam.Native
 				_testResult = result;
 				return HitTestResultBehavior.Stop;
 			}
-
-			#region Native definitions
-
-			private const int WM_NCHITTEST = 0x0084;
-
-			private const int HTCLIENT = 1;
-			private const int HTCAPTION = 2;
-
-			[DllImport("user32.dll")]
-			private static extern IntPtr DefWindowProc(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam);
-
-			#endregion Native definitions
 		}
 	}
 }

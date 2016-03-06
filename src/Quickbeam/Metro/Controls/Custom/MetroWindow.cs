@@ -37,26 +37,26 @@ namespace Quickbeam.Metro.Controls.Custom
 
         private void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
         {
-            var mmi = (MonitorWorkarea.MinMaxInfo) Marshal.PtrToStructure(lParam, typeof (MonitorWorkarea.MinMaxInfo));
+            var mmi = (MinMaxInfo) Marshal.PtrToStructure(lParam, typeof (MinMaxInfo));
 
             // Adjust the maximized size and position to fit the work area of the correct monitor
-            const int monitorDefaulttonearest = 0x00000002;
-            var monitor = MonitorWorkarea.MonitorFromWindow(hwnd, monitorDefaulttonearest);
+            const int monitorDefaultToNearest = 0x00000002;
+            var monitor = NativeApi.MonitorFromWindow(hwnd, monitorDefaultToNearest);
 
             if (monitor != IntPtr.Zero)
             {
-                var monitorInfo = new MonitorWorkarea.MonitorInfo();
-                MonitorWorkarea.GetMonitorInfo(monitor, monitorInfo);
+                var monitorInfo = new MonitorInfo();
+                NativeApi.GetMonitorInfo(monitor, monitorInfo);
                 var rcWorkArea = monitorInfo.rcWork;
                 var rcMonitorArea = monitorInfo.rcMonitor;
-                mmi.ptMaxPosition.x = Math.Abs(rcWorkArea.left - rcMonitorArea.left);
-                mmi.ptMaxPosition.y = Math.Abs(rcWorkArea.top - rcMonitorArea.top);
-                mmi.ptMaxSize.x = Math.Abs(rcWorkArea.right - rcWorkArea.left);
-                mmi.ptMaxSize.y = Math.Abs(rcWorkArea.bottom - rcWorkArea.top);
+                mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
+                mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
+                mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
+                mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
             }
 
-            mmi.ptMinTrackSize.x = DpiConversion.PointsToPixels(MinWidth, DpiConversion.Direction.Horizontal);
-            mmi.ptMinTrackSize.y = DpiConversion.PointsToPixels(MinHeight, DpiConversion.Direction.Vertical);
+            mmi.ptMinTrackSize.X = DpiConversion.PointsToPixels(MinWidth, DpiConversion.Direction.Horizontal);
+            mmi.ptMinTrackSize.Y = DpiConversion.PointsToPixels(MinHeight, DpiConversion.Direction.Vertical);
 
             Marshal.StructureToPtr(mmi, lParam, true);
         }
