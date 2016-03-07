@@ -98,7 +98,11 @@ class HaloMap(Observable):
         # type: Dict[int, HaloTag]
 
         # save references to stuff
+        map_header.property_changed.add(
+            lambda *args, **kwargs: self.property_changed(*args, **kwargs))
         self.map_header = map_header
+        index_header.property_changed.add(
+            lambda *args, **kwargs: self.property_changed(*args, **kwargs))
         self.index_header = index_header
         self.tags_by_ident = tags_by_ident
 

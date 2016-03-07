@@ -12,7 +12,7 @@ namespace ConsoleTestApp
         static void Main(string[] args)
         {
             var foo = new HaloMapProxy();
-            foo.doThing();
+            var bar = foo.getGhost();
         }
     }
 }
