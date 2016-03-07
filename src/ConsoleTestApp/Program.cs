@@ -13,6 +13,7 @@ namespace ConsoleTestApp
         {
             var foo = new HaloMapProxy();
             var bar = foo.getGhost();
+            var qux = bar.getData();
         }
     }
 }

@@ -30,27 +30,38 @@ namespace PythonBinding {
         return 0;
     }
 
-    HaloStructProxy::HaloStructProxy()
-    {}
+    HaloStructProxy::HaloStructProxy(PyObject* halostruct)
+    {
+        this->halostruct = halostruct;
+    }
 
     HaloStructProxy::HaloStructProxy(const HaloStructProxy^ & other)
-    {}
+    {
+        this->halostruct = other->halostruct;
+    }
 
     HaloStructProxy::~HaloStructProxy()
     {}
 
-    HaloTagProxy::HaloTagProxy(PyObject* tag)
+    HaloTagProxy::HaloTagProxy(PyObject* halotag)
     {
-        this->tag = tag;
+        this->halotag = halotag;
     }
 
     HaloTagProxy::HaloTagProxy(const HaloTagProxy^ & other)
     {
-        this->tag = other->tag;
+        this->halotag = other->halotag;
     }
 
     HaloTagProxy::~HaloTagProxy()
     {}
+
+    HaloStructProxy^ HaloTagProxy::getData()
+    {
+        auto data = PyObject_GetAttrString(this->halotag, "data");
+        PyObject_Print(data, stdout, Py_PRINT_RAW);
+        return gcnew HaloStructProxy(data);
+    }
 
     HaloMapProxy::HaloMapProxy()
     {
@@ -63,14 +74,18 @@ namespace PythonBinding {
             "import halolib\n"
             "map = halolib.HaloMap.from_hpc()");
 
-        PyObject* sys_mod_dict = PyImport_GetModuleDict();
-        PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
-        PyObject* map = PyObject_GetAttrString(main_mod, "map");
-        this->halomap = new PyObject_Thunk(map);
+        PySys_SetPath(L".");
+        auto halolib = PyImport_ImportModule("halolib");
+        auto halolib_dict = PyModule_GetDict(halolib);
+        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
+        auto from_hpc = PyObject_GetAttrString(halomap_class, "from_hpc");
+        this->halomap = PyObject_CallObject(from_hpc, nullptr);
     }
 
     HaloMapProxy::HaloMapProxy(const HaloMapProxy^ & other)
-    {}
+    {
+        this->halomap = other->halomap;
+    }
 
     HaloMapProxy::~HaloMapProxy()
     {
@@ -85,11 +100,11 @@ namespace PythonBinding {
         //int result_b = PyObject_SetAttr(ghost, PyUnicode_FromString("max_forward_velocity"), PyFloat_FromDouble(12));
         //PyRun_SimpleString("map.index_header.integrity = 'n00b'");
 
-        PyRun_SimpleString("ghost = map.tag('vehi', 'ghost')");
-        PyObject* sys_mod_dict = PyImport_GetModuleDict();
-        PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
-        PyObject* ghost = PyObject_GetAttrString(main_mod, "ghost");
-
+        auto tag_fn = PyObject_GetAttrString(this->halomap, "tag");
+        auto args = PyTuple_Pack(2,
+            PyUnicode_FromString("vehi"),
+            PyUnicode_FromString("ghost"));
+        auto ghost = PyObject_CallObject(tag_fn, args);
         return gcnew HaloTagProxy(ghost);
     }
 }

@@ -6,11 +6,10 @@
 
 import re
 from byteaccess import open_file, open_process
-from basicstruct.struct import Observable
 from .structs import IndexHeader, MapHeader, TagHeader
 from .halotag import HaloTag
 
-class HaloMap(Observable):
+class HaloMap(object):
 
     """Represents a single Halo mapfile and everything in it.
 

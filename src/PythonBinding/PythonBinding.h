@@ -30,19 +30,22 @@ namespace PythonBinding {
     public ref class HaloStructProxy
     {
     public:
-        HaloStructProxy();
-        HaloStructProxy(const HaloStructProxy^ & Name);
+        HaloStructProxy(PyObject* halostruct);
+        HaloStructProxy(const HaloStructProxy^ & other);
         ~HaloStructProxy();
+    private:
+        PyObject* halostruct;
     };
 
     public ref class HaloTagProxy
     {
     public:
-        HaloTagProxy(PyObject* tag);
-        HaloTagProxy(const HaloTagProxy^ & Name);
+        HaloTagProxy(PyObject* halotag);
+        HaloTagProxy(const HaloTagProxy^ & other);
         ~HaloTagProxy();
+        HaloStructProxy^ getData();
     private:
-        PyObject* tag;
+        PyObject* halotag;
     };
 
     public ref class HaloMapProxy
@@ -51,11 +54,8 @@ namespace PythonBinding {
         HaloMapProxy();
         HaloMapProxy(const HaloMapProxy^ & other);
         ~HaloMapProxy();
-
-        /// Pseudo-main function for developing purposes.
         HaloTagProxy^ getGhost();
-
     private:
-        PyObject_Thunk* halomap;
+        PyObject* halomap;
     };
 }
