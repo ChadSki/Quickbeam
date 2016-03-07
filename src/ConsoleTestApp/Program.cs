@@ -11,7 +11,7 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            var foo = new Class1();
+            Class1.doThing();
         }
     }
 }
