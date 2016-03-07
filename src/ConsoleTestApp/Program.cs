@@ -11,7 +11,8 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            HaloMapProxy.doThing();
+            var foo = new HaloMapProxy();
+            foo.doThing();
         }
     }
 }

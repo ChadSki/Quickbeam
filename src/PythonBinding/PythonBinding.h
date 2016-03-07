@@ -21,7 +21,6 @@ namespace PythonBinding {
         /// is updated.
         void OnPropertyChanged();
 
-    private:
         PyObject* _po;
     };
 
@@ -33,36 +32,35 @@ namespace PythonBinding {
     public ref class HaloMapProxy
     {
     public:
-        /// Pseudo-main function for developing purposes.
-        static void doThing()
+        HaloMapProxy()
         {
             Py_Initialize();
-            PyRun_SimpleString(
-                // Fix console output
+            PyRun_SimpleString( // Fix console output
                 "import sys\n"
                 "sys.stdout = open('CONOUT$', 'wt')");
 
-            // Load map
-            PyRun_SimpleString(
+            PyRun_SimpleString( // Load map
                 "import halolib\n"
-                "map = halolib.HaloMap.from_hpc()\n"
-                "ghost = map.tag('vehi', 'rwarthog')\n"
-                "print(repr(ghost))");
+                "map = halolib.HaloMap.from_hpc()");
 
             PyObject* sys_mod_dict = PyImport_GetModuleDict();
             PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
-            PyObject* ghost = PyObject_GetAttrString(main_mod, "ghost");
-            PyObject* ghostdata = PyObject_GetAttrString(ghost, "data");
+            PyObject* map = PyObject_GetAttrString(main_mod, "map");
+            this->halomap = new BoundPyObject(map);
+        }
 
-            BoundPyObject* bpo = new BoundPyObject(ghostdata);
-
-            int result_a = PyObject_SetAttr(ghost, PyUnicode_FromString("acceleration"), PyFloat_FromDouble(12));
-            int result_b = PyObject_SetAttr(ghost, PyUnicode_FromString("max_forward_velocity"), PyFloat_FromDouble(12));
+        /// Pseudo-main function for developing purposes.
+        void doThing()
+        {
+            //int result_a = PyObject_SetAttr(ghost, PyUnicode_FromString("acceleration"), PyFloat_FromDouble(12));
+            //int result_b = PyObject_SetAttr(ghost, PyUnicode_FromString("max_forward_velocity"), PyFloat_FromDouble(12));
             //PyRun_SimpleString("map.index_header.integrity = 'n00b'");
 
-            PyRun_SimpleString("print(repr(ghost))"); 
+            PyRun_SimpleString("print(map)"); 
             PyRun_SimpleString("print('exiting')");
             Py_Finalize();
         }
+    private:
+        BoundPyObject* halomap;
     };
 }
