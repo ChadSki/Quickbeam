@@ -4,6 +4,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
                     xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
+                    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
                     WindowStartupLocation="CenterScreen"
                     Width="1130" Height="640"
                     MinWidth="380" MinHeight="64"
@@ -97,7 +98,22 @@
                 <Rectangle Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                            Fill="{DynamicResource AssemblyAccentBrush}" Height="1.3" SnapsToDevicePixels="True"/>
 
-                <ContentPresenter Grid.Row="1" Name="ContentPresenter" Content="{Binding Path=MainPage}" />
+                <avalonDock:DockingManager x:Name="DockManager" Grid.Row="1"
+                                       AllowMixedOrientation="True">
+                    <!--avalonDock:DockingManager.Theme>
+                        <avalonDockThemes:MetroTheme />
+                    </-->
+                    <avalonDock:LayoutRoot>
+                        <avalonDock:LayoutPanel Orientation="Horizontal">
+                            <avalonDock:LayoutDocumentPaneGroup>
+                                <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
+                            </avalonDock:LayoutDocumentPaneGroup>
+                            <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
+                                <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
+                            </avalonDock:LayoutAnchorablePaneGroup>
+                        </avalonDock:LayoutPanel>
+                    </avalonDock:LayoutRoot>
+                </avalonDock:DockingManager>
             </Grid>
         </Border>
 
