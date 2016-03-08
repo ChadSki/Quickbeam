@@ -9,6 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam", "Quickbeam\Quickbeam.csproj", "{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6735C990-59FD-4C22-B92C-9F907E73D9D5} = {6735C990-59FD-4C22-B92C-9F907E73D9D5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonBinding", "PythonBinding\PythonBinding.vcxproj", "{6735C990-59FD-4C22-B92C-9F907E73D9D5}"
 EndProject
