@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Quickbeam.Views
 {
@@ -18,6 +19,8 @@ namespace Quickbeam.Views
             DataContext = ViewModel = new HomeViewModel();
             ViewModel.MainPage = new MainPage();
             Helper = new WindowInteropHelper(this);
+            var tab = new LayoutAnchorable { Title = "Start Page", Content = new MainPage() };
+            DocumentManager.Children.Add(tab);
             Closing += OnClosing;
         }
 
