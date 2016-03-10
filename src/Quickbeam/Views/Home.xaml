@@ -96,9 +96,6 @@
                     </Button>
                 </StackPanel>
 
-                <Rectangle Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                           Fill="{DynamicResource AssemblyAccentBrush}" Height="1.3" SnapsToDevicePixels="True"/>
-
                 <avalonDock:DockingManager x:Name="DockManager" Grid.Row="1"
                                        AllowMixedOrientation="True">
                     <avalonDock:DockingManager.Theme>
