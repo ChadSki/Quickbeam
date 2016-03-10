@@ -192,7 +192,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="/Quickbeam;component/Images/settings_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
+        <Image Source="/MetroIde;component/Images/settings_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
                HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="336" Width="338" Margin="320,0,0,-77"
                Grid.ColumnSpan="2" />
         <Grid Grid.Column="0" Background="#2d2d30">

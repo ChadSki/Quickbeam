@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Width="15" Height="15">
     <Grid>
-        <Image Source="/Quickbeam;component/Images/Vectored/freezeVector.png" Stretch="Fill" Width="15"
+        <Image Source="/MetroIde;component/Images/Vectored/freezeVector.png" Stretch="Fill" Width="15"
                Height="15" />
     </Grid>
 </UserControl>

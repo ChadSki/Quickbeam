@@ -24,7 +24,7 @@ namespace MetroIde.Controls.AvalonDockMetro
         public override Uri GetResourceUri()
         {
             return new Uri(
-                "/Quickbeam;component/Controls/AvalonDockMetro/Theme.xaml",
+                "/MetroIde;component/Controls/AvalonDockMetro/Theme.xaml",
                 UriKind.Relative);
         }
     }

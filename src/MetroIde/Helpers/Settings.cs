@@ -171,14 +171,14 @@ namespace MetroIde.Helpers
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
                 {
-                    Source = new Uri("/Quickbeam;component/Themes/" + theme + ".xaml", UriKind.Relative)
+                    Source = new Uri("/MetroIde;component/Themes/" + theme + ".xaml", UriKind.Relative)
                 });
             }
             catch
             {
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
                 {
-                    Source = new Uri("/Quickbeam;component/Themes/Blue.xaml", UriKind.Relative)
+                    Source = new Uri("/MetroIde;component/Themes/Blue.xaml", UriKind.Relative)
                 });
             }
         }

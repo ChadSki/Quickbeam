@@ -8,7 +8,7 @@
     Background="#28282b"
     d:DesignWidth="1000" d:DesignHeight="600">
     <Grid>
-        <Image Source="/Quickbeam;component/Images/background_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
+        <Image Source="/MetroIde;component/Images/background_logo.png" OpacityMask="#FF7A7A7A" Opacity="0.05"
                Margin="320,108,166,-102" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
 
         <Grid x:Name="SideBar" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="250" Background="#2d2d30">
