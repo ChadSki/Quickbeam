@@ -5,6 +5,7 @@
                     xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
                     xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
                     xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+                    xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro;assembly=MetroIde"
                     WindowStartupLocation="CenterScreen"
                     Width="1130" Height="640"
                     MinWidth="380" MinHeight="64"
@@ -100,9 +101,9 @@
 
                 <avalonDock:DockingManager x:Name="DockManager" Grid.Row="1"
                                        AllowMixedOrientation="True">
-                    <!--avalonDock:DockingManager.Theme>
+                    <avalonDock:DockingManager.Theme>
                         <avalonDockThemes:MetroTheme />
-                    </-->
+                    </avalonDock:DockingManager.Theme>
                     <avalonDock:LayoutRoot>
                         <avalonDock:LayoutPanel Orientation="Horizontal">
                             <avalonDock:LayoutDocumentPaneGroup>
