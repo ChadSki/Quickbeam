@@ -1,21 +1,17 @@
-﻿using System;
+﻿using MetroIde.Dialogs;
+using MetroIde.Helpers.Native;
+using MetroIde.Pages;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Threading;
-using AvalonDock.Layout;
-using Microsoft.Win32;
-using MetroIde.Helpers;
-using MetroIde.Helpers.Native;
-using MetroIde.Helpers.Net;
-using MetroIde.Dialogs;
-using MetroIde.Pages;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace MetroIde
 {

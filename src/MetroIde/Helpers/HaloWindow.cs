@@ -68,8 +68,8 @@ namespace MetroIde.Helpers
                 NativeMethods.SetWindowPos(_haloProcess.MainWindowHandle, IntPtr.Zero, 0, 0, 800, 600, NativeMethods.SwpNoZOrder | NativeMethods.SwpNoActivate);
 
                 // force video rendering
-                const int exeOffset = 0x400000;
-                const int wmkillHandlerOffset = exeOffset + 0x142538;
+                //const int exeOffset = 0x400000;
+                //const int wmkillHandlerOffset = exeOffset + 0x142538;
                 //var wmkillHandler = new WinMemoryByteAccess(wmkillHandlerOffset, 4);
                 //wmkillHandler.WriteBytes(0, new byte[] { 0xe9, 0x91, 0x00, 0x00 });
             });
