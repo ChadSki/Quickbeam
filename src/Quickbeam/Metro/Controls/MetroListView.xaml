@@ -36,14 +36,14 @@
 								<Condition Property="IsMouseOver" Value="True" />
 								<Condition Property="IsSelected" Value="False" />
 							</MultiTrigger.Conditions>
-							<Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}" TargetName="BorderOutline" />
+							<Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}" TargetName="BorderOutline" />
 							<Setter Property="Opacity" Value="0.8" TargetName="BorderOutline" />
-							<Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}" TargetName="BorderInline" />
+							<Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}" TargetName="BorderInline" />
 							<Setter Property="Opacity" Value="0.2" TargetName="BorderInline" />
 						</MultiTrigger>
 						<Trigger Property="IsSelected" Value="True">
-							<Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}" TargetName="BorderOutline" />
-							<Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}" TargetName="BorderInline" />
+							<Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}" TargetName="BorderOutline" />
+							<Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}" TargetName="BorderInline" />
 							<Setter Property="Opacity" Value="0.3" TargetName="BorderInline" />
 						</Trigger>
 					</ControlTemplate.Triggers>
@@ -71,14 +71,14 @@
 								<Condition Property="IsMouseOver" Value="True" />
 								<Condition Property="IsSelected" Value="False" />
 							</MultiTrigger.Conditions>
-							<Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}" TargetName="BorderOutline" />
+							<Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}" TargetName="BorderOutline" />
 							<Setter Property="Opacity" Value="0.8" TargetName="BorderOutline" />
-							<Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}" TargetName="BorderInline" />
+							<Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}" TargetName="BorderInline" />
 							<Setter Property="Opacity" Value="0.2" TargetName="BorderInline" />
 						</MultiTrigger>
 						<Trigger Property="IsSelected" Value="True">
-							<Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}" TargetName="BorderOutline" />
-							<Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}" TargetName="BorderInline" />
+							<Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}" TargetName="BorderOutline" />
+							<Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}" TargetName="BorderInline" />
 							<Setter Property="Opacity" Value="0.3" TargetName="BorderInline" />
 						</Trigger>
 					</ControlTemplate.Triggers>
@@ -109,10 +109,10 @@
 					</Grid>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="true">
-							<Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+							<Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}" />
 						</Trigger>
 						<Trigger Property="IsPressed" Value="true">
-							<Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ExtryzeAccentBrush}" />
+							<Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource AssemblyAccentBrush}" />
 							<Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
 						</Trigger>
 						<Trigger Property="Selector.IsSelected" Value="True">

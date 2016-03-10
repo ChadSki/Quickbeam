@@ -165,7 +165,7 @@ assembly=Xceed.Wpf.AvalonDock
                         <Border x:Name="ContentPanel"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
-                                BorderBrush="{DynamicResource ExtryzeAccentBrush}"
+                                BorderBrush="{DynamicResource AssemblyAccentBrush}"
                                 BorderThickness="0,2,0,0"
                                 Background="Transparent"
                                 Grid.Column="0"
@@ -184,12 +184,12 @@ assembly=Xceed.Wpf.AvalonDock
                         <Trigger Property="IsMouseOver" SourceName="MenuDropDownButton" Value="True">
                             <Setter Property="Background" TargetName="MenuDropDownButton" Value="#FF3e3e40" />
                             <Setter Property="Fill" TargetName="ArrowPathData"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" SourceName="MenuDropDownButton" Value="True">
                             <Setter Property="Background" TargetName="MenuDropDownButton"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                             <Setter Property="Fill" TargetName="ArrowPathData" Value="White" />
                         </Trigger>
 
@@ -254,8 +254,8 @@ assembly=Xceed.Wpf.AvalonDock
                                     </Trigger>
 
                                     <DataTrigger Binding="{Binding IsActive}" Value="True">
-                                        <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}" />
-                                        <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrush}" />
+                                        <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}" />
+                                        <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrush}" />
                                         <Setter Property="Foreground" Value="White" />
                                         <Setter Property="Panel.ZIndex" Value="1" />
                                     </DataTrigger>
@@ -266,9 +266,9 @@ assembly=Xceed.Wpf.AvalonDock
                                             <Condition Property="Selector.IsSelected" Value="false" />
                                         </MultiTrigger.Conditions>
                                         <Setter Property="BorderBrush"
-                                                Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                                Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                         <Setter Property="Background"
-                                                Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                                Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                         <Setter Property="Foreground"
                                                 Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor5}" />
                                         <Setter Property="Panel.ZIndex" Value="0" />
@@ -384,7 +384,7 @@ assembly=Xceed.Wpf.AvalonDock
 
                                     <DataTrigger Binding="{Binding IsActive}" Value="True">
                                         <Setter Property="Background"
-                                                Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                                Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                         <Setter Property="Panel.ZIndex"
                                                 Value="1" />
                                     </DataTrigger>
@@ -469,11 +469,10 @@ assembly=Xceed.Wpf.AvalonDock
                             </avalonDockControls:DropDownControlArea>
 
                             <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                <Grid.Background>
+                                <!--Grid.Background>
                                     <ImageBrush TileMode="Tile" Stretch="None"
-                                                ImageSource="/Images\DockPaneImageTile.png" />
-                                    <!--TODO Fix ImageSource so this links correctly!-->
-                                </Grid.Background>
+                                                ImageSource="/Images\DockPanelImageTile.png" />
+                                TODO Fix ImageSource so this links correctly!-->
                             </Grid>
 
                             <avalonDockControls:DropDownButton
@@ -564,7 +563,7 @@ assembly=Xceed.Wpf.AvalonDock
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Model.IsActive, RelativeSource={RelativeSource Mode=Self}}"
                                      Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrush}" />
                         </DataTrigger>
 
                         <Trigger Property="IsMouseOver" SourceName="MenuDropDownButton" Value="True">
@@ -572,14 +571,14 @@ assembly=Xceed.Wpf.AvalonDock
                         </Trigger>
                         <Trigger Property="IsChecked" SourceName="MenuDropDownButton" Value="True">
                             <Setter Property="Background" TargetName="MenuDropDownButton"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" SourceName="PART_AutoHidePin" Value="True">
                             <Setter Property="Background" TargetName="AutoHidePin" Value="#33FFFFFF" />
                         </Trigger>
                         <!--<Trigger Property="IsChecked" SourceName="PART_AutoHidePin" Value="True">
-							<Setter Property="Background" TargetName="AutoHidePin" Value="{DynamicResource ExtryzeAccentBrush}" />
+							<Setter Property="Background" TargetName="AutoHidePin" Value="{DynamicResource AssemblyAccentBrush}" />
 						</Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -645,10 +644,10 @@ assembly=Xceed.Wpf.AvalonDock
                     <Condition Property="IsMouseOver" Value="true" />
                     <Condition Property="Selector.IsSelected" Value="false" />
                 </MultiTrigger.Conditions>
-                <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}" />
             </MultiTrigger>
             <DataTrigger Binding="{Binding Model.IsActive, RelativeSource={RelativeSource Mode=Self}}" Value="true">
-                <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -659,7 +658,7 @@ assembly=Xceed.Wpf.AvalonDock
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type avalonDockControls:OverlayWindow}">
                     <Canvas x:Name="PART_DropTargetsContainer" Opacity="0.6">
-                        <Path x:Name="PART_PreviewBox" Fill="{DynamicResource ExtryzeAccentBrushSecondary}"
+                        <Path x:Name="PART_PreviewBox" Fill="{DynamicResource AssemblyAccentBrushSecondary}"
                               StrokeThickness="5"
                               Stroke="DimGray" />
                         <Grid x:Name="PART_DockingManagerDropTargets">
@@ -1039,7 +1038,7 @@ assembly=Xceed.Wpf.AvalonDock
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="DocumentCloseButton" />
                             <Setter Property="Background" TargetName="DocumentCloseButton"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                         </Trigger>
                         <DataTrigger Binding="{Binding Path=CanClose}" Value="false">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="DocumentCloseButton" />
@@ -1047,7 +1046,7 @@ assembly=Xceed.Wpf.AvalonDock
 
                         <Trigger Property="IsMouseOver" SourceName="DocumentCloseButton" Value="True">
                             <Setter Property="Background" TargetName="DocumentCloseButton"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
@@ -1153,7 +1152,7 @@ assembly=Xceed.Wpf.AvalonDock
                         <Border x:Name="WindowBorder"
 
                                 BorderThickness="4"
-                                BorderBrush="{DynamicResource ExtryzeAccentBrush}">
+                                BorderBrush="{DynamicResource AssemblyAccentBrush}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="24" />
@@ -1165,7 +1164,7 @@ assembly=Xceed.Wpf.AvalonDock
                                 </Grid.ColumnDefinitions>
 
                                 <Border x:Name="bd" Width="5" VerticalAlignment="Stretch"
-                                        Background="{DynamicResource ExtryzeAccentBrush}" />
+                                        Background="{DynamicResource AssemblyAccentBrush}" />
 
                                 <Border x:Name="Header"
                                         Padding="2,0,2,0"
@@ -1287,11 +1286,11 @@ assembly=Xceed.Wpf.AvalonDock
                             <Setter
                                 TargetName="bd"
                                 Property="Background"
-                                Value="{DynamicResource ExtryzeAccentBrush}" />
+                                Value="{DynamicResource AssemblyAccentBrush}" />
                             <Setter
                                 TargetName="Header"
                                 Property="Background"
-                                Value="{DynamicResource ExtryzeAccentBrush}" />
+                                Value="{DynamicResource AssemblyAccentBrush}" />
                         </DataTrigger>
 
                         <Trigger Property="IsMouseOver" SourceName="ContextMenuDropdownButton" Value="True">
@@ -1416,7 +1415,7 @@ assembly=Xceed.Wpf.AvalonDock
                         <DataTrigger
                             Binding="{Binding RelativeSource={RelativeSource Self}, Path=Model.SinglePane.SelectedContent.IsActive}"
                             Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrush}"
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrush}"
                                     TargetName="Header" />
                         </DataTrigger>
 

@@ -62,7 +62,7 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="#454545" />
                             <Setter TargetName="Border" Property="BorderBrush"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="#c1c1c1" />

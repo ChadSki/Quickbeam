@@ -7,8 +7,8 @@
              Width="13" Height="14">
     <Grid>
         <StackPanel>
-            <Rectangle Height="7" Fill="{DynamicResource ExtryzeAccentBrush}" />
-            <Rectangle Height="7" Fill="{DynamicResource ExtryzeAccentBrush}" />
+            <Rectangle Height="7" Fill="{DynamicResource AssemblyAccentBrush}" />
+            <Rectangle Height="7" Fill="{DynamicResource AssemblyAccentBrush}" />
         </StackPanel>
 
         <Rectangle Fill="#232324" VerticalAlignment="Top" Height="4" Margin="1,2,1,0" />

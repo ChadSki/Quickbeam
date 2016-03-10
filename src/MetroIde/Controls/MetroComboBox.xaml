@@ -280,12 +280,12 @@
             <Trigger Property="UIElement.IsMouseOver" Value="True">
                 <Setter Property="Background" TargetName="Border" Value="#3f3f46" />
                 <Setter Property="Background" TargetName="TargetBorder" Value="#3f3f46" />
-                <Setter Property="BorderBrush" TargetName="TargetBorder" Value="{DynamicResource ExtryzeAccentBrush}" />
-                <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource ExtryzeAccentBrush}" />
+                <Setter Property="BorderBrush" TargetName="TargetBorder" Value="{DynamicResource AssemblyAccentBrush}" />
+                <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource AssemblyAccentBrush}" />
             </Trigger>
 
             <Trigger Property="ToggleButton.IsChecked" Value="True">
-                <Setter Property="Background" TargetName="Border" Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                <Setter Property="Background" TargetName="Border" Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                 <Setter Property="Fill" TargetName="Arrow" Value="White" />
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">

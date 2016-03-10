@@ -36,7 +36,7 @@
                                 <Condition Property="IsEnabled" Value="true" />
                                 <Condition Property="IsDefaulted" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
@@ -48,7 +48,7 @@
                                 <Condition Property="IsEnabled" Value="true" />
                                 <Condition Property="IsDefaulted" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrush}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrush}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
@@ -60,7 +60,7 @@
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#393939" TargetName="Border" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
@@ -72,7 +72,7 @@
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#333333" TargetName="Border" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
@@ -126,14 +126,14 @@
                                 <Condition Property="IsPressed" Value="true" />
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" Value="#161616" TargetName="Border" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -171,7 +171,7 @@
                                 <Condition Property="IsPressed" Value="false" />
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
@@ -182,7 +182,7 @@
                                 <Condition Property="IsPressed" Value="true" />
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrush}" />
                             <Setter Property="Opacity" Value="0.7" />
                         </MultiTrigger>
 
@@ -203,7 +203,7 @@
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" Value="#161616" TargetName="Border" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -246,7 +246,7 @@
                                 <Condition Property="IsPressed" Value="false" />
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </MultiTrigger>
 
@@ -257,14 +257,14 @@
                                 <Condition Property="IsPressed" Value="true" />
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrush}"
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrush}"
                                     TargetName="Border" />
                             <Setter Property="Opacity" Value="0.7" />
                         </MultiTrigger>
 
                         <!-- Checked Third State -->
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ExtryzeAccentBrush}"
+                            <Setter Property="Background" Value="{DynamicResource AssemblyAccentBrush}"
                                     TargetName="Border" />
                             <Setter Property="Opacity" Value="1.0" />
                         </Trigger>
@@ -272,7 +272,7 @@
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" Value="#161616" TargetName="Border" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="Border" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -291,7 +291,7 @@
         <Setter Property="Background" Value="#414141" />
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="SelectionBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}" />
         <Setter Property="BorderBrush" Value="#595959" />
         <Setter Property="ContextMenu">
             <Setter.Value>
@@ -501,7 +501,7 @@
                                                         </Trigger>
                                                         <Trigger Property="IsMouseOver" Value="True">
                                                             <Setter Property="Stroke" TargetName="circle"
-                                                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                                                    Value="{DynamicResource AssemblyAccentBrush}" />
                                                             <Setter Property="Fill" TargetName="circle"
                                                                     Value="Transparent" />
                                                             <Setter Property="Stroke" TargetName="arrow"
@@ -509,13 +509,13 @@
                                                         </Trigger>
                                                         <Trigger Property="IsPressed" Value="True">
                                                             <Setter Property="Stroke" TargetName="circle"
-                                                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                                             <Setter Property="StrokeThickness" TargetName="circle"
                                                                     Value="1.5" />
                                                             <Setter Property="Fill" TargetName="circle"
                                                                     Value="Transparent" />
                                                             <Setter Property="Stroke" TargetName="arrow"
-                                                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                                         </Trigger>
                                                         <Trigger Property="IsEnabled" Value="False">
                                                             <Setter Property="Stroke" TargetName="circle"

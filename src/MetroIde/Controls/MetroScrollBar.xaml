@@ -69,7 +69,7 @@
                                 <Condition Property="IsPressed" Value="false" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="RepeatButton" Property="Fill"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -77,7 +77,7 @@
                                 <Condition Property="IsPressed" Value="true" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="RepeatButton" Property="Fill"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                         </MultiTrigger>
 
                         <Trigger Property="IsEnabled" Value="false">

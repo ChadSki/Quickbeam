@@ -47,7 +47,7 @@
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsSelected" Value="true">
 							<Setter Property="Panel.ZIndex" Value="1"/>
-							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource ExtryzeAccentBrush}"/>
+							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource AssemblyAccentBrush}"/>
 						</Trigger>
 						
 						<MultiTrigger>
@@ -55,7 +55,7 @@
 								<Condition Property="IsSelected" Value="false"/>
 								<Condition Property="IsMouseOver" Value="true"/>
 							</MultiTrigger.Conditions>
-							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource ExtryzeAccentBrushSecondary}"/>
+							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource AssemblyAccentBrushSecondary}"/>
 						</MultiTrigger>
 						<MultiTrigger>
 							<MultiTrigger.Conditions>

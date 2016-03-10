@@ -56,12 +56,12 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Opacity" TargetName="Chrome" Value="0.90" />
                                     <Setter Property="Background" TargetName="Chrome"
-                                            Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                            Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
                                     <Setter Property="Opacity" TargetName="Chrome" Value="0.90" />
                                     <Setter Property="Background" TargetName="Chrome"
-                                            Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                            Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="false">
                                     <Setter Property="Foreground" Value="#ADADAD" />
@@ -109,7 +109,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
-                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource ExtryzeAccentBrush}" />
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource AssemblyAccentBrush}" />
                         </Trigger>
 
                         <MultiTrigger>
@@ -118,7 +118,7 @@
                                 <Condition Property="IsMouseOver" Value="true" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" TargetName="Bd"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                         </MultiTrigger>
 
                         <MultiTrigger>

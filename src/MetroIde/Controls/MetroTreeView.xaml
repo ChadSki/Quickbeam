@@ -32,7 +32,7 @@
                                 <Condition Property="IsChecked" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Stroke" TargetName="ExpandPath"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                             <Setter Property="Fill" TargetName="ExpandPath" Value="Transparent" />
                         </MultiTrigger>
 
@@ -60,9 +60,9 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="Fill" TargetName="ExpandPath"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                             <Setter Property="Stroke" TargetName="ExpandPath"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -112,7 +112,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Background" TargetName="Bd"
-                                    Value="{DynamicResource ExtryzeAccentBrushSecondary}" />
+                                    Value="{DynamicResource AssemblyAccentBrushSecondary}" />
                             <Setter Property="Foreground" Value="White" />
                         </Trigger>
                         <MultiTrigger>

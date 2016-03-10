@@ -63,7 +63,7 @@
 								<Condition Property="IsSelected" Value="False" />
 								<Condition Property="IsMouseOver" Value="True" />
 							</MultiTrigger.Conditions>
-							<Setter Property="TextElement.Foreground" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+							<Setter Property="TextElement.Foreground" Value="{DynamicResource AssemblyAccentBrushSecondary}"
 									TargetName="ContentSite" />
 						</MultiTrigger>
 						<Trigger Property="IsEnabled" Value="False">
@@ -103,7 +103,7 @@
 								<Condition Property="IsSelected" Value="False" />
 								<Condition Property="IsMouseOver" Value="True" />
 							</MultiTrigger.Conditions>
-							<Setter Property="TextElement.Foreground" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+							<Setter Property="TextElement.Foreground" Value="{DynamicResource AssemblyAccentBrushSecondary}"
 									TargetName="ContentSite" />
 						</MultiTrigger>
 						<Trigger Property="IsEnabled" Value="False">

@@ -96,7 +96,7 @@
                                 <Condition Property="IsPressed" Value="false" />
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="border" />
                         </MultiTrigger>
 
@@ -108,7 +108,7 @@
                                 <Condition Property="IsEnabled" Value="true" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#333333" TargetName="border" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ExtryzeAccentBrushSecondary}"
+                            <Setter Property="BorderBrush" Value="{DynamicResource AssemblyAccentBrushSecondary}"
                                     TargetName="border" />
                         </MultiTrigger>
 

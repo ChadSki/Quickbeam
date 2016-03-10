@@ -96,10 +96,10 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="ControlChrome" Value="#3f3f46" />
                             <Setter Property="BorderBrush" TargetName="mainButtonBorder"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
                             <Setter Property="BorderBrush" TargetName="dropButtonBorder"
-                                    Value="{DynamicResource ExtryzeAccentBrush}" />
-                            <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource ExtryzeAccentBrush}" />
+                                    Value="{DynamicResource AssemblyAccentBrush}" />
+                            <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource AssemblyAccentBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

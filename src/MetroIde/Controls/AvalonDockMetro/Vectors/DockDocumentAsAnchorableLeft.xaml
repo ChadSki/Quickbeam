@@ -8,7 +8,7 @@
     <Grid>
         <Border Background="#232324" CornerRadius="4" Margin="0">
             <Grid>
-                <Rectangle Width="12" Height="24" Margin="4,0,0,0" Fill="{DynamicResource ExtryzeAccentBrush}"
+                <Rectangle Width="12" Height="24" Margin="4,0,0,0" Fill="{DynamicResource AssemblyAccentBrush}"
                            VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Rectangle Width="10" Height="20" Margin="5,2,0,0" Fill="#232324" VerticalAlignment="Center"
                            HorizontalAlignment="Left" />
