@@ -94,11 +94,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>C:\Users\Chad\Anaconda3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\vendor\Python3\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>C:\Users\Chad\Anaconda3\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\vendor\Python3\libs</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,11 +107,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>C:\Users\Chad\Anaconda3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\vendor\Python3\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>C:\Users\Chad\Anaconda3\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\vendor\Python3\libs</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,11 +119,11 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>C:\Users\Chad\Anaconda3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\vendor\Python3\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>C:\Users\Chad\Anaconda3\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\vendor\Python3\libs</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,11 +131,11 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>C:\Users\Chad\Anaconda3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\vendor\Python3\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>C:\Users\Chad\Anaconda3\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\vendor\Python3\libs</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

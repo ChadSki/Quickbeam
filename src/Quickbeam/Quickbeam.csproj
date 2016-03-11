@@ -175,12 +175,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\HierarchyNodeToIconConverter.cs" />
     <Compile Include="Converters\PercentileToDecimalConverter.cs" />
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />
     <Compile Include="Converters\StringToResourceConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Converters\LowercaseConverter.cs" />
+    <Compile Include="Converters\TagHierarchyContextMenuConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Interfaces\Base.cs" />
     <Compile Include="Interfaces\IView.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\HaloSettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Helpers\TagHierarchyNode.cs" />
     <Compile Include="Views\DpiDecorator.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>

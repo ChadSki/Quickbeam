@@ -3,9 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Quickbeam.Converters"
+             xmlns:helpers="clr-namespace:Quickbeam.Helpers"
              mc:Ignorable="d"
              Background="#2d2d30"
              d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData MainPageViewModel}">
+    <UserControl.Resources>
+        <ContextMenu x:Key="TagHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Open" Uid="opentagcontext" />
+            <MenuItem Header="Rename" Uid="renametagcontext" />
+            <Separator />
+            <MenuItem Header="Extract" Uid="extracttagcontext" />
+        </ContextMenu>
+        <ContextMenu x:Key="FolderHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Rename" Uid="renametagcontext" />
+        </ContextMenu>
+        <converters:TagHierarchyContextMenuConverter x:Key="IValueConverterTagHierarchyContextMenu" TagContextMenu="{StaticResource TagHierarchyContextMenu}" FolderContextMenu="{StaticResource FolderHierarchyContextMenu}" />
+    </UserControl.Resources>
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding HaloGridWidth, Mode=TwoWay}" MinWidth="30" Name="LeftColumn" />
@@ -112,9 +126,34 @@
                       VerticalAlignment="Bottom"
                       Background="#FF545456" Foreground="{x:Null}"
                       IsEnabled="True" />
-        <DockPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
-                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        </DockPanel>
+
+        <TreeView x:Name="TagTreeView" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Nodes}"
+                        Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,10,0,0" 
+                        VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type helpers:TagHierarchyNode}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20"
+                                ContextMenu="{Binding Converter={StaticResource IValueConverterTagHierarchyContextMenu}}">
+                        <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />
+                        <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0"
+                                           VerticalAlignment="Center">
+                                                        <Run Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+                                                        <Run Text="{Binding Suffix, Mode=OneWay}" Foreground="#e5e5e5" />
+                        </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <!--DataTemplate DataType="{x:Type models:CacheEditorNode}" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20">
+                                <ContentControl Template="{Binding Converter={StaticResource IValueConverterCacheEditorNodeToIcon}}" />
+                                <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0"
+                                                               VerticalAlignment="Center">
+                                                        <Run Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+                                                        <Run Text=" - Specialized Editor" Foreground="#e5e5e5" />
+                                </TextBlock>
+                            </StackPanel>
+                        </-->
+            </TreeView.Resources>
+        </TreeView>
 
     </Grid>
 </UserControl>

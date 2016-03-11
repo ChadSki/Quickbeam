@@ -1,11 +1,15 @@
 ﻿using Quickbeam.Interfaces;
+using Quickbeam.Helpers;
 using Quickbeam.Native;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace Quickbeam.ViewModels
 {
     public class MainPageViewModel : Base
     {
+        #region HaloExe
         private GridLength _haloWidth = new GridLength(0, GridUnitType.Auto);
         private GridLength _haloHeight = new GridLength(0, GridUnitType.Auto);
 
@@ -66,6 +70,15 @@ namespace Quickbeam.ViewModels
                     new GridLength(DpiConversion.PixelsToPoints(value + PixelsBorder, DpiConversion.Direction.Horizontal), GridUnitType.Pixel));
                 OnPropertyChanged("HaloGridHeight");
             }
+        }
+        #endregion HaloExe
+
+        private ObservableCollection<TagHierarchyNode> _nodes = new ObservableCollection<TagHierarchyNode>(
+            Enumerable.Repeat(new TagHierarchyNode(
+                Enumerable.Repeat(new TagHierarchyNode(), 4)), 10));
+        public ObservableCollection<TagHierarchyNode> Nodes
+        {
+            get { return _nodes; }
         }
     }
 }
