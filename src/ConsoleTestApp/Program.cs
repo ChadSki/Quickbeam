@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PythonBinding;
+﻿using PythonBinding;
 
 namespace ConsoleTestApp
 {
@@ -11,8 +6,8 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            var foo = new HaloMapProxy();
-            var bar = foo.getGhost();
+            var map = PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
+            var bar = map.getGhost();
             var qux = bar.getData();
         }
     }
