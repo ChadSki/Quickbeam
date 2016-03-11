@@ -46,7 +46,7 @@ namespace PythonBinding {
     public ref class HaloMapProxy
     {
     public:
-        HaloMapProxy();
+        HaloMapProxy(PyObject* map);
         HaloTagProxy^ getGhost();
     private:
         PyObject* halomap;

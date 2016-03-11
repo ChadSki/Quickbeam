@@ -42,23 +42,9 @@ namespace PythonBinding {
         return gcnew HaloStructProxy(data);
     }
 
-    HaloMapProxy::HaloMapProxy()
+    HaloMapProxy::HaloMapProxy(PyObject* map)
     {
-        Py_Initialize();
-        PyRun_SimpleString( // Fix console output
-            "import sys\n"
-            "sys.stdout = open('CONOUT$', 'wt')");
-
-        PyRun_SimpleString( // Load map
-            "import halolib\n"
-            "map = halolib.HaloMap.from_hpc()");
-
-        PySys_SetPath(L".");
-        auto halolib = PyImport_ImportModule("halolib");
-        auto halolib_dict = PyModule_GetDict(halolib);
-        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
-        auto from_hpc = PyObject_GetAttrString(halomap_class, "from_hpc");
-        this->halomap = PyObject_CallObject(from_hpc, nullptr);
+        this->halomap = map;
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()
