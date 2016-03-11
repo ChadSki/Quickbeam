@@ -14,11 +14,6 @@ namespace PythonBinding {
             reinterpret_cast<UINT64>(this));
     }
 
-    PyObject_Thunk::~PyObject_Thunk()
-    {
-        // TODO
-    }
-
     void PyObject_Thunk::OnPropertyChanged()
     {
         std::cout << "changed! (C++ OnPropertyChanged)" << std::endl;
@@ -35,26 +30,10 @@ namespace PythonBinding {
         this->halostruct = halostruct;
     }
 
-    HaloStructProxy::HaloStructProxy(const HaloStructProxy^ & other)
-    {
-        this->halostruct = other->halostruct;
-    }
-
-    HaloStructProxy::~HaloStructProxy()
-    {}
-
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
     {
         this->halotag = halotag;
     }
-
-    HaloTagProxy::HaloTagProxy(const HaloTagProxy^ & other)
-    {
-        this->halotag = other->halotag;
-    }
-
-    HaloTagProxy::~HaloTagProxy()
-    {}
 
     HaloStructProxy^ HaloTagProxy::getData()
     {
@@ -80,17 +59,6 @@ namespace PythonBinding {
         auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
         auto from_hpc = PyObject_GetAttrString(halomap_class, "from_hpc");
         this->halomap = PyObject_CallObject(from_hpc, nullptr);
-    }
-
-    HaloMapProxy::HaloMapProxy(const HaloMapProxy^ & other)
-    {
-        this->halomap = other->halomap;
-    }
-
-    HaloMapProxy::~HaloMapProxy()
-    {
-        PyRun_SimpleString("print('exiting')");
-        Py_Finalize();
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()

@@ -1,4 +1,5 @@
-// PythonBinding.h
+﻿// TODO - I haven't written copy constructors or
+// destructors = memory leak? ¯\_(ツ)_/¯
 
 #pragma once
 #include "Stdafx.h"
@@ -14,8 +15,6 @@ namespace PythonBinding {
     {
     public:
         PyObject_Thunk(PyObject* po);
-        PyObject_Thunk(const PyObject_Thunk &po);
-        ~PyObject_Thunk();
 
         /// Triggered whenever a property of the bound PyObject is updated.
         void OnPropertyChanged();
@@ -31,8 +30,6 @@ namespace PythonBinding {
     {
     public:
         HaloStructProxy(PyObject* halostruct);
-        HaloStructProxy(const HaloStructProxy^ & other);
-        ~HaloStructProxy();
     private:
         PyObject* halostruct;
     };
@@ -41,8 +38,6 @@ namespace PythonBinding {
     {
     public:
         HaloTagProxy(PyObject* halotag);
-        HaloTagProxy(const HaloTagProxy^ & other);
-        ~HaloTagProxy();
         HaloStructProxy^ getData();
     private:
         PyObject* halotag;
@@ -52,8 +47,6 @@ namespace PythonBinding {
     {
     public:
         HaloMapProxy();
-        HaloMapProxy(const HaloMapProxy^ & other);
-        ~HaloMapProxy();
         HaloTagProxy^ getGhost();
     private:
         PyObject* halomap;
