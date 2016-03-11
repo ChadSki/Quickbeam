@@ -145,12 +145,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PythonBinding.h" />
+    <ClInclude Include="PythonInterpreter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="PythonBinding.cpp" />
+    <ClCompile Include="PythonInterpreter.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
