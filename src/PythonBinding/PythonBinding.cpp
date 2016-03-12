@@ -47,8 +47,10 @@ namespace PythonBinding {
         // type: Sequence[Tuple[str, Union[BasicField, HaloField]]]
         auto fieldsItems = PyMapping_Items(fieldsDict);
         auto fieldsIter = PyObject_GetIter(fieldsItems);
-        if (fieldsIter == nullptr) { throw gcnew NullReferenceException(
-            "Could not iterate over the struct's fields."); }
+        if (fieldsIter == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not iterate over the struct's fields.");
+        }
 
         // Read all the fields into our collection
         PyObject* item;
@@ -63,22 +65,26 @@ namespace PythonBinding {
         }
     }
 
+    String^ HaloStructProxy::ToString()
+    {
+        return gcnew String("TODO");
+    }
+
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
     {
         this->halotag = halotag;
+        this->_data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
     }
 
-    HaloStructProxy^ HaloTagProxy::getData()
+    String^ HaloTagProxy::ToString()
     {
-        auto data = PyObject_GetAttrString(this->halotag, "data");
-        PyObject_Print(data, stdout, Py_PRINT_RAW);
-        return gcnew HaloStructProxy(data);
+        return gcnew String("TODO");
     }
 
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
-        this->Tags = gcnew List<PythonBinding::HaloTagProxy^>();
+        this->_tags = gcnew List<PythonBinding::HaloTagProxy^>();
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()
@@ -90,57 +96,68 @@ namespace PythonBinding {
         auto ghost = PyObject_CallObject(tag_fn, args);
         return gcnew HaloTagProxy(ghost);
     }
-}
 
-PythonBinding::PythonInterpreter::PythonInterpreter()
-{
-    Py_Initialize();
-    PyRun_SimpleString(
-        "import sys\n"
-        "sys.stdout = open('CONOUT$', 'wt')\n"  // Fix console output
-        "import halolib\n");
-
-    PyObject* sys_mod_dict = PyImport_GetModuleDict();
-    PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
-    this->halolib = PyObject_GetAttrString(main_mod, "halolib");
-    this->_maps = gcnew List<PythonBinding::HaloMapProxy^>();
-}
-
-void PythonBinding::PythonInterpreter::OpenMap(HaloMemory whichExe)
-{
-    auto halolib_dict = PyModule_GetDict(halolib);
-    auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
-    PyObject* map_constructor{};
-    switch (whichExe)
+    String^ HaloMapProxy::ToString()
     {
-    case HaloMemory::PC:
-        std::cout << "PC" << std::endl;
-        map_constructor = PyObject_GetAttrString(halomap_class, "from_hpc");
-        break;
-
-    case HaloMemory::CE:
-        std::cout << "CE" << std::endl;
-        map_constructor = PyObject_GetAttrString(halomap_class, "from_hce");
-        break;
+        return gcnew String("TODO");
     }
-    std::cout << "map_constructor " << map_constructor << std::endl;
-    auto map = PyObject_CallObject(map_constructor, nullptr);
-    std::cout << "map " << map << std::endl;
-    Maps->Add(gcnew PythonBinding::HaloMapProxy(map));
-    return;
-}
 
-void PythonBinding::PythonInterpreter::OpenMap(String ^ filename)
-{
-    // Encode the text as UTF8, making sure the array is zero terminated
-    auto encodedBytes = Encoding::UTF8->GetBytes(filename + "\0");
-    // prevent GC moving the bytes around while this variable is on the stack
-    pin_ptr<Byte> pinnedBytes = &encodedBytes[0];
-    auto halolib_dict = PyModule_GetDict(halolib);
-    auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
-    auto map_constructor = PyObject_GetAttrString(halomap_class, "from_file");
-    // cast pin_ptr to char*
-    auto map = PyObject_CallObject(map_constructor,
-        PyTuple_Pack(1, PyUnicode_FromString(reinterpret_cast<char*>(pinnedBytes))));
-    Maps->Add(gcnew PythonBinding::HaloMapProxy(map));
+
+    PythonInterpreter::PythonInterpreter()
+    {
+        Py_Initialize();
+        PyRun_SimpleString(
+            "import sys\n"
+            "sys.stdout = open('CONOUT$', 'wt')\n"  // Fix console output
+            "import halolib\n");
+
+        PyObject* sys_mod_dict = PyImport_GetModuleDict();
+        PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
+        this->halolib = PyObject_GetAttrString(main_mod, "halolib");
+        this->_maps = gcnew List<HaloMapProxy^>();
+    }
+
+    void PythonInterpreter::OpenMap(HaloMemory whichExe)
+    {
+        auto halolib_dict = PyModule_GetDict(halolib);
+        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
+        PyObject* map_constructor{};
+        switch (whichExe)
+        {
+        case HaloMemory::PC:
+            std::cout << "PC" << std::endl;
+            map_constructor = PyObject_GetAttrString(halomap_class, "from_hpc");
+            break;
+
+        case HaloMemory::CE:
+            std::cout << "CE" << std::endl;
+            map_constructor = PyObject_GetAttrString(halomap_class, "from_hce");
+            break;
+        }
+        std::cout << "map_constructor " << map_constructor << std::endl;
+        auto map = PyObject_CallObject(map_constructor, nullptr);
+        std::cout << "map " << map << std::endl;
+        Maps->Add(gcnew HaloMapProxy(map));
+        return;
+    }
+
+    void PythonInterpreter::OpenMap(String ^ filename)
+    {
+        // Encode the text as UTF8, making sure the array is zero terminated
+        auto encodedBytes = Encoding::UTF8->GetBytes(filename + "\0");
+        // prevent GC moving the bytes around while this variable is on the stack
+        pin_ptr<Byte> pinnedBytes = &encodedBytes[0];
+        auto halolib_dict = PyModule_GetDict(halolib);
+        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
+        auto map_constructor = PyObject_GetAttrString(halomap_class, "from_file");
+        // cast pin_ptr to char*
+        auto map = PyObject_CallObject(map_constructor,
+            PyTuple_Pack(1, PyUnicode_FromString(reinterpret_cast<char*>(pinnedBytes))));
+        Maps->Add(gcnew HaloMapProxy(map));
+    }
+
+    String^ PythonInterpreter::ToString()
+    {
+        return gcnew String("TODO");
+    }
 }

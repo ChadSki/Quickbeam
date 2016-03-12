@@ -1,4 +1,5 @@
-﻿using PythonBinding;
+﻿using System;
+using PythonBinding;
 
 namespace ConsoleTestApp
 {
@@ -6,10 +7,15 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(PythonInterpreter.Instance);
             PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
-            var map = PythonInterpreter.Instance.Maps[0];
-            var bar = map.getGhost();
-            var qux = bar.getData();
+            Console.WriteLine(PythonInterpreter.Instance);
+            var hmap = PythonInterpreter.Instance.Maps[0];
+            Console.WriteLine(hmap);
+            var htag = hmap.getGhost();
+            Console.WriteLine(htag);
+            var hstruct = htag.Data;
+            Console.WriteLine(hstruct);
         }
     }
 }
