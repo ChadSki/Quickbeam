@@ -3,23 +3,19 @@
 
 #pragma once
 #include "Stdafx.h"
-#using <WindowsBase.dll>
 
 using namespace System;
 using namespace System::Collections::Generic;
-using namespace System::Collections::ObjectModel;
 
 namespace PythonBinding {
 
-#pragma managed(push, off)
-
+    #pragma managed(push, off)
     /// Wraps a PyObject known to have a property_changed Event.
     class ObservablePyObject;
 
     /// Callback function to be passed into Python.
     int callback_thunk(ObservablePyObject* slf);
-
-#pragma managed(pop)
+    #pragma managed(pop)
 
     public enum class FieldType {
         Ascii, Asciiz, RawData,
@@ -29,15 +25,17 @@ namespace PythonBinding {
         AsciizPtr, TagReference, StructArray,
         };
 
+    typedef List<Tuple<String^, FieldType, Object^>^> FieldGroup;
+
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructProxy
     {
     public:
         HaloStructProxy(PyObject* halostruct);
-        property ObservableCollection<
-            Tuple<String^, FieldType, Object^>^>^ Fields;
+        property FieldGroup^ Fields { FieldGroup^ get() { return _fields; } }
     private:
-        PyObject* halostruct;
+        ObservablePyObject* halostruct;
+        FieldGroup^ _fields;
     };
 
     /// Wraps a PyObject known to be a HaloTag
@@ -45,12 +43,14 @@ namespace PythonBinding {
     {
     public:
         HaloTagProxy(PyObject* halotag);
-        property HaloStructProxy^ Header;
-        property HaloStructProxy^ Data;
+        property HaloStructProxy^ Header { HaloStructProxy^ get() { return _header; } }
+        property HaloStructProxy^ Data { HaloStructProxy^ get() { return _data; } }
 
         HaloStructProxy^ HaloTagProxy::getData(); // Temporary
     private:
         PyObject* halotag;
+        HaloStructProxy^ _header;
+        HaloStructProxy^ _data;
     };
 
     /// Wraps a PyObject known to be a HaloMap
@@ -58,7 +58,7 @@ namespace PythonBinding {
     {
     public:
         HaloMapProxy(PyObject* map);
-        property ObservableCollection<PythonBinding::HaloTagProxy^>^ Tags;
+        property List<PythonBinding::HaloTagProxy^>^ Tags;
         HaloTagProxy^ getGhost();
     private:
         PyObject* halomap;
@@ -72,7 +72,7 @@ namespace PythonBinding {
         static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %m_instance; } }
         void OpenMap(HaloMemory whichExe);
         void OpenMap(String^ filename);
-        property ObservableCollection<PythonBinding::HaloMapProxy^>^ Maps;
+        property List<PythonBinding::HaloMapProxy^>^ Maps;
 
     private:
         PythonInterpreter();

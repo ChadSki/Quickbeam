@@ -25,6 +25,7 @@ namespace PythonBinding {
         void OnPropertyChanged()
         {
             std::cout << "changed! (C++ OnPropertyChanged)" << std::endl;
+            // TODO run event handlers too
         }
 
         PyObject* _po;
@@ -38,7 +39,9 @@ namespace PythonBinding {
 
     HaloStructProxy::HaloStructProxy(PyObject* halostruct)
     {
-        this->halostruct = halostruct;
+        this->halostruct = new ObservablePyObject(halostruct);
+        _fields = gcnew FieldGroup();
+
     }
 
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
@@ -56,7 +59,7 @@ namespace PythonBinding {
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
-        this->Tags = gcnew ObservableCollection<PythonBinding::HaloTagProxy^>();
+        this->Tags = gcnew List<PythonBinding::HaloTagProxy^>();
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()
@@ -81,7 +84,7 @@ PythonBinding::PythonInterpreter::PythonInterpreter()
     PyObject* sys_mod_dict = PyImport_GetModuleDict();
     PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
     this->halolib = PyObject_GetAttrString(main_mod, "halolib");
-    this->Maps = gcnew ObservableCollection<PythonBinding::HaloMapProxy^>();
+    this->Maps = gcnew List<PythonBinding::HaloMapProxy^>();
 }
 
 void PythonBinding::PythonInterpreter::OpenMap(HaloMemory whichExe)
