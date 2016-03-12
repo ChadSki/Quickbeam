@@ -72,12 +72,13 @@ namespace PythonBinding {
         static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %m_instance; } }
         void OpenMap(HaloMemory whichExe);
         void OpenMap(String^ filename);
-        property List<PythonBinding::HaloMapProxy^>^ Maps;
+        property List<HaloMapProxy^>^ Maps { List<HaloMapProxy^>^ get() { return _maps; } }
 
     private:
         PythonInterpreter();
         PythonInterpreter(const PythonInterpreter%) { throw gcnew InvalidOperationException("PythonInterpreter cannot be copy-constructed"); }
         static PythonInterpreter m_instance;
         PyObject* halolib;
+        property List<PythonBinding::HaloMapProxy^>^ _maps;
     };
 }

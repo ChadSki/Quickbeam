@@ -40,8 +40,27 @@ namespace PythonBinding {
     HaloStructProxy::HaloStructProxy(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
-        _fields = gcnew FieldGroup();
+        this->_fields = gcnew FieldGroup();
 
+        // type: Dict[str, Union[BasicField, HaloField]]
+        auto fieldsDict = PyObject_GetAttrString(this->halostruct->_po, "fields");
+        // type: Sequence[Tuple[str, Union[BasicField, HaloField]]]
+        auto fieldsItems = PyMapping_Items(fieldsDict);
+        auto fieldsIter = PyObject_GetIter(fieldsItems);
+        if (fieldsIter == nullptr) { throw gcnew NullReferenceException(
+            "Could not iterate over the struct's fields."); }
+
+        // Read all the fields into our collection
+        PyObject* item;
+        while (item = PyIter_Next(fieldsIter)) {
+            auto fieldName = PySequence_GetItem(item, 0);
+            auto fieldItself = PySequence_GetItem(item, 1);
+
+            PyObject_Print(fieldName, stdout, Py_PRINT_RAW);
+            std::cout << " ";
+            PyObject_Print(fieldItself, stdout, Py_PRINT_RAW);
+            std::cout << std::endl;
+        }
     }
 
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
@@ -84,7 +103,7 @@ PythonBinding::PythonInterpreter::PythonInterpreter()
     PyObject* sys_mod_dict = PyImport_GetModuleDict();
     PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
     this->halolib = PyObject_GetAttrString(main_mod, "halolib");
-    this->Maps = gcnew List<PythonBinding::HaloMapProxy^>();
+    this->_maps = gcnew List<PythonBinding::HaloMapProxy^>();
 }
 
 void PythonBinding::PythonInterpreter::OpenMap(HaloMemory whichExe)
