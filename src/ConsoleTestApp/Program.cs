@@ -6,7 +6,8 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            var map = PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
+            PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
+            var map = PythonInterpreter.Instance.Maps[0];
             var bar = map.getGhost();
             var qux = bar.getData();
         }
