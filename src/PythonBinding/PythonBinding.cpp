@@ -4,6 +4,10 @@
 
 #include "PythonBinding.h"
 
+using namespace System;
+using namespace System::Text;
+using namespace System::Runtime::InteropServices;
+
 namespace PythonBinding {
 
     public class ObservablePyObject
@@ -52,6 +56,7 @@ namespace PythonBinding {
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
+        this->Tags = gcnew ObservableCollection<PythonBinding::HaloTagProxy^>();
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()
@@ -108,14 +113,17 @@ void PythonBinding::PythonInterpreter::OpenMap(HaloMemory whichExe)
     return;
 }
 
-void PythonBinding::PythonInterpreter::OpenMap(System::String ^ filename)
+void PythonBinding::PythonInterpreter::OpenMap(String ^ filename)
 {
-    char* asdf;
+    // Encode the text as UTF8, making sure the array is zero terminated
+    auto encodedBytes = Encoding::UTF8->GetBytes(filename + "\0");
+    // prevent GC moving the bytes around while this variable is on the stack
+    pin_ptr<Byte> pinnedBytes = &encodedBytes[0];
     auto halolib_dict = PyModule_GetDict(halolib);
     auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
     auto map_constructor = PyObject_GetAttrString(halomap_class, "from_file");
-    auto map = PyObject_CallObject(map_constructor, PyTuple_Pack(1, PyUnicode_FromString(asdf)));
-
-    throw gcnew System::NotImplementedException();
-    // TODO: insert return statement here
+    // cast pin_ptr to char*
+    auto map = PyObject_CallObject(map_constructor,
+        PyTuple_Pack(1, PyUnicode_FromString(reinterpret_cast<char*>(pinnedBytes))));
+    Maps->Add(gcnew PythonBinding::HaloMapProxy(map));
 }

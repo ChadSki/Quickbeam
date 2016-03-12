@@ -44,7 +44,7 @@ namespace PythonBinding {
     {
     public:
         HaloMapProxy(PyObject* map);
-
+        property ObservableCollection<PythonBinding::HaloTagProxy^>^ Tags;
         HaloTagProxy^ getGhost();
     private:
         PyObject* halomap;
