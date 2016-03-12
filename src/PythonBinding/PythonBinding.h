@@ -28,21 +28,21 @@ namespace PythonBinding {
     public ref class FieldProxy
     {
     public:
-        FieldProxy();
+        FieldProxy(PyObject* field);
         property Object^ Value;
     };
 
-    typedef List<Tuple<String^, FieldType, Object^>^> FieldGroup;
+    typedef Tuple<String^, FieldType, Object^> FieldEntry;
 
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructProxy
     {
         ObservablePyObject* halostruct;
-        FieldGroup^ _fields;
+        List<FieldEntry^>^ _fields;
 
     public:
         HaloStructProxy(PyObject* halostruct);
-        property FieldGroup^ Fields { FieldGroup^ get() { return _fields; } }
+        property List<FieldEntry^>^ Fields { List<FieldEntry^>^ get() { return _fields; } }
         virtual String^ ToString() override;
     };
 

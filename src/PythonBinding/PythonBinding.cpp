@@ -37,12 +37,12 @@ namespace PythonBinding {
         return 0;
     }
 
-    FieldProxy::FieldProxy() {}
+    FieldProxy::FieldProxy(PyObject* field) {}
 
     HaloStructProxy::HaloStructProxy(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
-        this->_fields = gcnew FieldGroup();
+        this->_fields = gcnew List<FieldEntry^>();
 
         // type: Dict[str, Union[BasicField, HaloField]]
         auto fieldsDict = PyObject_GetAttrString(this->halostruct->_po, "fields");
@@ -57,19 +57,25 @@ namespace PythonBinding {
         // Read all the fields into our collection
         PyObject* item;
         while (item = PyIter_Next(fieldsIter)) {
-            auto fieldName = PySequence_GetItem(item, 0);
-            auto fieldItself = PySequence_GetItem(item, 1);
-
-            PyObject_Print(fieldName, stdout, Py_PRINT_RAW);
+            // Name
+            auto fieldNameObj = PySequence_GetItem(item, 0);
+            PyObject_Print(fieldNameObj, stdout, Py_PRINT_RAW);
             std::cout << " ";
-            PyObject_Print(fieldItself, stdout, Py_PRINT_RAW);
+            auto fieldNameChar = PyUnicode_AsUTF8AndSize(fieldNameObj, nullptr);
+            auto fieldNameStr = gcnew String(fieldNameChar);
+
+            //Field
+            auto fieldObj = PySequence_GetItem(item, 1);
+            PyObject_Print(fieldObj, stdout, Py_PRINT_RAW);
             std::cout << std::endl;
+            FieldEntry^ entry = gcnew FieldEntry(
+                fieldNameStr, FieldType::Int32, gcnew FieldProxy(fieldObj));
         }
     }
 
     String^ HaloStructProxy::ToString()
     {
-        return gcnew String("TODO");
+        return gcnew String("HaloStruct.");
     }
 
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
@@ -80,7 +86,7 @@ namespace PythonBinding {
 
     String^ HaloTagProxy::ToString()
     {
-        return gcnew String("TODO");
+        return gcnew String("HaloTag.");
     }
 
     HaloMapProxy::HaloMapProxy(PyObject* map)
@@ -101,9 +107,8 @@ namespace PythonBinding {
 
     String^ HaloMapProxy::ToString()
     {
-        return gcnew String("TODO");
+        return String::Format("HaloMap with {0} tags.", this->Tags->Count);
     }
-
 
     PythonInterpreter::PythonInterpreter()
     {
@@ -139,7 +144,7 @@ namespace PythonBinding {
         std::cout << "map_constructor " << map_constructor << std::endl;
         auto map = PyObject_CallObject(map_constructor, nullptr);
         std::cout << "map " << map << std::endl;
-        Maps->Add(gcnew HaloMapProxy(map));
+        this->Maps->Add(gcnew HaloMapProxy(map));
         return;
     }
 
@@ -155,11 +160,11 @@ namespace PythonBinding {
         // cast pin_ptr to char*
         auto map = PyObject_CallObject(map_constructor,
             PyTuple_Pack(1, PyUnicode_FromString(reinterpret_cast<char*>(pinnedBytes))));
-        Maps->Add(gcnew HaloMapProxy(map));
+        this->Maps->Add(gcnew HaloMapProxy(map));
     }
 
     String^ PythonInterpreter::ToString()
     {
-        return gcnew String("TODO");
+        return String::Format("PythonInterpreter with {0} open maps.", this->Maps->Count);
     }
 }
