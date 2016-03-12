@@ -37,6 +37,8 @@ namespace PythonBinding {
         return 0;
     }
 
+    FieldProxy::FieldProxy() {}
+
     HaloStructProxy::HaloStructProxy(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
