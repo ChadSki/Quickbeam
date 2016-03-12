@@ -61,11 +61,6 @@ namespace PythonBinding {
 
     HaloTagProxy^ HaloMapProxy::getGhost()
     {
-
-        //int result_a = PyObject_SetAttr(ghost, PyUnicode_FromString("acceleration"), PyFloat_FromDouble(12));
-        //int result_b = PyObject_SetAttr(ghost, PyUnicode_FromString("max_forward_velocity"), PyFloat_FromDouble(12));
-        //PyRun_SimpleString("map.index_header.integrity = 'n00b'");
-
         auto tag_fn = PyObject_GetAttrString(this->halomap, "tag");
         auto args = PyTuple_Pack(2,
             PyUnicode_FromString("vehi"),

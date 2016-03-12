@@ -6,6 +6,7 @@
 #using <WindowsBase.dll>
 
 using namespace System;
+using namespace System::Collections::Generic;
 using namespace System::Collections::ObjectModel;
 
 namespace PythonBinding {
@@ -20,11 +21,21 @@ namespace PythonBinding {
 
 #pragma managed(pop)
 
+    public enum class FieldType {
+        Ascii, Asciiz, RawData,
+        Enum16, BitFlag, Float32, Float64,
+        Int8, Int16, Int32, Int64,
+        Uint8, UInt16, UInt32, UInt64,
+        AsciizPtr, TagReference, StructArray,
+        };
+
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructProxy
     {
     public:
         HaloStructProxy(PyObject* halostruct);
+        property ObservableCollection<
+            Tuple<String^, FieldType, Object^>^>^ Fields;
     private:
         PyObject* halostruct;
     };
@@ -34,7 +45,10 @@ namespace PythonBinding {
     {
     public:
         HaloTagProxy(PyObject* halotag);
-        HaloStructProxy^ getData();
+        property HaloStructProxy^ Header;
+        property HaloStructProxy^ Data;
+
+        HaloStructProxy^ HaloTagProxy::getData(); // Temporary
     private:
         PyObject* halotag;
     };
