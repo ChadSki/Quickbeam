@@ -75,7 +75,7 @@ namespace PythonBinding {
 
     String^ HaloStructProxy::ToString()
     {
-        return gcnew String("HaloStruct.");
+        return String::Format("HaloStruct with {0} fields.", this->Fields->Count);
     }
 
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
@@ -132,18 +132,14 @@ namespace PythonBinding {
         switch (whichExe)
         {
         case HaloMemory::PC:
-            std::cout << "PC" << std::endl;
             map_constructor = PyObject_GetAttrString(halomap_class, "from_hpc");
             break;
 
         case HaloMemory::CE:
-            std::cout << "CE" << std::endl;
             map_constructor = PyObject_GetAttrString(halomap_class, "from_hce");
             break;
         }
-        std::cout << "map_constructor " << map_constructor << std::endl;
         auto map = PyObject_CallObject(map_constructor, nullptr);
-        std::cout << "map " << map << std::endl;
         this->Maps->Add(gcnew HaloMapProxy(map));
         return;
     }
