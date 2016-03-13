@@ -1,4 +1,4 @@
-﻿using Quickbeam.Helpers;
+﻿using PythonBinding;
 using System;
 using System.Globalization;
 using System.IO;
@@ -13,7 +13,7 @@ namespace Quickbeam.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var tagHierarchyNode = (ExplorerNode)value;
-            if (tagHierarchyNode.IsFolder)
+            if (tagHierarchyNode.Children.Count == 0)
                 return Application.Current.FindResource("HierarchyClosedFolder");
 
             var ext = (Path.GetExtension(tagHierarchyNode.Name) ?? "").ToLower();

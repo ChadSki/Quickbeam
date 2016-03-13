@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Quickbeam</RootNamespace>
     <AssemblyName>Quickbeam</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -218,7 +219,6 @@
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\HaloSettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Helpers\ExplorerNode.cs" />
     <Compile Include="Views\DpiDecorator.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
@@ -469,6 +469,10 @@
     <ProjectReference Include="..\MetroIde\MetroIde.csproj">
       <Project>{cf8ea988-3789-48c4-8e2d-bd157a8b1cc4}</Project>
       <Name>MetroIde</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PythonBinding\PythonBinding.vcxproj">
+      <Project>{6735c990-59fd-4c22-b92c-9f907e73d9d5}</Project>
+      <Name>PythonBinding</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

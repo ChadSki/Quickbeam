@@ -1,8 +1,7 @@
-﻿using Quickbeam.Interfaces;
-using Quickbeam.Helpers;
+﻿using PythonBinding;
+using Quickbeam.Interfaces;
 using Quickbeam.Native;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 
 namespace Quickbeam.ViewModels
@@ -11,9 +10,7 @@ namespace Quickbeam.ViewModels
     {
         public MainPageViewModel()
         {
-            nodes = new ObservableCollection<ExplorerNode>(
-                Enumerable.Repeat(new ExplorerNode(
-                    Enumerable.Repeat(new ExplorerNode(), 4)), 10));
+            PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
         }
 
         #region HaloExe
@@ -80,10 +77,9 @@ namespace Quickbeam.ViewModels
         }
         #endregion HaloExe
 
-        private ObservableCollection<ExplorerNode> nodes;
         public ObservableCollection<ExplorerNode> Nodes
         {
-            get { return nodes; }
+            get { return PythonInterpreter.Instance.Children; }
         }
     }
 }

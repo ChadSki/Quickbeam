@@ -60,7 +60,6 @@ namespace PythonBinding {
         virtual property ObservableCollection<ExplorerNode^>^ Children;
         virtual property String^ Name;
         virtual property String^ Suffix;
-        property Boolean^ IsFolder { Boolean^ get() { return Children->Count > 0; } }
 
     };
 
@@ -114,8 +113,10 @@ namespace PythonBinding {
                 "PythonInterpreter cannot be copy-constructed");
         }
         static PythonInterpreter instance;
-        PyObject* halolib;
+        PyObject* halomap_class;
         property ObservableCollection<ExplorerNode^>^ maps;
+
+        bool initialized = false;
 
     public:
         static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %instance; } }

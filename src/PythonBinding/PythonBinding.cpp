@@ -115,19 +115,20 @@ namespace PythonBinding {
         Py_Initialize();
         PyRun_SimpleString(
             "import sys\n"
-            "sys.stdout = open('CONOUT$', 'wt')\n"  // Fix console output
+            //"sys.stdout = open('CONOUT$', 'wt')\n"  // Fix console output
             "import halolib\n");
 
-        PyObject* sys_mod_dict = PyImport_GetModuleDict();
-        PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
-        this->halolib = PyObject_GetAttrString(main_mod, "halolib");
+        auto sys_mod_dict = PyImport_GetModuleDict();
+        auto main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
+        auto halolib = PyObject_GetAttrString(main_mod, "halolib");
+        auto halolib_dict = PyModule_GetDict(halolib);
+        this->halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
         this->maps = gcnew ObservableCollection<ExplorerNode^>();
+        
     }
 
     void PythonInterpreter::OpenMap(HaloMemory whichExe)
     {
-        auto halolib_dict = PyModule_GetDict(halolib);
-        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
         PyObject* map_constructor{};
         switch (whichExe)
         {
@@ -149,8 +150,6 @@ namespace PythonBinding {
         auto encodedBytes = Encoding::UTF8->GetBytes(filename + "\0");
         // prevent GC moving the bytes around while this variable is on the stack
         pin_ptr<Byte> pinnedBytes = &encodedBytes[0];
-        auto halolib_dict = PyModule_GetDict(halolib);
-        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
         auto map_constructor = PyObject_GetAttrString(halomap_class, "from_file");
         // cast pin_ptr to char*
         auto map = PyObject_CallObject(map_constructor,
