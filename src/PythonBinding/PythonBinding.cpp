@@ -91,7 +91,7 @@ namespace PythonBinding {
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
-        this->tags = gcnew List<ExplorerNode^>();
+        this->tagClasses = gcnew List<ExplorerNode^>();
 
         auto tags_fn = PyObject_GetAttrString(this->halomap, "tags");
         auto allTags = PyObject_CallObject(tags_fn, nullptr);
@@ -103,8 +103,19 @@ namespace PythonBinding {
 
         // Read all the tags into our collection
         PyObject* item;
+        auto tagsByClass = gcnew Dictionary<String^, List<ExplorerNode^>^>();
         while (item = PyIter_Next(tagsIter)) {
-            this->tags->Add(gcnew HaloTagProxy(item));
+            auto tag = gcnew HaloTagProxy(item);
+            auto tagClassStr = tag->FirstClass;
+            if (!tagsByClass->ContainsKey(tagClassStr))
+            {
+                tagsByClass->Add(tagClassStr, gcnew List<ExplorerNode^>());
+            }
+            (tagsByClass[tagClassStr])->Add(tag);
+        }
+        for each (auto tagClass in tagsByClass)
+        {
+            tagClasses->Add(gcnew HaloTagClassProxy(tagClass.Key, tagClass.Value));
         }
     }
 
@@ -120,7 +131,7 @@ namespace PythonBinding {
 
     String^ HaloMapProxy::ToString()
     {
-        return String::Format("HaloMap with {0} tags.", this->tags->Count);
+        return String::Format("HaloMap with {0} tag classes.", this->tagClasses->Count);
     }
 
     PythonInterpreter::PythonInterpreter()

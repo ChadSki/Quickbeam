@@ -74,6 +74,7 @@ namespace PythonBinding {
         HaloTagProxy(PyObject* halotag);
         property HaloStructProxy^ Header { HaloStructProxy^ get() { return header; } }
         property HaloStructProxy^ Data { HaloStructProxy^ get() { return data; } }
+        property String^ FirstClass { String^ get() { return "idk"; } }
         virtual property List<ExplorerNode^>^ Children
         {
             List<ExplorerNode^>^ get() override { return noChildren; }
@@ -83,18 +84,35 @@ namespace PythonBinding {
         virtual String^ ToString() override;
     };
 
+    public ref class HaloTagClassProxy : ExplorerNode
+    {
+        String^ className;
+        List<ExplorerNode^>^ tags;
+    public:
+        HaloTagClassProxy(String^ className, List<ExplorerNode^>^ tags)
+        {
+            this->className = className;
+            this->tags = tags;
+        }
+        virtual property String^ Name { String^ get() override { return className; } }
+        virtual property List<ExplorerNode^>^ Children
+        {
+            List<ExplorerNode^>^ get() override { return tags; }
+        }
+    };
+
     /// Wraps a PyObject known to be a HaloMap
     public ref class HaloMapProxy : ExplorerNode
     {
         PyObject* halomap;
-        List<ExplorerNode^>^ tags;
+        List<ExplorerNode^>^ tagClasses{};
 
     public:
         HaloMapProxy(PyObject* map);
         HaloTagProxy^ getGhost();
         virtual property List<ExplorerNode^>^ Children
         {
-            List<ExplorerNode^>^ get() override { return tags; }
+            List<ExplorerNode^>^ get() override { return tagClasses; }
         }
         virtual property String^ Name { String^ get() override { return ToString(); } }
         virtual property String^ Suffix { String^ get() override { return "map"; } }
