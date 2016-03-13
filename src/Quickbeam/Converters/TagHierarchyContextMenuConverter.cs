@@ -6,7 +6,7 @@ using System.Windows.Data;
 
 namespace Quickbeam.Converters
 {
-    [ValueConversion(typeof(TagHierarchyNode), typeof(ContextMenu))]
+    [ValueConversion(typeof(ExplorerNode), typeof(ContextMenu))]
     public class TagHierarchyContextMenuConverter : IValueConverter
     {
         public ContextMenu TagContextMenu { get; set; }
@@ -15,7 +15,7 @@ namespace Quickbeam.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var item = value as TagHierarchyNode;
+            var item = value as ExplorerNode;
             if (item == null) return null;
 
             //return item.IsTag ? TagContextMenu : FolderContextMenu;

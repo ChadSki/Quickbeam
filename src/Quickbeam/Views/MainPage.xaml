@@ -131,7 +131,7 @@
                         Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,10,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type helpers:TagHierarchyNode}" ItemsSource="{Binding Children}">
+                <HierarchicalDataTemplate DataType="{x:Type helpers:ExplorerNode}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20"
                                 ContextMenu="{Binding Converter={StaticResource IValueConverterTagHierarchyContextMenu}}">
                         <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />

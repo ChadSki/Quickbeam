@@ -9,6 +9,13 @@ namespace Quickbeam.ViewModels
 {
     public class MainPageViewModel : Base
     {
+        public MainPageViewModel()
+        {
+            nodes = new ObservableCollection<ExplorerNode>(
+                Enumerable.Repeat(new ExplorerNode(
+                    Enumerable.Repeat(new ExplorerNode(), 4)), 10));
+        }
+
         #region HaloExe
         private GridLength _haloWidth = new GridLength(0, GridUnitType.Auto);
         private GridLength _haloHeight = new GridLength(0, GridUnitType.Auto);
@@ -73,12 +80,10 @@ namespace Quickbeam.ViewModels
         }
         #endregion HaloExe
 
-        private ObservableCollection<TagHierarchyNode> _nodes = new ObservableCollection<TagHierarchyNode>(
-            Enumerable.Repeat(new TagHierarchyNode(
-                Enumerable.Repeat(new TagHierarchyNode(), 4)), 10));
-        public ObservableCollection<TagHierarchyNode> Nodes
+        private ObservableCollection<ExplorerNode> nodes;
+        public ObservableCollection<ExplorerNode> Nodes
         {
-            get { return _nodes; }
+            get { return nodes; }
         }
     }
 }

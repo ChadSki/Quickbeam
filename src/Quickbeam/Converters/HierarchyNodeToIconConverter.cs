@@ -12,7 +12,7 @@ namespace Quickbeam.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var tagHierarchyNode = (TagHierarchyNode)value;
+            var tagHierarchyNode = (ExplorerNode)value;
             if (tagHierarchyNode.IsFolder)
                 return Application.Current.FindResource("HierarchyClosedFolder");
 
