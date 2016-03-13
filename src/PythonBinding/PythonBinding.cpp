@@ -24,7 +24,7 @@ namespace PythonBinding {
         /// Triggered whenever a property of the bound PyObject is updated.
         void OnPropertyChanged()
         {
-            std::cout << "changed! (C++ OnPropertyChanged)" << std::endl;
+            //std::cout << "changed! (C++ OnPropertyChanged)" << std::endl;
             // TODO run event handlers too
         }
 
@@ -78,7 +78,8 @@ namespace PythonBinding {
     {
         this->halotag = halotag;
         this->header = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "header"));
-        this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
+        //std::cout << "Has data: " << PyObject_HasAttrString(this->halotag, "data") << std::endl;
+        //this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
         this->noChildren = gcnew ObservableCollection<ExplorerNode^>();
     }
 
@@ -92,7 +93,19 @@ namespace PythonBinding {
         this->halomap = map;
         this->tags = gcnew ObservableCollection<ExplorerNode^>();
 
-        // TODO iterate tags and add to collection
+        auto tags_fn = PyObject_GetAttrString(this->halomap, "tags");
+        auto allTags = PyObject_CallObject(tags_fn, nullptr);
+        auto tagsIter = PyObject_GetIter(allTags);
+        if (tagsIter == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not iterate over tags.");
+        }
+
+        // Read all the tags into our collection
+        PyObject* item;
+        while (item = PyIter_Next(tagsIter)) {
+            this->tags->Add(gcnew HaloTagProxy(item));
+        }
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()

@@ -59,15 +59,14 @@ class BasicStruct(object):
         Takes arguments as uint32_t rather than void* in order to work around
         Python's type system.
         """
-        print('registering callback')
         functype = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint64)
         callback = functype(callback_ptr)
         def stub(attr_name):
-            print('stub')
+            # print('stub')
             callback(opaque_ptr)
         self.property_changed.add(stub)
         for each in self.property_changed:
-            print(each)
+            # print(each)
             each('foo')
 
     def __str__(self):

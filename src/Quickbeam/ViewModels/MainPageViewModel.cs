@@ -10,7 +10,8 @@ namespace Quickbeam.ViewModels
     {
         public MainPageViewModel()
         {
-            PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
+            if (PythonInterpreter.Instance.Children.Count == 0)
+                PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
         }
 
         #region HaloExe
