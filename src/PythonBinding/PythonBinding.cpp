@@ -59,17 +59,17 @@ namespace PythonBinding {
         while (item = PyIter_Next(fieldsIter)) {
             // Name
             auto fieldNameObj = PySequence_GetItem(item, 0);
-            PyObject_Print(fieldNameObj, stdout, Py_PRINT_RAW);
-            std::cout << " ";
             auto fieldNameChar = PyUnicode_AsUTF8AndSize(fieldNameObj, nullptr);
             auto fieldNameStr = gcnew String(fieldNameChar);
 
             //Field
             auto fieldObj = PySequence_GetItem(item, 1);
-            PyObject_Print(fieldObj, stdout, Py_PRINT_RAW);
-            std::cout << std::endl;
-            FieldEntry^ entry = gcnew FieldEntry(
+
+            // Altogether now
+            auto entry = gcnew FieldEntry(
                 fieldNameStr, FieldType::Int32, gcnew FieldProxy(fieldObj));
+
+            this->Fields->Add(entry);
         }
     }
 

@@ -32,7 +32,7 @@ namespace PythonBinding {
         property Object^ Value;
     };
 
-    typedef Tuple<String^, FieldType, Object^> FieldEntry;
+    typedef Tuple<String^, FieldType, FieldProxy^> FieldEntry;
 
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructProxy
