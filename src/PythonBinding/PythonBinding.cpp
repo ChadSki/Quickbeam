@@ -79,6 +79,7 @@ namespace PythonBinding {
         this->halotag = halotag;
         this->header = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "header"));
         this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
+        this->noChildren = gcnew ObservableCollection<ExplorerNode^>();
     }
 
     String^ HaloTagProxy::ToString()
@@ -89,7 +90,9 @@ namespace PythonBinding {
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
-        this->tags = gcnew List<PythonBinding::HaloTagProxy^>();
+        this->tags = gcnew ObservableCollection<ExplorerNode^>();
+
+        // TODO iterate tags and add to collection
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()
@@ -104,7 +107,7 @@ namespace PythonBinding {
 
     String^ HaloMapProxy::ToString()
     {
-        return String::Format("HaloMap with {0} tags.", this->Tags->Count);
+        return String::Format("HaloMap with {0} tags.", this->tags->Count);
     }
 
     PythonInterpreter::PythonInterpreter()
@@ -118,7 +121,7 @@ namespace PythonBinding {
         PyObject* sys_mod_dict = PyImport_GetModuleDict();
         PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
         this->halolib = PyObject_GetAttrString(main_mod, "halolib");
-        this->maps = gcnew List<HaloMapProxy^>();
+        this->maps = gcnew ObservableCollection<ExplorerNode^>();
     }
 
     void PythonInterpreter::OpenMap(HaloMemory whichExe)
@@ -137,8 +140,7 @@ namespace PythonBinding {
             break;
         }
         auto map = PyObject_CallObject(map_constructor, nullptr);
-        this->Maps->Add(gcnew HaloMapProxy(map));
-        return;
+        this->maps->Add(gcnew HaloMapProxy(map));
     }
 
     void PythonInterpreter::OpenMap(String ^ filename)
@@ -153,11 +155,11 @@ namespace PythonBinding {
         // cast pin_ptr to char*
         auto map = PyObject_CallObject(map_constructor,
             PyTuple_Pack(1, PyUnicode_FromString(reinterpret_cast<char*>(pinnedBytes))));
-        this->Maps->Add(gcnew HaloMapProxy(map));
+        this->maps->Add(gcnew HaloMapProxy(map));
     }
 
     String^ PythonInterpreter::ToString()
     {
-        return String::Format("PythonInterpreter with {0} open maps.", this->Maps->Count);
+        return String::Format("PythonInterpreter with {0} open maps.", this->maps->Count);
     }
 }

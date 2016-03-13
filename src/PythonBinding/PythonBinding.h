@@ -3,9 +3,14 @@
 
 #pragma once
 #include "Stdafx.h"
+#using <WindowsBase.dll>
+#using <System.Core.dll>
 
 using namespace System;
+using namespace System::Linq;
+using namespace System::Collections;
 using namespace System::Collections::Generic;
+using namespace System::Collections::ObjectModel;
 
 namespace PythonBinding {
 
@@ -48,37 +53,60 @@ namespace PythonBinding {
         virtual String^ ToString() override;
     };
 
+    /// Common stuff for displaying in tree format
+    public ref class ExplorerNode abstract
+    {
+    public:
+        virtual property ObservableCollection<ExplorerNode^>^ Children;
+        virtual property String^ Name;
+        virtual property String^ Suffix;
+        property Boolean^ IsFolder { Boolean^ get() { return Children->Count > 0; } }
+
+    };
+
     /// Wraps a PyObject known to be a HaloTag
-    public ref class HaloTagProxy
+    public ref class HaloTagProxy : ExplorerNode
     {
         PyObject* halotag;
         HaloStructProxy^ header;
         HaloStructProxy^ data;
+        ObservableCollection<ExplorerNode^>^ noChildren{};  // Should remain empty
 
     public:
         HaloTagProxy(PyObject* halotag);
         property HaloStructProxy^ Header { HaloStructProxy^ get() { return header; } }
         property HaloStructProxy^ Data { HaloStructProxy^ get() { return data; } }
+        virtual property ObservableCollection<ExplorerNode^>^ Children
+        {
+            ObservableCollection<ExplorerNode^>^ get() override { return noChildren; }
+        }
+        virtual property String^ Name { String^ get() override { return ToString(); } }
+        virtual property String^ Suffix { String^ get() override { return "tag"; } }
         virtual String^ ToString() override;
     };
 
     /// Wraps a PyObject known to be a HaloMap
-    public ref class HaloMapProxy
+    public ref class HaloMapProxy : ExplorerNode
     {
         PyObject* halomap;
-        List<HaloTagProxy^>^ tags;
+        ObservableCollection<ExplorerNode^>^ tags;
 
     public:
         HaloMapProxy(PyObject* map);
-        property List<HaloTagProxy^>^ Tags { List<HaloTagProxy^>^ get() { return tags; } }
         HaloTagProxy^ getGhost();
+        virtual property ObservableCollection<ExplorerNode^>^ Children
+        {
+            ObservableCollection<ExplorerNode^>^ get() override { return tags; }
+        }
+        virtual property String^ Name { String^ get() override { return ToString(); } }
+        virtual property String^ Suffix { String^ get() override { return "map"; } }
         virtual String^ ToString() override;
     };
 
     public enum class HaloMemory { PC, CE };
 
     /// Top-level, allows you to open Halo maps
-    public ref class PythonInterpreter
+    public ref class PythonInterpreter : ExplorerNode
     {
         PythonInterpreter();
         PythonInterpreter(const PythonInterpreter%) {
@@ -87,13 +115,18 @@ namespace PythonBinding {
         }
         static PythonInterpreter instance;
         PyObject* halolib;
-        property List<PythonBinding::HaloMapProxy^>^ maps;
+        property ObservableCollection<ExplorerNode^>^ maps;
 
     public:
         static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %instance; } }
         void OpenMap(HaloMemory whichExe);
         void OpenMap(String^ filename);
-        property List<HaloMapProxy^>^ Maps { List<HaloMapProxy^>^ get() { return maps; } }
+        virtual property ObservableCollection<ExplorerNode^>^ Children
+        {
+            ObservableCollection<ExplorerNode^>^ get() override { return maps; }
+        }
+        virtual property String^ Name { String^ get() override { return "Quickbeam"; } }
+        virtual property String^ Suffix { String^ get() override { return "Python Environment"; } }
         virtual String^ ToString() override;
     };
 }
