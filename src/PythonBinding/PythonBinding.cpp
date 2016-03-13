@@ -80,7 +80,7 @@ namespace PythonBinding {
         this->header = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "header"));
         //std::cout << "Has data: " << PyObject_HasAttrString(this->halotag, "data") << std::endl;
         //this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
-        this->noChildren = gcnew ObservableCollection<ExplorerNode^>();
+        this->noChildren = gcnew List<ExplorerNode^>();
     }
 
     String^ HaloTagProxy::ToString()
@@ -91,7 +91,7 @@ namespace PythonBinding {
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
-        this->tags = gcnew ObservableCollection<ExplorerNode^>();
+        this->tags = gcnew List<ExplorerNode^>();
 
         auto tags_fn = PyObject_GetAttrString(this->halomap, "tags");
         auto allTags = PyObject_CallObject(tags_fn, nullptr);
@@ -136,7 +136,7 @@ namespace PythonBinding {
         auto halolib = PyObject_GetAttrString(main_mod, "halolib");
         auto halolib_dict = PyModule_GetDict(halolib);
         this->halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
-        this->maps = gcnew ObservableCollection<ExplorerNode^>();
+        this->maps = gcnew List<ExplorerNode^>();
         
     }
 
@@ -154,6 +154,10 @@ namespace PythonBinding {
             break;
         }
         auto map = PyObject_CallObject(map_constructor, nullptr);
+        if (map == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not open map.");
+        }
         this->maps->Add(gcnew HaloMapProxy(map));
     }
 
