@@ -32,17 +32,19 @@ namespace PythonBinding {
         property Object^ Value;
     };
 
-    typedef Tuple<String^, FieldType, FieldProxy^> FieldEntry;
+    typedef Tuple<FieldType, FieldProxy^> FieldEntry;
 
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructProxy
     {
         ObservablePyObject* halostruct;
-        List<FieldEntry^>^ _fields;
+        Dictionary<String^, FieldEntry^>^ fields;
 
     public:
         HaloStructProxy(PyObject* halostruct);
-        property List<FieldEntry^>^ Fields { List<FieldEntry^>^ get() { return _fields; } }
+        property Dictionary<String^, FieldEntry^>^ Fields {
+            Dictionary<String^, FieldEntry^>^ get() { return fields; }
+        }
         virtual String^ ToString() override;
     };
 
@@ -50,13 +52,13 @@ namespace PythonBinding {
     public ref class HaloTagProxy
     {
         PyObject* halotag;
-        HaloStructProxy^ _header;
-        HaloStructProxy^ _data;
+        HaloStructProxy^ header;
+        HaloStructProxy^ data;
 
     public:
         HaloTagProxy(PyObject* halotag);
-        property HaloStructProxy^ Header { HaloStructProxy^ get() { return _header; } }
-        property HaloStructProxy^ Data { HaloStructProxy^ get() { return _data; } }
+        property HaloStructProxy^ Header { HaloStructProxy^ get() { return header; } }
+        property HaloStructProxy^ Data { HaloStructProxy^ get() { return data; } }
         virtual String^ ToString() override;
     };
 
@@ -64,11 +66,11 @@ namespace PythonBinding {
     public ref class HaloMapProxy
     {
         PyObject* halomap;
-        List<HaloTagProxy^>^ _tags;
+        List<HaloTagProxy^>^ tags;
 
     public:
         HaloMapProxy(PyObject* map);
-        property List<HaloTagProxy^>^ Tags { List<HaloTagProxy^>^ get() { return _tags; } }
+        property List<HaloTagProxy^>^ Tags { List<HaloTagProxy^>^ get() { return tags; } }
         HaloTagProxy^ getGhost();
         virtual String^ ToString() override;
     };
@@ -83,15 +85,15 @@ namespace PythonBinding {
             throw gcnew InvalidOperationException(
                 "PythonInterpreter cannot be copy-constructed");
         }
-        static PythonInterpreter m_instance;
+        static PythonInterpreter instance;
         PyObject* halolib;
-        property List<PythonBinding::HaloMapProxy^>^ _maps;
+        property List<PythonBinding::HaloMapProxy^>^ maps;
 
     public:
-        static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %m_instance; } }
+        static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %instance; } }
         void OpenMap(HaloMemory whichExe);
         void OpenMap(String^ filename);
-        property List<HaloMapProxy^>^ Maps { List<HaloMapProxy^>^ get() { return _maps; } }
+        property List<HaloMapProxy^>^ Maps { List<HaloMapProxy^>^ get() { return maps; } }
         virtual String^ ToString() override;
     };
 }

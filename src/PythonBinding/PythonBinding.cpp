@@ -14,7 +14,7 @@ namespace PythonBinding {
     {
     public:
         ObservablePyObject(PyObject* po)
-            : _po(po)
+            : pyobj(po)
         {
             PyObject* result0 = PyObject_CallMethod(po, "register_callback", "KK", // (uint64, uint64)
                 reinterpret_cast<UINT64>(&callback_thunk),
@@ -28,7 +28,7 @@ namespace PythonBinding {
             // TODO run event handlers too
         }
 
-        PyObject* _po;
+        PyObject* pyobj;
     };
 
     int callback_thunk(ObservablePyObject* slf)
@@ -42,10 +42,10 @@ namespace PythonBinding {
     HaloStructProxy::HaloStructProxy(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
-        this->_fields = gcnew List<FieldEntry^>();
+        this->fields = gcnew Dictionary<String^, FieldEntry^>();
 
         // type: Dict[str, Union[BasicField, HaloField]]
-        auto fieldsDict = PyObject_GetAttrString(this->halostruct->_po, "fields");
+        auto fieldsDict = PyObject_GetAttrString(this->halostruct->pyobj, "fields");
         // type: Sequence[Tuple[str, Union[BasicField, HaloField]]]
         auto fieldsItems = PyMapping_Items(fieldsDict);
         auto fieldsIter = PyObject_GetIter(fieldsItems);
@@ -64,12 +64,8 @@ namespace PythonBinding {
 
             //Field
             auto fieldObj = PySequence_GetItem(item, 1);
-
-            // Altogether now
-            auto entry = gcnew FieldEntry(
-                fieldNameStr, FieldType::Int32, gcnew FieldProxy(fieldObj));
-
-            this->Fields->Add(entry);
+            auto entry = gcnew FieldEntry(FieldType::Int32, gcnew FieldProxy(fieldObj));
+            this->Fields->Add(fieldNameStr, entry);
         }
     }
 
@@ -81,7 +77,8 @@ namespace PythonBinding {
     HaloTagProxy::HaloTagProxy(PyObject* halotag)
     {
         this->halotag = halotag;
-        this->_data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
+        this->header = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "header"));
+        this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
     }
 
     String^ HaloTagProxy::ToString()
@@ -92,7 +89,7 @@ namespace PythonBinding {
     HaloMapProxy::HaloMapProxy(PyObject* map)
     {
         this->halomap = map;
-        this->_tags = gcnew List<PythonBinding::HaloTagProxy^>();
+        this->tags = gcnew List<PythonBinding::HaloTagProxy^>();
     }
 
     HaloTagProxy^ HaloMapProxy::getGhost()
@@ -121,7 +118,7 @@ namespace PythonBinding {
         PyObject* sys_mod_dict = PyImport_GetModuleDict();
         PyObject* main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
         this->halolib = PyObject_GetAttrString(main_mod, "halolib");
-        this->_maps = gcnew List<HaloMapProxy^>();
+        this->maps = gcnew List<HaloMapProxy^>();
     }
 
     void PythonInterpreter::OpenMap(HaloMemory whichExe)
