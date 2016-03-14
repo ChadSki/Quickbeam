@@ -125,9 +125,11 @@ namespace PythonBinding {
             }
             (tagsByClass[tagClassStr])->Add(tag);
         }
-        for each (auto tagClass in tagsByClass)
+        auto sortedClasses = gcnew List<String^>(tagsByClass->Keys);
+        sortedClasses->Sort();
+        for each (auto tagClass in sortedClasses)
         {
-            tagClasses->Add(gcnew HaloTagClassProxy(tagClass.Key, tagClass.Value));
+            tagClasses->Add(gcnew HaloTagClassProxy(tagClass, tagsByClass[tagClass]));
         }
     }
 
