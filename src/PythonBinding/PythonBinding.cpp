@@ -37,12 +37,11 @@ namespace PythonBinding {
         return 0;
     }
 
-    FieldProxy::FieldProxy(PyObject* field) {}
-
     HaloStructProxy::HaloStructProxy(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
-        this->fields = gcnew Dictionary<String^, FieldEntry^>();
+        this->fields = gcnew Dictionary<String^, String^>();
+        this->fieldTypes = gcnew Dictionary<String^, FieldType>();
 
         // type: Dict[str, Union[BasicField, HaloField]]
         auto fieldsDict = PyObject_GetAttrString(this->halostruct->pyobj, "fields");
@@ -62,10 +61,16 @@ namespace PythonBinding {
             auto fieldNameChar = PyUnicode_AsUTF8AndSize(fieldNameObj, nullptr);
             auto fieldNameStr = gcnew String(fieldNameChar);
 
-            //Field
-            auto fieldObj = PySequence_GetItem(item, 1);
-            auto entry = gcnew FieldEntry(FieldType::Integer, gcnew FieldProxy(fieldObj));
-            this->Fields->Add(fieldNameStr, entry);
+            // Value
+            auto fieldValue = PyObject_GetAttrString(this->halostruct->pyobj, fieldNameChar);
+            auto fieldValueChar = PyUnicode_AsUTF8AndSize(PyObject_Str(fieldValue), nullptr);
+            auto fieldValueStr = gcnew String(fieldValueChar);
+
+            // Type
+            auto fieldObj = PySequence_GetItem(item, 1); //TODO
+
+            this->Fields->Add(fieldNameStr, fieldValueStr);
+            this->FieldTypes->Add(fieldNameStr, FieldType::String);
         }
     }
 

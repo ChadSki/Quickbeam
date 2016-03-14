@@ -25,25 +25,20 @@ namespace PythonBinding {
         String, FloatingPoint, Integer, Other,
         };
 
-    public ref class FieldProxy
-    {
-    public:
-        FieldProxy(PyObject* field);
-        property Object^ Value;
-    };
-
-    typedef Tuple<FieldType, FieldProxy^> FieldEntry;
-
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructProxy
     {
         ObservablePyObject* halostruct;
-        Dictionary<String^, FieldEntry^>^ fields;
+        Dictionary<String^, String^>^ fields;
+        Dictionary<String^, FieldType>^ fieldTypes;
 
     public:
         HaloStructProxy(PyObject* halostruct);
-        property Dictionary<String^, FieldEntry^>^ Fields {
-            Dictionary<String^, FieldEntry^>^ get() { return fields; }
+        property Dictionary<String^, String^>^ Fields {
+            Dictionary<String^, String^>^ get() { return fields; }
+        }
+        property Dictionary<String^, FieldType>^ FieldTypes {
+            Dictionary<String^, FieldType>^ get() { return fieldTypes; }
         }
         Object^ Get(String^ attrName);
         virtual String^ ToString() override;
