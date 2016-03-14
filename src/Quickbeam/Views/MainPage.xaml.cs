@@ -1,10 +1,11 @@
-﻿using Quickbeam.Interfaces;
+﻿using PythonBinding;
+using Quickbeam.Interfaces;
 using Quickbeam.Native;
 using Quickbeam.ViewModels;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Quickbeam.Views
 {
@@ -18,6 +19,13 @@ namespace Quickbeam.Views
             InitializeComponent();
             Instance = this;
             DataContext = ViewModel = new MainPageViewModel();
+            var map = PythonInterpreter.Instance.Children[0] as HaloMapProxy;
+            var newTab = new LayoutAnchorable
+            {
+                Title = "Tag Editor",
+                Content = new TagView(map.getGhost())
+            };
+            DocumentManager.Children.Add(newTab);
         }
 
         public bool Close()

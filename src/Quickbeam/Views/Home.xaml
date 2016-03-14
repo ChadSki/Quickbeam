@@ -13,7 +13,7 @@
                     SnapsToDevicePixels="True"
                     UseLayoutRounding="False">
     <Window.Resources>
-        <sys:Double x:Key="CaptionHeight">41</sys:Double>
+        <sys:Double x:Key="CaptionHeight">43</sys:Double>
         <sys:Double x:Key="StatusHeight">23</sys:Double>
         <Thickness x:Key="FallbackBorderThickness"
                    Top="1" Left="1" Right="1" Bottom="{StaticResource StatusHeight}" />

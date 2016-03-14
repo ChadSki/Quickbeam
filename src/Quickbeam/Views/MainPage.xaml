@@ -8,6 +8,7 @@
              xmlns:converters="clr-namespace:Quickbeam.Converters"
              xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
              xmlns:helpers="clr-namespace:PythonBinding;assembly=PythonBinding"
+             xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
              mc:Ignorable="d"
              Background="#2d2d30"
              d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData MainPageViewModel}">
@@ -99,27 +100,17 @@
                     <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8"
                             Height="30" HorizontalAlignment="Stretch"
                             Click="BtnLaunchHalo_Click" Content="Launch Halo" />
+
+                    <!-- TODO make this resize the grid -->
+                    <vectors:ResizeModule Grid.Column="4" Grid.Row="9" Margin="0,0,5,5"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right" />
                 </Grid>
             </Grid>
         </custom:MetroContainer>
 
-        <GridSplitter ResizeDirection="Columns" Width="2" Name="HorizontalGridSplitter"
-                      Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Stretch"
-                      Background="#FF545456" Foreground="{x:Null}"
-                      IsEnabled="True" />
-
-        <GridSplitter ResizeDirection="Rows" Height="2" Name="VerticalGridSplitter"
-                      Grid.Row="0" Grid.Column="0"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Bottom"
-                      Background="#FF545456" Foreground="{x:Null}"
-                      IsEnabled="True" />
-
         <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
             <TreeView x:Name="TagTreeView" ItemsSource="{Binding Nodes}"
-                        Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,10,0,0" 
+                        Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,0,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type helpers:ExplorerNode}" ItemsSource="{Binding Children}">
@@ -135,7 +126,7 @@
             </TreeView>
         </custom:MetroContainer>
 
-        <avalonDock:DockingManager x:Name="DockManager" Grid.Column="1" AllowMixedOrientation="True">
+        <avalonDock:DockingManager x:Name="DockManager" Grid.Column="1" Grid.RowSpan="2" AllowMixedOrientation="True" Margin="0,-3,0,0">
             <avalonDock:DockingManager.Theme>
                 <avalonDockThemes:MetroTheme />
             </avalonDock:DockingManager.Theme>
@@ -150,5 +141,19 @@
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
+
+        <GridSplitter ResizeDirection="Columns" Width="2" Name="HorizontalGridSplitter"
+                      Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Stretch"
+                      Background="#FF545456" Foreground="{x:Null}"
+                      IsEnabled="True" />
+
+        <GridSplitter ResizeDirection="Rows" Height="2" Name="VerticalGridSplitter"
+                      Grid.Row="0" Grid.Column="0"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Bottom"
+                      Background="#FF545456" Foreground="{x:Null}"
+                      IsEnabled="True" />
     </Grid>
 </UserControl>
