@@ -3,9 +3,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
+                    xmlns:views="clr-namespace:Quickbeam.Views"
                     xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
-                    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
-                    xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro;assembly=MetroIde"
                     WindowStartupLocation="CenterScreen"
                     Width="1130" Height="640"
                     MinWidth="380" MinHeight="64"
@@ -14,7 +13,7 @@
                     SnapsToDevicePixels="True"
                     UseLayoutRounding="False">
     <Window.Resources>
-        <sys:Double x:Key="CaptionHeight">40</sys:Double>
+        <sys:Double x:Key="CaptionHeight">41</sys:Double>
         <sys:Double x:Key="StatusHeight">23</sys:Double>
         <Thickness x:Key="FallbackBorderThickness"
                    Top="1" Left="1" Right="1" Bottom="{StaticResource StatusHeight}" />
@@ -96,22 +95,8 @@
                     </Button>
                 </StackPanel>
 
-                <avalonDock:DockingManager x:Name="DockManager" Grid.Row="1"
-                                       AllowMixedOrientation="True">
-                    <avalonDock:DockingManager.Theme>
-                        <avalonDockThemes:MetroTheme />
-                    </avalonDock:DockingManager.Theme>
-                    <avalonDock:LayoutRoot>
-                        <avalonDock:LayoutPanel Orientation="Horizontal">
-                            <avalonDock:LayoutDocumentPaneGroup>
-                                <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
-                            </avalonDock:LayoutDocumentPaneGroup>
-                            <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
-                                <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
-                            </avalonDock:LayoutAnchorablePaneGroup>
-                        </avalonDock:LayoutPanel>
-                    </avalonDock:LayoutRoot>
-                </avalonDock:DockingManager>
+                <views:MainPage Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
             </Grid>
         </Border>
 

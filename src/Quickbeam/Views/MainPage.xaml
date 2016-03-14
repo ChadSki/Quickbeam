@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+             xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro;assembly=MetroIde"
              xmlns:converters="clr-namespace:Quickbeam.Converters"
+             xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
              xmlns:helpers="clr-namespace:PythonBinding;assembly=PythonBinding"
              mc:Ignorable="d"
              Background="#2d2d30"
@@ -29,89 +32,76 @@
             <RowDefinition Height="{Binding HaloGridHeight, Mode=TwoWay}" Name="TopRow" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="18" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="18" />
-                <RowDefinition Height="24" />
-                <RowDefinition Height="24" />
-                
-                <RowDefinition Height="18" />
-                <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="18" />
-                <RowDefinition Height="Auto" />
+        <custom:MetroContainer Title="Halo Viewport" Grid.Column="0" Grid.Row="0">
+            <Grid Name="HaloGrid"
+                  Width="{Binding VisibleWidth, Mode=OneWay}"
+                  Height="{Binding VisibleHeight, Mode=OneWay}">
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="18" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6" />
+                        <RowDefinition Height="24" />
+                        <RowDefinition Height="24" />
 
-                <RowDefinition Height="18" />
-                <RowDefinition Height="Auto" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="18" />
-                <RowDefinition Height="Auto" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="18" />
-                <RowDefinition Height="Auto" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-            <Polygon Fill="#FF4A4A4C" Margin="1,0,0,0"
-                     Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
-                <Polygon.Points>
-                    <Point X="0" Y="8" />
-                    <Point X="0" Y="40" />
-                    <Point X="18" Y="24" />
-                </Polygon.Points>
-            </Polygon>
-            <TextBlock Grid.Row="1" Grid.RowSpan="2"
-                       Grid.Column="1" Grid.ColumnSpan="2"
-                       Margin="-2,0,0,0" Foreground="White"
-                       Text="Quickbeam"
-                       FontFamily="{DynamicResource MetroFontLight}"
-                       FontSize="32" />
+                    <Polygon Fill="#FF4A4A4C" Margin="1,0,0,0"
+                        Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
+                        <Polygon.Points>
+                            <Point X="0" Y="8" />
+                            <Point X="0" Y="40" />
+                            <Point X="18" Y="24" />
+                        </Polygon.Points>
+                    </Polygon>
+                    <TextBlock Grid.Row="1" Grid.RowSpan="2"
+                               Grid.Column="1" Grid.ColumnSpan="3"
+                               Margin="0,10,0,0"
+                               Text="{Binding HaloExePath, Mode=OneTime}"
+                               FontFamily="{DynamicResource MetroFontLight}"
+                               FontSize="18" />
 
-            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,0,0,0"
-                       Text="Halo PC Settings" Foreground="{DynamicResource AssemblyAccentBrush}" FontSize="18"
-                       FontFamily="{DynamicResource MetroFontSemiLight}" />
+                    <TextBlock Grid.Column="1" Grid.Row="4" Margin="0,4,0,0"
+                               Text="Version" Foreground="White"
+                               FontFamily="{DynamicResource MetroFontRegular}" />
+                    <TextBlock Grid.Column="2" Grid.Row="4"  Margin="0,4,0,0" Grid.ColumnSpan="2" 
+                               HorizontalAlignment="Stretch" Text="{Binding HaloVersion, Mode=OneTime}" />
 
-            <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,4,0,0"
-                       Text="Path:" Foreground="White"
-                       FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBlock Grid.Column="2" Grid.Row="6" Margin="0,4,0,0" Grid.ColumnSpan="2" 
-                       HorizontalAlignment="Stretch" Text="{Binding HaloExePath, Mode=OneTime}" />
+                    <TextBlock Grid.Column="1" Grid.Row="6"
+                               Text="Resolution:" Foreground="White" Margin="0,4,0,0"
+                               FontFamily="{DynamicResource MetroFontRegular}" />
+                    <TextBox Grid.Column="2" Grid.Row="6"
+                               Width="54" Text="{Binding HaloWidth, Mode=TwoWay}"
+                               HorizontalAlignment="Left" />
+                    <TextBlock Grid.Column="2" Grid.Row="6"
+                               Text="x" Foreground="White" FontFamily="{DynamicResource MetroFontRegular}"
+                               HorizontalAlignment="Center" />
+                    <TextBox Grid.Column="2" Grid.Row="6"
+                             Width="54" Text="{Binding HaloHeight, Mode=TwoWay}"
+                             HorizontalAlignment="Right" />
 
-            <TextBlock Grid.Column="1" Grid.Row="8" Margin="0,4,0,0"
-                       Text="Version" Foreground="White"
-                       FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBlock Grid.Column="2" Grid.Row="8"  Margin="0,4,0,0" Grid.ColumnSpan="2" 
-                       HorizontalAlignment="Stretch" Text="{Binding HaloVersion, Mode=OneTime}" />
-
-            <TextBlock Grid.Column="1" Grid.Row="10"
-                       Text="Resolution:" Foreground="White" Margin="0,4,0,0"
-                       FontFamily="{DynamicResource MetroFontRegular}" />
-            <TextBox Grid.Column="2" Grid.Row="10"
-                     Width="54" Text="{Binding HaloWidth, Mode=TwoWay}"
-                     HorizontalAlignment="Left" />
-            <TextBlock Grid.Column="2" Grid.Row="10"
-                       Text="x" Foreground="White" FontFamily="{DynamicResource MetroFontRegular}"
-                       HorizontalAlignment="Center" />
-            <TextBox Grid.Column="2" Grid.Row="10"
-                     Width="54" Text="{Binding HaloHeight, Mode=TwoWay}"
-                     HorizontalAlignment="Right" />
-
-            <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="12"
-                    Height="30" HorizontalAlignment="Stretch"
-                    Click="BtnLaunchHalo_Click" Content="Launch Halo" />
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.Row="0" Name="HaloGrid"
-              Width="{Binding VisibleWidth, Mode=OneWay}"
-              Height="{Binding VisibleHeight, Mode=OneWay}"/>
+                    <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8"
+                            Height="30" HorizontalAlignment="Stretch"
+                            Click="BtnLaunchHalo_Click" Content="Launch Halo" />
+                </Grid>
+            </Grid>
+        </custom:MetroContainer>
 
         <GridSplitter ResizeDirection="Columns" Width="2" Name="HorizontalGridSplitter"
                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
@@ -127,21 +117,38 @@
                       Background="#FF545456" Foreground="{x:Null}"
                       IsEnabled="True" />
 
-        <TreeView x:Name="TagTreeView" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Nodes}"
+        <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
+            <TreeView x:Name="TagTreeView" ItemsSource="{Binding Nodes}"
                         Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,10,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type helpers:ExplorerNode}" ItemsSource="{Binding Children}">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20">
-                        <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />
-                        <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0"
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type helpers:ExplorerNode}" ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20">
+                            <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />
+                            <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0"
                                    VerticalAlignment="Center">
                             <Run Text="{Binding Name, Mode=OneWay}" Foreground="White" />
-                        </TextBlock>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </custom:MetroContainer>
 
+        <avalonDock:DockingManager x:Name="DockManager" Grid.Column="1" AllowMixedOrientation="True">
+            <avalonDock:DockingManager.Theme>
+                <avalonDockThemes:MetroTheme />
+            </avalonDock:DockingManager.Theme>
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutPanel Orientation="Horizontal">
+                    <avalonDock:LayoutDocumentPaneGroup>
+                        <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
+                    </avalonDock:LayoutDocumentPaneGroup>
+                    <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
+                        <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
+                    </avalonDock:LayoutAnchorablePaneGroup>
+                </avalonDock:LayoutPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
     </Grid>
 </UserControl>
