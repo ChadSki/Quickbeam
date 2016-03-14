@@ -14,10 +14,12 @@ namespace ConsoleTestApp
             Console.WriteLine(hmap);
             var htag = hmap.getGhost();
             Console.WriteLine(htag);
-            var tagheader = htag.Header;
-            Console.WriteLine(tagheader);
-            var firstClass = tagheader.Get("first_class") as String;
+            var tagHeader = htag.Header;
+            Console.WriteLine(tagHeader);
+            var firstClass = tagHeader.Get("first_class") as String;
             Console.WriteLine(firstClass);
+            var tagData = htag.Data;
+            Console.WriteLine(tagData);
         }
     }
 }

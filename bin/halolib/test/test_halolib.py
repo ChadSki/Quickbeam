@@ -43,7 +43,7 @@ class BloodgulchTest(SimpleMapTest, unittest.TestCase):
 class MemoryMapTest(SimpleMapTest, unittest.TestCase):
 
     def setUp(self):
-        self.map = HaloMap.from_memory()
+        self.map = HaloMap.from_hpc()
 
 if __name__ == '__main__':
     unittest.main()

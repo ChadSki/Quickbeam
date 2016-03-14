@@ -43,8 +43,11 @@ namespace PythonBinding {
         this->fields = gcnew Dictionary<String^, String^>();
         this->fieldTypes = gcnew Dictionary<String^, FieldType>();
 
+        PyObject_Print(halostruct, stdout, Py_PRINT_RAW);
+        std::cout << std::endl;
+
         // type: Dict[str, Union[BasicField, HaloField]]
-        auto fieldsDict = PyObject_GetAttrString(this->halostruct->pyobj, "fields");
+        auto fieldsDict = PyObject_GetAttrString(halostruct, "fields");
         // type: Sequence[Tuple[str, Union[BasicField, HaloField]]]
         auto fieldsItems = PyMapping_Items(fieldsDict);
         auto fieldsIter = PyObject_GetIter(fieldsItems);
@@ -78,12 +81,9 @@ namespace PythonBinding {
     {
         auto attrNameC = Marshal::StringToHGlobalAnsi(attrName);
         auto result = PyObject_GetAttrString(halostruct->pyobj, (const char*)attrNameC.ToPointer());
-        PyObject_Print(result, stdout, Py_PRINT_RAW);
         Marshal::FreeHGlobal(attrNameC);
-        auto asdf = PyUnicode_AsASCIIString(result);
-        auto qwer = PyBytes_AsString(asdf);
-        std::cout << std::endl << qwer << std::endl;
-        return gcnew String(qwer);
+        auto charArray = PyBytes_AsString(PyUnicode_AsASCIIString(result));
+        return gcnew String(charArray);
     }
 
     String^ HaloStructProxy::ToString()
@@ -95,8 +95,7 @@ namespace PythonBinding {
     {
         this->halotag = halotag;
         this->header = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "header"));
-        //std::cout << "Has data: " << PyObject_HasAttrString(this->halotag, "data") << std::endl;
-        //this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
+        this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
         this->noChildren = gcnew List<ExplorerNode^>();
     }
 

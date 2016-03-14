@@ -13,6 +13,9 @@ from halolib.structs import halofield
 tag_types = {}
 # type: Dict[str, HaloMapStruct]
 
+tag_types['unknown'] = define_halo_struct(struct_size=32,
+    rawdata=field.RawData(offset=0, length=32))
+
 tag_types['bipd'] = define_halo_struct(struct_size=0x450,
     model=halofield.TagReference(offset=0x28),
     animation=halofield.TagReference(offset=0x38),

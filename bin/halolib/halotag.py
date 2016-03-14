@@ -23,13 +23,17 @@ class HaloTag(object):
         super().__init__()
         object.__setattr__(self, 'halomap', halomap)
         object.__setattr__(self, 'header', header)
-        try:
-            data = tag_types[header.first_class](halomap,
+
+        def interpret_data(class_name):
+            return tag_types[class_name](halomap,
                 add_offsets(
                     self.halomap.magic_offset,
                     lambda magic: header.meta_offset_raw - magic))
+        try:
+            data = interpret_data(header.first_class)
         except KeyError:
-            data = None
+            data = interpret_data('unknown')
+
         object.__setattr__(self, 'data', data)
 
     def __str__(self):
