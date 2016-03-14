@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<plugin name="effe" struct_size="0x700">
-    <rawdata name="stuff" offset="0x0" length="16" />
-</plugin>

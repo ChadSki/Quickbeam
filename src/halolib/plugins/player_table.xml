@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<plugin name="player_table" struct_size="40">
-    <asciiz name="name" offset="0" maxlength="32" />
-</plugin>
