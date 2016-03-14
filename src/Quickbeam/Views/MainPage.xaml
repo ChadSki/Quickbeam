@@ -14,7 +14,7 @@
              d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData MainPageViewModel}">
     <UserControl.Resources>
         <ContextMenu x:Key="TagHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
-            <MenuItem Header="Open" Uid="opentagcontext" />
+            <MenuItem Header="Open" Uid="opentagcontext" Click="OpenTag_Click" />
             <MenuItem Header="Rename" Uid="renametagcontext" />
             <Separator />
             <MenuItem Header="Extract" Uid="extracttagcontext" />
@@ -22,7 +22,7 @@
         <ContextMenu x:Key="FolderHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
             <MenuItem Header="Rename" Uid="renametagcontext" />
         </ContextMenu>
-        <converters:TagHierarchyContextMenuConverter x:Key="IValueConverterTagHierarchyContextMenu" TagContextMenu="{StaticResource TagHierarchyContextMenu}" FolderContextMenu="{StaticResource FolderHierarchyContextMenu}" />
+        <converters:ExplorerNodeContextMenuConverter x:Key="IValueConverterTagHierarchyContextMenu" TagContextMenu="{StaticResource TagHierarchyContextMenu}" FolderContextMenu="{StaticResource FolderHierarchyContextMenu}" />
     </UserControl.Resources>
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
@@ -114,7 +114,8 @@
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type helpers:ExplorerNode}" ItemsSource="{Binding Children}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20"
+                                    ContextMenu="{Binding Converter={StaticResource IValueConverterTagHierarchyContextMenu}}">
                             <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />
                             <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0"
                                    VerticalAlignment="Center">

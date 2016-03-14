@@ -5,6 +5,7 @@ using Quickbeam.ViewModels;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Quickbeam.Views
@@ -19,13 +20,6 @@ namespace Quickbeam.Views
             InitializeComponent();
             Instance = this;
             DataContext = ViewModel = new MainPageViewModel();
-            var map = PythonInterpreter.Instance.Children[0] as HaloMapProxy;
-            var newTab = new LayoutAnchorable
-            {
-                Title = "Tag Editor",
-                Content = new TagView(map.getGhost())
-            };
-            DocumentManager.Children.Add(newTab);
         }
 
         public bool Close()
@@ -52,6 +46,26 @@ namespace Quickbeam.Views
                 Instance.HaloGrid.Children.Remove(child);
             Instance.HorizontalGridSplitter.IsEnabled = true;
             Instance.VerticalGridSplitter.IsEnabled = true;
+        }
+
+        private void OpenTag_Click(object sender, RoutedEventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            if (menuItem == null) return;
+
+            var contextMenu = menuItem.Parent as ContextMenu;
+            if (contextMenu == null) return;
+
+            var node = contextMenu.DataContext as ExplorerNode;
+            var tag = node as HaloTagProxy;
+            if (tag == null)
+                return;
+            var newTab = new LayoutAnchorable
+            {
+                Title = "Tag Editor",
+                Content = new TagView(tag),
+            };
+            DocumentManager.Children.Add(newTab);
         }
     }
 }
