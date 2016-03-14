@@ -65,7 +65,9 @@ namespace Quickbeam.Views
                 Title = "Tag Editor",
                 Content = new TagView(tag),
             };
-            DocumentManager.Children.Add(newTab);
+            var documentPane = DockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
+            if (documentPane != null)
+                documentPane.Children.Add(newTab);
         }
     }
 }

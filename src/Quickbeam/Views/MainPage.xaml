@@ -131,16 +131,6 @@
             <avalonDock:DockingManager.Theme>
                 <avalonDockThemes:MetroTheme />
             </avalonDock:DockingManager.Theme>
-            <avalonDock:LayoutRoot>
-                <avalonDock:LayoutPanel Orientation="Horizontal">
-                    <avalonDock:LayoutDocumentPaneGroup>
-                        <avalonDock:LayoutDocumentPane x:Name="DocumentManager"/>
-                    </avalonDock:LayoutDocumentPaneGroup>
-                    <avalonDock:LayoutAnchorablePaneGroup DockWidth="600">
-                        <avalonDock:LayoutAnchorablePane x:Name="RightDockManager"/>
-                    </avalonDock:LayoutAnchorablePaneGroup>
-                </avalonDock:LayoutPanel>
-            </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
 
         <GridSplitter ResizeDirection="Columns" Width="2" Name="HorizontalGridSplitter"
