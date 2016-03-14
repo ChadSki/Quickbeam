@@ -10,12 +10,14 @@ namespace ConsoleTestApp
             Console.WriteLine(PythonInterpreter.Instance);
             PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
             Console.WriteLine(PythonInterpreter.Instance);
-            var hmap = PythonInterpreter.Instance.Children[0];
+            var hmap = PythonInterpreter.Instance.Children[0] as HaloMapProxy;
             Console.WriteLine(hmap);
-            //var htag = hmap.getGhost();
-            //Console.WriteLine(htag);
-            //var hstruct = htag.Data;
-            //Console.WriteLine(hstruct);
+            var htag = hmap.getGhost();
+            Console.WriteLine(htag);
+            var tagheader = htag.Header;
+            Console.WriteLine(tagheader);
+            var firstClass = tagheader.Get("first_class") as String;
+            Console.WriteLine(firstClass);
         }
     }
 }

@@ -127,7 +127,7 @@
                       Background="#FF545456" Foreground="{x:Null}"
                       IsEnabled="True" />
 
-        <TreeView x:Name="TagTreeView" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Nodes}"
+        <TreeView x:Name="TagTreeView" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Nodes}"
                         Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,10,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
             <TreeView.Resources>

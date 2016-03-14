@@ -22,11 +22,7 @@ namespace PythonBinding {
     #pragma managed(pop)
 
     public enum class FieldType {
-        Ascii, Asciiz, RawData,
-        Enum16, BitFlag, Float32, Float64,
-        Int8, Int16, Int32, Int64,
-        Uint8, UInt16, UInt32, UInt64,
-        AsciizPtr, TagReference, StructArray,
+        String, FloatingPoint, Integer, Other,
         };
 
     public ref class FieldProxy
@@ -49,6 +45,7 @@ namespace PythonBinding {
         property Dictionary<String^, FieldEntry^>^ Fields {
             Dictionary<String^, FieldEntry^>^ get() { return fields; }
         }
+        Object^ Get(String^ attrName);
         virtual String^ ToString() override;
     };
 
@@ -74,12 +71,18 @@ namespace PythonBinding {
         HaloTagProxy(PyObject* halotag);
         property HaloStructProxy^ Header { HaloStructProxy^ get() { return header; } }
         property HaloStructProxy^ Data { HaloStructProxy^ get() { return data; } }
-        property String^ FirstClass { String^ get() { return "idk"; } }
+        property String^ FirstClass
+        {
+            String^ get() { return (String^)(header->Get("first_class")); }
+        }
         virtual property List<ExplorerNode^>^ Children
         {
             List<ExplorerNode^>^ get() override { return noChildren; }
         }
-        virtual property String^ Name { String^ get() override { return ToString(); } }
+        virtual property String^ Name
+        {
+            String^ get() override { return (String^)(header->Get("name")); }
+        }
         virtual property String^ Suffix { String^ get() override { return "tag"; } }
         virtual String^ ToString() override;
     };

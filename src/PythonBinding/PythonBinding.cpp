@@ -64,9 +64,21 @@ namespace PythonBinding {
 
             //Field
             auto fieldObj = PySequence_GetItem(item, 1);
-            auto entry = gcnew FieldEntry(FieldType::Int32, gcnew FieldProxy(fieldObj));
+            auto entry = gcnew FieldEntry(FieldType::Integer, gcnew FieldProxy(fieldObj));
             this->Fields->Add(fieldNameStr, entry);
         }
+    }
+
+    Object^ HaloStructProxy::Get(String^ attrName)
+    {
+        auto attrNameC = Marshal::StringToHGlobalAnsi(attrName);
+        auto result = PyObject_GetAttrString(halostruct->pyobj, (const char*)attrNameC.ToPointer());
+        PyObject_Print(result, stdout, Py_PRINT_RAW);
+        Marshal::FreeHGlobal(attrNameC);
+        auto asdf = PyUnicode_AsASCIIString(result);
+        auto qwer = PyBytes_AsString(asdf);
+        std::cout << std::endl << qwer << std::endl;
+        return gcnew String(qwer);
     }
 
     String^ HaloStructProxy::ToString()
