@@ -4,16 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Quickbeam.Views"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:pb="clr-namespace:PythonBinding;assembly=PythonBinding"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type pb:FloatField}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" />
+                <TextBox Text="{Binding Value}"  Width="200" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type pb:UnknownField}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text=" = " />
+                <TextBlock Text="{Binding Repr}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <ListBox VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.CanContentScroll="True"
              VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
              Background="Transparent" ItemsSource="{Binding Fields}">
-        <ListBox.ItemTemplate>
-            <DataTemplate DataType="{x:Type sys:String}">
-                <Button Content="{Binding}" />
-            </DataTemplate>
-        </ListBox.ItemTemplate>
     </ListBox>
 </UserControl>

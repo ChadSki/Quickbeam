@@ -40,8 +40,7 @@ namespace PythonBinding {
     HaloStructViewModel::HaloStructViewModel(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
-        this->fields = gcnew Dictionary<String^, String^>();
-        this->fieldTypes = gcnew Dictionary<String^, FieldType>();
+        this->fields = gcnew List<Field^>();
 
         PyObject_Print(halostruct, stdout, Py_PRINT_RAW);
         std::cout << std::endl;
@@ -64,16 +63,26 @@ namespace PythonBinding {
             auto fieldNameChar = PyUnicode_AsUTF8AndSize(fieldNameObj, nullptr);
             auto fieldNameStr = gcnew String(fieldNameChar);
 
-            // Value
-            auto fieldValue = PyObject_GetAttrString(this->halostruct->pyobj, fieldNameChar);
-            auto fieldValueChar = PyUnicode_AsUTF8AndSize(PyObject_Str(fieldValue), nullptr);
-            auto fieldValueStr = gcnew String(fieldValueChar);
+            // read value
+            //auto fieldValue = PyObject_GetAttrString(this->halostruct->pyobj, fieldNameChar);
+            //auto fieldValueChar = PyUnicode_AsUTF8AndSize(PyObject_Str(fieldValue), nullptr);
+            //auto fieldValueStr = gcnew String(fieldValueChar);
 
-            // Type
-            auto fieldObj = PySequence_GetItem(item, 1); //TODO
+            // Field
+            auto fieldObj = PySequence_GetItem(item, 1);
+            auto typeName = PyObject_GetAttrString(
+                (PyObject*)fieldObj->ob_type, "__name__");
+            auto typeNameChar = PyUnicode_AsUTF8AndSize(typeName, nullptr);
+            auto typeNameStr = gcnew String(typeNameChar);
 
-            this->Fields->Add(fieldNameStr, fieldValueStr);
-            this->FieldTypes->Add(fieldNameStr, FieldType::String);
+            if (typeNameStr->Contains("Float"))
+            {
+                this->Fields->Add(gcnew FloatField(fieldNameStr, fieldObj));
+            }
+            else
+            {
+                this->Fields->Add(gcnew UnknownField(fieldNameStr, fieldObj));
+            }
         }
     }
 

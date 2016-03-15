@@ -21,26 +21,61 @@ namespace PythonBinding {
     int callback_thunk(ObservablePyObject* slf);
     #pragma managed(pop)
 
-    public enum class FieldType {
-        String, FloatingPoint, Integer, Other,
-        };
+    public ref class Field abstract
+    {
+    protected:
+        PyObject* field;
+        String^ name;
+    public:
+        property String^ Name { String^ get() { return name; } }
+    };
 
+    public ref class UnknownField : Field
+    {
+    public:
+        UnknownField(String^ name, PyObject* field)
+        {
+            this->name = name;
+            this->field = field;
+        }
+        property String^ Repr { String^ get() { return "TODO"; } }
+    };
 
+    public ref class FloatField : Field
+    {
+    public:
+        FloatField(String^ name, PyObject* field)
+        {
+            this->name = name;
+            this->field = field;
+        }
+        property double Value
+        {
+            double get()
+            {
+                auto set_fn = PyObject_GetAttrString(this->field, "getf");
+                auto value = PyObject_CallObject(set_fn, nullptr);
+                return PyFloat_AsDouble(value);
+            }
+            void set(double newvalue)
+            {
+                auto set_fn = PyObject_GetAttrString(this->field, "setf");
+                PyObject_CallObject(set_fn, PyTuple_Pack(1,
+                    PyFloat_FromDouble(newvalue)));
+            }
+        }
+    };
 
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructViewModel
     {
         ObservablePyObject* halostruct;
-        Dictionary<String^, String^>^ fields;
-        Dictionary<String^, FieldType>^ fieldTypes;
+        List<Field^>^ fields;
 
     public:
         HaloStructViewModel(PyObject* halostruct);
-        property Dictionary<String^, String^>^ Fields {
-            Dictionary<String^, String^>^ get() { return fields; }
-        }
-        property Dictionary<String^, FieldType>^ FieldTypes {
-            Dictionary<String^, FieldType>^ get() { return fieldTypes; }
+        property List<Field^>^ Fields {
+            List<Field^>^ get() { return fields; }
         }
         Object^ Get(String^ attrName);
         virtual String^ ToString() override;
