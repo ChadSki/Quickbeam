@@ -34,9 +34,9 @@ class AsciizPtr(HaloField):
         super().__init__(offset, docs)
         self.string_access = None
 
-    def getf(self, byteaccess):
+    def getf(self):
         if self.string_access is None:
-            name_offset_raw = byteaccess.read_uint32(self.offset)
+            name_offset_raw = self.parent.byteaccess.read_uint32(self.offset)
             name_offset = add_offsets(
                 self.halomap.magic_offset,
                 lambda magic: name_offset_raw - magic)
@@ -44,7 +44,7 @@ class AsciizPtr(HaloField):
                 name_offset, AsciizPtr.max_str_size)
         return self.string_access.read_asciiz(0, AsciizPtr.max_str_size)
         
-    def setf(self, byteaccess):
+    def setf(self, newvalue):
         raise NotImplementedError()
 
 
@@ -60,8 +60,8 @@ class TagReference(HaloField):
             # This is a full reference, but we only care to read the ident
             self.offset += 12  # which is located 12 bytes inside
 
-    def getf(self, byteaccess):
-        ident = byteaccess.read_uint32(self.offset)
+    def getf(self):
+        ident = self.parent.byteaccess.read_uint32(self.offset)
         if ident == 0xFFFFFFFF:
             return None
         try:
@@ -70,10 +70,10 @@ class TagReference(HaloField):
             print("keyerror")
             return None  # we wanted a tag that wasn't there =(
 
-    def setf(self, byteaccess, value):
+    def setf(self, newvalue):
         # when value is None, write Halo's version of null (-1)
         # otherwise, write the tag's ident, not the tag itself
-        byteaccess.write_uint32(self.offset,
+        self.parent.byteaccess.write_uint32(self.offset,
                                 0xFFFFFFFF if value is None
                                 else value.ident)
 
@@ -87,10 +87,10 @@ class StructArray(HaloField):
         self.struct_type = define_halo_struct(**kwargs)
         self.children = None
 
-    def getf(self, byteaccess):
+    def getf(self):
         if self.children is None:
-            count = byteaccess.read_uint32(self.offset)
-            array_offset_raw = byteaccess.read_uint32(self.offset + 4)
+            count = self.parent.byteaccess.read_uint32(self.offset)
+            array_offset_raw = self.parent.byteaccess.read_uint32(self.offset + 4)
 
             array_offset = add_offsets(
                 self.halomap.magic_offset,
@@ -108,6 +108,6 @@ class StructArray(HaloField):
                 for i in range(count)]
         return self.children
 
-    def setf(self, byteaccess, value):
+    def setf(self, newvalue):
         raise NotImplementedError(
             'Reassigning entire struct arrays is not yet supported.')

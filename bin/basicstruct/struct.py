@@ -73,7 +73,7 @@ class BasicStruct(object):
         answer = "{"
         for name, field in self.fields.items():
             answer += "\n    {}: ".format(name)
-            value = field.getf(self.byteaccess)
+            value = field.getf()
             if isinstance(value, list):
                 answer += "["
                 for each in value:
@@ -101,7 +101,7 @@ class BasicStruct(object):
 
         if attr_name in self.fields:
             try:
-                return self.fields[attr_name].getf(self.byteaccess)
+                return self.fields[attr_name].getf()
             except KeyError as err:
                 raise AttributeError(
                     ("Attribute name `{}` does not appear to be a member"
@@ -125,9 +125,9 @@ class BasicStruct(object):
             pass
 
         if attr_name in fields.keys():
-            oldvalue = fields[attr_name].getf(self.byteaccess)
+            oldvalue = fields[attr_name].getf()
             print('old:{}\nnew:{}'.format(oldvalue, newvalue))
-            fields[attr_name].setf(self.byteaccess, newvalue)
+            fields[attr_name].setf(newvalue)
             if oldvalue != newvalue:
                 self.property_changed(attr_name)
         else:
