@@ -37,7 +37,7 @@ namespace PythonBinding {
         return 0;
     }
 
-    HaloStructProxy::HaloStructProxy(PyObject* halostruct)
+    HaloStructViewModel::HaloStructViewModel(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
         this->fields = gcnew Dictionary<String^, String^>();
@@ -77,7 +77,7 @@ namespace PythonBinding {
         }
     }
 
-    Object^ HaloStructProxy::Get(String^ attrName)
+    Object^ HaloStructViewModel::Get(String^ attrName)
     {
         auto attrNameC = Marshal::StringToHGlobalAnsi(attrName);
         auto result = PyObject_GetAttrString(halostruct->pyobj, (const char*)attrNameC.ToPointer());
@@ -86,25 +86,25 @@ namespace PythonBinding {
         return gcnew String(charArray);
     }
 
-    String^ HaloStructProxy::ToString()
+    String^ HaloStructViewModel::ToString()
     {
         return String::Format("HaloStruct with {0} fields.", this->Fields->Count);
     }
 
-    HaloTagProxy::HaloTagProxy(PyObject* halotag)
+    HaloTagNode::HaloTagNode(PyObject* halotag)
     {
         this->halotag = halotag;
-        this->header = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "header"));
-        this->data = gcnew HaloStructProxy(PyObject_GetAttrString(this->halotag, "data"));
+        this->header = gcnew HaloStructViewModel(PyObject_GetAttrString(this->halotag, "header"));
+        this->data = gcnew HaloStructViewModel(PyObject_GetAttrString(this->halotag, "data"));
         this->noChildren = gcnew List<ExplorerNode^>();
     }
 
-    String^ HaloTagProxy::ToString()
+    String^ HaloTagNode::ToString()
     {
         return gcnew String("HaloTag.");
     }
 
-    HaloMapProxy::HaloMapProxy(PyObject* map)
+    HaloMapNode::HaloMapNode(PyObject* map)
     {
         this->halomap = map;
         this->tagClasses = gcnew List<ExplorerNode^>();
@@ -121,7 +121,7 @@ namespace PythonBinding {
         PyObject* item;
         auto tagsByClass = gcnew Dictionary<String^, List<ExplorerNode^>^>();
         while (item = PyIter_Next(tagsIter)) {
-            auto tag = gcnew HaloTagProxy(item);
+            auto tag = gcnew HaloTagNode(item);
             auto tagClassStr = tag->FirstClass;
             if (!tagsByClass->ContainsKey(tagClassStr))
             {
@@ -133,21 +133,21 @@ namespace PythonBinding {
         sortedClasses->Sort();
         for each (auto tagClass in sortedClasses)
         {
-            tagClasses->Add(gcnew HaloTagClassProxy(tagClass, tagsByClass[tagClass]));
+            tagClasses->Add(gcnew HaloTagClassNode(tagClass, tagsByClass[tagClass]));
         }
     }
 
-    HaloTagProxy^ HaloMapProxy::getGhost()
+    HaloTagNode^ HaloMapNode::getGhost()
     {
         auto tag_fn = PyObject_GetAttrString(this->halomap, "tag");
         auto args = PyTuple_Pack(2,
             PyUnicode_FromString("vehi"),
             PyUnicode_FromString("ghost"));
         auto ghost = PyObject_CallObject(tag_fn, args);
-        return gcnew HaloTagProxy(ghost);
+        return gcnew HaloTagNode(ghost);
     }
 
-    String^ HaloMapProxy::ToString()
+    String^ HaloMapNode::ToString()
     {
         return String::Format("HaloMap with {0} tag classes.", this->tagClasses->Count);
     }
@@ -187,7 +187,7 @@ namespace PythonBinding {
             throw gcnew NullReferenceException(
                 "Could not open map.");
         }
-        this->maps->Add(gcnew HaloMapProxy(map));
+        this->maps->Add(gcnew HaloMapNode(map));
     }
 
     void PythonInterpreter::OpenMap(String ^ filename)
@@ -200,7 +200,7 @@ namespace PythonBinding {
         // cast pin_ptr to char*
         auto map = PyObject_CallObject(map_constructor,
             PyTuple_Pack(1, PyUnicode_FromString(reinterpret_cast<char*>(pinnedBytes))));
-        this->maps->Add(gcnew HaloMapProxy(map));
+        this->maps->Add(gcnew HaloMapNode(map));
     }
 
     String^ PythonInterpreter::ToString()

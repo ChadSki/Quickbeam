@@ -1,10 +1,8 @@
 ﻿using PythonBinding;
 using Quickbeam.Interfaces;
 using Quickbeam.Native;
-using Quickbeam.Views;
 using System.Collections.Generic;
 using System.Windows;
-using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Quickbeam.ViewModels
 {

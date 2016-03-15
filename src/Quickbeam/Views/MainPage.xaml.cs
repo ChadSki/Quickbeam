@@ -57,9 +57,8 @@ namespace Quickbeam.Views
             if (contextMenu == null) return;
 
             var node = contextMenu.DataContext as ExplorerNode;
-            var tag = node as HaloTagProxy;
-            if (tag == null)
-                return;
+            var tag = node as HaloTagNode;
+            if (tag == null) return;
             var newTab = new LayoutAnchorable
             {
                 Title = "Tag Editor",

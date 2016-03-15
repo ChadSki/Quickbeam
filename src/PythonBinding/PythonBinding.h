@@ -25,15 +25,17 @@ namespace PythonBinding {
         String, FloatingPoint, Integer, Other,
         };
 
+
+
     /// Wraps a PyObject known to be a HaloStruct
-    public ref class HaloStructProxy
+    public ref class HaloStructViewModel
     {
         ObservablePyObject* halostruct;
         Dictionary<String^, String^>^ fields;
         Dictionary<String^, FieldType>^ fieldTypes;
 
     public:
-        HaloStructProxy(PyObject* halostruct);
+        HaloStructViewModel(PyObject* halostruct);
         property Dictionary<String^, String^>^ Fields {
             Dictionary<String^, String^>^ get() { return fields; }
         }
@@ -55,17 +57,17 @@ namespace PythonBinding {
     };
 
     /// Wraps a PyObject known to be a HaloTag
-    public ref class HaloTagProxy : ExplorerNode
+    public ref class HaloTagNode : ExplorerNode
     {
         PyObject* halotag;
-        HaloStructProxy^ header;
-        HaloStructProxy^ data;
+        HaloStructViewModel^ header;
+        HaloStructViewModel^ data;
         List<ExplorerNode^>^ noChildren{};  // Should remain empty
 
     public:
-        HaloTagProxy(PyObject* halotag);
-        property HaloStructProxy^ Header { HaloStructProxy^ get() { return header; } }
-        property HaloStructProxy^ Data { HaloStructProxy^ get() { return data; } }
+        HaloTagNode(PyObject* halotag);
+        property HaloStructViewModel^ Header { HaloStructViewModel^ get() { return header; } }
+        property HaloStructViewModel^ Data { HaloStructViewModel^ get() { return data; } }
         property String^ FirstClass
         {
             String^ get() { return (String^)(header->Get("first_class")); }
@@ -82,12 +84,12 @@ namespace PythonBinding {
         virtual String^ ToString() override;
     };
 
-    public ref class HaloTagClassProxy : ExplorerNode
+    public ref class HaloTagClassNode : ExplorerNode
     {
         String^ className;
         List<ExplorerNode^>^ tags;
     public:
-        HaloTagClassProxy(String^ className, List<ExplorerNode^>^ tags)
+        HaloTagClassNode(String^ className, List<ExplorerNode^>^ tags)
         {
             this->className = className;
             this->tags = tags;
@@ -100,14 +102,14 @@ namespace PythonBinding {
     };
 
     /// Wraps a PyObject known to be a HaloMap
-    public ref class HaloMapProxy : ExplorerNode
+    public ref class HaloMapNode : ExplorerNode
     {
         PyObject* halomap;
         List<ExplorerNode^>^ tagClasses{};
 
     public:
-        HaloMapProxy(PyObject* map);
-        HaloTagProxy^ getGhost();
+        HaloMapNode(PyObject* map);
+        HaloTagNode^ getGhost();
         virtual property List<ExplorerNode^>^ Children
         {
             List<ExplorerNode^>^ get() override { return tagClasses; }
@@ -120,7 +122,7 @@ namespace PythonBinding {
     public enum class HaloMemory { PC, CE };
 
     /// Top-level, allows you to open Halo maps
-    public ref class PythonInterpreter : ExplorerNode
+    public ref class PythonInterpreter
     {
         PythonInterpreter();
         PythonInterpreter(const PythonInterpreter%) {
@@ -139,10 +141,8 @@ namespace PythonBinding {
         void OpenMap(String^ filename);
         virtual property List<ExplorerNode^>^ Children
         {
-            List<ExplorerNode^>^ get() override { return maps; }
+            List<ExplorerNode^>^ get() { return maps; }
         }
-        virtual property String^ Name { String^ get() override { return "Quickbeam"; } }
-        virtual property String^ Suffix { String^ get() override { return "Python Environment"; } }
         virtual String^ ToString() override;
     };
 }

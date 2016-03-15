@@ -8,10 +8,10 @@ namespace Quickbeam.Views
     /// </summary>
     public partial class TagView : UserControl
     {
-        public TagView(HaloTagProxy haloStruct)
+        public TagView(HaloTagNode haloTag)
         {
             InitializeComponent();
-            DataContext = haloStruct.Data;
+            DataContext = haloTag.Data;
         }
     }
 }
