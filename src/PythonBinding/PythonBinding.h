@@ -41,6 +41,31 @@ namespace PythonBinding {
         property String^ Repr { String^ get() { return "TODO"; } }
     };
 
+    public ref class IntField : Field
+    {
+    public:
+        IntField(String^ name, PyObject* field)
+        {
+            this->name = name;
+            this->field = field;
+        }
+        property long Value
+        {
+            long get()
+            {
+                auto set_fn = PyObject_GetAttrString(this->field, "getf");
+                auto value = PyObject_CallObject(set_fn, nullptr);
+                return PyLong_AsLong(value);
+            }
+            void set(long newvalue)
+            {
+                auto set_fn = PyObject_GetAttrString(this->field, "setf");
+                PyObject_CallObject(set_fn, PyTuple_Pack(1,
+                    PyLong_FromLong(newvalue)));
+            }
+        }
+    };
+
     public ref class FloatField : Field
     {
     public:
