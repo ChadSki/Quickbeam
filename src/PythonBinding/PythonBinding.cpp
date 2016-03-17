@@ -173,10 +173,31 @@ namespace PythonBinding {
             "import halolib\n");
 
         auto sys_mod_dict = PyImport_GetModuleDict();
+        if (sys_mod_dict == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not open Python module dictionary.");
+        }
         auto main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
+        if (main_mod == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not open __main__ module.");
+        }
         auto halolib = PyObject_GetAttrString(main_mod, "halolib");
+        if (halolib == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not find library `halolib`.");
+        }
         auto halolib_dict = PyModule_GetDict(halolib);
-        this->halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
+        if (halolib == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not get dictionary from halolib.");
+        }
+        auto halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
+        if (halomap_class == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not get HaloMap class from halolib.");
+        }
+        this->halomap_class = halomap_class;
         this->maps = gcnew ObservableCollection<ExplorerNode^>();
         
     }
