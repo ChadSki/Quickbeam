@@ -40,7 +40,7 @@ namespace PythonBinding {
     HaloStructViewModel::HaloStructViewModel(PyObject* halostruct)
     {
         this->halostruct = new ObservablePyObject(halostruct);
-        this->fields = gcnew List<Field^>();
+        this->fields = gcnew ObservableCollection<Field^>();
 
         PyObject_Print(halostruct, stdout, Py_PRINT_RAW);
         std::cout << std::endl;
@@ -105,7 +105,7 @@ namespace PythonBinding {
         this->halotag = halotag;
         this->header = gcnew HaloStructViewModel(PyObject_GetAttrString(this->halotag, "header"));
         this->data = gcnew HaloStructViewModel(PyObject_GetAttrString(this->halotag, "data"));
-        this->noChildren = gcnew List<ExplorerNode^>();
+        this->noChildren = gcnew ObservableCollection<ExplorerNode^>();
     }
 
     String^ HaloTagNode::ToString()
@@ -113,10 +113,12 @@ namespace PythonBinding {
         return gcnew String("HaloTag.");
     }
 
+    String^ Identity(String^ x) { return x; }
+
     HaloMapNode::HaloMapNode(PyObject* map)
     {
         this->halomap = map;
-        this->tagClasses = gcnew List<ExplorerNode^>();
+        this->tagClasses = gcnew ObservableCollection<ExplorerNode^>();
 
         auto tags_fn = PyObject_GetAttrString(this->halomap, "tags");
         auto allTags = PyObject_CallObject(tags_fn, nullptr);
@@ -128,18 +130,19 @@ namespace PythonBinding {
 
         // Read all the tags into our collection
         PyObject* item;
-        auto tagsByClass = gcnew Dictionary<String^, List<ExplorerNode^>^>();
+        auto tagsByClass = gcnew Dictionary<String^, ObservableCollection<ExplorerNode^>^>();
         while (item = PyIter_Next(tagsIter)) {
             auto tag = gcnew HaloTagNode(item);
             auto tagClassStr = tag->FirstClass;
             if (!tagsByClass->ContainsKey(tagClassStr))
             {
-                tagsByClass->Add(tagClassStr, gcnew List<ExplorerNode^>());
+                tagsByClass->Add(tagClassStr, gcnew ObservableCollection<ExplorerNode^>());
             }
             (tagsByClass[tagClassStr])->Add(tag);
         }
-        auto sortedClasses = gcnew List<String^>(tagsByClass->Keys);
-        sortedClasses->Sort();
+        auto sortedClasses = Enumerable::OrderBy(tagsByClass->Keys,
+            gcnew Func<String^, String^>(Identity));
+
         for each (auto tagClass in sortedClasses)
         {
             tagClasses->Add(gcnew HaloTagClassNode(tagClass, tagsByClass[tagClass]));
@@ -174,7 +177,7 @@ namespace PythonBinding {
         auto halolib = PyObject_GetAttrString(main_mod, "halolib");
         auto halolib_dict = PyModule_GetDict(halolib);
         this->halomap_class = PyDict_GetItem(halolib_dict, PyUnicode_FromString("HaloMap"));
-        this->maps = gcnew List<ExplorerNode^>();
+        this->maps = gcnew ObservableCollection<ExplorerNode^>();
         
     }
 

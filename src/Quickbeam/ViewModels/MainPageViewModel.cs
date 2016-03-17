@@ -2,18 +2,13 @@
 using Quickbeam.Interfaces;
 using Quickbeam.Native;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Quickbeam.ViewModels
 {
     public class MainPageViewModel : Base
     {
-        public MainPageViewModel()
-        {
-            if (PythonInterpreter.Instance.Children.Count == 0)
-                PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
-        }
-
         #region HaloExe
         private GridLength _haloWidth = new GridLength(0, GridUnitType.Auto);
         private GridLength _haloHeight = new GridLength(0, GridUnitType.Auto);
@@ -78,7 +73,7 @@ namespace Quickbeam.ViewModels
         }
         #endregion HaloExe
 
-        public List<ExplorerNode> Nodes
+        public ObservableCollection<ExplorerNode> Nodes
         {
             get { return PythonInterpreter.Instance.Children; }
         }
