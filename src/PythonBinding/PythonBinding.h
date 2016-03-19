@@ -3,6 +3,7 @@
 
 #pragma once
 #include "Stdafx.h"
+#include "Fields.h"
 #using <WindowsBase.dll>
 #using <System.Core.dll>
 
@@ -20,76 +21,6 @@ namespace PythonBinding {
     /// Callback function to be passed into Python.
     int callback_thunk(ObservablePyObject* slf);
     #pragma managed(pop)
-
-    public ref class Field abstract
-    {
-    protected:
-        PyObject* field;
-        String^ name;
-    public:
-        property String^ Name { String^ get() { return name; } }
-    };
-
-    public ref class UnknownField : Field
-    {
-    public:
-        UnknownField(String^ name, PyObject* field)
-        {
-            this->name = name;
-            this->field = field;
-        }
-        property String^ Repr { String^ get() { return "TODO"; } }
-    };
-
-    public ref class IntField : Field
-    {
-    public:
-        IntField(String^ name, PyObject* field)
-        {
-            this->name = name;
-            this->field = field;
-        }
-        property long Value
-        {
-            long get()
-            {
-                auto set_fn = PyObject_GetAttrString(this->field, "getf");
-                auto value = PyObject_CallObject(set_fn, nullptr);
-                return PyLong_AsLong(value);
-            }
-            void set(long newvalue)
-            {
-                auto set_fn = PyObject_GetAttrString(this->field, "setf");
-                PyObject_CallObject(set_fn, PyTuple_Pack(1,
-                    PyLong_FromLong(newvalue)));
-            }
-        }
-    };
-
-    public ref class FloatField : Field
-    {
-    public:
-        FloatField(String^ name, PyObject* field)
-        {
-            this->name = name;
-            this->field = field;
-        }
-        property double Value
-        {
-            double get()
-            {
-                auto set_fn = PyObject_GetAttrString(this->field, "getf");
-                auto value = PyObject_CallObject(set_fn, nullptr);
-                return PyFloat_AsDouble(value);
-            }
-            void set(double newvalue)
-            {
-                auto set_fn = PyObject_GetAttrString(this->field, "setf");
-                PyObject_CallObject(set_fn, PyTuple_Pack(1,
-                    PyFloat_FromDouble(newvalue)));
-            }
-        }
-    };
 
     /// Wraps a PyObject known to be a HaloStruct
     public ref class HaloStructViewModel
