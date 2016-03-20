@@ -15,8 +15,10 @@ namespace PythonBinding {
         virtual property ObservableCollection<ExplorerNode^>^ Children;
         virtual property String^ Name;
         virtual property String^ Suffix;
-
     };
+
+    // For brevity
+    typedef ObservableCollection<ExplorerNode^> ChildNodes;
 
     /// Wraps a PyObject known to be a HaloTag
     public ref class HaloTagNode : ExplorerNode
@@ -24,60 +26,42 @@ namespace PythonBinding {
         PyObject* halotag;
         HaloStructViewModel^ header;
         HaloStructViewModel^ data;
-        ObservableCollection<ExplorerNode^>^ noChildren{};  // Should remain empty
+        ChildNodes^ noChildren{};  // Should remain empty
 
     public:
         HaloTagNode(PyObject* halotag);
         property HaloStructViewModel^ Header { HaloStructViewModel^ get() { return header; } }
         property HaloStructViewModel^ Data { HaloStructViewModel^ get() { return data; } }
-        property String^ FirstClass
-        {
-            String^ get() { return (String^)(header->Get("first_class")); }
-        }
-        virtual property ObservableCollection<ExplorerNode^>^ Children
-        {
-            ObservableCollection<ExplorerNode^>^ get() override { return noChildren; }
-        }
-        virtual property String^ Name
-        {
-            String^ get() override { return (String^)(header->Get("name")); }
-        }
-        virtual property String^ Suffix { String^ get() override { return "tag"; } }
+        property String^ FirstClass { String^ get(); }
+        virtual property String^ Name { String^ get() override; }
+        virtual property String^ Suffix { String^ get() override; }
+        virtual property ChildNodes^ Children { ChildNodes^ get() override; }
         virtual String^ ToString() override;
     };
 
     public ref class HaloTagClassNode : ExplorerNode
     {
         String^ className;
-        ObservableCollection<ExplorerNode^>^ tags;
+        ChildNodes^ tags;
+
     public:
-        HaloTagClassNode(String^ className, ObservableCollection<ExplorerNode^>^ tags)
-        {
-            this->className = className;
-            this->tags = tags;
-        }
-        virtual property String^ Name { String^ get() override { return className; } }
-        virtual property ObservableCollection<ExplorerNode^>^ Children
-        {
-            ObservableCollection<ExplorerNode^>^ get() override { return tags; }
-        }
+        HaloTagClassNode(String^ className, ChildNodes^ tags);
+        virtual property String^ Name { String^ get() override; }
+        virtual property ChildNodes^ Children { ChildNodes^ get() override; }
     };
 
     /// Wraps a PyObject known to be a HaloMap
     public ref class HaloMapNode : ExplorerNode
     {
         PyObject* halomap;
-        ObservableCollection<ExplorerNode^>^ tagClasses{};
+        ChildNodes^ tagClasses{};
 
     public:
         HaloMapNode(PyObject* map);
         HaloTagNode^ getGhost();
-        virtual property ObservableCollection<ExplorerNode^>^ Children
-        {
-            ObservableCollection<ExplorerNode^>^ get() override { return tagClasses; }
-        }
         virtual property String^ Name { String^ get() override { return ToString(); } }
         virtual property String^ Suffix { String^ get() override { return "map"; } }
+        virtual property ChildNodes^ Children { ChildNodes^ get() override; }
         virtual String^ ToString() override;
     };
 
@@ -93,7 +77,7 @@ namespace PythonBinding {
         }
         static PythonInterpreter instance;
         PyObject* halomap_class;
-        property ObservableCollection<ExplorerNode^>^ maps;
+        property ChildNodes^ maps;
 
         bool initialized = false;
 
@@ -101,10 +85,7 @@ namespace PythonBinding {
         static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %instance; } }
         void OpenMap(HaloMemory whichExe);
         void OpenMap(String^ filename);
-        virtual property ObservableCollection<ExplorerNode^>^ Children
-        {
-            ObservableCollection<ExplorerNode^>^ get() { return maps; }
-        }
-        virtual String^ ToString() override;
+        property ChildNodes^ Children { ChildNodes^ get(); }
+        String^ ToString() override;
     };
 }
