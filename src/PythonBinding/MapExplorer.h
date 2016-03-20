@@ -3,39 +3,10 @@
 
 #pragma once
 #include "Stdafx.h"
-#include "Fields.h"
-#using <WindowsBase.dll>
-#using <System.Core.dll>
-
-using namespace System;
-using namespace System::Linq;
-using namespace System::Collections::Generic;
-using namespace System::Collections::ObjectModel;
+#include "HaloStruct.h"
+#include "ObservablePyObject.h"
 
 namespace PythonBinding {
-
-    #pragma managed(push, off)
-    /// Wraps a PyObject known to have a property_changed Event.
-    class ObservablePyObject;
-
-    /// Callback function to be passed into Python.
-    int callback_thunk(ObservablePyObject* slf);
-    #pragma managed(pop)
-
-    /// Wraps a PyObject known to be a HaloStruct
-    public ref class HaloStructViewModel
-    {
-        ObservablePyObject* halostruct;
-        ObservableCollection<Field^>^ fields;
-
-    public:
-        HaloStructViewModel(PyObject* halostruct);
-        property ObservableCollection<Field^>^ Fields {
-            ObservableCollection<Field^>^ get() { return fields; }
-        }
-        Object^ Get(String^ attrName);
-        virtual String^ ToString() override;
-    };
 
     /// Common stuff for displaying in tree format
     public ref class ExplorerNode abstract

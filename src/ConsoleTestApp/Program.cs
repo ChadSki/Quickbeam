@@ -16,7 +16,7 @@ namespace ConsoleTestApp
             Console.WriteLine(htag);
             var tagHeader = htag.Header;
             Console.WriteLine(tagHeader);
-            var firstClass = tagHeader.Get("first_class") as String;
+            var firstClass = tagHeader.Get("first_class");
             Console.WriteLine(firstClass);
             var tagData = htag.Data;
             Console.WriteLine(tagData);

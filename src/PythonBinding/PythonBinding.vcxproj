@@ -144,15 +144,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Fields.h" />
-    <ClInclude Include="PythonBinding.h" />
+    <ClInclude Include="HaloStruct.h" />
+    <ClInclude Include="MapExplorer.h" />
+    <ClInclude Include="ObservablePyObject.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="Fields.cpp" />
-    <ClCompile Include="PythonBinding.cpp" />
+    <ClCompile Include="HaloStruct.cpp" />
+    <ClCompile Include="MapExplorer.cpp" />
+    <ClCompile Include="ObservablePyObject.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

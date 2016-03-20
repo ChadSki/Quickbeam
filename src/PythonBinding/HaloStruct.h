@@ -1,6 +1,6 @@
 #pragma once
 #include "Stdafx.h"
-using namespace System;
+#include "ObservablePyObject.h"
 
 namespace PythonBinding
 {
@@ -36,5 +36,20 @@ namespace PythonBinding
     public:
         UnknownField(String^ name, PyObject* field);
         property String^ Repr { String^ get() { return "TODO"; } }
+    };
+
+    /// Wraps a PyObject known to be a HaloStruct
+    public ref class HaloStructViewModel
+    {
+        ObservablePyObject* halostruct;
+        ObservableCollection<Field^>^ fields;
+
+    public:
+        HaloStructViewModel(PyObject* halostruct);
+        property ObservableCollection<Field^>^ Fields {
+            ObservableCollection<Field^>^ get() { return fields; }
+        }
+        Object^ Get(String^ attrName);
+        virtual String^ ToString() override;
     };
 }
