@@ -24,17 +24,6 @@
     <Content Include="basicstruct\test\test.bmp" />
     <Content Include="basicstruct\test\testfile.bin" />
     <Content Include="byteaccess\test\testfile.bin" />
-    <Content Include="halolib\structs\clean_xml\bipd.xml" />
-    <Content Include="halolib\structs\clean_xml\effe.xml" />
-    <Content Include="halolib\structs\clean_xml\index_header.xml" />
-    <Content Include="halolib\structs\clean_xml\map_header.xml" />
-    <Content Include="halolib\structs\clean_xml\object_table.xml" />
-    <Content Include="halolib\structs\clean_xml\player_table.xml" />
-    <Content Include="halolib\structs\clean_xml\proj.xml" />
-    <Content Include="halolib\structs\clean_xml\tag_header.xml" />
-    <Content Include="halolib\structs\clean_xml\unknown.xml" />
-    <Content Include="halolib\structs\clean_xml\vehi.xml" />
-    <Content Include="halolib\structs\clean_xml\weap.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="basicstruct\field.py" />
@@ -68,7 +57,6 @@
     <Folder Include="byteaccess\test" />
     <Folder Include="halolib\" />
     <Folder Include="halolib\structs\" />
-    <Folder Include="halolib\structs\clean_xml\" />
     <Folder Include="halolib\test\" />
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,12 @@
                 <TextBox Text="{Binding Value}"  Width="200" />
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type pb:StringField}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" />
+                <TextBox Text="{Binding Value}"  Width="200" />
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type pb:UnknownField}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Name}" />

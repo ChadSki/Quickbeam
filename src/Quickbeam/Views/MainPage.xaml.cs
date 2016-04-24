@@ -12,13 +12,15 @@ namespace Quickbeam.Views
 {
     public partial class MainPage : IView
     {
-        public static MainPage Instance { get; private set; }
+        public static MainPage Instance
+        {
+            get { return Home.Instance.ViewModel.MainPage as MainPage; }
+        }
         public MainPageViewModel ViewModel { get; private set; }
 
         public MainPage()
         {
             InitializeComponent();
-            Instance = this;
             DataContext = ViewModel = new MainPageViewModel();
         }
 

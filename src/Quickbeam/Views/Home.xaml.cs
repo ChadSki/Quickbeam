@@ -9,12 +9,14 @@ namespace Quickbeam.Views
 {
     public partial class Home
     {
-        private HomeViewModel ViewModel { get; set; }
+        public static Home Instance { get; private set; }
+        public HomeViewModel ViewModel { get; set; }
         private WindowInteropHelper Helper { get; set; }
 
         public Home()
         {
             InitializeComponent();
+            Instance = this;
             DataContext = ViewModel = new HomeViewModel();
             ViewModel.MainPage = new MainPage();
             Helper = new WindowInteropHelper(this);

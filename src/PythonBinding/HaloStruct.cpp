@@ -1,11 +1,17 @@
 #include "stdafx.h"
 #include "HaloStruct.h"
 
+String^ ManagedString(PyObject* pyo)
+{
+    auto utf8bytes = PyUnicode_AsUTF8AndSize(PyObject_Str(pyo), nullptr);
+    return gcnew String(utf8bytes);
+}
+
 namespace PythonBinding
 {
     String^ Field::Name::get() { return name; }
 
-    FloatField::FloatField(String^ name, PyObject* field)
+    Field::Field(String^ name, PyObject* field)
     {
         this->name = name;
         this->field = field;
@@ -14,8 +20,8 @@ namespace PythonBinding
     double FloatField::Value::get()
     {
         auto set_fn = PyObject_GetAttrString(this->field, "getf");
-        auto value = PyObject_CallObject(set_fn, nullptr);
-        return PyFloat_AsDouble(value);
+        auto fieldValue = PyObject_CallObject(set_fn, nullptr);
+        return PyFloat_AsDouble(fieldValue);
     }
 
     void FloatField::Value::set(double newvalue)
@@ -25,17 +31,11 @@ namespace PythonBinding
             PyFloat_FromDouble(newvalue)));
     }
 
-    IntField::IntField(String^ name, PyObject* field)
-    {
-        this->name = name;
-        this->field = field;
-    }
-
     long IntField::Value::get()
     {
         auto set_fn = PyObject_GetAttrString(this->field, "getf");
-        auto value = PyObject_CallObject(set_fn, nullptr);
-        return PyLong_AsLong(value);
+        auto fieldValue = PyObject_CallObject(set_fn, nullptr);
+        return PyLong_AsLong(fieldValue);
     }
 
     void IntField::Value::set(long newvalue)
@@ -45,10 +45,29 @@ namespace PythonBinding
             PyLong_FromLong(newvalue)));
     }
 
-    UnknownField::UnknownField(String^ name, PyObject* field)
+    String^ StringField::Value::get()
     {
-        this->name = name;
-        this->field = field;
+        auto set_fn = PyObject_GetAttrString(this->field, "getf");
+        auto fieldValue = PyObject_CallObject(set_fn, nullptr);
+        return ManagedString(fieldValue);
+    }
+
+    void StringField::Value::set(String^ newvalue)
+    {
+        auto set_fn = PyObject_GetAttrString(this->field, "setf");
+        auto rawValue = Marshal::StringToHGlobalAnsi(newvalue);
+        PyObject_CallObject(set_fn, PyTuple_Pack(1, (char*)(void*)rawValue));
+        Marshal::FreeHGlobal(rawValue);
+    }
+
+    String^ UnknownField::Value::get()
+    {
+        // Get our string representation from parent
+        auto parentStruct = PyObject_GetAttrString(this->field, "parent");
+        auto rawName = Marshal::StringToHGlobalAnsi(this->name);
+        auto fieldValue = PyObject_GetAttrString(parentStruct, (char*)(void*)rawName);
+        Marshal::FreeHGlobal(rawName);
+        return ManagedString(fieldValue);
     }
 
     HaloStructViewModel::HaloStructViewModel(PyObject* halostruct)
@@ -77,11 +96,6 @@ namespace PythonBinding
             auto fieldNameChar = PyUnicode_AsUTF8AndSize(fieldNameObj, nullptr);
             auto fieldNameStr = gcnew String(fieldNameChar);
 
-            // read value
-            //auto fieldValue = PyObject_GetAttrString(this->halostruct->pyobj, fieldNameChar);
-            //auto fieldValueChar = PyUnicode_AsUTF8AndSize(PyObject_Str(fieldValue), nullptr);
-            //auto fieldValueStr = gcnew String(fieldValueChar);
-
             // Field
             auto fieldObj = PySequence_GetItem(item, 1);
             auto typeName = PyObject_GetAttrString(
@@ -92,6 +106,14 @@ namespace PythonBinding
             if (typeNameStr->Contains("Float"))
             {
                 this->Fields->Add(gcnew FloatField(fieldNameStr, fieldObj));
+            }
+            else if (typeNameStr->Contains("Int"))
+            {
+                this->Fields->Add(gcnew IntField(fieldNameStr, fieldObj));
+            }
+            else if (typeNameStr->Contains("Ascii"))
+            {
+                this->Fields->Add(gcnew StringField(fieldNameStr, fieldObj));
             }
             else
             {
@@ -104,6 +126,10 @@ namespace PythonBinding
     {
         auto attrNameC = Marshal::StringToHGlobalAnsi(attrName);
         auto result = PyObject_GetAttrString(halostruct->pyobj, (const char*)attrNameC.ToPointer());
+        if (result == nullptr) {
+            throw gcnew NullReferenceException(
+                String::Format("Could not find attribute `{}`", attrName));
+        }
         Marshal::FreeHGlobal(attrNameC);
         auto charArray = PyBytes_AsString(PyUnicode_AsASCIIString(result));
         return gcnew String(charArray);

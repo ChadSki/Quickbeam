@@ -19,15 +19,12 @@ namespace Quickbeam.ViewModels
 
         private DispatcherTimer StatusResetTimer { get; set; }
 
-        private string _status = "Ready...";
+        private string _status = "Ready";
         public string Status
         {
             get { return _status; }
             set
             {
-                if (!value.EndsWith("..."))
-                    value += "...";
-
                 StatusResetTimer.Stop();
                 SetField(ref _status, value);
                 StatusResetTimer.Start();
