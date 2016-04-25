@@ -20,8 +20,10 @@ namespace ConsoleTestApp
             Console.WriteLine(firstClass);
             var tagData = htag.Data;
             Console.WriteLine(tagData);
-            var marker_name = tagData.Get("attachment_marker_name");
-            Console.WriteLine(marker_name);
+            var marker_field = tagData.Fields[0] as StringField;
+            Console.WriteLine(marker_field.Value);
+            marker_field.Value = "cheese";
+            Console.WriteLine(marker_field.Value);
         }
     }
 }

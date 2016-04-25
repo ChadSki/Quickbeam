@@ -64,17 +64,13 @@ namespace PythonBinding
         return ManagedString(fieldValue);
     }
 
-    void StringField::Value::set(String^ newvalue)
+    void StringField::Value::set(String^ newValue)
     {
-        std::cout << "Get set_fn" << std::endl;
         auto set_fn = PyObject_GetAttrString(this->field, "setf");
-        std::cout << "Get rawValue" << std::endl;
-        auto rawValue = Marshal::StringToHGlobalAnsi(newvalue);
-        std::cout << "Creating args" << std::endl;
-        auto args = PyTuple_Pack(1, (char*)(void*)rawValue);
-        std::cout << "Calling" << std::endl;
+        auto rawValue = Marshal::StringToHGlobalAnsi(newValue);
+        auto pyStrValue = PyUnicode_FromString((char*)(void*)rawValue);
+        auto args = PyTuple_Pack(1, pyStrValue);
         PyObject_CallObject(set_fn, args);
-        std::cout << "Freeing" << std::endl;
         Marshal::FreeHGlobal(rawValue);
     }
 
@@ -114,15 +110,12 @@ namespace PythonBinding
         while (item = PyIter_Next(fieldsIter)) {
             // Name
             auto fieldNameObj = PySequence_GetItem(item, 0);
-            auto fieldNameChar = PyUnicode_AsUTF8AndSize(fieldNameObj, nullptr);
-            auto fieldNameStr = gcnew String(fieldNameChar);
+            auto fieldNameStr = ManagedString(fieldNameObj);
 
-            // Field
+            // Field type
             auto fieldObj = PySequence_GetItem(item, 1);
-            auto typeName = PyObject_GetAttrString(
-                (PyObject*)fieldObj->ob_type, "__name__");
-            auto typeNameChar = PyUnicode_AsUTF8AndSize(typeName, nullptr);
-            auto typeNameStr = gcnew String(typeNameChar);
+            auto typeName = PyObject_GetAttrString((PyObject*)fieldObj->ob_type, "__name__");
+            auto typeNameStr = ManagedString(typeName);
 
             if (typeNameStr->Contains("RawData"))
             {
