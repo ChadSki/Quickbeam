@@ -17,6 +17,18 @@ namespace PythonBinding
         this->field = field;
     }
 
+    String^ BytesField::Value::get()
+    {
+        auto set_fn = PyObject_GetAttrString(this->field, "getf");
+        auto fieldValue = PyObject_CallObject(set_fn, nullptr);
+        return ManagedString(fieldValue);
+    }
+
+    void BytesField::Value::set(String^ newvalue)
+    {
+        //
+    }
+
     double FloatField::Value::get()
     {
         auto set_fn = PyObject_GetAttrString(this->field, "getf");
@@ -54,9 +66,15 @@ namespace PythonBinding
 
     void StringField::Value::set(String^ newvalue)
     {
+        std::cout << "Get set_fn" << std::endl;
         auto set_fn = PyObject_GetAttrString(this->field, "setf");
+        std::cout << "Get rawValue" << std::endl;
         auto rawValue = Marshal::StringToHGlobalAnsi(newvalue);
-        PyObject_CallObject(set_fn, PyTuple_Pack(1, (char*)(void*)rawValue));
+        std::cout << "Creating args" << std::endl;
+        auto args = PyTuple_Pack(1, (char*)(void*)rawValue);
+        std::cout << "Calling" << std::endl;
+        PyObject_CallObject(set_fn, args);
+        std::cout << "Freeing" << std::endl;
         Marshal::FreeHGlobal(rawValue);
     }
 
@@ -75,13 +93,16 @@ namespace PythonBinding
         this->halostruct = new ObservablePyObject(halostruct);
         this->fields = gcnew ObservableCollection<Field^>();
 
-        PyObject_Print(halostruct, stdout, Py_PRINT_RAW);
-        std::cout << std::endl;
+        // For debug, but it's very noisy.
+        //PyObject_Print(halostruct, stdout, Py_PRINT_RAW);
+        //std::cout << std::endl;
 
-        // type: Dict[str, Union[BasicField, HaloField]]
         auto fieldsDict = PyObject_GetAttrString(halostruct, "fields");
-        // type: Sequence[Tuple[str, Union[BasicField, HaloField]]]
+        // type: Dict[str, Union[BasicField, HaloField]]
+
         auto fieldsItems = PyMapping_Items(fieldsDict);
+        // type: Sequence[Tuple[str, Union[BasicField, HaloField]]]
+
         auto fieldsIter = PyObject_GetIter(fieldsItems);
         if (fieldsIter == nullptr) {
             throw gcnew NullReferenceException(
@@ -103,7 +124,11 @@ namespace PythonBinding
             auto typeNameChar = PyUnicode_AsUTF8AndSize(typeName, nullptr);
             auto typeNameStr = gcnew String(typeNameChar);
 
-            if (typeNameStr->Contains("Float"))
+            if (typeNameStr->Contains("RawData"))
+            {
+                this->Fields->Add(gcnew BytesField(fieldNameStr, fieldObj));
+            }
+            else if (typeNameStr->Contains("Float"))
             {
                 this->Fields->Add(gcnew FloatField(fieldNameStr, fieldObj));
             }

@@ -91,12 +91,12 @@ namespace PythonBinding {
         }
     }
 
-    HaloTagNode^ HaloMapNode::getGhost()
+    HaloTagNode^ HaloMapNode::getArbitraryTag()
     {
         auto tag_fn = PyObject_GetAttrString(this->halomap, "tag");
         auto args = PyTuple_Pack(2,
-            PyUnicode_FromString("vehi"),
-            PyUnicode_FromString("ghost"));
+            PyUnicode_FromString("ant!"),
+            PyUnicode_FromString(""));
         auto ghost = PyObject_CallObject(tag_fn, args);
         return gcnew HaloTagNode(ghost);
     }

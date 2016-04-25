@@ -12,7 +12,7 @@ namespace ConsoleTestApp
             Console.WriteLine(PythonInterpreter.Instance);
             var hmap = PythonInterpreter.Instance.Children[0] as HaloMapNode;
             Console.WriteLine(hmap);
-            var htag = hmap.getGhost();
+            var htag = hmap.getArbitraryTag();
             Console.WriteLine(htag);
             var tagHeader = htag.Header;
             Console.WriteLine(tagHeader);
@@ -20,6 +20,8 @@ namespace ConsoleTestApp
             Console.WriteLine(firstClass);
             var tagData = htag.Data;
             Console.WriteLine(tagData);
+            var marker_name = tagData.Get("attachment_marker_name");
+            Console.WriteLine(marker_name);
         }
     }
 }

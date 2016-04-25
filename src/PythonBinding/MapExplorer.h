@@ -58,7 +58,7 @@ namespace PythonBinding {
 
     public:
         HaloMapNode(PyObject* map);
-        HaloTagNode^ getGhost();
+        HaloTagNode^ getArbitraryTag();
         virtual property String^ Name { String^ get() override { return ToString(); } }
         virtual property String^ Suffix { String^ get() override { return "map"; } }
         virtual property ChildNodes^ Children { ChildNodes^ get() override; }

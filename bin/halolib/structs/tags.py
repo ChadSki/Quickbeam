@@ -16,6 +16,9 @@ tag_types = {}
 tag_types['unknown'] = define_halo_struct(struct_size=32,
     rawdata=field.RawData(offset=0, length=32))
 
+tag_types['ant!'] = define_halo_struct(struct_size=32,
+    attachment_marker_name=field.Asciiz(offset=0, maxlength=32))
+
 tag_types['bipd'] = define_halo_struct(struct_size=0x450,
     model=halofield.TagReference(offset=0x28),
     animation=halofield.TagReference(offset=0x38),

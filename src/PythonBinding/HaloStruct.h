@@ -15,6 +15,13 @@ namespace PythonBinding
         property String^ Name { String^ get(); }
     };
 
+    public ref class BytesField : Field
+    {
+    public:
+        BytesField(String^ name, PyObject* field) : Field(name, field) {};
+        property String^ Value { String^ get(); void set(String^ newvalue); }
+    };
+
     public ref class FloatField : Field
     {
     public:
