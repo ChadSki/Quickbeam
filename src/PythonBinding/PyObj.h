@@ -12,12 +12,27 @@ namespace PythonBinding
         PyObj(PyObject* obj);
 
         /// <summary>
+        /// Returns the double representation of this object.
+        /// </summary>
+        double AsDouble();
+
+        /// <summary>
+        /// Returns the integer representation of this object.
+        /// </summary>
+        long AsLong();
+
+        /// <summary>
+        /// Returns the string representation of this object.
+        /// </summary>
+        String^ AsStr();
+
+        /// <summary>
         /// Get a method by name and call it.
         /// </summary>
         PyObj^ CallMethod(String^ methodName, PyObj^ tupleArgs);
 
         /// <summary>
-        /// If this Python object is callable, call it with the given arguments.
+        /// Call this Python object with the given arguments.
         /// </summary>
         PyObj^ CallObject(PyObj^ tupleArgs);
 
@@ -35,21 +50,6 @@ namespace PythonBinding
         /// If this Python object supports [] indexing, get an item by its key.
         /// </summary>
         PyObj^ GetItem(PyObj^ key);
-
-        /// <summary>
-        /// Returns the string representation of this object.
-        /// </summary>
-        String^ Str();
-
-        /// <summary>
-        /// Returns the double representation of this object.
-        /// </summary>
-        double AsDouble();
-
-        /// <summary>
-        /// Returns the integer representation of this object.
-        /// </summary>
-        long AsLong();
 
         /// <summary>
         /// Print this object to the console for debugging purposes.

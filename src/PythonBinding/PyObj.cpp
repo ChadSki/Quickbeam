@@ -15,6 +15,22 @@ namespace PythonBinding
         this->obj = nullptr;
     }
 
+    double PyObj::AsDouble()
+    {
+        return PyFloat_AsDouble(this->obj);
+    }
+
+    long PyObj::AsLong()
+    {
+        return PyLong_AsLong(this->obj);
+    }
+
+    String^ PyObj::AsStr()
+    {
+        auto utf8bytes = PyUnicode_AsUTF8AndSize(PyObject_Str(this->obj), nullptr);
+        return gcnew String(utf8bytes);
+    }
+
     PyObj^ PyObj::CallMethod(String^ methodName, PyObj^ tupleArgs)
     {
         auto rawName = Marshal::StringToHGlobalAnsi(methodName);
@@ -70,22 +86,6 @@ namespace PythonBinding
             throw gcnew NullReferenceException("Failed to get item from key.");
         }
         return gcnew PyObj(result);
-    }
-
-    String^ PyObj::Str()
-    {
-        auto utf8bytes = PyUnicode_AsUTF8AndSize(PyObject_Str(this->obj), nullptr);
-        return gcnew String(utf8bytes);
-    }
-
-    double PyObj::AsDouble()
-    {
-        return PyFloat_AsDouble(this->obj);
-    }
-
-    long PyObj::AsLong()
-    {
-        return PyLong_AsLong(this->obj);
     }
 
     void PyObj::Print()

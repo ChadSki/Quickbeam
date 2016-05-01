@@ -219,7 +219,7 @@
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\HaloSettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\Field.cs" />
+    <Compile Include="ViewModels\FieldNode.cs" />
     <Compile Include="Views\DpiDecorator.cs" />
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
@@ -481,6 +481,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
+      <Project>{dde2a481-8271-4eac-a330-8fa6a38d13d1}</Project>
+      <Name>ICSharpCode.TreeView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MetroIde\MetroIde.csproj">
       <Project>{cf8ea988-3789-48c4-8e2d-bd157a8b1cc4}</Project>
       <Name>MetroIde</Name>

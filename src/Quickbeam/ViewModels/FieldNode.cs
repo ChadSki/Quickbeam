@@ -1,29 +1,35 @@
-﻿using PythonBinding;
+﻿using ICSharpCode.TreeView;
+using PythonBinding;
 
 namespace Quickbeam.ViewModels
 {
-    public abstract class Field
+    public abstract class FieldNode : SharpTreeNode
     {
         public string Name { get; protected set; }
 
-        protected PyObj FieldObject;
+        public PyObj FieldObject { get; protected set; }
 
-        protected Field(string name, PyObj field)
+        public FieldNode(string name, PyObj field)
         {
             Name = name;
             FieldObject = field;
         }
-    }
 
-    public class BytesField : Field
-    {
-        public BytesField(string name, PyObj field) : base(name, field) { }
-        public string Value {
-            get { return FieldObject.CallMethod("getf", null).Str(); }
+        public override string ToString()
+        {
+            return Name;
         }
     }
 
-    public class FloatField : Field
+    public class BytesField : FieldNode
+    {
+        public BytesField(string name, PyObj field) : base(name, field) { }
+        public string Value {
+            get { return FieldObject.CallMethod("getf", null).AsStr(); }
+        }
+    }
+
+    public class FloatField : FieldNode
     {
         public FloatField(string name, PyObj field) : base(name, field) { }
         public double Value
@@ -32,7 +38,7 @@ namespace Quickbeam.ViewModels
         }
     }
 
-    public class IntField : Field
+    public class IntField : FieldNode
     {
         public IntField(string name, PyObj field) : base(name, field) { }
         public long Value
@@ -41,21 +47,21 @@ namespace Quickbeam.ViewModels
         }
     }
 
-    public class StringField : Field
+    public class StringField : FieldNode
     {
         public StringField(string name, PyObj field) : base(name, field) { }
         public string Value
         {
-            get { return FieldObject.CallMethod("getf", null).Str(); }
+            get { return FieldObject.CallMethod("getf", null).AsStr(); }
         }
     }
 
-    public class UnknownField : Field
+    public class UnknownField : FieldNode
     {
         public UnknownField(string name, PyObj field) : base(name, field) { }
         public string Value
         {
-            get { return FieldObject.CallMethod("getf", null).Str(); }
+            get { return FieldObject.CallMethod("getf", null).AsStr(); }
         }
     }
 }
