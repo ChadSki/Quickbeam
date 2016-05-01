@@ -8,7 +8,7 @@ using System.Windows.Interop;
 
 namespace Quickbeam.Views
 {
-    public class HaloWindow : HwndHost
+    public class HaloHost : HwndHost
     {
         private IntPtr _hwndHost;
         private Process _haloProcess;

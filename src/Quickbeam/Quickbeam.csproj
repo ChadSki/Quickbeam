@@ -223,7 +223,7 @@
     <Compile Include="Views\HaloView.xaml.cs">
       <DependentUpon>HaloView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HaloWindow.cs" />
+    <Compile Include="Views\HaloHost.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

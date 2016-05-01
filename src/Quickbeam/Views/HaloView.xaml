@@ -11,7 +11,7 @@
         <Grid Name="OuterHaloGrid"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
-            <views:HaloWindow Width="{Binding ElementName=OuterHaloGrid,Path=ActualWidth}"
+            <views:HaloHost Width="{Binding ElementName=OuterHaloGrid,Path=ActualWidth}"
                               Height="{Binding ElementName=OuterHaloGrid,Path=ActualHeight}"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"/>
