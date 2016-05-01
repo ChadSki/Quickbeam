@@ -4,6 +4,8 @@
 ref class PyObj
 {
     PyObject* obj;
+protected:
+    ~PyObj();
 public:
     PyObj(PyObject* obj);
 

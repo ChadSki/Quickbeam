@@ -4,6 +4,13 @@
 PyObj::PyObj(PyObject * obj)
 {
     this->obj = obj;
+    Py_INCREF(this->obj);
+}
+
+PyObj::~PyObj()
+{
+    Py_DECREF(this->obj);
+    this->obj = nullptr;
 }
 
 PyObj^ PyObj::CallObject(PyObj^ tupleArgs)
