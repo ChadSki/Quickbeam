@@ -14,7 +14,7 @@ namespace Quickbeam.Views
     {
         public static MainPage Instance
         {
-            get { return Home.Instance.ViewModel.MainPage as MainPage; }
+            get { return HomeWindow.Instance.ViewModel.MainPage as MainPage; }
         }
         public MainPageViewModel ViewModel { get; private set; }
 

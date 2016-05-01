@@ -7,13 +7,13 @@ using System.Windows.Interop;
 
 namespace Quickbeam.Views
 {
-    public partial class Home
+    public partial class HomeWindow
     {
-        public static Home Instance { get; private set; }
+        public static HomeWindow Instance { get; private set; }
         public HomeViewModel ViewModel { get; set; }
         private WindowInteropHelper Helper { get; set; }
 
-        public Home()
+        public HomeWindow()
         {
             InitializeComponent();
             Instance = this;

@@ -25,13 +25,13 @@ namespace Quickbeam.Views
         {
             try
             {
-                Home.Instance.ViewModel.Status = "Reading Halo's memory...";
+                HomeWindow.Instance.ViewModel.Status = "Reading Halo's memory...";
                 PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
-                Home.Instance.ViewModel.Status = "Map opened";
+                HomeWindow.Instance.ViewModel.Status = "Map opened";
             }
             catch (NullReferenceException)
             {
-                Home.Instance.ViewModel.Status = "Could not read Halo's memory. Is it running?";
+                HomeWindow.Instance.ViewModel.Status = "Could not read Halo's memory. Is it running?";
             }
         }
 
