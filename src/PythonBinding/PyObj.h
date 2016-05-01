@@ -1,42 +1,59 @@
 #include "Stdafx.h"
 
 #pragma once
-ref class PyObj
+namespace PythonBinding
 {
-    PyObject* obj;
-protected:
-    ~PyObj();
-public:
-    PyObj(PyObject* obj);
+    public ref class PyObj
+    {
+        PyObject* obj;
+    protected:
+        ~PyObj();
+    public:
+        PyObj(PyObject* obj);
 
-    /// <summary>
-    /// If this Python object is callable, call it with the given arguments.
-    /// </summary>
-    PyObj^ CallObject(PyObj^ tupleArgs);
+        /// <summary>
+        /// Get a method by name and call it.
+        /// </summary>
+        PyObj^ CallMethod(String^ methodName, PyObj^ tupleArgs);
 
-    /// <summary>
-    /// Retrieve an attribute by name.
-    /// </summary>
-    PyObj^ GetAttrString(String^ attrName);
+        /// <summary>
+        /// If this Python object is callable, call it with the given arguments.
+        /// </summary>
+        PyObj^ CallObject(PyObj^ tupleArgs);
 
-    /// <summary>
-    /// If this Python object is iterable, get the iterator.
-    /// </summary>
-    PyObj^ GetIter();
+        /// <summary>
+        /// Retrieve an attribute by name.
+        /// </summary>
+        PyObj^ GetAttrString(String^ attrName);
 
-    /// <summary>
-    /// If this Python object supports [] indexing, get an item by its key.
-    /// </summary>
-    PyObj^ GetItem(PyObj^ key);
+        /// <summary>
+        /// If this Python object is iterable, get the iterator.
+        /// </summary>
+        PyObj^ GetIter();
 
-    /// <summary>
-    /// Returns the string representation of this object.
-    /// </summary>
-    String^ Str();
+        /// <summary>
+        /// If this Python object supports [] indexing, get an item by its key.
+        /// </summary>
+        PyObj^ GetItem(PyObj^ key);
 
-    /// <summary>
-    /// Print this object to the console for debugging purposes.
-    /// </summary>
-    void Print();
-};
+        /// <summary>
+        /// Returns the string representation of this object.
+        /// </summary>
+        String^ Str();
 
+        /// <summary>
+        /// Returns the double representation of this object.
+        /// </summary>
+        double AsDouble();
+
+        /// <summary>
+        /// Returns the integer representation of this object.
+        /// </summary>
+        long AsLong();
+
+        /// <summary>
+        /// Print this object to the console for debugging purposes.
+        /// </summary>
+        void Print();
+    };
+}
