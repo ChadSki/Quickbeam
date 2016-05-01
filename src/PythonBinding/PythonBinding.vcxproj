@@ -147,6 +147,7 @@
     <ClInclude Include="HaloStruct.h" />
     <ClInclude Include="MapExplorer.h" />
     <ClInclude Include="ObservablePyObject.h" />
+    <ClInclude Include="PyObj.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClCompile Include="HaloStruct.cpp" />
     <ClCompile Include="MapExplorer.cpp" />
     <ClCompile Include="ObservablePyObject.cpp" />
+    <ClCompile Include="PyObj.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
