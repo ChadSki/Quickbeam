@@ -10,27 +10,25 @@
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type pb:IntField}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Name}" Margin="0,0,12,0" />
                 <TextBox Text="{Binding Value}"  Width="200" />
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type pb:FloatField}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Name}" Margin="0,0,12,0" />
                 <TextBox Text="{Binding Value}"  Width="200" />
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type pb:StringField}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Name}" Margin="0,0,12,0" />
                 <TextBox Text="{Binding Value}"  Width="200" />
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type pb:UnknownField}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Name}" />
-                <TextBlock Text=" = " />
-                <TextBlock Text="{Binding Repr}" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>

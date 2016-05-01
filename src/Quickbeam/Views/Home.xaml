@@ -6,7 +6,7 @@
                     xmlns:views="clr-namespace:Quickbeam.Views"
                     xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
                     WindowStartupLocation="CenterScreen"
-                    Width="1130" Height="640"
+                    Width="1130" Height="1024"
                     MinWidth="380" MinHeight="64"
                     AllowsTransparency="False"
                     WindowStyle="None"

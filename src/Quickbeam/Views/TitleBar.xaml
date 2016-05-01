@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Quickbeam.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="42" d:DesignWidth="300">
+             d:DesignHeight="42" d:DesignWidth="700">
     <StackPanel Orientation="Horizontal">
         <!-- Logo -->
         <Path IsHitTestVisible="False" Fill="{DynamicResource AssemblyAccentBrush}" Stretch="Fill" RenderTransformOrigin="0.5,0.5"
@@ -40,14 +40,14 @@
                                Margin="6,-1.8,0,0"/>
 
         <StackPanel Margin="30,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Height="30" Width="30" Margin="6" WindowChrome.IsHitTestVisibleInChrome="True" IsEnabled="False" Click="OpenMapFile_Click">
-                File
+            <Button Height="30" Margin="6" Padding="6" WindowChrome.IsHitTestVisibleInChrome="True" IsEnabled="False" Click="OpenMapFile_Click">
+                Edit Mapfile
             </Button>
-            <Button Height="30" Width="30" Margin="6" WindowChrome.IsHitTestVisibleInChrome="True" IsEnabled="True" Click="OpenMapPC_Click">
-                PC
+            <Button Height="30" Margin="6" Padding="6" WindowChrome.IsHitTestVisibleInChrome="True" IsEnabled="True" Click="OpenMapPC_Click">
+                Edit PC Memory
             </Button>
-            <Button Height="30" Width="30" Margin="6" WindowChrome.IsHitTestVisibleInChrome="True" IsEnabled="False" Click="OpenMapCE_Click">
-                CE
+            <Button Height="30" Margin="6" Padding="6" WindowChrome.IsHitTestVisibleInChrome="True" IsEnabled="False" Click="OpenMapCE_Click">
+                Edit CE Memory
             </Button>
         </StackPanel>
     </StackPanel>
