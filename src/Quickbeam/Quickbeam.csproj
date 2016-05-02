@@ -225,6 +225,9 @@
       <DependentUpon>HaloView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HaloHost.cs" />
+    <Compile Include="Views\HaloViewport.xaml.cs">
+      <DependentUpon>HaloViewport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -419,6 +422,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\HaloViewport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -481,6 +488,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HalolibWrapper\HalolibWrapper.csproj">
+      <Project>{c6ff5f00-2650-4dfa-b171-110063b006c8}</Project>
+      <Name>HalolibWrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
       <Project>{dde2a481-8271-4eac-a330-8fa6a38d13d1}</Project>
       <Name>ICSharpCode.TreeView</Name>

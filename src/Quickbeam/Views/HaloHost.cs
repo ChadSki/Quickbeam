@@ -43,7 +43,7 @@ namespace Quickbeam.Views
                     WindowStyle = ProcessWindowStyle.Minimized
                 });
                 _haloProcess.EnableRaisingEvents = true;
-                _haloProcess.Exited += delegate { Application.Current.Dispatcher.Invoke(MainPage.RemoveHaloPage); };
+                _haloProcess.Exited += delegate { /* TODO Application.Current.Dispatcher.Invoke( ); */ };
 
                 // wait for window
                 _haloProcess.WaitForInputIdle();
