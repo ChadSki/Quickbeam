@@ -33,14 +33,24 @@ namespace PythonBinding
 
     PyObj^ PyObj::CallMethod(String^ methodName, PyObj^ tupleArgs)
     {
+        // Get method
         auto rawName = Marshal::StringToHGlobalAnsi(methodName);
-        auto method = PyObject_GetAttrString(this->obj, (char*)(void*)rawName);
+        auto method = PyObject_GetAttrString(this->obj, (const char*)rawName.ToPointer());
         Marshal::FreeHGlobal(rawName);
         if (method == nullptr) {
             throw gcnew NullReferenceException(
                 String::Format("Could not find method `{}`", methodName));
         }
-        auto result = PyObject_CallObject(method, tupleArgs->obj);
+
+        // Pass no args appropriately
+        PyObject* args;
+        if (tupleArgs == nullptr)
+            args = nullptr;
+        else
+            args = tupleArgs->obj;
+
+        // Call method
+        auto result = PyObject_CallObject(method, args);
         if (result == nullptr) {
             throw gcnew NullReferenceException(
                 String::Format("Calling `{}` failed.", methodName));
@@ -60,7 +70,7 @@ namespace PythonBinding
     PyObj^ PyObj::GetAttrString(String^ attrName)
     {
         auto rawName = Marshal::StringToHGlobalAnsi(attrName);
-        auto result = PyObject_GetAttrString(this->obj, (char*)(void*)rawName);
+        auto result = PyObject_GetAttrString(this->obj, (const char*)rawName.ToPointer());
         Marshal::FreeHGlobal(rawName);
         if (result == nullptr) {
             throw gcnew NullReferenceException(
@@ -92,6 +102,46 @@ namespace PythonBinding
     {
         PyObject_Print(this->obj, stdout, Py_PRINT_RAW);
         std::cout << std::endl;
+    }
+
+    PyObj^ PyObj::Module_GetAttr(String^ memberName)
+    {
+        auto module_dict = PyModule_GetDict(this->obj);
+        if (module_dict == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not get dictionary from module.");
+        }
+        auto result = PyDict_GetItem(module_dict, PyObj::FromStr(memberName)->obj);
+        if (result == nullptr) return nullptr;
+        else return gcnew PyObj(result);
+    }
+
+    PyObj^ PyObj::FromDouble(double value)
+    {
+        return gcnew PyObj(PyFloat_FromDouble(value));
+    }
+
+    PyObj^ PyObj::FromLong(long value)
+    {
+        return gcnew PyObj(PyLong_FromLong(value));
+    }
+
+    PyObj^ PyObj::FromStr(String^ value)
+    {
+        auto charStr = Marshal::StringToHGlobalAnsi(value);
+        auto result = gcnew PyObj(PyUnicode_FromString((const char*)charStr.ToPointer()));
+        Marshal::FreeHGlobal(charStr);
+        return result;
+    }
+
+    PyObj^ PyObj::PackTuple1(PyObj^ value)
+    {
+        return gcnew PyObj(PyTuple_Pack(1, value->obj));
+    }
+
+    PyObj^ PyObj::PackTuple2(PyObj^ value0, PyObj^ value1)
+    {
+        return gcnew PyObj(PyTuple_Pack(2, value0->obj, value1->obj));
     }
 
     PyObj^ PyIter::Next()

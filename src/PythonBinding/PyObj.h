@@ -8,9 +8,9 @@ namespace PythonBinding
     public ref class PyObj
     {
     protected:
-        PyObject* obj;
         ~PyObj();
     public:
+        PyObject* obj;
         PyObj(PyObject* obj);
 
         /// <summary>
@@ -53,10 +53,22 @@ namespace PythonBinding
         /// </summary>
         PyObj^ GetItem(PyObj^ key);
 
+        PyObj^ Module_GetAttr(String^ memberName);
+
         /// <summary>
         /// Print this object to the console for debugging purposes.
         /// </summary>
         void Print();
+
+        static PyObj^ FromDouble(double value);
+
+        static PyObj^ FromLong(long value);
+
+        static PyObj^ FromStr(String^ value);
+
+        // TODO make the variadic version
+        static PyObj^ PackTuple1(PyObj^ value);
+        static PyObj^ PackTuple2(PyObj^ value0, PyObj^ value1);
     };
 
     public ref class PyIter : PyObj

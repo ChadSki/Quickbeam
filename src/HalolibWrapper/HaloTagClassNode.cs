@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HalolibWrapper
 {
-    class HaloTagClassNode : SharpTreeNode
+    public class HaloTagClassNode : SharpTreeNode
     {
         private List<HaloTagNode> Tags { get; set; }
         private string ClassName { get; set; }

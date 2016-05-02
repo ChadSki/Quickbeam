@@ -1,4 +1,5 @@
 ﻿using System;
+using HalolibWrapper;
 using PythonBinding;
 
 namespace ConsoleTestApp
@@ -7,12 +8,12 @@ namespace ConsoleTestApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(PythonInterpreter.Instance);
-            PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
-            Console.WriteLine(PythonInterpreter.Instance);
-            var hmap = PythonInterpreter.Instance.Children[0] as HaloMapNode;
+            Console.WriteLine(HalolibWrapper.PythonInterpreter.Instance);
+            HalolibWrapper.PythonInterpreter.Instance.OpenMap(HalolibWrapper.HaloMemory.PC);
+            Console.WriteLine(HalolibWrapper.PythonInterpreter.Instance);
+            var hmap = HalolibWrapper.PythonInterpreter.Instance.Children[0] as HalolibWrapper.HaloMapNode;
             Console.WriteLine(hmap);
-            var htag = hmap.getArbitraryTag();
+            var htag = hmap.GetArbitraryTag();
             Console.WriteLine(htag);
             var tagHeader = htag.Header;
             Console.WriteLine(tagHeader);

@@ -1,5 +1,6 @@
 #pragma once
 #include "Stdafx.h"
+#include "PyObj.h"
 #include "ObservablePyObject.h"
 
 namespace PythonBinding
@@ -58,6 +59,7 @@ namespace PythonBinding
 
     public:
         HaloStructViewModel(PyObject* halostruct);
+        HaloStructViewModel(PyObj^ halostruct);
         property ObservableCollection<Field^>^ Fields {
             ObservableCollection<Field^>^ get() { return fields; }
         }

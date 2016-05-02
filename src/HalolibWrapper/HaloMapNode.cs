@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HalolibWrapper
 {
-    class HaloMapNode : SharpTreeNode
+    public class HaloMapNode : SharpTreeNode
     {
         private PyObj HaloMap { get; set; }
 
@@ -30,6 +30,13 @@ namespace HalolibWrapper
                 (TagsByClass[tagClassStr]).Add(tag);
                 item = tagsIter.Next();
             }
+        }
+
+        public HaloTagNode GetArbitraryTag()
+        {
+            return new HaloTagNode(
+                HaloMap.CallMethod("tag",
+                    PyObj.PackTuple1(PyObj.FromStr("ant!"))));
         }
 
         override protected void LoadChildren()

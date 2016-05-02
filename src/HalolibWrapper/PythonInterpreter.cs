@@ -3,7 +3,9 @@ using PythonBinding;
 
 namespace HalolibWrapper
 {
-    class PythonInterpreter : SharpTreeNode
+    public enum HaloMemory { PC, CE }
+
+    public class PythonInterpreter : SharpTreeNode
     {
         public static PythonInterpreter Instance { get; private set; } = new PythonInterpreter();
 
@@ -15,12 +17,12 @@ namespace HalolibWrapper
             HalolibModule = mainModule.GetAttrString("halolib");
         }
 
-        public enum HaloMemory { PC, CE }
-
         public void OpenMap(HaloMemory whichExe)
         {
+            System.Console.WriteLine("asdf");
             var methodName = whichExe == HaloMemory.PC ? "from_hpc" : "from_hce";
-            var map = HalolibModule.GetAttrString("HaloMap").CallMethod(methodName, null);
+            var halomapClass = HalolibModule.Module_GetAttr("HaloMap");
+            var map = halomapClass.CallMethod(methodName, null);
             Children.Add(new HaloMapNode(map));
         }
     }

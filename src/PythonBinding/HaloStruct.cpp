@@ -140,6 +140,8 @@ namespace PythonBinding
         }
     }
 
+    HaloStructViewModel::HaloStructViewModel(PyObj^ halostruct) : HaloStructViewModel(halostruct->obj) {}
+
     Object^ HaloStructViewModel::Get(String^ attrName)
     {
         auto attrNameC = Marshal::StringToHGlobalAnsi(attrName);
