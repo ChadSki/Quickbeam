@@ -3,10 +3,12 @@
 #pragma once
 namespace PythonBinding
 {
+    ref class PyIter;
+
     public ref class PyObj
     {
-        PyObject* obj;
     protected:
+        PyObject* obj;
         ~PyObj();
     public:
         PyObj(PyObject* obj);
@@ -44,7 +46,7 @@ namespace PythonBinding
         /// <summary>
         /// If this Python object is iterable, get the iterator.
         /// </summary>
-        PyObj^ GetIter();
+        PyIter^ GetIter();
 
         /// <summary>
         /// If this Python object supports [] indexing, get an item by its key.
@@ -55,5 +57,12 @@ namespace PythonBinding
         /// Print this object to the console for debugging purposes.
         /// </summary>
         void Print();
+    };
+
+    public ref class PyIter : PyObj
+    {
+    public:
+        PyIter(PyObject* obj) : PyObj(obj) {}
+        PyObj^ Next();
     };
 }

@@ -69,14 +69,14 @@ namespace PythonBinding
         return gcnew PyObj(result);
     }
 
-    PyObj^ PyObj::GetIter()
+    PyIter^ PyObj::GetIter()
     {
         auto result = PyObject_GetIter(this->obj);
         if (result == nullptr) {
             throw gcnew NullReferenceException(
                 "Failed to iterate over object.");
         }
-        return gcnew PyObj(result);
+        return gcnew PyIter(result);
     }
 
     PyObj^ PyObj::GetItem(PyObj^ key)
@@ -92,5 +92,12 @@ namespace PythonBinding
     {
         PyObject_Print(this->obj, stdout, Py_PRINT_RAW);
         std::cout << std::endl;
+    }
+
+    PyObj^ PyIter::Next()
+    {
+        auto result = PyIter_Next(this->obj);
+        if (result == nullptr) return nullptr;
+        else return gcnew PyObj(result);
     }
 }

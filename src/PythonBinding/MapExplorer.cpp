@@ -146,7 +146,27 @@ namespace PythonBinding {
         }
         this->halomap_class = halomap_class;
         this->maps = gcnew ChildNodes();
-        
+    }
+
+    PyObj^ PythonInterpreter::Initialize()
+    {
+        Py_Initialize();
+        PyRun_SimpleString(
+            "import sys\n"
+            //"sys.stdout = open('CONOUT$', 'wt')\n"  // Fix console output
+            "import halolib\n");
+
+        auto sys_mod_dict = PyImport_GetModuleDict();
+        if (sys_mod_dict == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not open Python module dictionary.");
+        }
+        auto main_mod = PyMapping_GetItemString(sys_mod_dict, "__main__");
+        if (main_mod == nullptr) {
+            throw gcnew NullReferenceException(
+                "Could not open __main__ module.");
+        }
+        return gcnew PyObj(main_mod);
     }
 
     void PythonInterpreter::OpenMap(HaloMemory whichExe)

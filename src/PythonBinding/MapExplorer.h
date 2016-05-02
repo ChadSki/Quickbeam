@@ -3,6 +3,7 @@
 
 #pragma once
 #include "Stdafx.h"
+#include "PyObj.h"
 #include "HaloStruct.h"
 #include "ObservablePyObject.h"
 
@@ -82,6 +83,7 @@ namespace PythonBinding {
         bool initialized = false;
 
     public:
+        static PyObj^ Initialize();
         static property PythonInterpreter^ Instance { PythonInterpreter^ get() { return %instance; } }
         void OpenMap(HaloMemory whichExe);
         void OpenMap(String^ filename);
