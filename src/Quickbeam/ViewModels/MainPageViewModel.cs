@@ -1,8 +1,7 @@
-﻿using PythonBinding;
+﻿using HalolibWrapper;
+using ICSharpCode.TreeView;
 using Quickbeam.Interfaces;
 using Quickbeam.Native;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Quickbeam.ViewModels
@@ -73,9 +72,9 @@ namespace Quickbeam.ViewModels
         }
         #endregion HaloExe
 
-        public ObservableCollection<ExplorerNode> Nodes
+        public SharpTreeNode RootNode
         {
-            get { return PythonInterpreter.Instance.Children; }
+            get { return PythonInterpreter.Instance; }
         }
     }
 }

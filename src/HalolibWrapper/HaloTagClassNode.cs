@@ -7,10 +7,11 @@ namespace HalolibWrapper
     {
         private List<HaloTagNode> Tags { get; set; }
         private string ClassName { get; set; }
-        public override object Text { get { return ClassName; } }
+        public override object Text { get { return "A Class" /*ClassName*/; } }
 
         public HaloTagClassNode(string className, List<HaloTagNode> tags)
         {
+            LazyLoading = true;
             ClassName = className;
             Tags = tags;
         }

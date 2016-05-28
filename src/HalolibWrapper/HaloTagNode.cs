@@ -21,7 +21,12 @@ namespace HalolibWrapper
 
         public override object Text
         {
-            get { return HaloTag.GetAttrString("name").AsStr(); }
+            get { return "tag"; /* HaloTag.GetAttrString("name").AsStr();*/ }
+        }
+
+        public override string ToString()
+        {
+            return "a tag.";
         }
 
         public HaloStructViewModel Header { get; private set; }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
              xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro;assembly=MetroIde"
+             xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
              xmlns:converters="clr-namespace:Quickbeam.Converters"
              xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
              xmlns:helpers="clr-namespace:PythonBinding;assembly=PythonBinding"
@@ -31,7 +32,23 @@
         </Grid.ColumnDefinitions>
 
         <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
-            <TreeView x:Name="TagTreeView" ItemsSource="{Binding Nodes}"
+            <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Margin="10 0 0 0">
+                <ListView.View>
+                    <sd:SharpGridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Name">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <sd:SharpTreeNodeView />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </sd:SharpGridView>
+                </ListView.View>
+
+            </sd:SharpTreeView>
+            <!--TreeView x:Name="TagTreeView" ItemsSource="{Binding Nodes}"
                         Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,0,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
                 <TreeView.Resources>
@@ -46,7 +63,7 @@
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
-            </TreeView>
+            </-->
         </custom:MetroContainer>
 
         <avalonDock:DockingManager x:Name="DockManager" Grid.Column="1" Grid.RowSpan="2" AllowMixedOrientation="True" Margin="0,-3,0,0">

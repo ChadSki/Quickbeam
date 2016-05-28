@@ -7,12 +7,15 @@ namespace HalolibWrapper
 {
     public class HaloMapNode : SharpTreeNode
     {
+        public override object Text { get { return "Halo Map"; } }
+
         private PyObj HaloMap { get; set; }
 
         private Dictionary<string, List<HaloTagNode>> TagsByClass { get; set; }
 
         public HaloMapNode(PyObj map)
         {
+            LazyLoading = true;
             HaloMap = map;
 
             // Load tags
@@ -41,10 +44,22 @@ namespace HalolibWrapper
 
         override protected void LoadChildren()
         {
+            /*
             var sortedClasses = Enumerable.OrderBy(TagsByClass.Keys, x => x);
             foreach (var tagClass in sortedClasses)
             {
-                Children.Add(new HaloTagClassNode(tagClass, TagsByClass[tagClass]));
+                var node = new HaloTagClassNode(tagClass, TagsByClass[tagClass]);
+                Children.Add(node);
+            }
+            */
+
+            var tagsIter = HaloMap.CallMethod("tags", null).GetIter();
+            var item = tagsIter.Next();
+            if (item != null)
+            {
+                var tag = new HaloTagNode(item);
+                Children.Add(tag);
+                item = tagsIter.Next();
             }
         }
     }

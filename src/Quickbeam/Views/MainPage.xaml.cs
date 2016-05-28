@@ -22,6 +22,7 @@ namespace Quickbeam.Views
         {
             InitializeComponent();
             DataContext = ViewModel = new MainPageViewModel();
+            treeView.Root = ViewModel.RootNode;
         }
 
         public bool Close()
