@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.TreeView", "ICS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalolibWrapper", "HalolibWrapper\HalolibWrapper.csproj", "{C6FF5F00-2650-4DFA-B171-110063B006C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusSharp", "NimbusSharp\NimbusSharp.csproj", "{7B272EA5-3C30-458B-A05B-58DD4949DB2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonBinding", "PythonBinding\PythonBinding.csproj", "{7B272EA5-3C30-458B-A05B-58DD4949DB2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

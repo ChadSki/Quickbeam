@@ -7,8 +7,8 @@
     <ProjectGuid>{7B272EA5-3C30-458B-A05B-58DD4949DB2C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NimbusSharp</RootNamespace>
-    <AssemblyName>NimbusSharp</AssemblyName>
+    <RootNamespace>PythonBinding</RootNamespace>
+    <AssemblyName>PythonBinding</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

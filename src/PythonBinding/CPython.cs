@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace NimbusSharp
+namespace PythonBinding
 {
     internal static class CPython
     {

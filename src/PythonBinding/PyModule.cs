@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NimbusSharp
+namespace PythonBinding
 {
     public class PyModule : PyObj
     {

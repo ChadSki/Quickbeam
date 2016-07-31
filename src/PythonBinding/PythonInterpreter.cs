@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace NimbusSharp
+namespace PythonBinding
 {
     public class PythonInterpreter
     {
