@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam", "Quickbeam\Quic
 		{6735C990-59FD-4C22-B92C-9F907E73D9D5} = {6735C990-59FD-4C22-B92C-9F907E73D9D5}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonBinding", "PythonBinding\PythonBinding.vcxproj", "{6735C990-59FD-4C22-B92C-9F907E73D9D5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrappyCppBinding", "CrappyCppBinding\CrappyCppBinding.vcxproj", "{6735C990-59FD-4C22-B92C-9F907E73D9D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{16936A26-D633-4286-9AD6-CB2865ECB063}"
 EndProject

@@ -1,7 +1,7 @@
 #include "Stdafx.h"
 
 #pragma once
-namespace PythonBinding
+namespace CrappyCppBinding
 {
     ref class PyIter;
 

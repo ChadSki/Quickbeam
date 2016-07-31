@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "MapExplorer.h"
 
-namespace PythonBinding {
+namespace CrappyCppBinding {
 
     HaloTagNode::HaloTagNode(PyObject* halotag)
     {

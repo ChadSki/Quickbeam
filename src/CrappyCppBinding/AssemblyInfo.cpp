@@ -11,11 +11,11 @@ using namespace System::Security::Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly:AssemblyTitleAttribute(L"PythonBinding")];
+[assembly:AssemblyTitleAttribute(L"CrappyCppBinding")];
 [assembly:AssemblyDescriptionAttribute(L"")];
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"")];
-[assembly:AssemblyProductAttribute(L"PythonBinding")];
+[assembly:AssemblyProductAttribute(L"CrappyCppBinding")];
 [assembly:AssemblyCopyrightAttribute(L"Copyright (c)  2016")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];

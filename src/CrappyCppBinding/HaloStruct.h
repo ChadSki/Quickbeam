@@ -3,7 +3,7 @@
 #include "PyObj.h"
 #include "ObservablePyObject.h"
 
-namespace PythonBinding
+namespace CrappyCppBinding
 {
     /// Base class for Field objects in a struct
     public ref class Field abstract

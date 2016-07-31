@@ -504,9 +504,9 @@
       <Project>{cf8ea988-3789-48c4-8e2d-bd157a8b1cc4}</Project>
       <Name>MetroIde</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PythonBinding\PythonBinding.vcxproj">
+    <ProjectReference Include="..\CrappyCppBinding\CrappyCppBinding.vcxproj">
       <Project>{6735c990-59fd-4c22-b92c-9f907e73d9d5}</Project>
-      <Name>PythonBinding</Name>
+      <Name>CrappyCppBinding</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

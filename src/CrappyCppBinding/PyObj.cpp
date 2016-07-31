@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PyObj.h"
 
-namespace PythonBinding
+namespace CrappyCppBinding
 {
     PyObj::PyObj(PyObject * obj)
     {

@@ -7,7 +7,7 @@
              xmlns:avalonDockThemes="clr-namespace:MetroIde.Controls.AvalonDockMetro;assembly=MetroIde"
              xmlns:converters="clr-namespace:Quickbeam.Converters"
              xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
-             xmlns:helpers="clr-namespace:PythonBinding;assembly=PythonBinding"
+             xmlns:helpers="clr-namespace:CrappyCppBinding;assembly=CrappyCppBinding"
              xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">

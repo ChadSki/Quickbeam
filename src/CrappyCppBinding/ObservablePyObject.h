@@ -1,6 +1,6 @@
 #pragma once
 
-namespace PythonBinding
+namespace CrappyCppBinding
 {
 #pragma managed(push, off)
 

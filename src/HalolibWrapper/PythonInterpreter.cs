@@ -1,5 +1,5 @@
 ﻿using ICSharpCode.TreeView;
-using PythonBinding;
+using CrappyCppBinding;
 using System.Collections.Specialized;
 
 namespace HalolibWrapper
@@ -17,7 +17,7 @@ namespace HalolibWrapper
         private PythonInterpreter()
         {
             LazyLoading = true;
-            var mainModule = PythonBinding.PythonInterpreter.Initialize();
+            var mainModule = CrappyCppBinding.PythonInterpreter.Initialize();
             HalolibModule = mainModule.GetAttrString("halolib");
         }
 

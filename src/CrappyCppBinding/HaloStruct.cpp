@@ -7,7 +7,7 @@ String^ ManagedString(PyObject* pyo)
     return gcnew String(utf8bytes);
 }
 
-namespace PythonBinding
+namespace CrappyCppBinding
 {
     String^ Field::Name::get() { return name; }
 

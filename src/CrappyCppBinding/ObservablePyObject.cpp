@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ObservablePyObject.h"
 
-namespace PythonBinding
+namespace CrappyCppBinding
 {
 #pragma managed(push, off)
 

@@ -8,7 +8,7 @@
              xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
              xmlns:converters="clr-namespace:Quickbeam.Converters"
              xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
-             xmlns:helpers="clr-namespace:PythonBinding;assembly=PythonBinding"
+             xmlns:helpers="clr-namespace:CrappyCppBinding;assembly=CrappyCppBinding"
              xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
              mc:Ignorable="d"
              Background="#2d2d30"

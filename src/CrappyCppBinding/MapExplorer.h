@@ -7,7 +7,7 @@
 #include "HaloStruct.h"
 #include "ObservablePyObject.h"
 
-namespace PythonBinding {
+namespace CrappyCppBinding {
 
     /// Common stuff for displaying in tree format
     public ref class ExplorerNode abstract
