@@ -18,6 +18,9 @@ print('yolo')";
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void Py_Initialize();
 
+        [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void Py_SetProgramName([MarshalAs(UnmanagedType.LPWStr)]string name);
+
         // TODO test
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern unsafe PyObject* PyDict_GetItem(PyObject* dict, PyObject* key);
@@ -77,14 +80,17 @@ print('yolo')";
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern int PyRun_SimpleString([MarshalAs(UnmanagedType.LPStr)]string toRun);
 
-        // TODO test. don't forget to wrap variadic things in `__arglist(...)`
+        // TODO test.
+        // Don't forget to wrap variadic things in `__arglist(...)`
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern unsafe PyObject* PyTuple_Pack(IntPtr size, __arglist);
 
-        // TODO test
+        // TODO - fix leak and null
+        // Returns a buffer allocated by PyMem_Alloc() (use PyMem_Free() to free it) on success.
+        // Note that the resulting wchar_t string might contain null characters, which would cause the string to be truncated when used with most C functions.
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.LPStr)]
-        internal static extern unsafe string PyUnicode_AsUTF8AndSize(PyObject* str, IntPtr size);
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        internal static extern unsafe string PyUnicode_AsWideCharString(PyObject* str, IntPtr size);
 
         // TODO test
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]

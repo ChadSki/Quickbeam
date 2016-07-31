@@ -26,6 +26,8 @@ namespace ConsoleTestApp
             //Console.WriteLine(marker_field.Value);
 
             var x = NimbusSharp.PythonInterpreter.MainModule;
+            Console.WriteLine(x.ToString());
+            Console.ReadKey();
         }
     }
 }

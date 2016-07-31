@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="CPython.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PyObj.cs" />
     <Compile Include="PythonInterpreter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
