@@ -13,6 +13,7 @@ namespace PythonBinding
             this.obj = obj;
         }
 
+        /// Tell Python when we're finished referring to this object.
         unsafe ~PyObj()
         {
             CPython.Py_DecRef(obj);

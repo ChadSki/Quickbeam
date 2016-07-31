@@ -9,11 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickbeam", "Quickbeam\Quickbeam.csproj", "{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5} = {6735C990-59FD-4C22-B92C-9F907E73D9D5}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrappyCppBinding", "CrappyCppBinding\CrappyCppBinding.vcxproj", "{6735C990-59FD-4C22-B92C-9F907E73D9D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{16936A26-D633-4286-9AD6-CB2865ECB063}"
 EndProject
@@ -26,8 +21,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ICSharpCode", "ICSharpCode", "{2E2EB700-4505-4204-88A2-10ED8AE5D2C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.TreeView", "ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj", "{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalolibWrapper", "HalolibWrapper\HalolibWrapper.csproj", "{C6FF5F00-2650-4DFA-B171-110063B006C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonBinding", "PythonBinding\PythonBinding.csproj", "{7B272EA5-3C30-458B-A05B-58DD4949DB2C}"
 EndProject
@@ -49,12 +42,6 @@ Global
 		{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}.Release|x64.ActiveCfg = Release|x64
 		{7AA65F6E-CE77-4B93-9CD3-9E266CAC133F}.Release|x64.Build.0 = Release|x64
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Debug|x64.ActiveCfg = Release|x64
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Debug|x64.Build.0 = Release|x64
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Release|Any CPU.ActiveCfg = Release|Win32
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Release|x64.ActiveCfg = Release|x64
-		{6735C990-59FD-4C22-B92C-9F907E73D9D5}.Release|x64.Build.0 = Release|x64
 		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16936A26-D633-4286-9AD6-CB2865ECB063}.Debug|x64.ActiveCfg = Debug|x64
@@ -91,14 +78,6 @@ Global
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|x64.ActiveCfg = Release|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|x64.Build.0 = Release|Any CPU
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Debug|x64.ActiveCfg = Debug|x64
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Debug|x64.Build.0 = Debug|x64
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Release|x64.ActiveCfg = Release|Any CPU
-		{C6FF5F00-2650-4DFA-B171-110063B006C8}.Release|x64.Build.0 = Release|Any CPU
 		{7B272EA5-3C30-458B-A05B-58DD4949DB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B272EA5-3C30-458B-A05B-58DD4949DB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B272EA5-3C30-458B-A05B-58DD4949DB2C}.Debug|x64.ActiveCfg = Debug|x64

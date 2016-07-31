@@ -9,6 +9,7 @@ namespace PythonBinding
         internal const string StartupScript =
 @"import sys
 sys.stdout = open('CONOUT$', 'wt')
+import nimbus
 print('yolo')";
 
         internal unsafe struct PyObject { }
