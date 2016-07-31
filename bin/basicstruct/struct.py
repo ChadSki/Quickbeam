@@ -5,23 +5,20 @@
 # license as detailed in the LICENSE file.
 
 import copy
-import ctypes
 
 class Event(set):
 
     """A very simple event handler.
     
-    Add an event handler (a function) with `.add(handler)`.
+    Add an event handler (a function) with += and -= syntax.
     You may remove all handlers at once with `.clear()`.
-    Invoke the event with function call syntax `()`.
+    Invoke the handler with function call syntax `()`.
     
     Event handlers should be short and return quickly! Execution cannot
     continue until all event handlers have finished, so make it snappy."""
 
     def __call__(self, *args, **kwargs):
-        print('calling handlers')
         for handler in self:
-            print('handler')
             handler(*args, **kwargs)
 
 class BasicStruct(object):
@@ -44,7 +41,6 @@ class BasicStruct(object):
     """
 
     def __init__(self, byteaccess, **kwargs):
-        super().__init__()
         object.__setattr__(self, 'byteaccess', byteaccess)
         object.__setattr__(self, 'fields', {})
         for name, field in kwargs.items():
@@ -54,26 +50,11 @@ class BasicStruct(object):
             self.fields[name].parent = self
         object.__setattr__(self, 'property_changed', Event())
 
-    def register_callback(self, callback_ptr, opaque_ptr):
-        """Saves a callback function pointer and opaque pointer argument.
-        Takes arguments as uint32_t rather than void* in order to work around
-        Python's type system.
-        """
-        functype = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint64)
-        callback = functype(callback_ptr)
-        def stub(attr_name):
-            # print('stub')
-            callback(opaque_ptr)
-        self.property_changed.add(stub)
-        for each in self.property_changed:
-            # print(each)
-            each('foo')
-
     def __str__(self):
         answer = "{"
         for name, field in self.fields.items():
             answer += "\n    {}: ".format(name)
-            value = field.getf()
+            value = field.getf(self.byteaccess)
             if isinstance(value, list):
                 answer += "["
                 for each in value:
@@ -101,7 +82,7 @@ class BasicStruct(object):
 
         if attr_name in self.fields:
             try:
-                return self.fields[attr_name].getf()
+                return self.fields[attr_name].getf(self.byteaccess)
             except KeyError as err:
                 raise AttributeError(
                     ("Attribute name `{}` does not appear to be a member"
@@ -125,15 +106,13 @@ class BasicStruct(object):
             pass
 
         if attr_name in fields.keys():
-            oldvalue = fields[attr_name].getf()
-            print('old:{}\nnew:{}'.format(oldvalue, newvalue))
-            fields[attr_name].setf(newvalue)
+            oldvalue = fields[attr_name].getf(self.byteaccess)
+            fields[attr_name].setf(self.byteaccess, newvalue)
             if oldvalue != newvalue:
                 self.property_changed(attr_name)
         else:
             raise AttributeError("Cannot assign to {} because it is not a "
                 "member of this struct.".format(attr_name))
-
 
 def define_basic_struct(struct_size, **fields):
     """Returns a constructor function for a newly defined struct.

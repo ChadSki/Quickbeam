@@ -50,7 +50,9 @@ def find_process(name):
             raise RuntimeError("Failed iterating processes while looking for '{0}'"
                                .format(name))
         while True:
-            if process_entry.szExeFile == name:
+            if name in process_entry.szExeFile \
+               and (name == process_entry.szExeFile \
+                    or (name + '.exe') == process_entry.szExeFile):
                 return process_entry
 
             if 0 == k32.Process32Next(hTH32Snapshot, ctypes.byref(process_entry)):

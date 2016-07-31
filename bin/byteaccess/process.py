@@ -17,14 +17,14 @@ def open_process(process_name):
 
     process_name -- The name of the target process. e.g. 'notepad' or 'notepad.exe'
 
-    Usage:
+    Example usage:
         import byteaccess
-        ByteAccess = byteaccess.open_process('notepad')
-        foo = ByteAccess(offset, size)
-        bar = ByteAccess(other_offset, other_size)
+        NotepadAccess = byteaccess.open_process('notepad')
+        foo = NotepadAccess(offset, size)
+        bar = NotepadAccess(other_offset, other_size)
+        foo.write_bytes(0, bar.read_all_bytes())
+        NotepadAccess.close()
     """
-    if '.' not in process_name:
-        process_name += '.exe'
 
     class WinMemByteAccess(BaseByteAccess):
 
@@ -53,8 +53,7 @@ def open_process(process_name):
                                      buf, size, ctypes.byref(bytesRead)):
                 return bytes(buf)
             else:
-                raise OSError("Failed to read memory. " +
-                              "offset:{0} size:{1}"
+                raise OSError("Failed to read memory. offset:{0} size:{1}"
                               .format(offset, size))
 
         def _write_bytes(self, offset, to_write):
@@ -66,8 +65,7 @@ def open_process(process_name):
                                       buf, size, ctypes.byref(bytesWritten)):
                 return  # Success!
             else:
-                raise OSError("Failed to write memory. " +
-                              "offset:{0} size:{1}"
+                raise OSError("Failed to write memory. offset:{0} size:{1}"
                               .format(offset, size))
 
     return WinMemByteAccess

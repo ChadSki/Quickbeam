@@ -1,6 +1,6 @@
-# halolib.py
+# Nimbus
 
-Halolib is a library for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory. Halolib is compatible with Halo 1 PC on Windows.
+Nimbus is a library for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory. Nimbus is compatible with Halo 1 PC on Windows.
 
 ## Usage
 
@@ -8,10 +8,11 @@ As an example of modding at runtime, here we swap the projectile of the player's
 
 ### mem_example.py
 ```python
-import halolib
-map = halolib.HaloMap.from_memory()
+import nimbus
+map = nimbus.HaloMap.from_memory()
 
 # weapons
+pistol = map.tag('weap', '\\pistol')
 rifle = map.tag('weap', 'assault rifle')
 banshee_gun = map.tag('weap', 'banshee')
 
@@ -23,9 +24,10 @@ rocket = map.tag('proj', 'rocket')
 plasma = map.tag('proj', 'plasma grenade')
 
 # make edits
-rifle.triggers[0].projectile = rocket           # assault rifle now shoots rockets
-banshee_gun.triggers[0].projectile = warthog    # banshee primary trigger now spawns warthogs
-banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger now shoots plasma grenades
+pistol.triggers[0].projectile = rocket        # pistol now shoots rockets
+rifle.triggers[0].projectile = rocket         # assault rifle now shoots rockets
+banshee_gun.triggers[0].projectile = warthog  # banshee primary trigger now spawns warthogs
+banshee_gun.triggers[1].projectile = plasma   # banshee secondary trigger now shoots plasma grenades
 ```
 
 ![Effects of mem_example.py](http://i.imgur.com/tdnHwf0.png)

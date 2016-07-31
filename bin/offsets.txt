@@ -1,2 +1,0 @@
-# 0x721e8c is UInt8, set to 0 and Halo will do video
-# 0x6b15f8 set to 1 or will have to tab twice

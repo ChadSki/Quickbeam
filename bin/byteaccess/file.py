@@ -13,10 +13,12 @@ def open_file(filepath):
 
     filepath -- Full path to the file which will be opened.
 
-    Usage:
-        ByteAccess = byteaccess_for_file('test.bin')
-        foo = ByteAccess(offset, size)
-        bar = ByteAccess(other_offset, other_size)
+    Example usage:
+        ScratchpadAccess = byteaccess_for_file('scratchpad.bin')
+        foo = ScratchpadAccess(offset, size)
+        bar = ScratchpadAccess(other_offset, other_size)
+        foo.write_bytes(0, bar.read_all_bytes())
+        ScratchpadAccess.close()
     """
 
     class FileByteAccess(BaseByteAccess):
