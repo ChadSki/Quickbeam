@@ -25,7 +25,7 @@ namespace ConsoleTestApp
             //marker_field.Value = "cheese";
             //Console.WriteLine(marker_field.Value);
 
-            var x = NimbusSharp.PythonInterpreter.MainModule;
+            var x = PythonInterpreter.MainModule;
             Console.WriteLine(x.ToString());
             Console.ReadKey();
         }

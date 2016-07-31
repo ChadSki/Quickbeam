@@ -5,9 +5,10 @@ namespace NimbusSharp
 {
     public class PythonInterpreter
     {
-        private static PyObj mainModule = null;
+        private static PyModule mainModule = null;
 
-        public static PyObj MainModule
+        /// The main Python module. Singleton property, initializes Python environment on first access.
+        public static PyModule MainModule
         {
             get
             {
@@ -19,8 +20,8 @@ namespace NimbusSharp
                     unsafe
                     {
                         var sysModDict = CPython.PyImport_GetModuleDict();
-                        var mainModuleRaw = CPython.PyMapping_GetItemString(sysModDict, "__main__");
-                        mainModule = new PyObj(mainModuleRaw);
+                        var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
+                        mainModule = new PyModule(rawMainModule);
                     }
                 }
                 return mainModule;
