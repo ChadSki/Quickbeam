@@ -70,17 +70,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HalolibWrapper\HalolibWrapper.csproj">
-      <Project>{c6ff5f00-2650-4dfa-b171-110063b006c8}</Project>
-      <Name>HalolibWrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
-      <Project>{dde2a481-8271-4eac-a330-8fa6a38d13d1}</Project>
-      <Name>ICSharpCode.TreeView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PythonBinding\PythonBinding.vcxproj">
-      <Project>{6735c990-59fd-4c22-b92c-9f907e73d9d5}</Project>
-      <Name>PythonBinding</Name>
+    <ProjectReference Include="..\NimbusSharp\NimbusSharp.csproj">
+      <Project>{7b272ea5-3c30-458b-a05b-58dd4949db2c}</Project>
+      <Name>NimbusSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
