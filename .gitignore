@@ -2,7 +2,10 @@
 ## Project-specific
 ############
 *.map
-/vendor
+/bin/*.config
+/bin/*.manifest
+/bin/*.xml
+
 
 #############
 ## Python
