@@ -25,8 +25,11 @@ namespace ConsoleTestApp
             //marker_field.Value = "cheese";
             //Console.WriteLine(marker_field.Value);
 
+            PythonInterpreter.RunSimpleString("import nimbus");
             var x = PythonInterpreter.MainModule;
             Console.WriteLine(x.ToString());
+            var z = x.GetAttrString("nimbus");
+            Console.WriteLine(z.ToString());
             Console.ReadKey();
         }
     }

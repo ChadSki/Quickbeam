@@ -20,7 +20,7 @@ namespace PythonBinding
         }
 
         /// Call this Python object with the given arguments.
-        public PyObj CallObject(PyObj args)
+        public PyObj CallObject(PyObj args = null)
         {
             PyObj result;
             unsafe

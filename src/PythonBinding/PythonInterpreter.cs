@@ -1,30 +1,41 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace PythonBinding
 {
     public class PythonInterpreter
     {
-        private static PyModule mainModule = null;
+        private static PyObj mainModule = null;
 
-        /// The main Python module. Singleton property, initializes Python environment on first access.
-        public static PyModule MainModule
+        private static void initializeEnvironment()
+        {
+            CPython.Py_SetProgramName(Process.GetCurrentProcess().MainModule.FileName);
+            CPython.Py_Initialize();
+            var exitCode = CPython.PyRun_SimpleString(CPython.StartupScript);
+            if (exitCode == -1) throw new Exception("PyRun_SimpleString did not execute successfully.");
+            unsafe
+            {
+                var sysModDict = CPython.PyImport_GetModuleDict();
+                var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
+                mainModule = new PyObj(rawMainModule);
+            }
+        }
+
+        /// The main Python module. Singleton property.
+        public static PyObj MainModule
         {
             get
             {
-                if (mainModule == null)
-                {
-                    CPython.Py_SetProgramName(Process.GetCurrentProcess().MainModule.FileName);
-                    CPython.Py_Initialize();
-                    CPython.PyRun_SimpleString(CPython.StartupScript);
-                    unsafe
-                    {
-                        var sysModDict = CPython.PyImport_GetModuleDict();
-                        var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
-                        mainModule = new PyModule(rawMainModule);
-                    }
-                }
+                if (mainModule == null) initializeEnvironment();
                 return mainModule;
             }
+        }
+
+        /// Execute a string as a Python script.
+        public static void RunSimpleString(string script)
+        {
+            if (mainModule == null) initializeEnvironment();
+            CPython.PyRun_SimpleString(script);
         }
     }
 }
