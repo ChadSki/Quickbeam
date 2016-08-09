@@ -20,7 +20,7 @@ namespace PythonBinding
             {
                 var sysModDict = CPython.PyImport_GetModuleDict();
                 var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
-                mainModule = PyObj.Create(rawMainModule);
+                mainModule = PyObj.FromPointer(rawMainModule);
             }
         }
 
