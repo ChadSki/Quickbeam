@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PythonBinding;
 
 namespace NimbusSharp
 {
     public class HaloMap
     {
+        public HaloMap(PyObj myMap) { }
     }
 }

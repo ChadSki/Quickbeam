@@ -28,7 +28,7 @@ namespace ConsoleTestApp
             PythonInterpreter.RunSimpleString("import nimbus");
             var x = PythonInterpreter.MainModule;
             Console.WriteLine(x.ToString());
-            var z = x.GetAttrString("nimbus");
+            var z = x.Attr("nimbus");
             Console.WriteLine(z.ToString());
             Console.ReadKey();
         }

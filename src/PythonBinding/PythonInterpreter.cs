@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PythonBinding
@@ -6,6 +7,8 @@ namespace PythonBinding
     public class PythonInterpreter
     {
         private static PyObj mainModule = null;
+
+        internal static Dictionary<IntPtr, PyObj> ObjectCache = new Dictionary<IntPtr, PyObj>();
 
         private static void initializeEnvironment()
         {
@@ -17,7 +20,7 @@ namespace PythonBinding
             {
                 var sysModDict = CPython.PyImport_GetModuleDict();
                 var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
-                mainModule = new PyObj(rawMainModule);
+                mainModule = PyObj.Create(rawMainModule);
             }
         }
 
