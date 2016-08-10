@@ -29,7 +29,7 @@ namespace PythonBinding
         {
             var id = (IntPtr)obj;
             PyObj result;
-            if (PythonInterpreter.ObjectCache.TryGetValue(id, out result))
+            if (!PythonInterpreter.ObjectCache.TryGetValue(id, out result))
             {
                 result = new PyObj(obj);
                 PythonInterpreter.ObjectCache[id] = result;
