@@ -70,9 +70,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PythonBinding\PythonBinding.csproj">
-      <Project>{7b272ea5-3c30-458b-a05b-58dd4949db2c}</Project>
-      <Name>PythonBinding</Name>
+    <ProjectReference Include="..\NimbusSharp\NimbusSharp.csproj">
+      <Project>{0760440f-0837-43bf-8ca3-7b3625e456ee}</Project>
+      <Name>NimbusSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

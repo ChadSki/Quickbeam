@@ -38,13 +38,18 @@ namespace PythonBinding
         }
 
         /// Call this Python object with the given arguments.
-        public PyObj Call(PyObj args = null)
+        public PyObj Call(PyObj argsTuple = null)
         {
             PyObj result;
             unsafe
             {
-                var rawResult = CPython.PyObject_CallObject(obj, args.obj);
-                if (rawResult == null) throw new NullReferenceException("Calling PyObject returned null.");
+                var args = (argsTuple == null) ? null : argsTuple.obj;
+                var rawResult = CPython.PyObject_CallObject(obj, args);
+                if (rawResult == null)
+                {
+                    PrintPythonException();
+                    throw new NullReferenceException("Calling PyObject returned null.");
+                }
                 result = FromPointer(rawResult);
             }
             return result;
@@ -172,6 +177,22 @@ namespace PythonBinding
                     result = FromPointer(rawResult);
                 }
                 return result;
+            }
+        }
+
+        private static void PrintPythonException()
+        {
+            unsafe
+            {
+                if (CPython.PyErr_Occurred() == null)
+                {
+                    throw new InvalidOperationException("Python has not had an exception to handle!");
+                }
+                else
+                {
+                    CPython.PyErr_Print();
+                    CPython.PyErr_Clear();
+                }
             }
         }
     }

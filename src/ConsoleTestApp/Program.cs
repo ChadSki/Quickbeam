@@ -1,5 +1,5 @@
 ﻿using System;
-using PythonBinding;
+using NimbusSharp;
 
 namespace ConsoleTestApp
 {
@@ -25,11 +25,9 @@ namespace ConsoleTestApp
             //marker_field.Value = "cheese";
             //Console.WriteLine(marker_field.Value);
 
-            PythonInterpreter.RunSimpleString("import nimbus");
-            var x = PythonInterpreter.MainModule;
-            Console.WriteLine(x.ToString());
-            var z = x.Attr("nimbus");
-            Console.WriteLine(z.ToString());
+            Workbench.Instance.OpenMap();
+            Console.WriteLine(Workbench.Instance.Maps[0]);
+
             Console.ReadKey();
         }
     }

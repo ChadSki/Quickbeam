@@ -29,6 +29,15 @@ print('Python initialized.')";
         internal static extern unsafe PyObject* PyDict_GetItem(PyObject* dict, PyObject* key);
 
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern unsafe void PyErr_Clear();
+
+        [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern unsafe PyObject* PyErr_Occurred();
+
+        [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern unsafe void PyErr_Print();
+
+        [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern unsafe  double PyFloat_AsDouble(PyObject* value);
 
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
