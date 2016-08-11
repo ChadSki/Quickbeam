@@ -83,16 +83,26 @@ namespace PythonBinding
         }
 
         /// If this Python object is iterable, get the iterator.
-        public PyIter GetIter()
+        public PyObj GetIter()
         {
-            PyIter result;
+            PyObj result;
             unsafe
             {
                 var rawResult = CPython.PyObject_GetIter(obj);
                 if (rawResult == null) throw new NullReferenceException("Failed iterate over PyObject.");
-                result = (PyIter)FromPointer(rawResult);
+                result = FromPointer(rawResult);
             }
             return result;
+        }
+
+        /// If this Python object is an iterator, get the next item in the sequence.
+        public PyObj Next()
+        {
+            unsafe
+            {
+                var rawResult = CPython.PyIter_Next(obj);
+                return (rawResult == null) ? null : FromPointer(rawResult);
+            }
         }
 
         /// Double float representation of this PyObject.
@@ -161,23 +171,6 @@ namespace PythonBinding
                 result = FromPointer(rawResult);
             }
             return result;
-        }
-
-        public class PyIter : PyObj
-        {
-            unsafe internal PyIter(CPython.PyObject* obj) : base(obj) { }
-
-            public PyObj Next()
-            {
-                PyObj result;
-                unsafe
-                {
-                    var rawResult = CPython.PyIter_Next(obj);
-                    if (rawResult == null) throw new NullReferenceException("PyIter refused to yield an item.");
-                    result = FromPointer(rawResult);
-                }
-                return result;
-            }
         }
 
         private static void PrintPythonException()

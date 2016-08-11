@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using NimbusSharp;
+using System.Collections.Generic;
 
 namespace ConsoleTestApp
 {
@@ -27,6 +29,11 @@ namespace ConsoleTestApp
 
             Workbench.Instance.OpenMap();
             Console.WriteLine(Workbench.Instance.Maps[0]);
+            var tags = Workbench.Instance.Maps[0].Tags();
+            foreach (HaloTag x in tags)
+            {
+                Console.WriteLine(x.ToString());
+            }
 
             Console.ReadKey();
         }
