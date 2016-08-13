@@ -15,8 +15,8 @@ namespace ConsoleTestApp
             var tags = Workbench.Instance.Maps[0].Tags();
             var htag = tags.First();
             Console.WriteLine(htag);
-            //var tagHeader = htag.Header;
-            //Console.WriteLine(tagHeader);
+            var tagHeader = htag.Header;
+            Console.WriteLine(tagHeader);
             //var firstClass = tagHeader.Get("first_class");
             //Console.WriteLine(firstClass);
             //var tagData = htag.Data;

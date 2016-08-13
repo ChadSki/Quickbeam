@@ -6,14 +6,8 @@ namespace PythonBinding
     {
         unsafe internal CPython.PyObject* obj;
 
-        /// Increment the PyObject's reference count and save
-        /// its address.
         unsafe private PyObj(CPython.PyObject* obj)
         {
-            // TODO this only needs to be incremented if the manual
-            // says it is providing a borrowed reference, which is the
-            // uncommon case.
-            CPython.Py_IncRef(obj);
             this.obj = obj;
         }
 
@@ -25,8 +19,11 @@ namespace PythonBinding
         }
 
         /// Create a new C# wrapper, or return the existing wrapper
-        unsafe internal static PyObj FromPointer(CPython.PyObject* obj)
+        unsafe internal static PyObj FromPointer(CPython.PyObject* obj, bool needsIncRef = false)
         {
+            // Unlikely to need to do this, but just in case somewhere does.
+            if (needsIncRef) CPython.Py_IncRef(obj);
+
             var id = (IntPtr)obj;
             PyObj result;
             if (!PythonInterpreter.ObjectCache.TryGetValue(id, out result))
@@ -173,6 +170,7 @@ namespace PythonBinding
             return result;
         }
 
+        /// For diagnostic purposes
         private static void PrintPythonException()
         {
             unsafe
