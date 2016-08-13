@@ -126,6 +126,13 @@ def define_basic_struct(struct_size, **fields):
         the remaining arguments are grouped into a dictionary, with the
         argument name as the key and the argument itself (which should be a
         BasicField) as the value.
+
+    Example
+    -------
+        MyConstructor = define_basic_struct(struct_size=0x18,
+            foo=field.Ascii(offset=0, length=16, reverse=True),
+            bar=field.UInt32(offset=0x10),
+            baz=field.Float32(offset=0x14))
     """
     def finish_construction(thing_access, offset):
         # enclose the bytes we need
