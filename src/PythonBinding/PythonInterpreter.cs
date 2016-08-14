@@ -18,12 +18,9 @@ namespace PythonBinding
             CPython.Py_Initialize();
             var exitCode = CPython.PyRun_SimpleString(CPython.StartupScript);
             if (exitCode == -1) throw new Exception("PyRun_SimpleString did not execute successfully.");
-            unsafe
-            {
-                var sysModDict = CPython.PyImport_GetModuleDict();
-                var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
-                mainModule = PyObj.FromPointer(rawMainModule);
-            }
+            var sysModDict = CPython.PyImport_GetModuleDict();
+            var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
+            mainModule = PyObj.FromPointer(rawMainModule);
         }
 
         /// The main Python module. Singleton property.

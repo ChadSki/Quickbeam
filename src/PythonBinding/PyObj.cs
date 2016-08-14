@@ -4,32 +4,31 @@ namespace PythonBinding
 {
     public class PyObj
     {
-        unsafe internal CPython.PyObject* obj;
+        internal IntPtr obj;
 
-        unsafe private PyObj(CPython.PyObject* obj)
+        private PyObj(IntPtr obj)
         {
             this.obj = obj;
         }
 
         /// Tell Python when we're finished referring to this object.
-        unsafe ~PyObj()
+        ~PyObj()
         {
             PythonInterpreter.Instance.ObjectCache.Remove((IntPtr)obj);
             CPython.Py_DecRef(obj);
         }
 
         /// Create a new C# wrapper, or return the existing wrapper
-        unsafe internal static PyObj FromPointer(CPython.PyObject* obj, bool needsIncRef = false)
+        internal static PyObj FromPointer(IntPtr objPtr, bool needsIncRef = false)
         {
             // Unlikely to need to do this, but just in case somewhere does.
-            if (needsIncRef) CPython.Py_IncRef(obj);
+            if (needsIncRef) CPython.Py_IncRef(objPtr);
 
-            var id = (IntPtr)obj;
             PyObj result;
-            if (!PythonInterpreter.Instance.ObjectCache.TryGetValue(id, out result))
+            if (!PythonInterpreter.Instance.ObjectCache.TryGetValue(objPtr, out result))
             {
-                result = new PyObj(obj);
-                PythonInterpreter.Instance.ObjectCache[id] = result;
+                result = new PyObj(objPtr);
+                PythonInterpreter.Instance.ObjectCache[objPtr] = result;
             }
             return result;
         }
@@ -38,152 +37,104 @@ namespace PythonBinding
         public PyObj Call(PyObj argsTuple = null)
         {
             PyObj result;
-            unsafe
+            var args = (argsTuple == null) ? IntPtr.Zero : argsTuple.obj;
+            var rawResult = CPython.PyObject_CallObject(obj, args);
+            if (rawResult == IntPtr.Zero)
             {
-                var args = (argsTuple == null) ? null : argsTuple.obj;
-                var rawResult = CPython.PyObject_CallObject(obj, args);
-                if (rawResult == null)
-                {
-                    PrintPythonException();
-                    throw new NullReferenceException("Calling PyObject returned null.");
-                }
-                result = FromPointer(rawResult);
+                PrintPythonException();
+                throw new NullReferenceException("Calling PyObject returned null.");
             }
+            result = FromPointer(rawResult);
             return result;
         }
 
         /// Get an attribute from this PyObject by string name.
         public PyObj Attr(string attrName)
         {
-            PyObj result;
-            unsafe
-            {
-                var rawResult = CPython.PyObject_GetAttrString(obj, attrName);
-                if (rawResult == null) throw new NullReferenceException(
-                    string.Format("Failed to get attribute `{0}` from PyObject.", attrName));
-                result = FromPointer(rawResult);
-            }
-            return result;
+            var rawResult = CPython.PyObject_GetAttrString(obj, attrName);
+            if (rawResult == IntPtr.Zero) throw new NullReferenceException(
+                string.Format("Failed to get attribute `{0}` from PyObject.", attrName));
+            return FromPointer(rawResult);
         }
 
         /// If this Python object supports [] indexing, get an item by its key.
         public PyObj GetItem(PyObj key)
         {
-            PyObj result;
-            unsafe
-            {
-                var rawResult = CPython.PyObject_GetItem(obj, key.obj);
-                if (rawResult == null) throw new NullReferenceException("Failed to get item by key.");
-                result = FromPointer(rawResult);
-            }
-            return result;
+            var rawResult = CPython.PyObject_GetItem(obj, key.obj);
+            if (rawResult == IntPtr.Zero) throw new NullReferenceException("Failed to get item by key.");
+            return FromPointer(rawResult);
         }
 
         /// If this Python object is iterable, get the iterator.
         public PyObj GetIter()
         {
-            PyObj result;
-            unsafe
-            {
-                var rawResult = CPython.PyObject_GetIter(obj);
-                if (rawResult == null) throw new NullReferenceException("Failed iterate over PyObject.");
-                result = FromPointer(rawResult);
-            }
-            return result;
+            var rawResult = CPython.PyObject_GetIter(obj);
+            if (rawResult == IntPtr.Zero) throw new NullReferenceException("Failed iterate over PyObject.");
+            return FromPointer(rawResult);
         }
 
         /// If this Python object is an iterator, get the next item in the sequence.
         public PyObj Next()
         {
-            unsafe
-            {
-                var rawResult = CPython.PyIter_Next(obj);
-                return (rawResult == null) ? null : FromPointer(rawResult);
-            }
+            var rawResult = CPython.PyIter_Next(obj);
+            return (rawResult == IntPtr.Zero) ? null : FromPointer(rawResult);
         }
 
         /// Double float representation of this PyObject.
         public double ToDouble()
         {
-            double result;
-            unsafe { result = CPython.PyFloat_AsDouble(obj); }
-            return result;
+            return CPython.PyFloat_AsDouble(obj);
         }
 
         /// String representation of this PyObject.
         public override string ToString()
         {
-            string str;
-            unsafe
-            {
-                var asStr = CPython.PyObject_Str(obj);
-                if (asStr == null) throw new NullReferenceException("Failed to convert PyObject to string.");
-                str = CPython.PyUnicode_AsWideCharString(asStr, IntPtr.Zero);
-            }
-            return str;
+            var asStr = CPython.PyObject_Str(obj);
+            if (asStr == IntPtr.Zero) throw new NullReferenceException("Failed to convert PyObject to string.");
+            return CPython.PyUnicode_AsWideCharString(asStr, IntPtr.Zero);
         }
 
         /// Long integer representation of this PyObject.
         public long ToLong()
         {
-            long result;
-            unsafe { result = CPython.PyLong_AsLong(obj); }
-            return result;
+            return CPython.PyLong_AsLong(obj);
         }
 
         /// Create a PyObject from a double.
         public static PyObj FromDouble(double value)
         {
-            PyObj result;
-            unsafe
-            {
-                var rawResult = CPython.PyFloat_FromDouble(value);
-                if (rawResult == null) throw new NullReferenceException("Failed to create PyObject from double.");
-                result = FromPointer(rawResult);
-            }
-            return result;
+            var rawResult = CPython.PyFloat_FromDouble(value);
+            if (rawResult == IntPtr.Zero) throw new NullReferenceException("Failed to create PyObject from double.");
+            return FromPointer(rawResult);
         }
 
         /// Create a PyObject from a string.
         public static PyObj FromString(string value)
         {
-            PyObj result;
-            unsafe
-            {
-                var rawResult = CPython.PyUnicode_FromString(value);
-                if (rawResult == null) throw new NullReferenceException("Failed to create PyObject from string.");
-                result = FromPointer(rawResult);
-            }
-            return result;
+            var rawResult = CPython.PyUnicode_FromString(value);
+            if (rawResult == IntPtr.Zero) throw new NullReferenceException("Failed to create PyObject from string.");
+            return FromPointer(rawResult);
         }
 
         /// Create a PyObject from a long integer.
         public static PyObj FromLong(long value)
         {
-            PyObj result;
-            unsafe
-            {
-                var rawResult = CPython.PyLong_FromLong(value);
-                if (rawResult == null) throw new NullReferenceException("Failed to create PyObject from long.");
-                result = FromPointer(rawResult);
-            }
-            return result;
+            var rawResult = CPython.PyLong_FromLong(value);
+            if (rawResult == IntPtr.Zero) throw new NullReferenceException("Failed to create PyObject from long.");
+            return FromPointer(rawResult);
         }
 
         /// For diagnostic purposes
         private static void PrintPythonException()
         {
-            unsafe
+            if (CPython.PyErr_Occurred() == IntPtr.Zero)
             {
-                if (CPython.PyErr_Occurred() == null)
-                {
-                    throw new InvalidOperationException("Python has not had an exception to handle!");
-                }
-                else
-                {
-                    CPython.PyErr_Print();
-                    CPython.PyErr_Clear();
-                }
+                throw new InvalidOperationException("Python has not had an exception to handle!");
+            }
+            else
+            {
+                CPython.PyErr_Print();
+                CPython.PyErr_Clear();
             }
         }
     }
