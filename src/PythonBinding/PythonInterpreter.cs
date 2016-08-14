@@ -6,7 +6,7 @@ namespace PythonBinding
 {
     public class PythonInterpreter
     {
-        public static PythonInterpreter Instance = new PythonInterpreter();
+        public static PythonInterpreter Instance { get; private set; } = new PythonInterpreter();
 
         private PyObj mainModule = null;
 

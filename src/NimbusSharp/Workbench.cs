@@ -14,7 +14,7 @@ namespace NimbusSharp
             nimbus = PythonInterpreter.Instance.MainModule.Attr("nimbus");
         }
 
-        public static Workbench Instance = new Workbench();
+        public static Workbench Instance { get; private set; } = new Workbench();
 
         public ObservableCollection<HaloMap> Maps { get; private set; } = new ObservableCollection<HaloMap>();
 
