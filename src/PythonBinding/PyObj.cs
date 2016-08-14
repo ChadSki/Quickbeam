@@ -14,7 +14,7 @@ namespace PythonBinding
         /// Tell Python when we're finished referring to this object.
         unsafe ~PyObj()
         {
-            PythonInterpreter.ObjectCache.Remove((IntPtr)obj);
+            PythonInterpreter.Instance.ObjectCache.Remove((IntPtr)obj);
             CPython.Py_DecRef(obj);
         }
 
@@ -26,10 +26,10 @@ namespace PythonBinding
 
             var id = (IntPtr)obj;
             PyObj result;
-            if (!PythonInterpreter.ObjectCache.TryGetValue(id, out result))
+            if (!PythonInterpreter.Instance.ObjectCache.TryGetValue(id, out result))
             {
                 result = new PyObj(obj);
-                PythonInterpreter.ObjectCache[id] = result;
+                PythonInterpreter.Instance.ObjectCache[id] = result;
             }
             return result;
         }

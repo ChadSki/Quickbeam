@@ -10,8 +10,8 @@ namespace NimbusSharp
 
         private Workbench()
         {
-            PythonInterpreter.RunSimpleString("import nimbus");
-            nimbus = PythonInterpreter.MainModule.Attr("nimbus");
+            PythonInterpreter.Instance.RunSimpleString("import nimbus");
+            nimbus = PythonInterpreter.Instance.MainModule.Attr("nimbus");
         }
 
         public static Workbench Instance = new Workbench();

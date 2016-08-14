@@ -6,11 +6,13 @@ namespace PythonBinding
 {
     public class PythonInterpreter
     {
-        private static PyObj mainModule = null;
+        public static PythonInterpreter Instance = new PythonInterpreter();
 
-        internal static Dictionary<IntPtr, PyObj> ObjectCache = new Dictionary<IntPtr, PyObj>();
+        private PyObj mainModule = null;
 
-        private static void initializeEnvironment()
+        internal Dictionary<IntPtr, PyObj> ObjectCache = new Dictionary<IntPtr, PyObj>();
+
+        private void initializeEnvironment()
         {
             CPython.Py_SetProgramName(Process.GetCurrentProcess().MainModule.FileName);
             CPython.Py_Initialize();
@@ -25,7 +27,7 @@ namespace PythonBinding
         }
 
         /// The main Python module. Singleton property.
-        public static PyObj MainModule
+        public PyObj MainModule
         {
             get
             {
@@ -35,7 +37,7 @@ namespace PythonBinding
         }
 
         /// Execute a string as a Python script.
-        public static void RunSimpleString(string script)
+        public void RunSimpleString(string script)
         {
             if (mainModule == null) initializeEnvironment();
             CPython.PyRun_SimpleString(script);
