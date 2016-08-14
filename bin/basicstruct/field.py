@@ -14,8 +14,12 @@ class BasicField(metaclass=abc.ABCMeta):
 
     Fields are parented by a struct, which can be accessed via `self.parent`.
 
-    The getf/setf functions translate between Python values and raw data from
+    The getf/setf functions do not cache data, but convert to and from raw data via
     `byteaccess`."""
+
+    typestring = 'undefined'
+    """Declares this field's type in a way easy to access by other code relying on
+    this library."""
 
     def __init__(self, offset: int, docs=""):
         self.offset = offset
@@ -42,6 +46,8 @@ class Ascii(BasicField):
 
     """Fixed-length ascii string."""
 
+    typestring = 'ascii'
+
     def __init__(self, *, offset, length, reverse=False, docs=""):
         super().__init__(offset, docs)
         self.length = length
@@ -60,6 +66,8 @@ class Asciiz(BasicField):
 
     """Null-terminated ascii string."""
 
+    typestring = 'asciiz'
+
     def __init__(self, *, offset, maxlength, docs=""):
         super().__init__(offset, docs)
         self.maxlength = maxlength
@@ -74,6 +82,8 @@ class Asciiz(BasicField):
 class RawData(BasicField):
 
     """Just bytes. Useful for debugging."""
+
+    typestring = 'rawdata'
 
     def __init__(self, *, offset, length, docs=""):
         super().__init__(offset, docs)
@@ -92,6 +102,8 @@ class RawData(BasicField):
 class Enum16(BasicField):
 
     """16-bit enumeration of options."""
+
+    typestring = 'enum16'
 
     def __init__(self, *, offset, options, docs=""):
         super().__init__(offset, docs)
@@ -125,6 +137,8 @@ class Flag(BasicField):
 
     """A boolean flag."""
 
+    typestring = 'flag'
+
     def __init__(self, *, offset, bit, docs=""):
         super().__init__(offset, docs)
         self.bit = bit
@@ -144,6 +158,8 @@ class Float32(BasicField):
 
     """Floating point single-precision number."""
 
+    typestring = 'float32'
+
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
 
@@ -157,6 +173,8 @@ class Float32(BasicField):
 class Float64(BasicField):
 
     """Floating point double-precision number."""
+
+    typestring = 'float64'
 
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
@@ -172,6 +190,8 @@ class Int8(BasicField):
 
     """8-bit (1-byte) signed integer."""
 
+    typestring = 'int8'
+
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
 
@@ -185,6 +205,8 @@ class Int8(BasicField):
 class Int16(BasicField):
 
     """16-bit (2-byte) signed integer."""
+
+    typestring = 'int16'
 
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
@@ -200,6 +222,8 @@ class Int32(BasicField):
 
     """32-bit (4-byte) signed integer."""
 
+    typestring = 'int32'
+
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
 
@@ -213,6 +237,8 @@ class Int32(BasicField):
 class Int64(BasicField):
 
     """64-bit (8-byte) signed integer."""
+
+    typestring = 'int64'
 
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
@@ -228,6 +254,8 @@ class UInt8(BasicField):
 
     """8-bit (1-byte) unsigned integer."""
 
+    typestring = 'uint8'
+
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
 
@@ -241,6 +269,8 @@ class UInt8(BasicField):
 class UInt16(BasicField):
 
     """16-bit (2-byte) unsigned integer."""
+
+    typestring = 'uint16'
 
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
@@ -256,6 +286,8 @@ class UInt32(BasicField):
 
     """32-bit (4-byte) unsigned integer."""
 
+    typestring = 'uint32'
+
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)
 
@@ -269,6 +301,8 @@ class UInt32(BasicField):
 class UInt64(BasicField):
 
     """64-bit (8-byte) unsigned integer."""
+
+    typestring = 'uint64'
 
     def __init__(self, *, offset, docs=""):
         super().__init__(offset, docs)

@@ -27,6 +27,8 @@ class AsciizPtr(HaloField):
 
     """Pointer to a null-terminated string somewhere else in the mapfile."""
 
+    typestring = 'asciizptr'
+
     # really should use some low constant with a doubling mechanism or something
     max_str_size = 260
 
@@ -51,6 +53,8 @@ class AsciizPtr(HaloField):
 class TagReference(HaloField):
 
     """Semantic link to a HaloTag."""
+
+    typestring = 'tagreference'
 
     def __init__(self, *, offset, loneid=False, docs=""):
         super().__init__(offset, docs)
@@ -81,6 +85,8 @@ class TagReference(HaloField):
 class StructArray(HaloField):
 
     """A pointer to an array of Halo structs somewhere else in the mapfile."""
+
+    typestring = 'structarray'
 
     def __init__(self, *, offset, docs="", **kwargs):
         super().__init__(offset, docs)
