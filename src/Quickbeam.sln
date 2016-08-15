@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonBinding", "PythonBind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusSharp", "NimbusSharp\NimbusSharp.csproj", "{0760440F-0837-43BF-8CA3-7B3625E456EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusSharpGUI", "NimbusSharpGUI\NimbusSharpGUI.csproj", "{D686474E-C41F-4BF0-903D-36F486E87640}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "QuickbeamFs", "QuickbeamFs\QuickbeamFs.fsproj", "{68405DAA-28AF-4A61-8385-645BCDEF9FE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +96,18 @@ Global
 		{0760440F-0837-43BF-8CA3-7B3625E456EE}.Release|Any CPU.ActiveCfg = Release|x64
 		{0760440F-0837-43BF-8CA3-7B3625E456EE}.Release|x64.ActiveCfg = Release|x64
 		{0760440F-0837-43BF-8CA3-7B3625E456EE}.Release|x64.Build.0 = Release|x64
+		{D686474E-C41F-4BF0-903D-36F486E87640}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{D686474E-C41F-4BF0-903D-36F486E87640}.Debug|x64.ActiveCfg = Debug|x64
+		{D686474E-C41F-4BF0-903D-36F486E87640}.Debug|x64.Build.0 = Debug|x64
+		{D686474E-C41F-4BF0-903D-36F486E87640}.Release|Any CPU.ActiveCfg = Release|x64
+		{D686474E-C41F-4BF0-903D-36F486E87640}.Release|x64.ActiveCfg = Release|x64
+		{D686474E-C41F-4BF0-903D-36F486E87640}.Release|x64.Build.0 = Release|x64
+		{68405DAA-28AF-4A61-8385-645BCDEF9FE8}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{68405DAA-28AF-4A61-8385-645BCDEF9FE8}.Debug|x64.ActiveCfg = Debug|x64
+		{68405DAA-28AF-4A61-8385-645BCDEF9FE8}.Debug|x64.Build.0 = Debug|x64
+		{68405DAA-28AF-4A61-8385-645BCDEF9FE8}.Release|Any CPU.ActiveCfg = Release|x64
+		{68405DAA-28AF-4A61-8385-645BCDEF9FE8}.Release|x64.ActiveCfg = Release|x64
+		{68405DAA-28AF-4A61-8385-645BCDEF9FE8}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
