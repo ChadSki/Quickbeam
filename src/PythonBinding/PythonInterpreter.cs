@@ -8,6 +8,8 @@ namespace PythonBinding
     {
         public static PythonInterpreter Instance { get; private set; } = new PythonInterpreter();
 
+        public static bool ConsoleSubsystem = false;
+
         private PyObj mainModule = null;
 
         internal Dictionary<IntPtr, PyObj> ObjectCache = new Dictionary<IntPtr, PyObj>();
@@ -16,8 +18,11 @@ namespace PythonBinding
         {
             CPython.Py_SetProgramName(Process.GetCurrentProcess().MainModule.FileName);
             CPython.Py_Initialize();
-            var exitCode = CPython.PyRun_SimpleString(CPython.StartupScript);
-            if (exitCode == -1) throw new Exception("PyRun_SimpleString did not execute successfully.");
+            if (ConsoleSubsystem)
+            {
+                var exitCode = CPython.PyRun_SimpleString(CPython.StartupScript);
+                if (exitCode == -1) throw new Exception("PyRun_SimpleString did not execute successfully.");
+            }
             var sysModDict = CPython.PyImport_GetModuleDict();
             var rawMainModule = CPython.PyMapping_GetItemString(sysModDict, "__main__");
             mainModule = PyObj.FromPointer(rawMainModule);

@@ -1,0 +1,26 @@
+﻿<Window x:Class="WpfTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
+        xmlns:local="clr-namespace:WpfTestApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Margin="10 0 0 0">
+        <ListView.View>
+            <sd:SharpGridView>
+                <GridView.Columns>
+                    <GridViewColumn Header="Heirarchy" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <sd:SharpTreeNodeView />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="80"/>
+                </GridView.Columns>
+            </sd:SharpGridView>
+        </ListView.View>
+    </sd:SharpTreeView>
+</Window>
