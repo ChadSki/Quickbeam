@@ -11,6 +11,8 @@ namespace NimbusSharpGUI
 
         public override object Text { get { return "Workbench"; } }
 
+        public string Name { get { return "Foo"; } }
+
         private WorkbenchNode()
         {
             LazyLoading = true;

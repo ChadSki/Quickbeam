@@ -3,7 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
     xmlns:views="clr-namespace:Views;assembly=QuickbeamFs"
+    xmlns:viewModels="clr-namespace:ViewModels;assembly=QuickbeamFs"
+    xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
     MinHeight="220" MinWidth="300" Height="Auto"
     x:Name="Self">
-    <TextBlock Text="placeholder"></TextBlock>
+    <TextBox Text="Ahoy"></TextBox>
 </UserControl>

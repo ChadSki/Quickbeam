@@ -61,12 +61,17 @@
     <Compile Include="AssemblyInfo.fs" />
     <Resource Include="MainView.xaml" />
     <Compile Include="MainView.xaml.fs" />
+    <Compile Include="MainViewModel.fs" />
     <Resource Include="MainWindow.xaml" />
     <Compile Include="MainWindow.xaml.fs" />
     <Resource Include="App.xaml" />
     <Compile Include="App.fs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FSharp.ViewModule">
+      <HintPath>..\packages\FSharp.ViewModule.Core.0.9.9.3\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\FSharp.ViewModule.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FsXaml.Wpf">
       <HintPath>..\packages\FsXaml.Wpf.2.1.0\lib\net45\FsXaml.Wpf.dll</HintPath>
       <Private>True</Private>
@@ -89,6 +94,18 @@
     <Reference Include="System.Xml" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
+      <Name>ICSharpCode.TreeView</Name>
+      <Project>{dde2a481-8271-4eac-a330-8fa6a38d13d1}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\NimbusSharpGUI\NimbusSharpGUI.csproj">
+      <Name>NimbusSharpGUI</Name>
+      <Project>{d686474e-c41f-4bf0-903d-36f486e87640}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
