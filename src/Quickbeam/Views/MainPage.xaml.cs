@@ -1,5 +1,4 @@
-﻿using CrappyCppBinding;
-using Quickbeam.Interfaces;
+﻿using Quickbeam.Interfaces;
 using Quickbeam.Native;
 using Quickbeam.ViewModels;
 using System.IO;
@@ -32,23 +31,23 @@ namespace Quickbeam.Views
 
         private void OpenTag_Click(object sender, RoutedEventArgs e)
         {
-            var menuItem = sender as MenuItem;
-            if (menuItem == null) return;
+            //var menuItem = sender as MenuItem;
+            //if (menuItem == null) return;
 
-            var contextMenu = menuItem.Parent as ContextMenu;
-            if (contextMenu == null) return;
+            //var contextMenu = menuItem.Parent as ContextMenu;
+            //if (contextMenu == null) return;
 
-            var node = contextMenu.DataContext as ExplorerNode;
-            var tag = node as HaloTagNode;
-            if (tag == null) return;
-            var newTab = new LayoutAnchorable
-            {
-                Title = "Tag Editor",
-                Content = new TagView(tag),
-            };
-            var documentPane = DockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
-            if (documentPane != null)
-                documentPane.Children.Add(newTab);
+            //var node = contextMenu.DataContext as SharpTreeNode;
+            //var tag = node as HaloTagNode;
+            //if (tag == null) return;
+            //var newTab = new LayoutAnchorable
+            //{
+            //    Title = "Tag Editor",
+            //    Content = new TagView(tag),
+            //};
+            //var documentPane = DockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
+            //if (documentPane != null)
+            //    documentPane.Children.Add(newTab);
         }
     }
 }

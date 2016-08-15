@@ -1,8 +1,8 @@
 ﻿using ICSharpCode.TreeView;
-using CrappyCppBinding;
 
 namespace Quickbeam.ViewModels
 {
+    /*
     public abstract class FieldNode : SharpTreeNode
     {
         public string Name { get; protected set; }
@@ -64,4 +64,5 @@ namespace Quickbeam.ViewModels
             get { return FieldObject.CallMethod("getf", null).AsStr(); }
         }
     }
+    */
 }

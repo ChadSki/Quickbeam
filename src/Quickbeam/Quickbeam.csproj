@@ -183,7 +183,7 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Converters\LowercaseConverter.cs" />
-    <Compile Include="Converters\ExplorerNodeContextMenuConverter.cs" />
+    <Compile Include="Converters\SharpTreeNodeContextMenuConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Interfaces\Base.cs" />
     <Compile Include="Interfaces\IView.cs" />
@@ -235,9 +235,6 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TagView.xaml.cs">
-      <DependentUpon>TagView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
@@ -434,10 +431,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TagView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\TitleBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -499,6 +492,10 @@
     <ProjectReference Include="..\MetroIde\MetroIde.csproj">
       <Project>{cf8ea988-3789-48c4-8e2d-bd157a8b1cc4}</Project>
       <Name>MetroIde</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NimbusSharpGUI\NimbusSharpGUI.csproj">
+      <Project>{d686474e-c41f-4bf0-903d-36f486e87640}</Project>
+      <Name>NimbusSharpGUI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

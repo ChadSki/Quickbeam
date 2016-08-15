@@ -1,8 +1,8 @@
 ﻿using System;
-using CrappyCppBinding;
 using System.Windows;
 using System.Windows.Controls;
 using Quickbeam.ViewModels;
+using NimbusSharpGUI;
 
 namespace Quickbeam.Views
 {
@@ -26,7 +26,7 @@ namespace Quickbeam.Views
             try
             {
                 HomeWindow.Instance.ViewModel.Status = "Reading Halo's memory...";
-                PythonInterpreter.Instance.OpenMap(HaloMemory.PC);
+                WorkbenchNode.Instance.OpenMap();
                 HomeWindow.Instance.ViewModel.Status = "Map opened";
             }
             catch (NullReferenceException)
@@ -37,7 +37,7 @@ namespace Quickbeam.Views
 
         private void OpenMapCE_Click(object sender, RoutedEventArgs e)
         {
-            PythonInterpreter.Instance.OpenMap(HaloMemory.CE);
+            throw new NotImplementedException("CE TODO");
         }
     }
 }

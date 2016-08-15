@@ -1,4 +1,4 @@
-﻿using CrappyCppBinding;
+﻿using ICSharpCode.TreeView;
 using System;
 using System.Globalization;
 using System.IO;
@@ -12,25 +12,27 @@ namespace Quickbeam.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var tagHierarchyNode = (ExplorerNode)value;
+            var tagHierarchyNode = (SharpTreeNode)value;
             if (tagHierarchyNode.Children.Count > 0)
                 return Application.Current.FindResource("HierarchyClosedFolder");
 
-            var ext = (Path.GetExtension(tagHierarchyNode.Name) ?? "").ToLower();
-            switch (ext)
-            {
-                case ".snd!":
-                    return Application.Current.FindResource("HierarchySnd!Tag");
+            return Application.Current.FindResource("HierarchyGenericTag");
 
-                case ".bitm":
-                    return Application.Current.FindResource("HierarchyBitmTag");
+            //var ext = (Path.GetExtension(tagHierarchyNode.Name) ?? "").ToLower();
+            //switch (ext)
+            //{
+            //    case ".snd!":
+            //        return Application.Current.FindResource("HierarchySnd!Tag");
 
-                case ".mode":
-                    return Application.Current.FindResource("HierarchyModeTag");
+            //    case ".bitm":
+            //        return Application.Current.FindResource("HierarchyBitmTag");
 
-                default:
-                    return Application.Current.FindResource("HierarchyGenericTag");
-            }
+            //    case ".mode":
+            //        return Application.Current.FindResource("HierarchyModeTag");
+
+            //    default:
+            //        return Application.Current.FindResource("HierarchyGenericTag");
+            //}
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

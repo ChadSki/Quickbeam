@@ -1,5 +1,5 @@
-﻿using HalolibWrapper;
-using ICSharpCode.TreeView;
+﻿using ICSharpCode.TreeView;
+using NimbusSharpGUI;
 using Quickbeam.Interfaces;
 using Quickbeam.Native;
 using System.Windows;
@@ -74,7 +74,7 @@ namespace Quickbeam.ViewModels
 
         public SharpTreeNode RootNode
         {
-            get { return PythonInterpreter.Instance; }
+            get { return WorkbenchNode.Instance; }
         }
     }
 }
