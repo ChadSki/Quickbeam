@@ -1,4 +1,5 @@
-﻿using Quickbeam.ViewModels;
+﻿using NimbusSharpGUI.MapExplorer;
+using Quickbeam.ViewModels;
 using System.Windows.Controls;
 
 namespace Quickbeam.Views
@@ -8,12 +9,10 @@ namespace Quickbeam.Views
     /// </summary>
     public partial class MapExplorer : UserControl
     {
-        public MapExplorerViewModel ViewModel { get; private set; }
-
         public MapExplorer()
         {
             InitializeComponent();
-            DataContext = ViewModel = new MapExplorerViewModel();
+            DataContext = WorkbenchNode.Instance;
         }
     }
 }

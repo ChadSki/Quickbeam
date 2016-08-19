@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
-        <TreeView x:Name="TagTreeView" ItemsSource="{Binding RootNode}"
+        <TreeView x:Name="TagTreeView" ItemsSource="{Binding Children}"
                         Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,0,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
             <TreeView.Resources>

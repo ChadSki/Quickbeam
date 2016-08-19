@@ -1,6 +1,4 @@
 ﻿using NimbusSharp;
-using System.Collections.ObjectModel;
-using System;
 
 namespace NimbusSharpGUI.MapExplorer
 {
