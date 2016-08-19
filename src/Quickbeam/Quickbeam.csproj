@@ -183,7 +183,7 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Converters\LowercaseConverter.cs" />
-    <Compile Include="Converters\SharpTreeNodeContextMenuConverter.cs" />
+    <Compile Include="Converters\ExplorerNodeContextMenuConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Interfaces\Base.cs" />
     <Compile Include="Interfaces\IView.cs" />
@@ -219,24 +219,12 @@
     <Compile Include="Native\DpiConversion.cs" />
     <Compile Include="Native\HaloSettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="Views\DpiDecorator.cs" />
-    <Compile Include="Views\HaloView.xaml.cs">
-      <DependentUpon>HaloView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\HaloHost.cs" />
-    <Compile Include="Views\HaloViewport.xaml.cs">
-      <DependentUpon>HaloViewport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MapExplorer.xaml.cs">
-      <DependentUpon>MapExplorer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
@@ -417,23 +405,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\HaloView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\HaloViewport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MapExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
