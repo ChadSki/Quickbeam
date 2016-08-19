@@ -1,4 +1,5 @@
-﻿using NimbusSharpGUI.MapExplorer;
+﻿using NimbusSharp;
+using System.Linq;
 using System.Windows;
 
 namespace WpfTestApp
@@ -8,7 +9,10 @@ namespace WpfTestApp
         public MainWindow()
         {
             InitializeComponent();
-            //treeView.Root = WorkbenchNode.Instance;
+            var map = Workbench.Instance.OpenMap();
+            var x = map.Tags().First();
+
+            //treeView.Root = ;
         }
     }
 }
