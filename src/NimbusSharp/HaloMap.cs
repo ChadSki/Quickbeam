@@ -14,7 +14,7 @@ namespace NimbusSharp
 
         public IEnumerable<HaloTag> Tags()
         {
-            var tagsIter = pyMap.Attr("tags").Call().GetIter();
+            var tagsIter = pyMap["tags"].Call().GetIter();
             PyObj currObj = tagsIter.Next();
             while (currObj != null)
             {

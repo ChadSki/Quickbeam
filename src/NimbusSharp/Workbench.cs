@@ -13,14 +13,14 @@ namespace NimbusSharp
         private Workbench()
         {
             PythonInterpreter.Instance.RunSimpleString("import nimbus");
-            nimbus = PythonInterpreter.Instance.MainModule.Attr("nimbus");
+            nimbus = PythonInterpreter.Instance.MainModule["nimbus"];
         }
 
         public ObservableCollection<HaloMap> Maps { get; private set; } = new ObservableCollection<HaloMap>();
 
         public HaloMap OpenMap()
         {
-            var newMap = new HaloMap(nimbus.Attr("HaloMap").Attr("from_memory").Call());
+            var newMap = new HaloMap(nimbus["HaloMap"]["from_memory"].Call());
             Maps.Add(newMap);
             return newMap;
         }

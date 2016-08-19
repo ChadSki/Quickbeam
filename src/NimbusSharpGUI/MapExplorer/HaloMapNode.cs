@@ -14,7 +14,8 @@ namespace NimbusSharpGUI.MapExplorer
             foreach (var tag in map.Tags())
             {
                 var tagNode = new HaloTagNode(tag);
-                var tagClass = tag.Header
+                dynamic header = tag.Header;
+                var tagClass = header.first_class;
             }
         }
 

@@ -13,7 +13,7 @@ namespace NimbusSharp
 
         public HaloStruct Header
         {
-            get { return new HaloStruct(pyTag.Attr("header")); }
+            get { return new HaloStruct(pyTag["header"]); }
         }
 
         public override string ToString()

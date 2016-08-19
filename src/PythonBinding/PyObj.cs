@@ -49,12 +49,15 @@ namespace PythonBinding
         }
 
         /// Get an attribute from this PyObject by string name.
-        public PyObj Attr(string attrName)
+        public PyObj this[string attrName]
         {
-            var rawResult = CPython.PyObject_GetAttrString(obj, attrName);
-            if (rawResult == IntPtr.Zero) throw new NullReferenceException(
-                string.Format("Failed to get attribute `{0}` from PyObject.", attrName));
-            return FromPointer(rawResult);
+            get
+            {
+                var rawResult = CPython.PyObject_GetAttrString(obj, attrName);
+                if (rawResult == IntPtr.Zero) throw new NullReferenceException(
+                    string.Format("Failed to get attribute `{0}` from PyObject.", attrName));
+                return FromPointer(rawResult);
+            }
         }
 
         /// If this Python object supports [] indexing, get an item by its key.

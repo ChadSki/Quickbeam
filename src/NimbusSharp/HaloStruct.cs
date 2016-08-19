@@ -1,6 +1,7 @@
 ﻿using PythonBinding;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 // Mapping of string typenames to a function which does the appropriate cast.
 using CastDict = System.Collections.Generic.Dictionary<string, System.Func<object, dynamic>>;
@@ -9,7 +10,7 @@ namespace NimbusSharp
 {
     public class HaloField { }
 
-    public class HaloStruct
+    public class HaloStruct : DynamicObject
     {
         public static readonly CastDict castDict = new CastDict
         {
@@ -31,24 +32,39 @@ namespace NimbusSharp
         };
 
         private PyObj pyStruct;
-        private List<HaloField> fieldsInOrder = new List<HaloField>();
-        private Dictionary<Type, HaloField> fieldsByType = new Dictionary<Type, HaloField>();
+        private Dictionary<string, PyObj> fieldsByName = new Dictionary<string, PyObj>();
+        private List<PyObj> fieldsInOrder = new List<PyObj>();
 
         public HaloStruct(PyObj pyStruct)
         {
             this.pyStruct = pyStruct;
 
-            Func<object, dynamic> foo = ((x) => (string)x);
+            // Iterate through the field objects, caching for later access
+            var itemsIter = pyStruct["fields"]["items"].Call().GetIter();
+            PyObj currPair = itemsIter.Next();
+            while (currPair != null)
+            {
+                var fieldName = currPair;
+                var fieldObj = currPair;
+                fieldsInOrder.Add(fieldObj);
+                fieldsByName.Add(fieldName.ToString(), fieldObj);
+                currPair = itemsIter.Next();
+            }
+        }
 
-            // Iterate through the field objects, construct and cache wrappers
-            // TODO
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            PyObj field;
+            bool didItWork = fieldsByName.TryGetValue(binder.Name, out field);
+            result = field;
+            return didItWork;
         }
 
         public IEnumerable<string> FieldNames
         {
             get
             {
-                var nameIter = pyStruct.Attr("fields").Attr("keys").Call().GetIter();
+                var nameIter = pyStruct["fields"]["keys"].Call().GetIter();
                 PyObj currName = nameIter.Next();
                 while (currName != null)
                 {
@@ -62,13 +78,13 @@ namespace NimbusSharp
         {
             get
             {
-                var fieldsDict = pyStruct.Attr("fields");
-                var nameIter = fieldsDict.Attr("keys").Call().GetIter();
+                var fieldsDict = pyStruct["fields"];
+                var nameIter = fieldsDict["keys"].Call().GetIter();
                 PyObj currName = nameIter.Next();
                 while (currName != null)
                 {
                     var fieldObj = fieldsDict.GetItem(currName);
-                    yield return fieldObj.Attr("typestring").ToString();
+                    yield return fieldObj["typestring"].ToString();
                     currName = nameIter.Next();
                 }
             }
