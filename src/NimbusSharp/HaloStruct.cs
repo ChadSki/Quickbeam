@@ -4,36 +4,61 @@ using System.Collections.Generic;
 using System.Dynamic;
 
 // Mapping of string typenames to a function which does the appropriate cast.
-using CastDict = System.Collections.Generic.Dictionary<string, System.Func<object, dynamic>>;
+using CastDict = System.Collections.Generic.Dictionary<string, System.Func<PythonBinding.PyObj, dynamic>>;
 
 namespace NimbusSharp
 {
-    public class HaloField { }
+    public class HaloField
+    {
+        private PyObj pyStruct;
+        private string typeName;
+        private static readonly CastDict castTo = new CastDict
+        {
+            ["ascii"] = ((x) => x.ToString()),
+            ["asciiz"] = ((x) => x.ToString()),
+            ["rawdata"] = ((x) => x.ToString()),
+            ["enum16"] = ((x) => { throw new NotImplementedException(); }),
+            ["flag"] = ((x) => { throw new NotImplementedException(); }),
+            ["float32"] = ((x) => x.ToDouble()),
+            ["float64"] = ((x) => x.ToDouble()),
+            ["int8"] = ((x) => (sbyte)x.ToLong()),
+            ["int16"] = ((x) => (short)x.ToLong()),
+            ["int32"] = ((x) => (int)x.ToLong()),
+            ["int64"] = ((x) => x.ToLong()),
+            ["uint8"] = ((x) => (byte)x.ToLong()),
+            ["uint16"] = ((x) => (ushort)x.ToLong()),
+            ["uint32"] = ((x) => (uint)x.ToLong()),
+            ["uint64"] = ((x) => (ulong)x.ToLong()),
+        };
+
+        public HaloField(PyObj fieldTuple, PyObj pyStruct)
+        {
+            // Unwrap the Tuple[str, Field]
+            Name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
+
+            // Keep the type name so we know what to cast to
+            var secondItem = fieldTuple.GetItem(PyObj.FromLong(1));
+            typeName = secondItem["typestring"].ToString();
+
+            this.pyStruct = pyStruct;
+        }
+
+        public string Name { get; private set; }
+
+        public dynamic Value
+        {
+            get
+            {
+                return castTo[typeName](pyStruct[Name]);
+            }
+        }
+    }
 
     public class HaloStruct : DynamicObject
     {
-        public static readonly CastDict castDict = new CastDict
-        {
-            ["ascii"] = ((x) => (string)x),
-            ["asciiz"] = ((x) => (string)x),
-            ["rawdata"] = ((x) => (string)x),
-            ["enum16"] = ((x) => (string)x), // TODO representation of this?
-            ["flag"] = ((x) => (bool)x),
-            ["float32"] = ((x) => (double)x),
-            ["float64"] = ((x) => (double)x),
-            ["int8"] = ((x) => (sbyte)x),
-            ["int16"] = ((x) => (short)x),
-            ["int32"] = ((x) => (int)x),
-            ["int64"] = ((x) => (long)x),
-            ["uint8"] = ((x) => (byte)x),
-            ["uint16"] = ((x) => (ushort)x),
-            ["uint32"] = ((x) => (uint)x),
-            ["uint64"] = ((x) => (ulong)x),
-        };
-
         private PyObj pyStruct;
-        private Dictionary<string, PyObj> fieldsByName = new Dictionary<string, PyObj>();
-        private List<PyObj> fieldsInOrder = new List<PyObj>();
+        private List<HaloField> fieldsInOrder = new List<HaloField>();
+        private Dictionary<string, HaloField> fieldsByName = new Dictionary<string, HaloField>();
 
         public HaloStruct(PyObj pyStruct)
         {
@@ -44,20 +69,18 @@ namespace NimbusSharp
             PyObj currPair = itemsIter.Next();
             while (currPair != null)
             {
-                var fieldName = currPair;
-                var fieldObj = currPair;
-                fieldsInOrder.Add(fieldObj);
-                fieldsByName.Add(fieldName.ToString(), fieldObj);
+                
+                var field = new HaloField(currPair, pyStruct);
+                fieldsInOrder.Add(field);
+                fieldsByName.Add(field.Name, field);
                 currPair = itemsIter.Next();
             }
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            PyObj field;
-            bool didItWork = fieldsByName.TryGetValue(binder.Name, out field);
-            result = field;
-            return didItWork;
+            result = fieldsByName[binder.Name].Value;
+            return true;
         }
 
         public IEnumerable<string> FieldNames

@@ -11,29 +11,18 @@ namespace Quickbeam.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var tagHierarchyNode = (ExplorerNode)value;
-            if ((tagHierarchyNode is WorkbenchNode) ||
-                (tagHierarchyNode.Children.Count > 0))
+            if ((value is WorkbenchNode) ||
+                (value is HaloMapNode) ||
+                (value is HaloTagClassNode))
             {
                 return Application.Current.FindResource("HierarchyClosedFolder");
             }
             return Application.Current.FindResource("HierarchyGenericTag");
 
-            //var ext = (Path.GetExtension(tagHierarchyNode.Name) ?? "").ToLower();
-            //switch (ext)
-            //{
-            //    case ".snd!":
-            //        return Application.Current.FindResource("HierarchySnd!Tag");
-
-            //    case ".bitm":
-            //        return Application.Current.FindResource("HierarchyBitmTag");
-
-            //    case ".mode":
-            //        return Application.Current.FindResource("HierarchyModeTag");
-
-            //    default:
-            //        return Application.Current.FindResource("HierarchyGenericTag");
-            //}
+            // return Application.Current.FindResource("HierarchySnd!Tag");
+            // return Application.Current.FindResource("HierarchyBitmTag");
+            // return Application.Current.FindResource("HierarchyModeTag");
+            // return Application.Current.FindResource("HierarchyGenericTag");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

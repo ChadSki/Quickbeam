@@ -2,7 +2,7 @@
 
 namespace NimbusSharpGUI.MapExplorer
 {
-    internal class HaloTagNode : ExplorerNode
+    public class HaloTagNode : ExplorerNode
     {
         private HaloTag tag;
 

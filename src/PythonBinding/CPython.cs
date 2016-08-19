@@ -10,7 +10,8 @@ namespace PythonBinding
         /// This snippet needs to be run in order to enable Windows console output.
         internal const string StartupScript =
 @"import sys
-sys.stdout = open('CONOUT$', 'wt')
+#sys.stdout = sys.stderr = open('CONOUT$', 'wt')
+sys.stdout = sys.stderr = open('C:\embedded_log_file.txt', 'w')
 print('Python initialized.')";
 
         internal struct PyObject { }
