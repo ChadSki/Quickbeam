@@ -1,10 +1,5 @@
-﻿using System;
+﻿using NimbusSharp;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NimbusSharp;
-using System.Collections.ObjectModel;
 
 namespace NimbusSharpGUI.MapExplorer
 {
@@ -15,9 +10,11 @@ namespace NimbusSharpGUI.MapExplorer
         public HaloMapNode(HaloMap map)
         {
             this.map = map;
+            var tagsByClass = new Dictionary<string, ExplorerNode>();
             foreach (var tag in map.Tags())
             {
-                Children.Add(new HaloTagNode(tag));
+                var tagNode = new HaloTagNode(tag);
+                var tagClass = tag.Header
             }
         }
 

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="MapExplorer\ExplorerNode.cs" />
     <Compile Include="MapExplorer\HaloMapNode.cs" />
+    <Compile Include="MapExplorer\HaloTagClassNode.cs" />
     <Compile Include="MapExplorer\HaloTagNode.cs" />
     <Compile Include="MapExplorer\WorkbenchNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
