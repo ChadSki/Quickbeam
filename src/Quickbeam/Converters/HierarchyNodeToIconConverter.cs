@@ -1,7 +1,6 @@
-﻿using ICSharpCode.TreeView;
+﻿using NimbusSharpGUI.MapExplorer;
 using System;
 using System.Globalization;
-using System.IO;
 using System.Windows;
 using System.Windows.Data;
 
@@ -12,10 +11,12 @@ namespace Quickbeam.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var tagHierarchyNode = (SharpTreeNode)value;
-            if (tagHierarchyNode.Children.Count > 0)
+            var tagHierarchyNode = (ExplorerNode)value;
+            if ((tagHierarchyNode is WorkbenchNode) ||
+                (tagHierarchyNode.Children.Count > 0))
+            {
                 return Application.Current.FindResource("HierarchyClosedFolder");
-
+            }
             return Application.Current.FindResource("HierarchyGenericTag");
 
             //var ext = (Path.GetExtension(tagHierarchyNode.Name) ?? "").ToLower();

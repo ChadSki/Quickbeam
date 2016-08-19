@@ -1,8 +1,7 @@
-﻿using System;
+﻿using NimbusSharpGUI.MapExplorer;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using Quickbeam.ViewModels;
-using NimbusSharpGUI;
 
 namespace Quickbeam.Views
 {

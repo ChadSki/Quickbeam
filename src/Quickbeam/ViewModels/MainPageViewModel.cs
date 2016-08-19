@@ -71,10 +71,5 @@ namespace Quickbeam.ViewModels
             }
         }
         #endregion HaloExe
-
-        public SharpTreeNode RootNode
-        {
-            get { return WorkbenchNode.Instance; }
-        }
     }
 }
