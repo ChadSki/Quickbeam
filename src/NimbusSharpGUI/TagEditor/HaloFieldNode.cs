@@ -10,18 +10,16 @@ namespace NimbusSharpGUI.TagEditor
     public class HaloFieldNode : SharpTreeNode
     {
         private HaloField hfield;
-        private string name;
         private string label;
 
-        public HaloFieldNode(HaloStruct hstruct, string name)
+        public HaloFieldNode(HaloStruct hstruct, HaloField hfield)
         {
-            this.name = name;
-            hfield = hstruct[name];
+            this.hfield = hfield;
 
             // Load children eagerly
             if (TypeName == "structarray")
             {
-                var childStructs = ((IEnumerable<PyObj>)hfield.Value).ToArray();
+                var childStructs = ((IEnumerable<PyObj>)((dynamic)hfield).Value).ToArray();
                 if (childStructs.Length == 0)
                 {
                     label = "None";
@@ -42,7 +40,7 @@ namespace NimbusSharpGUI.TagEditor
             }
         }
 
-        public override object Text { get { return name; } }
+        public override object Text { get { return hfield.Name; } }
 
         public string TypeName
         {
@@ -59,7 +57,7 @@ namespace NimbusSharpGUI.TagEditor
                 if (TypeName == "structarray")
                     return label;
                 else
-                    return hfield.Value;
+                    return ((dynamic)hfield).Value;
             }
         }
     }

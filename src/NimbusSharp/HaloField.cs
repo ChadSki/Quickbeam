@@ -1,66 +1,26 @@
 ﻿using PythonBinding;
 using System;
 
-// Mapping of string typenames to a function which does the appropriate cast.
-using CastFn = System.Func<PythonBinding.PyObj, dynamic>;
-using CastDict = System.Collections.Generic.Dictionary<string, System.Func<PythonBinding.PyObj, dynamic>>;
+// Constructor type signature
+using ConstructFn = System.Func<
+        PythonBinding.PyObj,
+        PythonBinding.PyObj,
+        NimbusSharp.HaloField>;
+
 using System.Collections.Generic;
 
 namespace NimbusSharp
 {
     public class HaloField
     {
-        private PyObj pyStruct;
-        private PyObj pyField;
+        protected PyObj pyStruct;
+        protected PyObj pyField;
 
-        private static IEnumerable<PyObj> castStructArray(PyObj pyStructArray)
-        {
-            var iter = pyStructArray.GetIter();
-            var currStruct = iter.Next();
-            while (currStruct != null)
-            {
-                yield return currStruct;
-                currStruct = iter.Next();
-            }
-            yield break;
-        }
-
-        private static readonly CastDict castTo = new CastDict
-        {
-            // basic fields
-            ["ascii"] = ((x) => x.ToString()),
-            ["asciiz"] = ((x) => x.ToString()),
-            ["rawdata"] = ((x) => x.ToString()),
-            ["enum16"] = ((x) => "TODO: enum16"),
-            ["flag"] = ((x) => "TODO: flag"),
-            ["float32"] = ((x) => x.ToDouble()),
-            ["float64"] = ((x) => x.ToDouble()),
-            ["int8"] = ((x) => (sbyte)x.ToLong()),
-            ["int16"] = ((x) => (short)x.ToLong()),
-            ["int32"] = ((x) => (int)x.ToLong()),
-            ["int64"] = ((x) => x.ToLong()),
-            ["uint8"] = ((x) => (byte)x.ToLong()),
-            ["uint16"] = ((x) => (ushort)x.ToLong()),
-            ["uint32"] = ((x) => (uint)x.ToLong()),
-            ["uint64"] = ((x) => (ulong)x.ToLong()),
-
-            // Halo fields
-            ["asciizptr"] = ((x) => x.ToString()),
-            ["tagreference"] = ((x) => x.ToString()),
-            ["structarray"] = castStructArray,
-        };
-
-        public static HaloField Build(PyObj fieldTuple, PyObj pyStruct)
-        {
-            return new HaloField(fieldTuple, pyStruct);
-        }
-
-        private HaloField(PyObj fieldTuple, PyObj pyStruct)
+        protected HaloField(PyObj fieldTuple, PyObj pyStruct)
         {
             // Unwrap the Tuple[str, Field]
             Name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
             pyField = fieldTuple.GetItem(PyObj.FromLong(1));
-
             this.pyStruct = pyStruct;
         }
 
@@ -76,24 +36,109 @@ namespace NimbusSharp
             }
         }
 
-        public dynamic Value
+        private static readonly Dictionary<string, ConstructFn> constructorDict = new Dictionary<string, ConstructFn>
+        {
+            // basic fields
+            ["ascii"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
+            ["asciiz"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
+            ["rawdata"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
+            ["enum16"] = ((fTup, fStruct) => new EnumField(fTup, fStruct)),
+            ["flag"] = ((fTup, fStruct) => new FlagField(fTup, fStruct)),
+            ["float32"] = ((fTup, fStruct) => new FloatField(fTup, fStruct)),
+            ["float64"] = ((fTup, fStruct) => new FloatField(fTup, fStruct)),
+            ["int8"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["int16"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["int32"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["int64"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["uint8"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["uint16"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["uint32"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["uint64"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+
+            // Halo fields
+            ["asciizptr"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
+            ["tagreference"] = ((fTup, fStruct) => new StringField(fTup, fStruct)), // TODO
+            ["structarray"] = ((fTup, fStruct) => new StructArrayField(fTup, fStruct)),
+        };
+
+        public static HaloField Build(PyObj fieldTuple, PyObj pyStruct)
+        {
+            // Unwrap the Tuple[str, Field]
+            var name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
+            var pyField = fieldTuple.GetItem(PyObj.FromLong(1));
+            var typeName = pyField["typestring"].ToString();
+
+            ConstructFn constructor;
+            if (!constructorDict.TryGetValue(typeName, out constructor))
+            {
+                throw new KeyNotFoundException(
+                    string.Format("{0} is not yet supported by the GUI.", typeName));
+            }
+
+            return constructorDict[typeName](fieldTuple, pyStruct);
+        }
+    }
+
+    public class EnumField : HaloField
+    {
+        public EnumField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public string Value
+        {
+            get { return "TODO: enum"; }
+        }
+    }
+
+    public class FlagField : HaloField
+    {
+        public FlagField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public string Value
+        {
+            get { return "TODO: flag"; }
+        }
+    }
+
+    public class FloatField : HaloField
+    {
+        public FloatField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public double Value
+        {
+            get { return pyStruct[Name].ToDouble(); }
+        }
+    }
+
+    public class IntField : HaloField
+    {
+        public IntField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public long Value
+        {
+            get { return pyStruct[Name].ToLong(); }
+        }
+    }
+
+    public class StringField : HaloField
+    {
+        public StringField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public string Value
+        {
+            get { return pyStruct[Name].ToString(); }
+        }
+    }
+
+    public class StructArrayField : HaloField
+    {
+        public StructArrayField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public IEnumerable<PyObj> Value
         {
             get
             {
-                CastFn castFn;
-                if (castTo.TryGetValue(TypeName, out castFn))
+                var iter = pyStruct[Name].GetIter();
+                var currStruct = iter.Next();
+                while (currStruct != null)
                 {
-                    Console.WriteLine("yay");
+                    yield return currStruct;
+                    currStruct = iter.Next();
                 }
-                else
-                {
-                    Console.WriteLine(
-                        string.Format("Key = '{0}' is not found.", TypeName));
-                }
-
-                var pyVal = pyStruct[Name];
-                dynamic result = castFn(pyVal);
-                return result;
+                yield break;
             }
         }
     }

@@ -12,9 +12,9 @@ namespace NimbusSharpGUI.TagEditor
         {
             this.hstruct = hstruct;
             this.label = label;
-            foreach (var name in hstruct.FieldNames)
+            foreach (var field in hstruct.FieldsInOrder)
             {
-                Children.Add(new HaloFieldNode(hstruct, name));
+                Children.Add(new HaloFieldNode(hstruct, field));
             }
             IsExpanded = true;
         }
