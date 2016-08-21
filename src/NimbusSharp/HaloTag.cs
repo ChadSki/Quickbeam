@@ -26,7 +26,9 @@ namespace NimbusSharp
         {
             get
             {
-                return new HaloStruct(pyTag["data"]);
+                if (tagData == null)
+                    tagData = new HaloStruct(pyTag["data"]);
+                return tagData;
             }
         }
 

@@ -11,6 +11,7 @@ namespace NimbusSharpGUI.TagEditor
     {
         private HaloField hfield;
         private string name;
+        private string length;
 
         public HaloFieldNode(HaloStruct hstruct, string name)
         {
@@ -27,8 +28,9 @@ namespace NimbusSharpGUI.TagEditor
                     Children.Add(
                         new HaloStructNode(
                             new HaloStruct(childStructs[i]),
-                            string.Format("struct #{0}", i)));
+                            string.Format("[{0}]", i)));
                 }
+                length = string.Format("Children: {0}", childStructs.Length);
             }
         }
 
@@ -47,7 +49,7 @@ namespace NimbusSharpGUI.TagEditor
             get
             {
                 if (TypeName == "structarray")
-                    return "";
+                    return length;
                 else
                     return hfield.Value;
             }

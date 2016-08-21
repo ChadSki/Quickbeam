@@ -15,7 +15,7 @@ namespace NimbusSharpGUI.MapExplorer
             foreach (var tag in map.Tags())
             {
                 dynamic header = tag.Header;
-                string tagClass = header.first_class;
+                string tagClass = header["first_class"].Value;
                 if (!tagsByClass.ContainsKey(tagClass))
                 {
                     tagsByClass.Add(tagClass, new List<HaloTagNode>());

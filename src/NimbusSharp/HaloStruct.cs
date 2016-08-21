@@ -9,7 +9,7 @@ namespace NimbusSharp
     public class HaloStruct
     {
         private PyObj pyStruct;
-        private List<HaloField> fieldsInOrder = new List<HaloField>();
+        private IEnumerable<HaloField> fieldsInOrder;
         private Dictionary<string, HaloField> fieldsByName = new Dictionary<string, HaloField>();
 
         public HaloStruct(PyObj pyStruct)
@@ -17,16 +17,17 @@ namespace NimbusSharp
             this.pyStruct = pyStruct;
 
             // Iterate through the field objects
+            var fieldsTemp = new List<HaloField>();
             var itemsIter = pyStruct["fields"]["items"].Call().GetIter();
             PyObj currPair = itemsIter.Next();
             while (currPair != null)
             {
                 var field = new HaloField(currPair, pyStruct);
-                fieldsInOrder.Add(field);
+                fieldsTemp.Add(field);
                 currPair = itemsIter.Next();
             }
-            
-            foreach (var hfield in fieldsInOrder.OrderBy((hfield) => hfield.Offset))
+            fieldsInOrder = fieldsTemp.OrderBy((hfield) => hfield.Offset);
+            foreach (var hfield in fieldsInOrder)
             {
                 fieldsByName.Add(hfield.Name, hfield);
             }

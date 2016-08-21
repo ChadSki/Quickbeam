@@ -46,7 +46,7 @@ namespace NimbusSharp
 
             // Halo fields
             ["asciizptr"] = ((x) => x.ToString()),
-            ["tagreference"] = ((x) => "TODO: tagreference"),
+            ["tagreference"] = ((x) => x.ToString()),
             ["structarray"] = castStructArray,
         };
 
