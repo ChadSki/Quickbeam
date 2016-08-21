@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HaloField.cs" />
     <Compile Include="HaloMap.cs" />
     <Compile Include="HaloStruct.cs" />
     <Compile Include="HaloTag.cs" />

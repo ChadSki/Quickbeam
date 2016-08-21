@@ -1,17 +1,35 @@
 ﻿using ICSharpCode.TreeView;
+using NimbusSharp;
 
 namespace NimbusSharpGUI.TagEditor
 {
     public class HaloFieldNode : SharpTreeNode
     {
+        private HaloField hfield;
+        private string name;
 
-        public HaloFieldNode(string name)
+        public HaloFieldNode(HaloStruct hstruct, string name)
         {
-            Name = name;
+            this.name = name;
+            hfield = hstruct[name];
         }
 
-        public override object Text { get { return Name; } }
+        public override object Text { get { return name; } }
 
-        public string Name { get; private set; }
+        public string TypeName
+        {
+            get
+            {
+                return hfield.TypeName;
+            }
+        }
+
+        public dynamic Value
+        {
+            get
+            {
+                return hfield.Value;
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace NimbusSharp
         {
             get
             {
-                var tagsIter = pyMap["tags"].Call("weap", "pistol").GetIter();
+                var tagsIter = pyMap["tags"].Call("bipd", "").GetIter();
                 PyObj currObj = tagsIter.Next();
                 return new HaloTag(currObj);
             }

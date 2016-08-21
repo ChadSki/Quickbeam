@@ -1,58 +1,9 @@
 ﻿using PythonBinding;
-using System;
 using System.Collections.Generic;
-using System.Dynamic;
-
-// Mapping of string typenames to a function which does the appropriate cast.
-using CastDict = System.Collections.Generic.Dictionary<string, System.Func<PythonBinding.PyObj, dynamic>>;
 
 namespace NimbusSharp
 {
-    public class HaloField
-    {
-        private PyObj pyStruct;
-        private string typeName;
-        private static readonly CastDict castTo = new CastDict
-        {
-            ["ascii"] = ((x) => x.ToString()),
-            ["asciiz"] = ((x) => x.ToString()),
-            ["rawdata"] = ((x) => x.ToString()),
-            ["enum16"] = ((x) => { throw new NotImplementedException(); }),
-            ["flag"] = ((x) => { throw new NotImplementedException(); }),
-            ["float32"] = ((x) => x.ToDouble()),
-            ["float64"] = ((x) => x.ToDouble()),
-            ["int8"] = ((x) => (sbyte)x.ToLong()),
-            ["int16"] = ((x) => (short)x.ToLong()),
-            ["int32"] = ((x) => (int)x.ToLong()),
-            ["int64"] = ((x) => x.ToLong()),
-            ["uint8"] = ((x) => (byte)x.ToLong()),
-            ["uint16"] = ((x) => (ushort)x.ToLong()),
-            ["uint32"] = ((x) => (uint)x.ToLong()),
-            ["uint64"] = ((x) => (ulong)x.ToLong()),
-        };
 
-        public HaloField(PyObj fieldTuple, PyObj pyStruct)
-        {
-            // Unwrap the Tuple[str, Field]
-            Name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
-
-            // Keep the type name so we know what to cast to
-            var secondItem = fieldTuple.GetItem(PyObj.FromLong(1));
-            typeName = secondItem["typestring"].ToString();
-
-            this.pyStruct = pyStruct;
-        }
-
-        public string Name { get; private set; }
-
-        public dynamic Value
-        {
-            get
-            {
-                return castTo[typeName](pyStruct[Name]);
-            }
-        }
-    }
 
     public class HaloStruct
     {
@@ -80,7 +31,7 @@ namespace NimbusSharp
         {
             get
             {
-                return fieldsByName[attrName].Value;
+                return fieldsByName[attrName];
             }
         }
 

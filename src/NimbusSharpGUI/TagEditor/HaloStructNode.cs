@@ -1,9 +1,4 @@
 ﻿using ICSharpCode.TreeView;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NimbusSharp;
 
 namespace NimbusSharpGUI.TagEditor
@@ -20,13 +15,13 @@ namespace NimbusSharpGUI.TagEditor
 
         public override object Text { get { return "Struct"; } }
 
-        public string Name { get { return hstruct.ToString(); } }
+        public string Value { get { return ""; } }
 
         protected override void LoadChildren()
         {
             foreach (var name in hstruct.FieldNames)
             {
-                Children.Add(new HaloFieldNode(name));
+                Children.Add(new HaloFieldNode(hstruct, name));
             }
         }
     }
