@@ -76,3 +76,6 @@ tag_types['weap'] = define_halo_struct(struct_size=0x504,
             fire_damage=halofield.TagReference(offset=0x54),
             misfire_damage=halofield.TagReference(offset=0x64),
             no_ammo_damage=halofield.TagReference(offset=0x74))))
+
+tag_types['unknown'] = define_halo_struct(struct_size=10,
+    raw=field.RawData(offset=0x0, length=10))

@@ -29,7 +29,10 @@ class HaloTag(object):
                     self.halomap.magic_offset,
                     lambda magic: header.meta_offset_raw - magic))
         except KeyError:
-            data = None
+            data = tag_types['unknown'](halomap,
+                add_offsets(
+                    self.halomap.magic_offset,
+                    lambda magic: header.meta_offset_raw - magic))
         object.__setattr__(self, 'data', data)
 
     def __str__(self):

@@ -16,6 +16,11 @@ namespace NimbusSharp
             get { return new HaloStruct(pyTag["header"]); }
         }
 
+        public HaloStruct TagData
+        {
+            get { return new HaloStruct(pyTag["data"]); }
+        }
+
         public override string ToString()
         {
             return pyTag.ToString();

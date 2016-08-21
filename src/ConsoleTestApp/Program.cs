@@ -21,10 +21,10 @@ namespace ConsoleTestApp
             {
                 Console.WriteLine(x);
             }
-            //var firstClass = tagHeader.Get("first_class");
-            //Console.WriteLine(firstClass);
-            //var tagData = htag.Data;
-            //Console.WriteLine(tagData);
+            var firstClass = tagHeader["first_class"];
+            Console.WriteLine(firstClass);
+            var tagData = htag.TagData;
+            Console.WriteLine(tagData);
             //var marker_field = tagData.Fields[0] as StringField;
             //Console.WriteLine(marker_field.Value);
             //marker_field.Value = "cheese";

@@ -54,7 +54,7 @@ namespace NimbusSharp
         }
     }
 
-    public class HaloStruct : DynamicObject
+    public class HaloStruct
     {
         private PyObj pyStruct;
         private List<HaloField> fieldsInOrder = new List<HaloField>();
@@ -77,10 +77,12 @@ namespace NimbusSharp
             }
         }
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        public dynamic this[string attrName]
         {
-            result = fieldsByName[binder.Name].Value;
-            return true;
+            get
+            {
+                return fieldsByName[attrName].Value;
+            }
         }
 
         public IEnumerable<string> FieldNames
