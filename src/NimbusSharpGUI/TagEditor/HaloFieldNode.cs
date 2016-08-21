@@ -1,9 +1,6 @@
 ﻿using ICSharpCode.TreeView;
 using NimbusSharp;
-using PythonBinding;
-using System;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace NimbusSharpGUI.TagEditor
 {
@@ -17,9 +14,10 @@ namespace NimbusSharpGUI.TagEditor
             this.hfield = hfield;
 
             // Load children eagerly
-            if (TypeName == "structarray")
+            var saf = hfield as StructArrayField;
+            if (saf != null)
             {
-                var childStructs = ((IEnumerable<PyObj>)((dynamic)hfield).Value).ToArray();
+                var childStructs = saf.Value.ToArray();
                 if (childStructs.Length == 0)
                 {
                     label = "None";
@@ -42,19 +40,11 @@ namespace NimbusSharpGUI.TagEditor
 
         public override object Text { get { return hfield.Name; } }
 
-        public string TypeName
-        {
-            get
-            {
-                return hfield.TypeName;
-            }
-        }
-
         public dynamic Value
         {
             get
             {
-                if (TypeName == "structarray")
+                if (hfield is StructArrayField)
                     return label;
                 else
                     return ((dynamic)hfield).Value;
