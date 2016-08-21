@@ -22,7 +22,7 @@ namespace NimbusSharp
             PyObj currPair = itemsIter.Next();
             while (currPair != null)
             {
-                var field = new HaloField(currPair, pyStruct);
+                var field = HaloField.Build(currPair, pyStruct);
                 fieldsTemp.Add(field);
                 currPair = itemsIter.Next();
             }

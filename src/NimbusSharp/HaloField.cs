@@ -50,7 +50,12 @@ namespace NimbusSharp
             ["structarray"] = castStructArray,
         };
 
-        public HaloField(PyObj fieldTuple, PyObj pyStruct)
+        public static HaloField Build(PyObj fieldTuple, PyObj pyStruct)
+        {
+            return new HaloField(fieldTuple, pyStruct);
+        }
+
+        private HaloField(PyObj fieldTuple, PyObj pyStruct)
         {
             // Unwrap the Tuple[str, Field]
             Name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();

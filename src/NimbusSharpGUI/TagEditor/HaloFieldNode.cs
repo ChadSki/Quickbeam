@@ -11,7 +11,7 @@ namespace NimbusSharpGUI.TagEditor
     {
         private HaloField hfield;
         private string name;
-        private string length;
+        private string label;
 
         public HaloFieldNode(HaloStruct hstruct, string name)
         {
@@ -21,16 +21,24 @@ namespace NimbusSharpGUI.TagEditor
             // Load children eagerly
             if (TypeName == "structarray")
             {
-                IEnumerable<PyObj> structArray = hfield.Value;
-                PyObj[] childStructs = structArray.ToArray();
-                for (int i = 0; i < childStructs.Length; i++)
+                var childStructs = ((IEnumerable<PyObj>)hfield.Value).ToArray();
+                if (childStructs.Length == 0)
                 {
-                    Children.Add(
-                        new HaloStructNode(
-                            new HaloStruct(childStructs[i]),
-                            string.Format("[{0}]", i)));
+                    label = "None";
                 }
-                length = string.Format("Children: {0}", childStructs.Length);
+                else
+                {
+                    label = "";
+                    for (int i = 0; i < childStructs.Length; i++)
+                    {
+                        Children.Add(
+                            new HaloStructNode(
+                                new HaloStruct(childStructs[i]),
+                                string.Format("[{0}]", i)));
+                    }
+                    if (childStructs.Length < 2)
+                        IsExpanded = true;
+                }
             }
         }
 
@@ -49,7 +57,7 @@ namespace NimbusSharpGUI.TagEditor
             get
             {
                 if (TypeName == "structarray")
-                    return length;
+                    return label;
                 else
                     return hfield.Value;
             }

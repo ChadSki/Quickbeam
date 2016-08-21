@@ -6,7 +6,7 @@
         xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
         xmlns:local="clr-namespace:WpfTestApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="600">
+        Title="MainWindow" Height="550" Width="720">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -16,15 +16,14 @@
             <ListView.View>
                 <sd:SharpGridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="Heirarchy" Width="200">
+                        <GridViewColumn Header="Heirarchy" Width="320">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <sd:SharpTreeNodeView />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="TypeName" DisplayMemberBinding="{Binding Path=TypeName}" Width="120"/>
-                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Path=Value}" Width="400"/>
+                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Path=Value}" Width="380"/>
                     </GridView.Columns>
                 </sd:SharpGridView>
             </ListView.View>
