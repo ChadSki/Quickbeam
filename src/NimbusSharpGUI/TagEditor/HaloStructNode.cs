@@ -6,14 +6,16 @@ namespace NimbusSharpGUI.TagEditor
     public class HaloStructNode : SharpTreeNode
     {
         private HaloStruct hstruct;
+        private string label;
 
-        public HaloStructNode(HaloStruct hstruct)
+        public HaloStructNode(HaloStruct hstruct, string label)
         {
             this.hstruct = hstruct;
+            this.label = label;
             LazyLoading = true;
         }
 
-        public override object Text { get { return "Struct"; } }
+        public override object Text { get { return label; } }
 
         public string Value { get { return ""; } }
 

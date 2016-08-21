@@ -4,14 +4,30 @@ using System;
 // Mapping of string typenames to a function which does the appropriate cast.
 using CastFn = System.Func<PythonBinding.PyObj, dynamic>;
 using CastDict = System.Collections.Generic.Dictionary<string, System.Func<PythonBinding.PyObj, dynamic>>;
+using System.Collections.Generic;
 
 namespace NimbusSharp
 {
     public class HaloField
     {
         private PyObj pyStruct;
+        private PyObj pyField;
+
+        private static IEnumerable<PyObj> castStructArray(PyObj pyStructArray)
+        {
+            var iter = pyStructArray.GetIter();
+            var currStruct = iter.Next();
+            while (currStruct != null)
+            {
+                yield return currStruct;
+                currStruct = iter.Next();
+            }
+            yield break;
+        }
+
         private static readonly CastDict castTo = new CastDict
         {
+            // basic fields
             ["ascii"] = ((x) => x.ToString()),
             ["asciiz"] = ((x) => x.ToString()),
             ["rawdata"] = ((x) => x.ToString()),
@@ -28,24 +44,32 @@ namespace NimbusSharp
             ["uint32"] = ((x) => (uint)x.ToLong()),
             ["uint64"] = ((x) => (ulong)x.ToLong()),
 
+            // Halo fields
+            ["asciizptr"] = ((x) => x.ToString()),
             ["tagreference"] = ((x) => "TODO: tagreference"),
+            ["structarray"] = castStructArray,
         };
 
         public HaloField(PyObj fieldTuple, PyObj pyStruct)
         {
             // Unwrap the Tuple[str, Field]
             Name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
-
-            // Keep the type name so we know what to cast to
-            var secondItem = fieldTuple.GetItem(PyObj.FromLong(1));
-            TypeName = secondItem["typestring"].ToString();
+            pyField = fieldTuple.GetItem(PyObj.FromLong(1));
 
             this.pyStruct = pyStruct;
         }
 
-        public string TypeName { get; private set; }
+        public string TypeName { get { return pyField["typestring"].ToString(); } }
 
         public string Name { get; private set; }
+
+        public long Offset
+        {
+            get
+            {
+                return pyField["offset"].ToLong();
+            }
+        }
 
         public dynamic Value
         {

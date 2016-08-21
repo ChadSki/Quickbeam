@@ -1,4 +1,5 @@
 ﻿using PythonBinding;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace NimbusSharp
@@ -8,22 +9,26 @@ namespace NimbusSharp
     public class HaloStruct
     {
         private PyObj pyStruct;
-        private List<HaloField> fieldsInOrder = new List<HaloField>();
         private Dictionary<string, HaloField> fieldsByName = new Dictionary<string, HaloField>();
 
         public HaloStruct(PyObj pyStruct)
         {
             this.pyStruct = pyStruct;
 
-            // Iterate through the field objects, caching for later access
+            // Iterate through the field objects
+            var fieldsInOrder = new List<HaloField>();
             var itemsIter = pyStruct["fields"]["items"].Call().GetIter();
             PyObj currPair = itemsIter.Next();
             while (currPair != null)
             {
                 var field = new HaloField(currPair, pyStruct);
                 fieldsInOrder.Add(field);
-                fieldsByName.Add(field.Name, field);
                 currPair = itemsIter.Next();
+            }
+            
+            foreach (var hfield in fieldsInOrder.OrderBy((hfield) => hfield.Offset))
+            {
+                fieldsByName.Add(hfield.Name, hfield);
             }
         }
 
