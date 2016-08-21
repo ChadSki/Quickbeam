@@ -50,6 +50,7 @@
     <Compile Include="MapExplorer\HaloTagNode.cs" />
     <Compile Include="MapExplorer\WorkbenchNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagEditor\HaloFieldNode.cs" />
     <Compile Include="TagEditor\HaloStructNode.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -85,10 +85,6 @@ print('Python initialized.')";
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern int PyRun_SimpleString([MarshalAs(UnmanagedType.LPStr)]string toRun);
 
-        // Don't forget to wrap variadic things in `__arglist(...)`
-        [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern IntPtr PyTuple_Pack(IntPtr size, __arglist);
-
         // TODO - fix leak and null
         // Returns a buffer allocated by PyMem_Alloc() (use PyMem_Free() to free it) on success.
         // Note that the resulting wchar_t string might contain null characters, which would cause the string to be truncated when used with most C functions.

@@ -34,18 +34,27 @@ namespace PythonBinding
         }
 
         /// Call this Python object with the given arguments.
-        public PyObj Call(PyObj argsTuple = null)
+        public PyObj Call()
         {
-            PyObj result;
-            var args = (argsTuple == null) ? IntPtr.Zero : argsTuple.obj;
-            var rawResult = CPython.PyObject_CallObject(obj, args);
+            var rawResult = CPython.PyObject_CallObject(obj, IntPtr.Zero);
             if (rawResult == IntPtr.Zero)
             {
                 PrintPythonException();
                 throw new NullReferenceException("Calling PyObject returned null.");
             }
-            result = FromPointer(rawResult);
-            return result;
+            return FromPointer(rawResult);
+        }
+        public PyObj Call(string left, string right)
+        {
+            CPython.PyRun_SimpleString(string.Format("temp = ('{0}', '{1}')", left, right));
+            var args = PythonInterpreter.Instance.MainModule["temp"];
+            var rawResult = CPython.PyObject_CallObject(obj, args.obj);
+            if (rawResult == IntPtr.Zero)
+            {
+                PrintPythonException();
+                throw new NullReferenceException("Calling PyObject returned null.");
+            }
+            return FromPointer(rawResult);
         }
 
         /// Get an attribute from this PyObject by string name.
@@ -80,7 +89,7 @@ namespace PythonBinding
         public PyObj Next()
         {
             var rawResult = CPython.PyIter_Next(obj);
-            return (rawResult == IntPtr.Zero) ? null : FromPointer(rawResult);
+            return (rawResult == IntPtr.Zero) ? null : FromPointer(rawResult); // TODO
         }
 
         /// Double float representation of this PyObject.

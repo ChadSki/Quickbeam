@@ -12,8 +12,9 @@ namespace ConsoleTestApp
             Workbench.Instance.OpenMap();
             var hmap = Workbench.Instance.Maps[0];
             Console.WriteLine(hmap);
-            var tags = Workbench.Instance.Maps[0].Tags();
-            var htag = tags.First();
+            //var tags = Workbench.Instance.Maps[0].Tags();
+            //var htag = tags.First();
+            var htag = hmap.ArbitraryTag;
             Console.WriteLine(htag);
             var tagHeader = htag.Header;
             Console.WriteLine(tagHeader);
@@ -25,11 +26,6 @@ namespace ConsoleTestApp
             Console.WriteLine(firstClass);
             var tagData = htag.TagData;
             Console.WriteLine(tagData);
-            //var marker_field = tagData.Fields[0] as StringField;
-            //Console.WriteLine(marker_field.Value);
-            //marker_field.Value = "cheese";
-            //Console.WriteLine(marker_field.Value);
-
             Console.ReadKey();
         }
     }

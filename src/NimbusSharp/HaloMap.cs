@@ -23,6 +23,16 @@ namespace NimbusSharp
             }
         }
 
+        public HaloTag ArbitraryTag
+        {
+            get
+            {
+                var tagsIter = pyMap["tags"].Call("weap", "pistol").GetIter();
+                PyObj currObj = tagsIter.Next();
+                return new HaloTag(currObj);
+            }
+        }
+
         public override string ToString()
         {
             return pyMap.ToString();

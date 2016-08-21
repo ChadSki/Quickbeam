@@ -1,4 +1,5 @@
 ﻿using NimbusSharp;
+using NimbusSharpGUI.TagEditor;
 using System.Linq;
 using System.Windows;
 
@@ -10,9 +11,8 @@ namespace WpfTestApp
         {
             InitializeComponent();
             var map = Workbench.Instance.OpenMap();
-            var x = map.Tags().First();
-
-            //treeView.Root = ;
+            var tag = map.ArbitraryTag;
+            treeView.Root = new HaloStructNode(tag.TagData);
         }
     }
 }
