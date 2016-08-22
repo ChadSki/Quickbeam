@@ -11,6 +11,6 @@ namespace NimbusSharpGUI.MapExplorer
 
         public HaloTag Tag { get; private set; }
 
-        public override string Name { get { return Tag.ToString(); } }
+        public override string Name { get { return Tag.Header["name"].Value.ToString(); } }
     }
 }

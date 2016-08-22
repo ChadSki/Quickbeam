@@ -37,7 +37,7 @@ namespace Quickbeam.Views
             if (tagNode == null) return;
             var newTab = new LayoutAnchorable
             {
-                Title = "Tag Editor",
+                Title = tagNode.Name.Split('\\').Last(),
                 Content = new TagEditor(tagNode),
             };
             var documentPane = DockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();

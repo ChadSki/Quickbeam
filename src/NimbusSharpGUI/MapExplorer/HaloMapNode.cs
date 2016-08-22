@@ -7,9 +7,11 @@ namespace NimbusSharpGUI.MapExplorer
     public class HaloMapNode : ExplorerNode
     {
         private HaloMap map;
+        private string label;
 
-        public HaloMapNode(HaloMap map)
+        public HaloMapNode(HaloMap map, string label)
         {
+            this.label = label;
             this.map = map;
             var tagsByClass = new Dictionary<string, List<HaloTagNode>>();
             foreach (var tag in map.Tags())
@@ -29,6 +31,6 @@ namespace NimbusSharpGUI.MapExplorer
             }
         }
 
-        public override string Name { get { return map.ToString(); } }
+        public override string Name { get { return label; } }
     }
 }

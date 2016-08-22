@@ -10,7 +10,7 @@ namespace NimbusSharpGUI.MapExplorer
         {
             foreach (var map in Workbench.Instance.Maps)
             {
-                Children.Add(new HaloMapNode(map));
+                Children.Add(new HaloMapNode(map, map.ToString()));
             }
         }
 
@@ -19,7 +19,7 @@ namespace NimbusSharpGUI.MapExplorer
         public void OpenMap()
         {
             var map = Workbench.Instance.OpenMap();
-            Children.Add(new HaloMapNode(map));
+            Children.Add(new HaloMapNode(map, "Halo PC Memory"));
         }
     }
 }
