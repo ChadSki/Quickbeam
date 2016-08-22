@@ -18,10 +18,6 @@ namespace ConsoleTestApp
             Console.WriteLine(htag);
             var tagHeader = htag.Header;
             Console.WriteLine(tagHeader);
-            foreach (var x in tagHeader.FieldTypes)
-            {
-                Console.WriteLine(x);
-            }
             var firstClass = tagHeader["first_class"];
             Console.WriteLine(firstClass);
             var tagData = htag.TagData;

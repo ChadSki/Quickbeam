@@ -76,6 +76,9 @@ print('Python initialized.')";
         internal static extern IntPtr PyObject_GetIter(IntPtr obj);
 
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int PyObject_SetAttrString(IntPtr obj, [MarshalAs(UnmanagedType.LPStr)]string attrName, IntPtr value);
+
+        [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr PyObject_Str(IntPtr obj);
 
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]

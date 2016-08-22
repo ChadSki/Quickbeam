@@ -67,6 +67,13 @@ namespace PythonBinding
                     string.Format("Failed to get attribute `{0}` from PyObject.", attrName));
                 return FromPointer(rawResult);
             }
+            set
+            {
+                if (CPython.PyObject_SetAttrString(obj, attrName, value.obj) == -1)
+                {
+                    throw new Exception("PyObject_SetAttrString failed");
+                }
+            }
         }
 
         /// If this Python object supports [] indexing, get an item by its key.

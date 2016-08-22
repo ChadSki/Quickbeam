@@ -57,8 +57,8 @@ namespace NimbusSharp
 
             // Halo fields
             ["asciizptr"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
-            ["tagreference"] = ((fTup, fStruct) => new StringField(fTup, fStruct)), // TODO
             ["structarray"] = ((fTup, fStruct) => new StructArrayField(fTup, fStruct)),
+            ["tagreference"] = ((fTup, fStruct) => new TagReferenceField(fTup, fStruct)), // TODO
         };
 
         public static HaloField Build(PyObj fieldTuple, PyObj pyStruct)
@@ -103,6 +103,7 @@ namespace NimbusSharp
         public double Value
         {
             get { return pyStruct[Name].ToDouble(); }
+            set { pyStruct[Name] = PyObj.FromDouble(value); }
         }
     }
 
@@ -112,6 +113,7 @@ namespace NimbusSharp
         public long Value
         {
             get { return pyStruct[Name].ToLong(); }
+            set { pyStruct[Name] = PyObj.FromLong(value); }
         }
     }
 
@@ -121,25 +123,35 @@ namespace NimbusSharp
         public string Value
         {
             get { return pyStruct[Name].ToString(); }
+            set { pyStruct[Name] = PyObj.FromString(value); }
         }
     }
 
     public class StructArrayField : HaloField
     {
-        public StructArrayField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
-        public IEnumerable<PyObj> Value
+        public StructArrayField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct)
         {
-            get
+            Children = new List<PyObj>();
+            var iter = pyStruct[Name].GetIter();
+            var currStruct = iter.Next();
+            while (currStruct != null)
             {
-                var iter = pyStruct[Name].GetIter();
-                var currStruct = iter.Next();
-                while (currStruct != null)
-                {
-                    yield return currStruct;
-                    currStruct = iter.Next();
-                }
-                yield break;
+                Children.Add(currStruct);
+                currStruct = iter.Next();
             }
+        }
+
+        public List<PyObj> Children { get; private set; }
+
+        public string Value { get { return ""; } }
+    }
+
+    public class TagReferenceField : HaloField
+    {
+        public TagReferenceField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public string Value
+        {
+            get { return pyStruct[Name].ToString(); }
         }
     }
 }

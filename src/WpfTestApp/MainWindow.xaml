@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
+        xmlns:ns="clr-namespace:NimbusSharp;assembly=NimbusSharp"
         xmlns:local="clr-namespace:WpfTestApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="720">
@@ -12,7 +13,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Margin="10 0 0 0" Grid.Column="0">
+        <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Grid.Column="0" >
             <ListView.View>
                 <sd:SharpGridView>
                     <GridView.Columns>
@@ -23,7 +24,42 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Path=Value}" Width="380"/>
+                        <GridViewColumn Header="Value" Width="380">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="400" />
+                                        </Grid.ColumnDefinitions>
+                                        <ContentControl Content="{Binding Field}">
+                                            <ContentControl.Resources>
+                                                <DataTemplate DataType="{x:Type ns:EnumField}">
+                                                    <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type ns:FlagField}">
+                                                    <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type ns:FloatField}">
+                                                    <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type ns:IntField}">
+                                                    <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type ns:StringField}">
+                                                    <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type ns:StructArrayField}">
+                                                    <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                                <DataTemplate DataType="{x:Type ns:TagReferenceField}">
+                                                    <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                                </DataTemplate>
+                                            </ContentControl.Resources>
+                                        </ContentControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView.Columns>
                 </sd:SharpGridView>
             </ListView.View>
