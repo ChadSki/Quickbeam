@@ -33,12 +33,12 @@ namespace Quickbeam.Views
             if (contextMenu == null) return;
 
             var node = contextMenu.DataContext as ExplorerNode;
-            var tag = node as HaloTagNode;
-            if (tag == null) return;
+            var tagNode = node as HaloTagNode;
+            if (tagNode == null) return;
             var newTab = new LayoutAnchorable
             {
                 Title = "Tag Editor",
-                Content = new TextBlock { Text = tag.Name },
+                Content = new TagEditor(tagNode),
             };
             var documentPane = DockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
             if (documentPane != null)

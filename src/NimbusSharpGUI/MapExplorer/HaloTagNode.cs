@@ -4,13 +4,13 @@ namespace NimbusSharpGUI.MapExplorer
 {
     public class HaloTagNode : ExplorerNode
     {
-        private HaloTag tag;
-
         public HaloTagNode(HaloTag tag)
         {
-            this.tag = tag;
+            Tag = tag;
         }
 
-        public override string Name { get { return tag.ToString(); } }
+        public HaloTag Tag { get; private set; }
+
+        public override string Name { get { return Tag.ToString(); } }
     }
 }
