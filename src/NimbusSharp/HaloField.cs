@@ -149,6 +149,12 @@ namespace NimbusSharp
     public class TagReferenceField : HaloField
     {
         public TagReferenceField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+
+        public string TagClass
+        {
+            get { return pyStruct[Name]["first_class"].ToString(); }
+        }
+
         public string Value
         {
             get { return pyStruct[Name].ToString(); }

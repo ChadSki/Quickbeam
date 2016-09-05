@@ -8,11 +8,11 @@
              xmlns:local="clr-namespace:Quickbeam.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Grid.Column="0" >
+    <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Grid.Column="0" ShowRoot="False">
         <ListView.View>
             <sd:SharpGridView>
                 <GridView.Columns>
-                    <GridViewColumn Header="Heirarchy" Width="320">
+                    <GridViewColumn Header="Heirarchy" Width="160">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <sd:SharpTreeNodeView />
@@ -22,36 +22,39 @@
                     <GridViewColumn Header="Value" Width="380">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="400" />
-                                    </Grid.ColumnDefinitions>
-                                    <ContentControl Content="{Binding Field}">
-                                        <ContentControl.Resources>
-                                            <DataTemplate DataType="{x:Type ns:EnumField}">
-                                                <TextBlock Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type ns:FlagField}">
-                                                <TextBlock Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type ns:FloatField}">
-                                                <TextBox Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type ns:IntField}">
-                                                <TextBox Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type ns:StringField}">
-                                                <TextBox Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type ns:StructArrayField}">
-                                                <TextBlock Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                            <DataTemplate DataType="{x:Type ns:TagReferenceField}">
-                                                <TextBlock Text="{Binding Value}" Grid.Column="0" />
-                                            </DataTemplate>
-                                        </ContentControl.Resources>
-                                    </ContentControl>
-                                </Grid>
+                                <ContentControl Content="{Binding Field}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}">
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type ns:EnumField}">
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:FlagField}">
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:FloatField}">
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:IntField}">
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:StringField}">
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:StructArrayField}">
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:TagReferenceField}">
+                                            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                                <ComboBox Width="60">
+                                                    <ComboBoxItem Content="asdf" />
+                                                    <ComboBoxItem Content="qwer" />
+                                                    <ComboBoxItem Content="zxcv" />
+                                                </ComboBox>
+                                                <TextBlock Text="{Binding TagClass}" Foreground="Black"  />
+                                                <TextBlock Text="{Binding Value}" Foreground="Black" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                </ContentControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
