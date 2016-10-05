@@ -1,4 +1,5 @@
 ﻿using NimbusSharpGUI.MapExplorer;
+using NimbusSharpGUI.TagEditor;
 using Quickbeam.Interfaces;
 using System.Linq;
 using System.Windows.Controls;
@@ -33,7 +34,7 @@ namespace Quickbeam.Views
             if (contextMenu == null) return;
 
             var node = contextMenu.DataContext as ExplorerNode;
-            var tagNode = node as HaloTagNode;
+            var tagNode = node as NimbusSharpGUI.MapExplorer.HaloTagNode;
             if (tagNode == null) return;
             var newTab = new LayoutAnchorable
             {

@@ -1,16 +1,16 @@
 ﻿using System.Windows.Controls;
 
-namespace Quickbeam.Views
+namespace NimbusSharpGUI.TagEditor
 {
     /// <summary>
     /// Interaction logic for TagEditor.xaml
     /// </summary>
     public partial class TagEditor : UserControl
     {
-        public TagEditor(NimbusSharpGUI.MapExplorer.HaloTagNode x)
+        public TagEditor(MapExplorer.HaloTagNode x)
         {
             InitializeComponent();
-            treeView.Root = new NimbusSharpGUI.TagEditor.HaloTagNode(x.Tag);
+            treeView.Root = new HaloTagNode(x.Tag);
         }
     }
 }
