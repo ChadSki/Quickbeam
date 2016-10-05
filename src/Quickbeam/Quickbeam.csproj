@@ -470,10 +470,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ICSharpCode\ICSharpCode.Core\ICSharpCode.Core.csproj">
-      <Project>{35cef10f-2d4c-45f2-9dd1-161e0fec583c}</Project>
-      <Name>ICSharpCode.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
       <Project>{dde2a481-8271-4eac-a330-8fa6a38d13d1}</Project>
       <Name>ICSharpCode.TreeView</Name>

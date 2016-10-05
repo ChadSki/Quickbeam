@@ -16,8 +16,6 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Nimbus", "..\bin\Nimbus.pyp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroIde", "MetroIde\MetroIde.csproj", "{CF8EA988-3789-48C4-8E2D-BD157A8B1CC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.Core", "ICSharpCode\ICSharpCode.Core\ICSharpCode.Core.csproj", "{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ICSharpCode", "ICSharpCode", "{2E2EB700-4505-4204-88A2-10ED8AE5D2C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.TreeView", "ICSharpCode\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj", "{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}"
@@ -50,10 +48,6 @@ Global
 		{CF8EA988-3789-48C4-8E2D-BD157A8B1CC4}.Debug|x64.Build.0 = Debug|x64
 		{CF8EA988-3789-48C4-8E2D-BD157A8B1CC4}.Release|x64.ActiveCfg = Release|Any CPU
 		{CF8EA988-3789-48C4-8E2D-BD157A8B1CC4}.Release|x64.Build.0 = Release|Any CPU
-		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}.Debug|x64.ActiveCfg = Debug|x64
-		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}.Debug|x64.Build.0 = Debug|x64
-		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}.Release|x64.ActiveCfg = Release|Any CPU
-		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}.Release|x64.Build.0 = Release|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Debug|x64.ActiveCfg = Debug|x64
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Debug|x64.Build.0 = Debug|x64
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|x64.ActiveCfg = Release|Any CPU
@@ -79,7 +73,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C} = {2E2EB700-4505-4204-88A2-10ED8AE5D2C8}
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1} = {2E2EB700-4505-4204-88A2-10ED8AE5D2C8}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
