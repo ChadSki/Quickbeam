@@ -122,15 +122,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
     <Compile Include="Helpers\DpiDecorator.cs" />
-    <Compile Include="Helpers\HaloWindow.cs" />
     <Compile Include="Helpers\Native\NativeMethods.cs" />
-    <Compile Include="Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\HaloPage.xaml.cs">
-      <DependentUpon>HaloPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StatusUpdater.cs" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -207,14 +199,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Page Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controls\AvalonDockMetro\MetroTheme.cs" />
     <Compile Include="Controls\AvalonDockMetro\Vectors\DockDocumentAsAnchorableBottom.xaml.cs">
       <DependentUpon>DockDocumentAsAnchorableBottom.xaml</DependentUpon>
@@ -304,56 +288,14 @@
     </Compile>
     <Compile Include="Controls\WPFTreeView\MetroTreeView.cs" />
     <Compile Include="Controls\WPFTreeView\MetroTreeViewItem.cs" />
-    <Compile Include="Dialogs\ControlDialogs\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\Exception.xaml.cs">
-      <DependentUpon>Exception.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\MessageBox.xaml.cs">
-      <DependentUpon>MessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\MessageBoxCode.xaml.cs">
-      <DependentUpon>MessageBoxCode.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\MessageBoxInput.xaml.cs">
-      <DependentUpon>MessageBoxInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\MessageBoxList.xaml.cs">
-      <DependentUpon>MessageBoxList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\MessageBoxOptions.xaml.cs">
-      <DependentUpon>MessageBoxOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ControlDialogs\PostGeneratorViewer.xaml.cs">
-      <DependentUpon>PostGeneratorViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\MetroAbout.cs" />
-    <Compile Include="Dialogs\MetroException.cs" />
-    <Compile Include="Dialogs\MetroInputBox.cs" />
-    <Compile Include="Dialogs\MetroMessageBox.cs" />
-    <Compile Include="Dialogs\MetroMessageBoxCode.cs" />
-    <Compile Include="Dialogs\MetroMessageBoxList.cs" />
     <Compile Include="Helpers\Converters\TagDescriptionCleanup.cs" />
-    <Compile Include="Helpers\JumpLists.cs" />
     <Compile Include="Helpers\Native\ShellChanges.cs" />
     <Compile Include="Helpers\Net\HttpExtensions.cs" />
     <Compile Include="Helpers\Net\HttpRequests.cs" />
     <Compile Include="Helpers\Net\AssemblyServer.cs" />
     <Compile Include="Helpers\Net\Updates.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\SingleInstance.cs" />
-    <Compile Include="Helpers\Storage.cs" />
     <Compile Include="Helpers\VariousFunctions.cs" />
-    <Compile Include="Pages\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\StartPage.xaml.cs">
-      <DependentUpon>StartPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\Native\MonitorWorkArea.cs" />
     <Compile Include="Helpers\Native\WindowMovement.cs" />
     <Page Include="Controls\ActionButtons\CloseButton.xaml">
@@ -580,58 +522,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\ControlDialogs\About.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\Exception.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\MessageBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\MessageBoxCode.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\MessageBoxInput.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\MessageBoxList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\MessageBoxOptions.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\ControlDialogs\PostGeneratorViewer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Home.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\HaloPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\StartPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\WelcomePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Themes\Blue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -669,17 +559,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Update\AssemblyUpdateManager.exe" />
-    <EmbeddedResource Include="Update\ICSharpCode.SharpZipLib.dll" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <BlendEmbeddedFont Include="Fonts\Halo3.ttf" />
-    <None Include="app.config" />
-    <None Include="MetroIde_1_TemporaryKey.pfx" />
-    <None Include="MetroIde_TemporaryKey.pfx" />
-    <None Include="packages.config" />
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
     </None>
