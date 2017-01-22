@@ -34,7 +34,7 @@
 
         <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
             <TreeView x:Name="TagTreeView" ItemsSource="{Binding Children}"
-                        Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,0,0,0" 
+                        Background="{DynamicResource MainBackgroundBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,0,0,0" 
                         VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type exp:ExplorerNode}" ItemsSource="{Binding Children}">

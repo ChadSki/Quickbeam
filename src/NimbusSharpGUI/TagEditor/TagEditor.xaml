@@ -7,7 +7,16 @@
              xmlns:ns="clr-namespace:NimbusSharp;assembly=NimbusSharp"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <sd:SharpTreeView x:Name="treeView" ShowAlternation="True" Grid.Column="0" ShowRoot="False">
+    <sd:SharpTreeView x:Name="treeView" ShowAlternation="False" Grid.Column="0" ShowRoot="False"
+                      Background="{DynamicResource MainBackgroundBrush}" Foreground="{DynamicResource TextBrushPrimary}"
+                      BorderThickness="0" Padding="0,0,0,0">
+        <ListView.Style>
+            <Style TargetType="{x:Type ListView}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource AssemblyAccentBrushColour}" />
+                </Style.Resources>
+            </Style>
+        </ListView.Style>
         <ListView.View>
             <sd:SharpGridView>
                 <GridView.Columns>
@@ -48,8 +57,9 @@
                                                     <ComboBoxItem Content="qwer" />
                                                     <ComboBoxItem Content="zxcv" />
                                                 </ComboBox>
-                                                <TextBlock Text="{Binding TagClass}" Foreground="Black"  />
-                                                <TextBlock Text="{Binding Value}" Foreground="Black" />
+                                                <ComboBox Padding="4,0,0,0" HorizontalAlignment="Stretch">
+                                                    <ComboBoxItem Content="{Binding Value}" />
+                                                </ComboBox>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ContentControl.Resources>
