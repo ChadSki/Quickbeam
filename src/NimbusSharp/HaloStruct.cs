@@ -9,11 +9,13 @@ namespace NimbusSharp
     public class HaloStruct
     {
         private PyObj pyStruct;
+        public HaloTag ParentTag { get; private set; }
         private Dictionary<string, HaloField> fieldsByName = new Dictionary<string, HaloField>();
 
-        public HaloStruct(PyObj pyStruct)
+        public HaloStruct(PyObj pyStruct, HaloTag hTag)
         {
             this.pyStruct = pyStruct;
+            this.ParentTag = hTag;
 
             // Iterate through the field objects
             var fieldsTemp = new List<HaloField>();
@@ -21,7 +23,7 @@ namespace NimbusSharp
             PyObj currPair = itemsIter.Next();
             while (currPair != null)
             {
-                var field = HaloField.Build(currPair, pyStruct);
+                var field = HaloField.Build(currPair, pyStruct, this);
                 fieldsTemp.Add(field);
                 currPair = itemsIter.Next();
             }

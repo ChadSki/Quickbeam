@@ -5,19 +5,19 @@ namespace NimbusSharpGUI.TagEditor
 {
     public class HaloFieldNode : SharpTreeNode
     {
-        public HaloFieldNode(HaloStruct hstruct, HaloField hfield)
+        public HaloFieldNode(HaloStruct hStruct, HaloField hField)
         {
-            Field = hfield;
+            Field = hField;
 
             // Load children eagerly
-            var sa = hfield as StructArrayField;
+            var sa = hField as StructArrayField;
             if (sa != null)
             {
                 for (int i = 0; i < sa.Children.Count; i++)
                 {
                     Children.Add(
                         new HaloStructNode(
-                            new HaloStruct(sa.Children[i]),
+                            new HaloStruct(sa.Children[i], hStruct.ParentTag),
                             string.Format("[{0}]", i)));
                 }
                 // Auto-expand if there aren't multiple children

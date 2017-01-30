@@ -5,6 +5,7 @@ using System;
 using ConstructFn = System.Func<
         PythonBinding.PyObj,
         PythonBinding.PyObj,
+        NimbusSharp.HaloStruct,
         NimbusSharp.HaloField>;
 
 using System.Collections.Generic;
@@ -17,12 +18,15 @@ namespace NimbusSharp
         protected PyObj pyStruct;
         protected PyObj pyField;
 
-        protected HaloField(PyObj fieldTuple, PyObj pyStruct)
+        public HaloStruct ParentStruct { get; private set; }
+
+        protected HaloField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct)
         {
             // Unwrap the Tuple[str, Field]
             Name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
             pyField = fieldTuple.GetItem(PyObj.FromLong(1));
             this.pyStruct = pyStruct;
+            ParentStruct = hStruct;
         }
 
         public string TypeName { get { return pyField["typestring"].ToString(); } }
@@ -40,29 +44,29 @@ namespace NimbusSharp
         private static readonly Dictionary<string, ConstructFn> constructorDict = new Dictionary<string, ConstructFn>
         {
             // basic fields
-            ["ascii"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
-            ["asciiz"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
-            ["rawdata"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
-            ["enum16"] = ((fTup, fStruct) => new EnumField(fTup, fStruct)),
-            ["flag"] = ((fTup, fStruct) => new FlagField(fTup, fStruct)),
-            ["float32"] = ((fTup, fStruct) => new FloatField(fTup, fStruct)),
-            ["float64"] = ((fTup, fStruct) => new FloatField(fTup, fStruct)),
-            ["int8"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["int16"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["int32"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["int64"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["uint8"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["uint16"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["uint32"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
-            ["uint64"] = ((fTup, fStruct) => new IntField(fTup, fStruct)),
+            ["ascii"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["asciiz"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["rawdata"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["enum16"] = ((fTup, pStruct, hStruct) => new EnumField(fTup, pStruct, hStruct)),
+            ["flag"] = ((fTup, pStruct, hStruct) => new FlagField(fTup, pStruct, hStruct)),
+            ["float32"] = ((fTup, pStruct, hStruct) => new FloatField(fTup, pStruct, hStruct)),
+            ["float64"] = ((fTup, pStruct, hStruct) => new FloatField(fTup, pStruct, hStruct)),
+            ["int8"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int16"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int32"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int64"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint8"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint16"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint32"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint64"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
 
             // Halo fields
-            ["asciizptr"] = ((fTup, fStruct) => new StringField(fTup, fStruct)),
-            ["structarray"] = ((fTup, fStruct) => new StructArrayField(fTup, fStruct)),
-            ["tagreference"] = ((fTup, fStruct) => new TagReferenceField(fTup, fStruct)), // TODO
+            ["asciizptr"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["structarray"] = ((fTup, pStruct, hStruct) => new StructArrayField(fTup, pStruct, hStruct)),
+            ["tagreference"] = ((fTup, pStruct, hStruct) => new TagReferenceField(fTup, pStruct, hStruct)), // TODO
         };
 
-        public static HaloField Build(PyObj fieldTuple, PyObj pyStruct)
+        public static HaloField Build(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct)
         {
             // Unwrap the Tuple[str, Field]
             var name = fieldTuple.GetItem(PyObj.FromLong(0)).ToString();
@@ -76,13 +80,13 @@ namespace NimbusSharp
                     string.Format("{0} is not yet supported by the GUI.", typeName));
             }
 
-            return constructorDict[typeName](fieldTuple, pyStruct);
+            return constructorDict[typeName](fieldTuple, pyStruct, hStruct);
         }
     }
 
     public class EnumField : HaloField
     {
-        public EnumField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public EnumField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public string Value
         {
             get { return "TODO: enum"; }
@@ -91,7 +95,7 @@ namespace NimbusSharp
 
     public class FlagField : HaloField
     {
-        public FlagField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public FlagField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public string Value
         {
             get { return "TODO: flag"; }
@@ -100,7 +104,7 @@ namespace NimbusSharp
 
     public class FloatField : HaloField
     {
-        public FloatField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public FloatField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public double Value
         {
             get { return pyStruct[Name].ToDouble(); }
@@ -110,7 +114,7 @@ namespace NimbusSharp
 
     public class IntField : HaloField
     {
-        public IntField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public IntField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public long Value
         {
             get { return pyStruct[Name].ToLong(); }
@@ -120,7 +124,7 @@ namespace NimbusSharp
 
     public class StringField : HaloField
     {
-        public StringField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        public StringField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public string Value
         {
             get { return pyStruct[Name].ToString(); }
@@ -130,7 +134,7 @@ namespace NimbusSharp
 
     public class StructArrayField : HaloField
     {
-        public StructArrayField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct)
+        public StructArrayField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct)
         {
             Children = new List<PyObj>();
             var iter = pyStruct[Name].GetIter();
@@ -148,19 +152,15 @@ namespace NimbusSharp
     public class TagReferenceField : HaloField
     {
         // Somehow needs to refer to the map object.
-        public ObservableCollection<string> PossibleTagClasses { get; private set; } = new ObservableCollection<string>();
+        public List<string> PossibleTagClasses { get; private set; }
 
         // `name (ident)` format so they're unique?
         public ObservableCollection<string> PossibleTags { get; private set; } = new ObservableCollection<string>();
 
-        public TagReferenceField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct)
+        public TagReferenceField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct)
         {
             // TODO: Load these from the map
-            PossibleTagClasses.Add("mod2");
-            PossibleTagClasses.Add("coll");
-            PossibleTagClasses.Add("antr");
-            PossibleTagClasses.Add("phys");
-            PossibleTagClasses.Add("jpt!");
+            PossibleTagClasses = ParentStruct.ParentTag.ParentMap.TagClasses;
         }
 
         public string SelectedTagClass

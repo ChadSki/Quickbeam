@@ -5,9 +5,12 @@ namespace NimbusSharp
     public class HaloTag
     {
         private PyObj pyTag;
-        public HaloTag(PyObj pyTag)
+        public HaloMap ParentMap { get; private set; }
+
+        public HaloTag(PyObj pyTag, HaloMap hMap)
         {
             this.pyTag = pyTag;
+            this.ParentMap = hMap;
         }
 
         private HaloStruct header = null;
@@ -16,7 +19,7 @@ namespace NimbusSharp
             get
             {
                 if (header == null)
-                    header = new HaloStruct(pyTag["header"]);
+                    header = new HaloStruct(pyTag["header"], this);
                 return header;
             }
         }
@@ -27,7 +30,7 @@ namespace NimbusSharp
             get
             {
                 if (tagData == null)
-                    tagData = new HaloStruct(pyTag["data"]);
+                    tagData = new HaloStruct(pyTag["data"], this);
                 return tagData;
             }
         }
