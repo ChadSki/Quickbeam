@@ -13,7 +13,8 @@
         <ListView.Style>
             <Style TargetType="{x:Type ListView}">
                 <Style.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource AssemblyAccentBrushColour}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource AssemblyAccentBrushColourSecondary}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{DynamicResource SidebarBlockColor}"/>
                 </Style.Resources>
             </Style>
         </ListView.Style>
@@ -33,33 +34,32 @@
                                 <ContentControl Content="{Binding Field}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}">
                                     <ContentControl.Resources>
                                         <DataTemplate DataType="{x:Type ns:EnumField}">
-                                            <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type ns:FlagField}">
-                                            <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type ns:FloatField}">
-                                            <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type ns:IntField}">
-                                            <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type ns:StringField}">
-                                            <TextBox Text="{Binding Value}" Grid.Column="0" />
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type ns:StructArrayField}">
-                                            <TextBlock Text="{Binding Value}" Grid.Column="0" />
+                                            <!-- Has children, but shows nothing over here? -->
+                                            <TextBlock Text="" Grid.Column="0" />
                                         </DataTemplate>
                                         <DataTemplate DataType="{x:Type ns:TagReferenceField}">
-                                            <StackPanel Orientation="Horizontal" Grid.Column="0">
-                                                <ComboBox Width="60">
-                                                    <ComboBoxItem Content="asdf" />
-                                                    <ComboBoxItem Content="qwer" />
-                                                    <ComboBoxItem Content="zxcv" />
-                                                </ComboBox>
-                                                <ComboBox Padding="4,0,0,0" HorizontalAlignment="Stretch">
-                                                    <ComboBoxItem Content="{Binding Value}" />
-                                                </ComboBox>
+                                            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="1">
+                                                <ComboBox Width="60"
+                                                          ItemsSource="{Binding Path=PossibleTagClasses}"
+                                                          SelectedValue="{Binding Path=SelectedTagClass}" />
+                                                <ComboBox HorizontalAlignment="Stretch" MinWidth="240" Margin="2,0,0,0"
+                                                          ItemsSource="{Binding Path=PossibleTags}"
+                                                          SelectedValue="{Binding Path=SelectedTag}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ContentControl.Resources>

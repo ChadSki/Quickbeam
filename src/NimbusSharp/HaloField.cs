@@ -8,6 +8,7 @@ using ConstructFn = System.Func<
         NimbusSharp.HaloField>;
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace NimbusSharp
 {
@@ -142,22 +143,42 @@ namespace NimbusSharp
         }
 
         public List<PyObj> Children { get; private set; }
-
-        public string Value { get { return ""; } }
     }
 
     public class TagReferenceField : HaloField
     {
-        public TagReferenceField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct) { }
+        // Somehow needs to refer to the map object.
+        public ObservableCollection<string> PossibleTagClasses { get; private set; } = new ObservableCollection<string>();
 
-        public string TagClass
+        // `name (ident)` format so they're unique?
+        public ObservableCollection<string> PossibleTags { get; private set; } = new ObservableCollection<string>();
+
+        public TagReferenceField(PyObj fieldTuple, PyObj pyStruct) : base(fieldTuple, pyStruct)
         {
-            get { return pyStruct[Name]["first_class"].ToString(); }
+            // TODO: Load these from the map
+            PossibleTagClasses.Add("mod2");
+            PossibleTagClasses.Add("coll");
+            PossibleTagClasses.Add("antr");
+            PossibleTagClasses.Add("phys");
+            PossibleTagClasses.Add("jpt!");
         }
 
-        public string Value
+        public string SelectedTagClass
+        {
+            get
+            {
+                var x = pyStruct[Name];
+                var y = x["first_class"];
+                var z = y.ToString();
+                return z;
+            }
+            set { throw new NotImplementedException(); }
+        }
+
+        public string SelectedTag
         {
             get { return pyStruct[Name].ToString(); }
+            set { throw new NotImplementedException(); }
         }
     }
 }
