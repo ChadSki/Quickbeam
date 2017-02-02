@@ -16,10 +16,10 @@ class HaloMap(object):
     Attributes
     ----------
     map_header : HaloStruct
-        todo
+        Basic details describing the map.
 
     index_header : HaloStruct
-        todo
+        Details about the tag index.
 
     tags_by_ident : Dict[int, HaloTag]
         Each tag in the map, addressable by unique id.

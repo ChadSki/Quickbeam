@@ -46,6 +46,7 @@ namespace PythonBinding
         }
         public PyObj Call(string left, string right)
         {
+            // TODO: fix this hack
             CPython.PyRun_SimpleString(string.Format("temp = ('{0}', '{1}')", left, right));
             var args = PythonInterpreter.Instance.MainModule["temp"];
             var rawResult = CPython.PyObject_CallObject(obj, args.obj);
