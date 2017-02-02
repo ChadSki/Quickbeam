@@ -152,10 +152,10 @@ namespace NimbusSharp
     public class TagReferenceField : HaloField
     {
         // Somehow needs to refer to the map object.
-        public List<string> PossibleTagClasses { get; private set; }
+        public IEnumerable<string> PossibleTagClasses { get; private set; }
 
         // `name (ident)` format so they're unique?
-        public ObservableCollection<string> PossibleTags { get; private set; } = new ObservableCollection<string>();
+        public IEnumerable<string> PossibleTags { get; private set; }
 
         public TagReferenceField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct)
         {

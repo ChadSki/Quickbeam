@@ -14,7 +14,7 @@ namespace NimbusSharpGUI.MapExplorer
             this.label = label;
             this.map = map;
             var tagsByClass = new Dictionary<string, List<HaloTagNode>>();
-            foreach (var tag in map.Tags())
+            foreach (var tag in map.Tags)
             {
                 dynamic header = tag.Header;
                 string tagClass = header["first_class"].Value;

@@ -7,48 +7,67 @@ namespace NimbusSharp
     public class HaloMap
     {
         private PyObj pyMap;
+        private List<HaloTag> tagsInOrder = new List<HaloTag>();
+        private Dictionary<string, List<HaloTag>> tagsByClass = new Dictionary<string, List<HaloTag>>();
 
         public HaloMap(PyObj pyMap)
         {
             this.pyMap = pyMap;
+            tagsFromPython().ToList().ForEach(BuildAndRegisterTag);
+
+            // TODO: Load tags later, too?
+            // I suppose we shouldn't expect anything to change unless we change it...
         }
 
-        public IEnumerable<HaloTag> Tags()
+        /// Iterate through all tags via the PythonBinding layer.
+        private IEnumerable<PyObj> tagsFromPython()
         {
             var tagsIter = pyMap["tags"].Call().GetIter();
             PyObj currObj = tagsIter.Next();
             while (currObj != null)
             {
-                yield return new HaloTag(currObj, this);
+                yield return currObj;
                 currObj = tagsIter.Next();
             }
         }
 
-        private List<string> _tagClasses = null;
-        public List<string> TagClasses
+        /// Verify whether our tag collection is up to date
+        private bool IsTagCollectionValid()
         {
-            get
-            {
-                if (_tagClasses == null)
-                {
-                    // Collect classes
-                    var classesTemp = new HashSet<string>();
-                    var tagsIter = pyMap["tags"].Call().GetIter();
-                    PyObj currTag = tagsIter.Next();
-                    while (currTag != null)
-                    {
-                        classesTemp.Add(currTag["header"]["first_class"].ToString());
-                        currTag = tagsIter.Next();
-                    }
-
-                    // Sort alphabetically and cache result
-                    // TODO: this probably needs to be updated if we add new tags?
-                    _tagClasses = classesTemp.OrderBy(x => x).ToList();
-                }
-                return _tagClasses;
-            }
+            var pyTags = tagsFromPython().GetEnumerator();
+            return tagsInOrder.All(
+                tag => (tag.Ident == pyTags.Current["ident"].ToLong())
+                    && (pyTags.MoveNext()));
         }
 
+        /// Create HaloTag object and save references to it,
+        /// so we're always talking about the same thing.
+        private void BuildAndRegisterTag(PyObj pyTag)
+        {
+            var tag = new HaloTag(pyTag, this);
+            tagsInOrder.Add(tag);
+            var firstClass = tag.FirstClass;
+            if (! tagsByClass.ContainsKey(firstClass))
+            {
+                tagsByClass[firstClass] = new List<HaloTag>();
+            }
+            tagsByClass[firstClass].Add(tag);
+        }
+
+        /// HaloTags in the same order the appear in the map.
+        public IEnumerable<HaloTag> Tags
+        {
+            get { return tagsInOrder; }
+        }
+
+        /// Four-character tag classes, in alphabetical order.
+        public IEnumerable<string> TagClasses
+        {
+            get { return tagsByClass.Keys.OrderBy(x => x); }
+        }
+
+        /// Get just one tag.
+        /// Useful for testing purposes while hacking on the lower layers.
         public HaloTag ArbitraryTag
         {
             get

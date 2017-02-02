@@ -7,7 +7,8 @@ namespace NimbusSharp
         private PyObj pyTag;
         public HaloMap ParentMap { get; private set; }
 
-        public HaloTag(PyObj pyTag, HaloMap hMap)
+        /// Architecturally, this should only be called by HaloMap
+        internal HaloTag(PyObj pyTag, HaloMap hMap)
         {
             this.pyTag = pyTag;
             this.ParentMap = hMap;
@@ -32,6 +33,24 @@ namespace NimbusSharp
                 if (tagData == null)
                     tagData = new HaloStruct(pyTag["data"], this);
                 return tagData;
+            }
+        }
+
+        public string FirstClass
+        {
+            get
+            {
+                StringField x = Header["first_class"];
+                return x.Value;
+            }
+        }
+
+        public long Ident
+        {
+            get
+            {
+                IntField x = Header["ident"];
+                return x.Value;
             }
         }
 
