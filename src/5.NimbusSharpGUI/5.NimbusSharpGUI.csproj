@@ -59,15 +59,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ICSharpCode.TreeView\4.ICSharpCode.TreeView.csproj">
+    <ProjectReference Include="..\4.ICSharpCode.TreeView\4.ICSharpCode.TreeView.csproj">
       <Project>{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}</Project>
       <Name>4.ICSharpCode.TreeView</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NimbusSharp\2.NimbusSharp.csproj">
+    <ProjectReference Include="..\2.NimbusSharp\2.NimbusSharp.csproj">
       <Project>{0760440f-0837-43bf-8ca3-7b3625e456ee}</Project>
       <Name>2.NimbusSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PythonBinding\1.PythonBinding.csproj">
+    <ProjectReference Include="..\1.PythonBinding\1.PythonBinding.csproj">
       <Project>{7B272EA5-3C30-458B-A05B-58DD4949DB2C}</Project>
       <Name>1.PythonBinding</Name>
     </ProjectReference>

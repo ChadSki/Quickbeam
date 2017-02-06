@@ -403,19 +403,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ICSharpCode.TreeView\4.ICSharpCode.TreeView.csproj">
+    <ProjectReference Include="..\4.ICSharpCode.TreeView\4.ICSharpCode.TreeView.csproj">
       <Project>{dde2a481-8271-4eac-a330-8fa6a38d13d1}</Project>
       <Name>4.ICSharpCode.TreeView</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MetroIde\7.MetroIde.csproj">
+    <ProjectReference Include="..\7.MetroIde\7.MetroIde.csproj">
       <Project>{cf8ea988-3789-48c4-8e2d-bd157a8b1cc4}</Project>
       <Name>7.MetroIde</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NimbusSharpGUI\5.NimbusSharpGUI.csproj">
+    <ProjectReference Include="..\5.NimbusSharpGUI\5.NimbusSharpGUI.csproj">
       <Project>{d686474e-c41f-4bf0-903d-36f486e87640}</Project>
       <Name>5.NimbusSharpGUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NimbusSharp\2.NimbusSharp.csproj">
+    <ProjectReference Include="..\2.NimbusSharp\2.NimbusSharp.csproj">
       <Project>{0760440F-0837-43BF-8CA3-7B3625E456EE}</Project>
       <Name>2.NimbusSharp</Name>
     </ProjectReference>
