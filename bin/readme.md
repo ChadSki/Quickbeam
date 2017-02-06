@@ -12,7 +12,7 @@ import nimbus
 map = nimbus.HaloMap.from_memory()
 
 # weapons
-pistol = map.tag('weap', '\\pistol')
+pistol = map.tag('weap', '\\pistol') # include a slash so we don't get the plasma pistol
 rifle = map.tag('weap', 'assault rifle')
 banshee_gun = map.tag('weap', 'banshee')
 
@@ -34,21 +34,22 @@ banshee_gun.triggers[1].projectile = plasma   # banshee secondary trigger now sh
 
 ### License
 
-The entirety of my work on this project is released under the 2-clause BSD license. While contributors retain copyright on their own work, I ask that pull requests also be released under the 2-clause BSD license.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
-## Community
-
-"If I have seen further it is by standing on the shoulders of giants." --Issac Newton
-
-### People
+### Thanks
 
 - conure: Proved that runtime edits are possible
 - Modzy: Provided source code to Open Halo Parser and Pearl 2
 - Oxide: Provided a simple C++ map parsing example and source code to [Phasor](https://github.com/urbanyoung/Phasor)
 - Ryx: Provided x86 assembly which prevents Halo's graphics from pausing when alt-tabbed
 - dirk: Provided source code to [SDMHaloMapLoader](https://github.com/samdmarshall/SDMHaloMapLoader)
+- nil: Always a big help on IRC
 - Zero2: Explained reflexives, map magic, and map deprotection theory
-- Btcc22: Assistance with C++ and reverse-engineering of the Halo executable
+- Btcc22: Provided code to hook into the Halo console and add custom commands
+- Xerax: Author of [Assembly](https://github.com/XboxChaos/Assembly)'s excellent WPF GUI.
 
 ### Forums
 

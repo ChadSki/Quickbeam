@@ -7,13 +7,10 @@ memory while the game is running hot.
 
 ### License
 
-The project as a whole is released under GPLv2+, but it contains
-
-I prefer to release my work under the 2-clause BSD license. However, I
-have recently merged changes from the [Assembly](https://github.com/XboxChaos/Assembly)
-project, which is GPLv2+ licensed. The project as a whole is therefore
-licensed under the GPLv2+, but individual files may be additionally
-licensed under the 2-clause BSD.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
 ### Thanks
 
