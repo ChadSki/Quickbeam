@@ -29,7 +29,7 @@
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="30" Name="LeftColumn" />
-            <ColumnDefinition Width="*" MinWidth="30" />
+            <ColumnDefinition Width="2*" MinWidth="30" />
         </Grid.ColumnDefinitions>
 
         <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
