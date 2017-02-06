@@ -1,6 +1,8 @@
 ﻿using PythonBinding;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace NimbusSharp
 {
@@ -64,6 +66,36 @@ namespace NimbusSharp
         public IEnumerable<string> TagClasses
         {
             get { return tagsByClass.Keys.OrderBy(x => x); }
+        }
+
+        public IEnumerable<HaloTag> TagsOfClass(string firstClass)
+        {
+            if (firstClass == "")
+            {
+                // TODO do I need a None tag?
+                return new List<HaloTag>();
+            }
+            return tagsByClass[firstClass];
+        }
+
+        public HaloTag TagFromIdent(long targetIdent)
+        {
+            return tagsInOrder.First(tag => tag.Ident == targetIdent);
+        }
+
+        public HaloTag TagFromPyObj(PyObj pyTag)
+        {
+            var x = pyTag;
+            var y = x["header"];
+            var z = y["ident"];
+            var targetIdent = z.ToLong();
+            return TagFromIdent(targetIdent);
+        }
+
+        public HaloTag TagFromUniqueName(string name)
+        {
+            var identMatch = Regex.Match(name, @"\[(.+)\]");
+            return TagFromIdent(long.Parse(identMatch.Groups[1].Value));
         }
 
         /// Get just one tag.

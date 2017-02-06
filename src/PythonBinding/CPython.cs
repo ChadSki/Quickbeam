@@ -15,6 +15,17 @@ print('Python initialized.')";
 
         internal struct PyObject { }
 
+        [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
+        private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
+        private static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
+
+        internal static IntPtr Py_None
+        {
+            get { return GetProcAddress(LoadLibrary(pythonDll), "_Py_NoneStruct"); }
+        }
+
         [DllImport(pythonDll, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void Py_DecRef(IntPtr obj);
 

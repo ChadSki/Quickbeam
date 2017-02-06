@@ -93,6 +93,12 @@ namespace PythonBinding
             return FromPointer(rawResult);
         }
 
+        /// Is this the Python object `None`?
+        public bool IsNone()
+        {
+            return obj == CPython.Py_None;
+        }
+
         /// If this Python object is an iterator, get the next item in the sequence.
         public PyObj Next()
         {
@@ -117,7 +123,14 @@ namespace PythonBinding
         /// Long integer representation of this PyObject.
         public long ToLong()
         {
-            return CPython.PyLong_AsLong(obj);
+            var a = this.ToString();
+            var x = CPython.PyLong_AsLong(obj);
+            if (x == 0xFFFFFFFF)
+            {
+                // TODO: fix this godawful hack
+                return long.Parse(this.ToString());
+            }
+            return x;
         }
 
         /// Create a PyObject from a double.

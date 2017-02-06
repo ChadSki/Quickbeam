@@ -4,7 +4,7 @@ namespace NimbusSharp
 {
     public class HaloTag
     {
-        private PyObj pyTag;
+        internal PyObj pyTag;
         public HaloMap ParentMap { get; private set; }
 
         /// Architecturally, this should only be called by HaloMap
@@ -38,20 +38,22 @@ namespace NimbusSharp
 
         public string FirstClass
         {
-            get
-            {
-                StringField x = Header["first_class"];
-                return x.Value;
-            }
+            get { return (Header["first_class"] as StringField).Value; }
         }
 
         public long Ident
         {
-            get
-            {
-                IntField x = Header["ident"];
-                return x.Value;
-            }
+            get { return (Header["ident"] as IntField).Value; }
+        }
+
+        public string Name
+        {
+            get { return (Header["name"] as StringField).Value; }
+        }
+
+        public string UniqueName
+        {
+            get { return string.Format("[{0}]{1}", Ident, Name); }
         }
 
         public override string ToString()

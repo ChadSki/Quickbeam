@@ -14,7 +14,7 @@ namespace NimbusSharpGUI.TagEditor
             this.label = label;
             foreach (var field in hstruct.FieldsInOrder)
             {
-                Children.Add(new HaloFieldNode(hstruct, field));
+                Children.Add(HaloFieldNode.Build(hstruct, field));
             }
             IsExpanded = true;
         }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
-             xmlns:ns="clr-namespace:NimbusSharp;assembly=NimbusSharp"
+             xmlns:ns="clr-namespace:NimbusSharpGUI.TagEditor"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <sd:SharpTreeView x:Name="treeView" ShowAlternation="False" Grid.Column="0" ShowRoot="False"
@@ -31,28 +31,28 @@
                     <GridViewColumn Header="Value" Width="380">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl Content="{Binding Field}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}">
+                                <ContentControl Content="{Binding FieldThunk}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}">
                                     <ContentControl.Resources>
-                                        <DataTemplate DataType="{x:Type ns:EnumField}">
+                                        <DataTemplate DataType="{x:Type ns:EnumFieldNode}">
                                             <TextBlock Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
-                                        <DataTemplate DataType="{x:Type ns:FlagField}">
+                                        <DataTemplate DataType="{x:Type ns:FlagFieldNode}">
                                             <TextBlock Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
-                                        <DataTemplate DataType="{x:Type ns:FloatField}">
+                                        <DataTemplate DataType="{x:Type ns:FloatFieldNode}">
                                             <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
-                                        <DataTemplate DataType="{x:Type ns:IntField}">
+                                        <DataTemplate DataType="{x:Type ns:IntFieldNode}">
                                             <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
-                                        <DataTemplate DataType="{x:Type ns:StringField}">
+                                        <DataTemplate DataType="{x:Type ns:StringFieldNode}">
                                             <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
                                         </DataTemplate>
-                                        <DataTemplate DataType="{x:Type ns:StructArrayField}">
+                                        <DataTemplate DataType="{x:Type ns:StructArrayFieldNode}">
                                             <!-- Has children, but shows nothing over here? -->
                                             <TextBlock Text="" Grid.Column="0" />
                                         </DataTemplate>
-                                        <DataTemplate DataType="{x:Type ns:TagReferenceField}">
+                                        <DataTemplate DataType="{x:Type ns:TagReferenceFieldNode}">
                                             <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="1">
                                                 <ComboBox Width="60"
                                                           ItemsSource="{Binding Path=PossibleTagClasses}"

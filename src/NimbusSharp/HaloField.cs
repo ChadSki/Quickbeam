@@ -1,24 +1,43 @@
 ﻿using PythonBinding;
 using System;
+using System.Linq;
 
 // Constructor type signature
-using ConstructFn = System.Func<
+using HaloFieldConstructFn = System.Func<
         PythonBinding.PyObj,
         PythonBinding.PyObj,
         NimbusSharp.HaloStruct,
         NimbusSharp.HaloField>;
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace NimbusSharp
 {
     public class HaloField
     {
-        protected PyObj pyStruct;
+        private PyObj pyStruct;
         protected PyObj pyField;
 
+        /// Access this field by name and get its value as a PyObj.
+        protected PyObj PyValue
+        {
+            get { return pyStruct[Name]; }
+            set { pyStruct[Name] = value; }
+        }
+
         public HaloStruct ParentStruct { get; private set; }
+
+        public string Name { get; private set; }
+
+        public string TypeName
+        {
+            get { return pyField["typestring"].ToString(); }
+        }
+
+        public long Offset
+        {
+            get { return pyField["offset"].ToLong(); }
+        }
 
         protected HaloField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct)
         {
@@ -29,41 +48,29 @@ namespace NimbusSharp
             ParentStruct = hStruct;
         }
 
-        public string TypeName { get { return pyField["typestring"].ToString(); } }
-
-        public string Name { get; private set; }
-
-        public long Offset
-        {
-            get
-            {
-                return pyField["offset"].ToLong();
-            }
-        }
-
-        private static readonly Dictionary<string, ConstructFn> constructorDict = new Dictionary<string, ConstructFn>
+        private static readonly Dictionary<string, HaloFieldConstructFn> constructorDict = new Dictionary<string, HaloFieldConstructFn>
         {
             // basic fields
-            ["ascii"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
-            ["asciiz"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["ascii"] =   ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["asciiz"] =  ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
             ["rawdata"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
-            ["enum16"] = ((fTup, pStruct, hStruct) => new EnumField(fTup, pStruct, hStruct)),
-            ["flag"] = ((fTup, pStruct, hStruct) => new FlagField(fTup, pStruct, hStruct)),
+            ["enum16"] =  ((fTup, pStruct, hStruct) => new EnumField(fTup, pStruct, hStruct)),
+            ["flag"] =    ((fTup, pStruct, hStruct) => new FlagField(fTup, pStruct, hStruct)),
             ["float32"] = ((fTup, pStruct, hStruct) => new FloatField(fTup, pStruct, hStruct)),
             ["float64"] = ((fTup, pStruct, hStruct) => new FloatField(fTup, pStruct, hStruct)),
-            ["int8"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["int16"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["int32"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["int64"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["uint8"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["uint16"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["uint32"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
-            ["uint64"] = ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int8"] =    ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int16"] =   ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int32"] =   ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["int64"] =   ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint8"] =   ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint16"] =  ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint32"] =  ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
+            ["uint64"] =  ((fTup, pStruct, hStruct) => new IntField(fTup, pStruct, hStruct)),
 
             // Halo fields
-            ["asciizptr"] = ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
-            ["structarray"] = ((fTup, pStruct, hStruct) => new StructArrayField(fTup, pStruct, hStruct)),
-            ["tagreference"] = ((fTup, pStruct, hStruct) => new TagReferenceField(fTup, pStruct, hStruct)), // TODO
+            ["asciizptr"] =    ((fTup, pStruct, hStruct) => new StringField(fTup, pStruct, hStruct)),
+            ["structarray"] =  ((fTup, pStruct, hStruct) => new StructArrayField(fTup, pStruct, hStruct)),
+            ["tagreference"] = ((fTup, pStruct, hStruct) => new TagReferenceField(fTup, pStruct, hStruct)),
         };
 
         public static HaloField Build(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct)
@@ -73,7 +80,7 @@ namespace NimbusSharp
             var pyField = fieldTuple.GetItem(PyObj.FromLong(1));
             var typeName = pyField["typestring"].ToString();
 
-            ConstructFn constructor;
+            HaloFieldConstructFn constructor;
             if (!constructorDict.TryGetValue(typeName, out constructor))
             {
                 throw new KeyNotFoundException(
@@ -107,8 +114,8 @@ namespace NimbusSharp
         public FloatField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public double Value
         {
-            get { return pyStruct[Name].ToDouble(); }
-            set { pyStruct[Name] = PyObj.FromDouble(value); }
+            get { return PyValue.ToDouble(); }
+            set { PyValue = PyObj.FromDouble(value); }
         }
     }
 
@@ -117,8 +124,8 @@ namespace NimbusSharp
         public IntField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public long Value
         {
-            get { return pyStruct[Name].ToLong(); }
-            set { pyStruct[Name] = PyObj.FromLong(value); }
+            get { return PyValue.ToLong(); }
+            set { PyValue = PyObj.FromLong(value); }
         }
     }
 
@@ -127,8 +134,8 @@ namespace NimbusSharp
         public StringField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct) { }
         public string Value
         {
-            get { return pyStruct[Name].ToString(); }
-            set { pyStruct[Name] = PyObj.FromString(value); }
+            get { return PyValue.ToString(); }
+            set { PyValue = PyObj.FromString(value); }
         }
     }
 
@@ -137,7 +144,7 @@ namespace NimbusSharp
         public StructArrayField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct)
         {
             Children = new List<PyObj>();
-            var iter = pyStruct[Name].GetIter();
+            var iter = PyValue.GetIter();
             var currStruct = iter.Next();
             while (currStruct != null)
             {
@@ -157,28 +164,45 @@ namespace NimbusSharp
         // `name (ident)` format so they're unique?
         public IEnumerable<string> PossibleTags { get; private set; }
 
+        private HaloMap ParentMap { get { return ParentStruct.ParentTag.ParentMap; } }
+
         public TagReferenceField(PyObj fieldTuple, PyObj pyStruct, HaloStruct hStruct) : base(fieldTuple, pyStruct, hStruct)
         {
-            // TODO: Load these from the map
-            PossibleTagClasses = ParentStruct.ParentTag.ParentMap.TagClasses;
+            PossibleTagClasses = ParentMap.TagClasses;
+            PossibleTags = ParentMap.TagsOfClass(SelectedTagClass).Select(x => x.UniqueName);
         }
 
+        string _selectedClass = null;
         public string SelectedTagClass
         {
             get
             {
-                var x = pyStruct[Name];
-                var y = x["first_class"];
-                var z = y.ToString();
-                return z;
+                if (_selectedClass == null)
+                {
+                    var selectedTag = PyValue;
+                    return selectedTag.IsNone() ? "" : selectedTag["first_class"].ToString();
+                }
+                return _selectedClass;
             }
-            set { throw new NotImplementedException(); }
+            set
+            {
+                _selectedClass = value;
+                PossibleTags = ParentMap.TagsOfClass(_selectedClass).Select(x => x.UniqueName);
+            }
         }
 
         public string SelectedTag
         {
-            get { return pyStruct[Name].ToString(); }
-            set { throw new NotImplementedException(); }
+            get { return ParentMap.TagFromPyObj(PyValue).UniqueName; }
+            set
+            {
+                var x = ParentMap.TagFromUniqueName(value);
+                var y = x.pyTag;
+                Console.WriteLine("====");
+                Console.WriteLine(y.ToString());
+                PyValue = y;
+                Console.WriteLine(PyValue.ToString());
+            }
         }
     }
 }
