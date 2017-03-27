@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Quickbeam.Views.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Quickbeam.Views"
+             xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+             xmlns:dockTheme="clr-namespace:MetroIde.Controls.AvalonDockMetro;assembly=MetroIde"
+             xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
+             xmlns:exp="clr-namespace:NimbusSharpGUI.MapExplorer;assembly=NimbusSharpGUI"
+             xmlns:converters="clr-namespace:Quickbeam.Converters"
+             xmlns:custom="clr-namespace:Quickbeam.Metro.Controls.Custom"
+             xmlns:vectors="clr-namespace:Quickbeam.Metro.Vectors"
+             mc:Ignorable="d"
+             Background="#2d2d30"
+             d:DesignWidth="1130" d:DesignHeight="600" d:DataContext="{d:DesignData MainPageViewModel}">
+    <UserControl.Resources>
+        <ContextMenu x:Key="TagHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Open" Uid="opentagcontext" Click="OpenTag_Click" />
+            <MenuItem Header="Rename" Uid="renametagcontext" />
+            <Separator />
+            <MenuItem Header="Extract" Uid="extracttagcontext" />
+        </ContextMenu>
+        <ContextMenu x:Key="FolderHierarchyContextMenu" DataContext="{Binding PlacementTarget.(FrameworkElement.DataContext), RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Rename" Uid="renametagcontext" />
+        </ContextMenu>
+        <converters:ExplorerNodeContextMenuConverter x:Key="IValueConverterTagHierarchyContextMenu" TagContextMenu="{StaticResource TagHierarchyContextMenu}" FolderContextMenu="{StaticResource FolderHierarchyContextMenu}" />
+    </UserControl.Resources>
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="30" Name="LeftColumn" />
+            <ColumnDefinition Width="2*" MinWidth="30" />
+        </Grid.ColumnDefinitions>
+
+        <custom:MetroContainer Title="Map Explorer" Grid.Column="0" Grid.Row="1">
+            <TreeView x:Name="TagTreeView" ItemsSource="{Binding Children}"
+                        Background="{DynamicResource MainBackgroundBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Padding="0,0,0,0" 
+                        VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type exp:ExplorerNode}" ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="20"
+                                    ContextMenu="{Binding Converter={StaticResource IValueConverterTagHierarchyContextMenu}}">
+                            <ContentControl Template="{Binding Converter={StaticResource IValueConverterHierarchyNodeToIcon}}" />
+                            <TextBlock FontSize="12" FontFamily="{DynamicResource MetroFontRegular}" Margin="0,-2,0,0"
+                                   VerticalAlignment="Center">
+                            <Run Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </custom:MetroContainer>
+
+        <GridSplitter ResizeDirection="Columns" Width="3" Name="HorizontalGridSplitter"
+                      Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Stretch"
+                      Background="#FF545456" Foreground="{x:Null}"
+                      IsEnabled="True" />
+
+        <dock:DockingManager x:Name="DockManager" AllowMixedOrientation="True" Grid.Column="1">
+            <dock:DockingManager.Theme>
+                <dockTheme:MetroTheme />
+            </dock:DockingManager.Theme>
+        </dock:DockingManager>
+    </Grid>
+</UserControl>

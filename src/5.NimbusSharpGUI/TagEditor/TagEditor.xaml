@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="NimbusSharpGUI.TagEditor.TagEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sd="clr-namespace:ICSharpCode.TreeView;assembly=ICSharpCode.TreeView"
+             xmlns:ns="clr-namespace:NimbusSharpGUI.TagEditor"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600">
+    <sd:SharpTreeView x:Name="treeView" ShowAlternation="False" Grid.Column="0" ShowRoot="False"
+                      Background="{DynamicResource MainBackgroundBrush}" Foreground="{DynamicResource TextBrushPrimary}"
+                      BorderThickness="0" Padding="0,0,0,0">
+        <ListView.Style>
+            <Style TargetType="{x:Type ListView}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource AssemblyAccentBrushColourSecondary}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{DynamicResource SidebarBlockColor}"/>
+                </Style.Resources>
+            </Style>
+        </ListView.Style>
+        <ListView.View>
+            <sd:SharpGridView>
+                <GridView.Columns>
+                    <GridViewColumn Header="Heirarchy" Width="280">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <sd:SharpTreeNodeView />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Value" Width="420">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding FieldThunk}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem, AncestorLevel=1},Path=ActualWidth}">
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type ns:EnumFieldNode}">
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" Margin="1" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:FlagFieldNode}">
+                                            <TextBlock Text="{Binding Value}" Grid.Column="0" Margin="1" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:FloatFieldNode}">
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:IntFieldNode}">
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:StringFieldNode}">
+                                            <TextBox Text="{Binding Value}" Grid.Column="0" Margin="1" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:StructArrayFieldNode}">
+                                            <!-- Has children, but shows nothing over here? -->
+                                            <TextBlock Text="" Grid.Column="0" />
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type ns:TagReferenceFieldNode}">
+                                            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="1">
+                                                <ComboBox Width="60"
+                                                          ItemsSource="{Binding Path=PossibleTagClasses}"
+                                                          SelectedValue="{Binding Path=SelectedTagClass}" />
+                                                <ComboBox HorizontalAlignment="Stretch" MinWidth="240" Margin="2,0,0,0"
+                                                          ItemsSource="{Binding Path=PossibleTags}"
+                                                          SelectedValue="{Binding Path=SelectedTag}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                </ContentControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView.Columns>
+            </sd:SharpGridView>
+        </ListView.View>
+    </sd:SharpTreeView>
+</UserControl>
